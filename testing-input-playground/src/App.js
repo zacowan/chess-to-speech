@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { ReactMic } from "react-mic";
 
-function App() {
+const App = () => {
+  const [isRecording, setIsRecording] = useState(false);
+
+  const handleOnStop = (recordedBlob) => {
+    console.log("recordedBlob is: ", recordedBlob);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Testing Input Playground</h1>
+      <p>Use the audio input button below to test audio input to Andy.</p>
+      <ReactMic record={isRecording} onStop={handleOnStop} />
+      <button onClick={() => setIsRecording(true)} type="button">
+        Start
+      </button>
+      <button onClick={() => setIsRecording(false)} type="button">
+        Stop
+      </button>
     </div>
   );
-}
+};
 
 export default App;

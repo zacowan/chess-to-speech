@@ -1,0 +1,3 @@
+.vscode
+service_account_key.json
+venv/*
