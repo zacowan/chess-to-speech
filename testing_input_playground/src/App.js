@@ -6,6 +6,11 @@ const App = () => {
 
   const handleOnStop = (recordedBlob) => {
     console.log("recordedBlob is: ", recordedBlob);
+    const csvURL = window.URL.createObjectURL(recordedBlob.blob);
+    const tempLink = document.createElement("a");
+    tempLink.href = csvURL;
+    tempLink.setAttribute("download", "audio.webm");
+    tempLink.click();
   };
 
   return (
