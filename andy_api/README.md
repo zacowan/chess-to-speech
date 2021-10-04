@@ -1,4 +1,4 @@
-# Flask API
+# Andy API
 
 This API will be used to communicate with Andy.
 

@@ -1,17 +1,23 @@
 import React, { useState } from "react";
 import { ReactMic } from "react-mic";
 
+const SESSION_ID = "TEST_SESSION" + Math.round(Math.random() * 10000);
+
 const App = () => {
   const [isRecording, setIsRecording] = useState(false);
+  const [andyResponse, setAndyResponse] = useState();
 
   const handleOnStop = async (recordedBlob) => {
-    console.log("recordedBlob is: ", recordedBlob);
     const blob = recordedBlob.blob;
     try {
-      await fetch("http://localhost:5000/api/test-transcribe-file", {
+      let urlString =
+        "http://localhost:5000/api/get-audio-response?session_id=" + SESSION_ID;
+      const response = await fetch(urlString, {
         method: "POST",
         body: blob,
       });
+      const data = await response.json();
+      setAndyResponse(data.audioResponse);
     } catch (error) {
       console.log(error);
     }
@@ -28,6 +34,8 @@ const App = () => {
       <button onClick={() => setIsRecording(false)} type="button">
         Stop
       </button>
+      <h2>Andy's Response</h2>
+      <p>{andyResponse || "Nothing's here."}</p>
     </div>
   );
 };
