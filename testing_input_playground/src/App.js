@@ -4,13 +4,17 @@ import { ReactMic } from "react-mic";
 const App = () => {
   const [isRecording, setIsRecording] = useState(false);
 
-  const handleOnStop = (recordedBlob) => {
+  const handleOnStop = async (recordedBlob) => {
     console.log("recordedBlob is: ", recordedBlob);
-    const csvURL = window.URL.createObjectURL(recordedBlob.blob);
-    const tempLink = document.createElement("a");
-    tempLink.href = csvURL;
-    tempLink.setAttribute("download", "audio.webm");
-    tempLink.click();
+    const blob = recordedBlob.blob;
+    try {
+      await fetch("http://localhost:5000/api/test-transcribe-file", {
+        method: "POST",
+        body: blob,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

@@ -4,6 +4,7 @@ from flask import (
     Blueprint, request
 )
 from google.cloud import dialogflow
+from . import speech_to_text
 
 bp = Blueprint('api', __name__, url_prefix='/api')
 
@@ -13,12 +14,20 @@ def hello_world():
     return "Chess-to-Speech Client API"
 
 
+@bp.route('/test-transcribe-file', methods=["POST"])
+def test_transcribe_file():
+    if request.method == "POST":
+        ret = speech_to_text.transcribe_audio_file(request.data)
+        if ret == None:
+            return 'Failed to upload file'
+        else:
+            return ret
+
+
 @bp.route("/detect-intent", methods=["POST"])
 def detect_intent():
     if request.method == "POST":
         return "post"
-    else:
-        return "invalid request"
 
 
 @bp.route("/test-detect-intent")
