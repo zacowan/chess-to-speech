@@ -5,16 +5,19 @@ from google.cloud import dialogflow
 
 app = Flask(__name__)
 
+
 @app.route("/")
 def hello_world():
     return "<p>Hello, World!</p>"
 
-@app.route("/detect-intent", methods=['POST'])
+
+@app.route("/detect-intent", methods=["POST"])
 def detect_intent():
-    if request.method == 'POST':
-        return 'post'
+    if request.method == "POST":
+        return "post"
     else:
-        return 'invalid request'
+        return "invalid request"
+
 
 @app.route("/test-detect-intent")
 def test_detect_intent():
@@ -24,6 +27,7 @@ def test_detect_intent():
     language_code = "en-us"
     return detect_intent_texts(project_id, session_id, texts, language_code)
 
+
 def detect_intent_texts(project_id, session_id, texts, language_code):
     session_client = dialogflow.SessionsClient()
 
@@ -31,7 +35,8 @@ def detect_intent_texts(project_id, session_id, texts, language_code):
     print("Session path: {}\n".format(session))
 
     for text in texts:
-        text_input = dialogflow.TextInput(text=text, language_code=language_code)
+        text_input = dialogflow.TextInput(
+            text=text, language_code=language_code)
 
         query_input = dialogflow.QueryInput(text=text_input)
 
@@ -47,5 +52,6 @@ def detect_intent_texts(project_id, session_id, texts, language_code):
                 response.query_result.intent_detection_confidence,
             )
         )
-        print("Fulfillment text: {}\n".format(response.query_result.fulfillment_text))
+        print("Fulfillment text: {}\n".format(
+            response.query_result.fulfillment_text))
         return "Fulfillment text: {}\n".format(response.query_result.fulfillment_text)
