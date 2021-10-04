@@ -1,17 +1,19 @@
 import uuid
 
-from flask import Flask, request
+from flask import (
+    Blueprint, request
+)
 from google.cloud import dialogflow
 
-app = Flask(__name__)
+bp = Blueprint('api', __name__, url_prefix='/api')
 
 
-@app.route("/")
+@bp.route("/")
 def hello_world():
-    return "<p>Hello, World!</p>"
+    return "Chess-to-Speech Client API"
 
 
-@app.route("/detect-intent", methods=["POST"])
+@bp.route("/detect-intent", methods=["POST"])
 def detect_intent():
     if request.method == "POST":
         return "post"
@@ -19,7 +21,7 @@ def detect_intent():
         return "invalid request"
 
 
-@app.route("/test-detect-intent")
+@bp.route("/test-detect-intent")
 def test_detect_intent():
     project_id = "chess-master-andy-mhyo"
     session_id = uuid.uuid4()
