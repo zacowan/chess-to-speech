@@ -6,9 +6,9 @@ from . import chess_logic
 bp = Blueprint('chess_api', __name__, url_prefix='/chess_api')
 
 @bp.route("/start-game", methods=["POST"])
-def start_game():
+def initialize_board():
     if request.method == "POST":
-        chess_logic.start_game()
+        chess_logic.initialize_board()
         try:
             return "Chess engine set and board cleared."
         except:
