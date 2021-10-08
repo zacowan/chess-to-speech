@@ -1,5 +1,11 @@
+"""Initialization of flask app.
+
+This module serves the purpose of initializing the flask application.
+
+"""
 from flask import Flask
 from flask_cors import CORS
+from . import api_routes
 
 
 def create_app(test_config=None):
@@ -19,11 +25,10 @@ def create_app(test_config=None):
 
     # Display the routes available
     @app.route("/")
-    def hello():
+    def health_check():
         return "Successfully running api!"
 
     # Register the API blueprint
-    from . import api
-    app.register_blueprint(api.bp)
+    app.register_blueprint(api_routes.bp)
 
     return app
