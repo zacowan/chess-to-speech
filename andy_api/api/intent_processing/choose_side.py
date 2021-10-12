@@ -1,5 +1,24 @@
-"""This module handles intent processing for CHOOSE_SIDE."""
-from .utils import get_random_choice, RESPONSE_LIST, RESPONSE_TYPES, ERROR_RESPONSE_LIST
+"""This module handles intent processing for CHOOSE_SIDE.
+
+Attributes:
+    HAPPY_PATH_RESPONSES (list): a list of happy-path responses.
+    ERROR_RESPONSES (list): a list of responses for errors.
+
+"""
+from .utils import get_random_choice
+
+
+HAPPY_PATH_RESPONSES = [
+    "Great, since you're on {user_side} side, you'll go {user_position}.",
+    "Good choice, that means you'll go {user_position}.",
+    "Sweet, that means I'll go {andy_position} and you'll go {user_position}.",
+    "That leaves me {andy_side}, meaning you'll go {user_position}."
+]
+
+ERROR_RESPONSES = [
+    "Sorry, you can only choose between black or white. Which side do you choose?",
+    "Oh, you should choose between black or white. What'll it be?"
+]
 
 
 def handle(intent_model):
@@ -15,8 +34,7 @@ def handle(intent_model):
     # TODO: add a check for if a game has started
     # TODO: add a check if player has already chosen a side
     if intent_model.all_required_params_present is True:
-        static_choice = get_random_choice(
-            RESPONSE_LIST, RESPONSE_TYPES.CHOOSE_SIDE)
+        static_choice = get_random_choice(HAPPY_PATH_RESPONSES)
         board_side = intent_model.parameters["BoardSide"]
 
         black_side = "black"
@@ -39,6 +57,4 @@ def handle(intent_model):
                                     user_side=user_side,
                                     user_position=user_position)
     else:
-        return get_random_choice(
-            ERROR_RESPONSE_LIST,
-            RESPONSE_TYPES.CHOOSE_SIDE)
+        return get_random_choice(ERROR_RESPONSES)

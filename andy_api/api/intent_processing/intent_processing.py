@@ -1,5 +1,8 @@
 """This module processes intents and determines a text response.
 
+Attributes:
+    STATIC_RESPONSES (dict): a dictionary of lists for static response types.
+
 Example Intent Model:
     {
         query_text: "I\'ll take white side."
@@ -27,8 +30,27 @@ Example Intent Model:
     }
 
 """
-from .utils import INTENT_MAPPING, RESPONSE_TYPES, RESPONSE_LIST, get_random_choice
+from .utils import INTENT_MAPPING, RESPONSE_TYPES, get_random_choice
 from . import choose_side
+
+
+STATIC_RESPONSES = {
+    RESPONSE_TYPES.HELLO: [
+        "Hi! How are you?",
+        "Hey, what's up?",
+        "Yo, how's it going?"
+    ],
+    RESPONSE_TYPES.FALLBACK: [
+        "I didn't get that. Can you say it again?",
+        "I missed what you said. What was that?",
+        "Sorry, could you say that again?",
+        "Can you say that again?",
+        "One more time?",
+        "What was that?",
+        "Say that one more time?",
+        "I'm not sure I understood that."
+    ]
+}
 
 
 def determine_response_from_intent(data):
@@ -51,7 +73,8 @@ def determine_response_from_intent(data):
         response_choice = choose_side.handle(data)
     else:
         # Catch for all static responses
-        response_choice = get_random_choice(RESPONSE_LIST, response_type)
+        response_choice = get_random_choice(
+            STATIC_RESPONSES.get(response_type))
 
     # Return the determined response
     return response_choice
