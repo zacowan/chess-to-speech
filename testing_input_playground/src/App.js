@@ -11,13 +11,13 @@ const App = () => {
     const blob = recordedBlob.blob;
     try {
       let urlString =
-        "http://localhost:5000/api/get-audio-response?session_id=" + SESSION_ID;
+        "http://localhost:5000/api/get-response?session_id=" + SESSION_ID;
       const response = await fetch(urlString, {
         method: "POST",
         body: blob,
       });
       const data = await response.json();
-      setAndyResponse(data.audioResponse);
+      setAndyResponse(data.response_text);
     } catch (error) {
       console.log(error);
     }
