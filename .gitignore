@@ -1,2 +1,5 @@
 service_key_file.json
 .vscode
+.project
+.pydevproject
+__pycache__/
