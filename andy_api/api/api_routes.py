@@ -7,7 +7,9 @@ Attributes:
 from flask import (
     Blueprint, request, jsonify
 )
-from . import speech_text_processing, dialogflow_andy, intent_processing
+
+from . import speech_text_processing, dialogflow_andy
+from .intent_processing import intent_processing
 
 bp = Blueprint('api', __name__, url_prefix='/api')
 
