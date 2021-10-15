@@ -14,6 +14,13 @@ from .intent_processing import intent_processing
 bp = Blueprint('api', __name__, url_prefix='/api')
 
 
+@bp.route("/test")
+def test_route():
+    transcribed_audio = speech_text_processing.transcribe_audio_file(
+        request.data)
+    print(transcribed_audio)
+
+
 @bp.route("/get-session", methods=["GET"])
 def get_session():
     """Route for getting a unique session ID to use with Andy.
@@ -84,5 +91,8 @@ def get_response():
 
         return jsonify({
             'response_text': response_text,
-            'response_audio': response_audio
+            'response_audio': response_audio,
+            # Just for debugging:
+            'transcribed_audio': transcribed_audio,
+            'detected_intent': intent_query_response.intent.display_name
         })
