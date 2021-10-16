@@ -4,17 +4,20 @@ Attributes:
     BUCKET_NAME: the name of the bucket to upload user's audio to for STT.
     FILENAME_PREFIX: the directory in the bucket to store audio files for STT.
     FILE_TYPE: the type of the file to be processed for STT.
+    BOARD_LOCATION_CC: the name of the BoardLocation custom class for
+        STT.
     FILE_SAMPLE_RATE: the sample rate of the file to be processed for STT.
     OUTPUT_FILE_NAME: the name of the file to output for TTS.
 
 """
 import uuid
 
-from google.cloud import speech, storage, texttospeech
+from google.cloud import speech_v1p1beta1 as speech, storage, texttospeech
 
 BUCKET_NAME = "chess-to-speech"
 FILENAME_PREFIX = "audio-files/"
 FILE_TYPE = "audio/webm"
+MOVE_PIECE_PHRASE_SET = "projects/408609438071/locations/global/phraseSets/MovePiece"
 FILE_SAMPLE_RATE = 48000
 OUTPUT_FILE_NAME = "andy_response.mp3"
 
@@ -109,18 +112,26 @@ def transcribe_audio_file(file_to_transcribe):
 
         audio = speech.RecognitionAudio(uri=gcs_uri)
 
+        # Model adaptation
+
+        # Speech adaptation configuration
+        speech_adaptation = speech.SpeechAdaptation(
+            phrase_set_references=[MOVE_PIECE_PHRASE_SET])
+
         # Note: the encoding and sample_rate_hertz should change based on what
         # file is expected.
         config = speech.RecognitionConfig(
             encoding=speech.RecognitionConfig.AudioEncoding.ENCODING_UNSPECIFIED,
             sample_rate_hertz=FILE_SAMPLE_RATE,
-            language_code="en-US"
+            language_code="en-US",
+            adaptation=speech_adaptation
         )
 
         response = client.recognize(config=config, audio=audio)
 
         for result in response.results:
-            print("Transcript: {}".format(result.alternatives[0].transcript))
+            print("Transcript: {}".format(
+                result.alternatives[0].transcript))
 
         return response.results[0].alternatives[0].transcript
     except Exception as err:
