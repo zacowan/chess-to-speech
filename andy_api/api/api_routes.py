@@ -16,9 +16,20 @@ bp = Blueprint('api', __name__, url_prefix='/api')
 
 @bp.route("/test")
 def test_route():
-    transcribed_audio = speech_text_processing.transcribe_audio_file(
-        request.data)
-    print(transcribed_audio)
+    intent_query_response = dialogflow_andy.perform_intent_query(
+        "TEST", "Pawn at E5")
+    response_text = intent_processing.determine_response_from_intent(
+        intent_query_response)
+    print(response_text)
+
+
+@bp.route("/test2")
+def test_route2():
+    intent_query_response = dialogflow_andy.perform_intent_query(
+        "TEST", "E7")
+    response_text = intent_processing.determine_response_from_intent(
+        intent_query_response)
+    print(response_text)
 
 
 @bp.route("/get-session", methods=["GET"])

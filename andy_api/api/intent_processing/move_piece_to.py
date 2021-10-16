@@ -33,7 +33,7 @@ def handle(intent_model):
     # TODO: add a check if player has chosen a side
     if intent_model.all_required_params_present is True:
         static_choice = get_random_choice(HAPPY_PATH_RESPONSES)
-        from_location = intent_model.output_contexts.parameters["fromLocation"]
+        from_location = intent_model.output_contexts[0].parameters["fromLocation"]
         to_location = intent_model.parameters["toLocation"]
 
         # TODO: add check that the move is valid
