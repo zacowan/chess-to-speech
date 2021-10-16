@@ -1,3 +1,8 @@
+'''
+Created on Oct 11, 2021
+
+@author: Legacy
+'''
 import theMain
 import pygame
 import sys
@@ -16,7 +21,7 @@ def setupGameEngine(screen):
 
 
 def startGame(screen):
-    while True:
+    while not theMain.isClosed():
         screen.fill((255, 255, 255))  # Background Color
         createBoard(screen)
         mx, my = pygame.mouse.get_pos()  # this provides clicking functionality for the future if we want it @IgnorePep8
@@ -24,11 +29,13 @@ def startGame(screen):
         # Event loop, This handles any button presses
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                theMain.close = True
                 pygame.mixer.quit()
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
+                    theMain.close = True
                     m1_clicked = True # this provides clicking functionality for the future if we want it @IgnorePep8
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
