@@ -14,6 +14,24 @@ from .intent_processing import intent_processing
 bp = Blueprint('api', __name__, url_prefix='/api')
 
 
+@bp.route("/test")
+def test_route():
+    intent_query_response = dialogflow_andy.perform_intent_query(
+        "TEST", "Pawn at E5")
+    response_text = intent_processing.determine_response_from_intent(
+        intent_query_response)
+    print(response_text)
+
+
+@bp.route("/test2")
+def test_route2():
+    intent_query_response = dialogflow_andy.perform_intent_query(
+        "TEST", "E7")
+    response_text = intent_processing.determine_response_from_intent(
+        intent_query_response)
+    print(response_text)
+
+
 @bp.route("/get-session", methods=["GET"])
 def get_session():
     """Route for getting a unique session ID to use with Andy.
@@ -84,5 +102,8 @@ def get_response():
 
         return jsonify({
             'response_text': response_text,
-            'response_audio': response_audio
+            'response_audio': response_audio,
+            # Just for debugging:
+            'transcribed_audio': transcribed_audio,
+            'detected_intent': intent_query_response.intent.display_name
         })
