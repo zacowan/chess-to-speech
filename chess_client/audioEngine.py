@@ -6,6 +6,7 @@ It was altered and repurposed by Legacy for the purposes of this project
 from sys import byteorder
 from array import array
 from struct import pack
+from pathlib import Path
 import pyaudio
 import wave
 import theMain
@@ -25,6 +26,7 @@ RATE = 44100
 
 def setupAudioEngine():
     count = 0
+    Path(AUDIO_PATH).mkdir(parents=True, exist_ok=True)
     while not theMain.isClosed():
         file_path = f"{AUDIO_PATH}/UserSpeech{str(count)}.wav"
         record_to_file(file_path)
