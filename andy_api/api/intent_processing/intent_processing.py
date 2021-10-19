@@ -31,7 +31,7 @@ Example Intent Model:
 
 """
 from .utils import INTENT_MAPPING, RESPONSE_TYPES, get_random_choice
-from . import choose_side
+from . import choose_side, move_piece_from, move_piece_to
 
 
 STATIC_RESPONSES = {
@@ -71,6 +71,10 @@ def determine_response_from_intent(data):
     # Handle more complex responses
     if response_type == RESPONSE_TYPES.CHOOSE_SIDE:
         response_choice = choose_side.handle(data)
+    elif response_type == RESPONSE_TYPES.MOVE_PIECE_FROM:
+        response_choice = move_piece_from.handle(data)
+    elif response_type == RESPONSE_TYPES.MOVE_PIECE_TO:
+        response_choice = move_piece_to.handle(data)
     else:
         # Catch for all static responses
         response_choice = get_random_choice(
