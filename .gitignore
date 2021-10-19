@@ -2,3 +2,6 @@ service_key_file.json
 .vscode
 .DS_Store
 andy_response.mp3
+.project
+.pydevproject
+__pycache__/
