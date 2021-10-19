@@ -3,3 +3,5 @@ service_key_file.json
 .project
 .pydevproject
 __pycache__/
+.DS_Store
+andy_response.mp3
