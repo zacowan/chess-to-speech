@@ -38,7 +38,6 @@ def handle(intent_model):
     # TODO: add a check for if a game has started
     # TODO: add a check if player has chosen a side
     if intent_model.all_required_params_present is True:
-        static_choice = get_random_choice(HAPPY_PATH_RESPONSES)
         from_location = intent_model.output_contexts[0].parameters["fromLocation"]
         to_location = intent_model.parameters["toLocation"]
 
@@ -53,7 +52,6 @@ def handle(intent_model):
         board = chess.Board(board_str)
 
         # check if move is valid
-        # TODO: add custom response for illegal move
         if(chess.Move.from_uci(from_location+to_location) in board.legal_moves):
             # Make the move
             board.push(chess.Move.from_uci(from_location+to_location))
@@ -63,9 +61,11 @@ def handle(intent_model):
             latest_board_str['board_str'] = board.board_fen()
             latest_board_str.close()
 
+            # TODO: See if player is in check or checkmate after move
+            static_choice = get_random_choice(HAPPY_PATH_RESPONSES)
             # Return a happy path response
             return static_choice.format(from_location=from_location, to_location=to_location)
-        else:
+        else: # Player is attempting an illegal move
             static_choice = get_random_choice(ILLEGAL_MOVE_RESPONSES)
             # Return an illegal move response
             return static_choice
