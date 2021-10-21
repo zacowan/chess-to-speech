@@ -10,6 +10,7 @@ from flask import (
 
 from . import speech_text_processing, dialogflow_andy
 from .intent_processing import intent_processing
+import shelve
 
 bp = Blueprint('api', __name__, url_prefix='/api')
 
@@ -80,6 +81,12 @@ def get_response():
     """
     if request.method == "POST":
         session_id = request.args.get('session_id')
+        board_str = request.args.get('board_str')
+
+        # Update board_str stored in database
+        latest_board_str = shelve.open('./db/latest_board_str')
+        latest_board_str ['board_str'] = board_str
+        latest_board_str.close()
 
         # Get text from audio file
         transcribed_audio = speech_text_processing.transcribe_audio_file(
@@ -100,9 +107,15 @@ def get_response():
         response_audio = speech_text_processing.generate_audio_response(
             response_text)
 
+        # Capture latest board_str...was updated if player requests to make a valid move
+        latest_board_str = shelve.open('./db/latest_board_str')
+        board_str = latest_board_str['board_str']
+        latest_board_str.close()
+
         return jsonify({
             'response_text': response_text,
             'response_audio': response_audio,
+            'board_str': board_str,
             # Just for debugging:
             'transcribed_audio': transcribed_audio,
             'detected_intent': intent_query_response.intent.display_name

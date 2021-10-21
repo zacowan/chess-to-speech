@@ -6,6 +6,8 @@ Attributes:
 
 """
 from .utils import get_random_choice
+import chess
+import shelve
 
 
 HAPPY_PATH_RESPONSES = [
@@ -17,7 +19,6 @@ ERROR_RESPONSES = [
     "Sorry, you want to move to where?",
     "Sorry, you want to move from {from_location} to where?"
 ]
-
 
 def handle(intent_model):
     """Handles choosing a response for the MOVE_PIECE intent.
@@ -36,11 +37,30 @@ def handle(intent_model):
         from_location = intent_model.output_contexts[0].parameters["fromLocation"]
         to_location = intent_model.parameters["toLocation"]
 
-        # TODO: add check that the move is valid
+        # Open chess board database
+        latest_board_str = shelve.open('../db/latest_board_str')
+        # Capture string representing latest board in variable
+        board_str = latest_board_str ['board_str']
+        latest_board_str.close()
 
-        return static_choice.format(from_location=from_location, to_location=to_location)
-    else:
-        static_choice = get_random_choice(ERROR_RESPONSES)
-        from_location = intent_model.output_contexts.parameters["fromLocation"]
+        # Use string representing latest board to create new chess board
+        # This board will be used to check if move is valid and make move if valid
+        board = chess.Board(board_str)
 
-        return static_choice.format(from_location=from_location)
+        # check if move is valid
+        # TODO: add custom response for illegal move
+        if(chess.Move.from_uci(from_location+to_location) in board.legal_moves):
+            # Make the move
+            board.push(chess.Move.from_uci(from_location+to_location))
+
+            # Update latest board string in database
+            latest_board_str = shelve.open('../db/latest_board_str')
+            latest_board_str['board_str'] = board.board_fen()
+            latest_board_str.close()
+
+            return static_choice.format(from_location=from_location, to_location=to_location)
+    
+    static_choice = get_random_choice(ERROR_RESPONSES)
+    from_location = intent_model.output_contexts.parameters["fromLocation"]
+
+    return static_choice.format(from_location=from_location)
