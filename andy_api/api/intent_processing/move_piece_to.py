@@ -20,6 +20,11 @@ ERROR_RESPONSES = [
     "Sorry, you want to move from {from_location} to where?"
 ]
 
+ILLEGAL_MOVE_RESPONSES = [
+    "I heard ya, but that move is illegal."
+    "I would let ya make that move, but there are rules to this game!"
+]
+
 def handle(intent_model):
     """Handles choosing a response for the MOVE_PIECE intent.
 
@@ -58,7 +63,13 @@ def handle(intent_model):
             latest_board_str['board_str'] = board.board_fen()
             latest_board_str.close()
 
+            # Return a happy path response
             return static_choice.format(from_location=from_location, to_location=to_location)
+        else:
+            static_choice = get_random_choice(ILLEGAL_MOVE_RESPONSES)
+            # Return an illegal move response
+            return static_choice
+
     
     static_choice = get_random_choice(ERROR_RESPONSES)
     from_location = intent_model.output_contexts.parameters["fromLocation"]
