@@ -29,10 +29,12 @@ def handle(intent_model):
 
     Returns:
         str: the response that should be given, as text.
+        boolean: whether or not the intent was handled successfully.
 
     """
     # TODO: add a check for if a game has started
     # TODO: add a check if player has already chosen a side
+
     if intent_model.all_required_params_present is True:
         static_choice = get_random_choice(HAPPY_PATH_RESPONSES)
         board_side = intent_model.parameters["BoardSide"]
@@ -55,6 +57,6 @@ def handle(intent_model):
         return static_choice.format(andy_side=andy_side,
                                     andy_position=andy_position,
                                     user_side=user_side,
-                                    user_position=user_position)
+                                    user_position=user_position), True
     else:
-        return get_random_choice(ERROR_RESPONSES)
+        return get_random_choice(ERROR_RESPONSES), False

@@ -27,6 +27,7 @@ def handle(intent_model):
 
     Returns:
         str: the response that should be given, as text.
+        boolean: whether or not the intent was handled successfully.
 
     """
     # TODO: add a check for if a game has started
@@ -36,8 +37,8 @@ def handle(intent_model):
 
         # TODO: add check that the move is valid
 
-        return static_choice
+        return static_choice, True
     else:
         static_choice = get_random_choice(ERROR_RESPONSES)
 
-        return static_choice
+        return static_choice, False
