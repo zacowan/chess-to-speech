@@ -7,7 +7,6 @@ Attributes:
 """
 from .utils import get_random_choice
 import chess
-import shelve
 
 
 HAPPY_PATH_RESPONSES = [
@@ -30,6 +29,7 @@ def handle(intent_model, board_str):
 
     Args:
         intent_model: the intent model to parse.
+        board_str: FEN representation of board from client
 
     Returns:
         str: the response that should be given, as text.
@@ -56,7 +56,7 @@ def handle(intent_model, board_str):
             # TODO: See if player is in check or checkmate after move
 
             static_choice = get_random_choice(HAPPY_PATH_RESPONSES)
-            
+
             # Return a happy path response
             return static_choice.format(from_location=from_location, to_location=to_location)
         else: # Player is attempting an illegal move
