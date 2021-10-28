@@ -25,7 +25,7 @@ ILLEGAL_MOVE_RESPONSES = [
     "I would let ya make that move, but there are rules to this game!"
 ]
 
-def handle(intent_model):
+def handle(intent_model, board_str):
     """Handles choosing a response for the MOVE_PIECE intent.
 
     Args:
@@ -41,12 +41,6 @@ def handle(intent_model):
         from_location = intent_model.output_contexts[0].parameters["fromLocation"]
         to_location = intent_model.parameters["toLocation"]
 
-        # Open chess board database
-        latest_board_str = shelve.open('../db/latest_board_str')
-        # Capture string representing latest board in variable
-        board_str = latest_board_str ['board_str']
-        latest_board_str.close()
-
         # Use string representing latest board to create new chess board
         # This board will be used to check if move is valid and make move if valid
         board = chess.Board(board_str)
@@ -56,13 +50,13 @@ def handle(intent_model):
             # Make the move
             board.push(chess.Move.from_uci(from_location+to_location))
 
-            # Update latest board string in database
-            latest_board_str = shelve.open('../db/latest_board_str')
-            latest_board_str['board_str'] = board.board_fen()
-            latest_board_str.close()
+            # Update latest board string
+            board_str = board.board_fen()
 
             # TODO: See if player is in check or checkmate after move
+
             static_choice = get_random_choice(HAPPY_PATH_RESPONSES)
+            
             # Return a happy path response
             return static_choice.format(from_location=from_location, to_location=to_location)
         else: # Player is attempting an illegal move

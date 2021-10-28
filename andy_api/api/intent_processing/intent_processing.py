@@ -53,7 +53,7 @@ STATIC_RESPONSES = {
 }
 
 
-def determine_response_from_intent(data):
+def determine_response_from_intent(data, board_str):
     """Determines the response for an intent.
 
     Args:
@@ -74,7 +74,7 @@ def determine_response_from_intent(data):
     elif response_type == RESPONSE_TYPES.MOVE_PIECE_FROM:
         response_choice = move_piece_from.handle(data)
     elif response_type == RESPONSE_TYPES.MOVE_PIECE_TO:
-        response_choice = move_piece_to.handle(data)
+        response_choice = move_piece_to.handle(data, board_str)
     else:
         # Catch for all static responses
         response_choice = get_random_choice(

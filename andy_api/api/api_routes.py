@@ -81,12 +81,7 @@ def get_response():
     """
     if request.method == "POST":
         session_id = request.args.get('session_id')
-        board_str = request.args.get('board_str')
-
-        # Update board_str stored in database
-        latest_board_str = shelve.open('./db/latest_board_str')
-        latest_board_str ['board_str'] = board_str
-        latest_board_str.close()
+        board_str = request.args.get('board_str') #grab board string from HTTP arguments
 
         # Get text from audio file
         transcribed_audio = speech_text_processing.transcribe_audio_file(
@@ -101,21 +96,18 @@ def get_response():
 
         # Determine Andy's response
         response_text = intent_processing.determine_response_from_intent(
-            intent_query_response)
+            intent_query_response, board_str)
 
         # Convert response to audio
         response_audio = speech_text_processing.generate_audio_response(
             response_text)
 
-        # Capture latest board_str...was updated if player requests to make a valid move
-        latest_board_str = shelve.open('./db/latest_board_str')
-        board_str = latest_board_str['board_str']
-        latest_board_str.close()
+        # TODO: Get updated board string
 
         return jsonify({
             'response_text': response_text,
             'response_audio': response_audio,
-            'board_str': board_str,
+            'board_str': board_str, #include updated board string in JSON response
             # Just for debugging:
             'transcribed_audio': transcribed_audio,
             'detected_intent': intent_query_response.intent.display_name
