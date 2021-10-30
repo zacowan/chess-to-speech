@@ -41,7 +41,7 @@ def startGame(screen):
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
-                    theMain.close = True
+                    # theMain.close = True
                     # this provides clicking functionality for the future if we want it @IgnorePep8
                     m1_clicked = True
             if event.type == pygame.KEYDOWN:

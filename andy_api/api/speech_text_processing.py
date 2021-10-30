@@ -16,9 +16,9 @@ from google.cloud import speech_v1p1beta1 as speech, storage, texttospeech
 
 BUCKET_NAME = "chess-to-speech"
 FILENAME_PREFIX = "audio-files/"
-FILE_TYPE = "audio/webm"
+FILE_TYPE = "audio/wav"
 MOVE_PIECE_PHRASE_SET = "projects/408609438071/locations/global/phraseSets/MovePiece"
-FILE_SAMPLE_RATE = 48000
+FILE_SAMPLE_RATE = 44100
 OUTPUT_FILE_NAME = "andy_response.mp3"
 
 

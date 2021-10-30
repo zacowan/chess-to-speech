@@ -30,6 +30,7 @@ def setupAudioEngine():
     while not theMain.isClosed():
         file_path = f"{AUDIO_PATH}/UserSpeech{str(count)}.wav"
         record_to_file(file_path)
+        print(f"File path: {file_path}")
         restService.sendUserAudio(file_path)  # send to Andy Api
 
         # This is to create a buffer of .wav files, so that they aren't deleted immediately
