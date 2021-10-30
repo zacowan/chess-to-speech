@@ -134,6 +134,8 @@ def transcribe_audio_file(file_to_transcribe):
                 result.alternatives[0].transcript))
 
         return response.results[0].alternatives[0].transcript
+    except IndexError:
+        return None
     except Exception as err:
         print(err)
         raise

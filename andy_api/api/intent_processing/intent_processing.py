@@ -66,6 +66,13 @@ def fulfill_intent(intent_data, board_str):
             fulfillment.
 
     """
+    if intent_data is None:
+        response_choice = get_random_choice(
+            STATIC_RESPONSES.get(RESPONSE_TYPES.FALLBACK))
+        return response_choice, {
+            'intent_name': RESPONSE_TYPES.FALLBACK.name,
+            'success': False
+        }, board_str
 
     # Determine the response type from the intent
     response_type = INTENT_MAPPING.get(intent_data.intent.name)

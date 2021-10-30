@@ -66,13 +66,14 @@ def get_response():
         board_str = request.args.get('board_str')
 
         # Get text from audio file
-        # TODO: if audio cannot be transcribed, provide a fallback
         transcribed_audio = speech_text_processing.transcribe_audio_file(
             request.data)
 
         # Detect intent from text
-        intent_query_response = dialogflow_andy.perform_intent_query(
-            session_id, transcribed_audio)
+        intent_query_response = None
+        if transcribed_audio is not None:
+            intent_query_response = dialogflow_andy.perform_intent_query(
+                session_id, transcribed_audio)
 
         # Determine Andy's response
         response_text, fulfillment_info, updated_board_str = intent_processing.fulfill_intent(
@@ -82,7 +83,4 @@ def get_response():
             'response_text': response_text,
             'fulfillment_info': fulfillment_info,
             'board_str': updated_board_str,
-            # Just for debugging:
-            'transcribed_audio': transcribed_audio,
-            'detected_intent': intent_query_response.intent.display_name
         })
