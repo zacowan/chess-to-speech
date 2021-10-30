@@ -14,34 +14,13 @@ from .intent_processing import intent_processing
 bp = Blueprint('api', __name__, url_prefix='/api')
 
 
-@bp.route("/get-session", methods=["GET"])
-def get_session():
-    """Route for getting a unique session ID to use with Andy.
-
-    Returns:
-        An HTTP response, with the data field containing a JSON object. The data
-        field will only be present if the status code of the response is 200.
-
-        {
-            'ID': str
-        }
-
-        ID (str): the unique session ID generated.
-
-    """
-    if request.method == "GET":
-        session_id = dialogflow_andy.create_session()
-        return jsonify({
-            'ID': session_id
-        })
-
-
 @bp.route("/get-response", methods=["POST"])
 def get_response():
     """Route for getting a response from Andy and any actions to take.
 
     Query Params:
         session_id: the unique session ID to use with Andy.
+        board_str: the state of the board, as a string.
 
     Body:
         A Blob that contains the audio to interpret.
@@ -74,6 +53,7 @@ def get_response():
     """
     if request.method == "POST":
         session_id = request.args.get('session_id')
+        board_str = request.args.get('board_str')
 
         # Get text from audio file
         transcribed_audio = speech_text_processing.transcribe_audio_file(
@@ -84,8 +64,8 @@ def get_response():
             session_id, transcribed_audio)
 
         # Determine Andy's response
-        response_text, fulfillment_info = intent_processing.fulfill_intent(
-            intent_query_response, "TEST")
+        response_text, fulfillment_info, updated_board_str = intent_processing.fulfill_intent(
+            intent_query_response, board_str)
 
         # Convert response to audio
         response_audio = speech_text_processing.generate_audio_response(
@@ -95,6 +75,7 @@ def get_response():
             'response_text': response_text,
             'response_audio': response_audio,
             'fulfillment_info': fulfillment_info,
+            'board_str': updated_board_str,
             # Just for debugging:
             'transcribed_audio': transcribed_audio,
             'detected_intent': intent_query_response.intent.display_name

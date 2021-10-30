@@ -72,6 +72,8 @@ def fulfill_intent(intent_data, board_str):
     response_choice = "No response."
     success = False
 
+    updated_board_str = board_str
+
     # Handle more complex responses
     if response_type == RESPONSE_TYPES.CHOOSE_SIDE:
         response_choice, success = choose_side.handle(intent_data)
@@ -89,4 +91,4 @@ def fulfill_intent(intent_data, board_str):
     return response_choice, {
         'intent_name': response_type.name,
         'success': success
-    }
+    }, updated_board_str
