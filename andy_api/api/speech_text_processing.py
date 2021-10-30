@@ -53,7 +53,7 @@ def generate_audio_response(text):
         text (str): the text to transform into audio.
 
     Returns:
-        str: the location of the audio file generated.
+        bytes: the audio bytes generated.
 
     """
     try:
@@ -80,14 +80,14 @@ def generate_audio_response(text):
             input=synthesis_input, voice=voice, audio_config=audio_config
         )
 
-        # The response's audio_content is binary.
-        with open(OUTPUT_FILE_NAME, "wb") as out:
-            # Clear the contents of the file
-            out.truncate(0)
-            # Write the response to the output file.
-            out.write(response.audio_content)
+        # # The response's audio_content is binary.
+        # with open(OUTPUT_FILE_NAME, "wb") as out:
+        #     # Clear the contents of the file
+        #     out.truncate(0)
+        #     # Write the response to the output file.
+        #     out.write(response.audio_content)
 
-        return OUTPUT_FILE_NAME
+        return response.audio_content
     except Exception as err:
         print(err)
         raise
