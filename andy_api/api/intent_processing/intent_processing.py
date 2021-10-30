@@ -75,7 +75,8 @@ def fulfill_intent(intent_data, board_str):
         }, board_str
 
     # Determine the response type from the intent
-    response_type = INTENT_MAPPING.get(intent_data.intent.name)
+    response_type = INTENT_MAPPING.get(
+        intent_data.intent.name, RESPONSE_TYPES.FALLBACK)
     response_choice = "No response."
     success = False
 
