@@ -7,9 +7,11 @@ import requests
 import theMain
 import gameEngine
 import time
-import audioEngine
 import uuid
+from pygame import mixer
 from chess import Board
+
+OUTPUT_FILE_NAME = "andy_response.mp3"
 
 new_audio_path = ""
 # potential BUGS: We could receive more audio files then we can send / receive responses for (May have to make queue for audio paths)
@@ -33,24 +35,38 @@ def setupRestService():
         temp_path = new_audio_path
         new_audio_path = ""
         url = "http://localhost:5000/api/get-response?session_id=" + \
-            session_id+"&board_str="+gameEngine.board.__str__()
+            session_id+"&board_str="+gameEngine.board.fen()
+
         # API Request
-        # TODO:Fill in With Proper info @IgnorePep8
+        # TODO: check if the requests are sync or async
         response = requests.post(url, open(temp_path, 'rb'), temp_path)
-        audio_response = requests.post(
-            f"http://localhost:5000/api/get-audio-response?session_id={session_id}", response.json()["response_text"])
-        gameEngine.board = Board(response.json()["board_str"])
+        if response.status_code == 200:
+            print(response.json())
+            audio_response = requests.post(
+                f"http://localhost:5000/api/get-audio-response?session_id={session_id}", response.json()["response_text"])
+            gameEngine.board = Board(response.json()["board_str"])
 
-        # TODO: Some how create an audio file of Andy's response from the data sent back
-        file_path = "TODO: File name for Andy's response"
+            # Write audio_response to file
+            with open(OUTPUT_FILE_NAME, "wb") as out:
+                # Clear the contents of the file
+                out.truncate(0)
+                # Write the response to the output file.
+                out.write(audio_response.content)
 
-        # Plays Andy's Response to the User
-        audioEngine.playAudio(file_path)
+            # Plays Andy's Response to the User
+            print("Playing sound")
+            # TODO: audio not playing, but audio file IS being generated.
+            mixer.init()
+            mixer.music.load(OUTPUT_FILE_NAME)
+            mixer.music.play()
+        else:
+            print("Error with response")
 
 
 # Call this Function to Send audio to Andy
 def sendUserAudio(filepath):
     global new_audio_path
+    print(f"Setting new path to {filepath}. Old path: {new_audio_path}")
     new_audio_path = filepath
 
 

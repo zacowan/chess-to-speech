@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "0e29555d29faad54cee3dd6bb7c096d5c5c95383bd85a65c48d4bbab91731216"
+            "sha256": "1a3efd40b0b50de99aa7e05fb19c2f4b3c423c80260a697850c8528bad3bf3eb"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -46,6 +46,13 @@
             ],
             "markers": "python_version >= '3'",
             "version": "==3.3"
+        },
+        "playsound": {
+            "hashes": [
+                "sha256:cc6ed11d773034b0ef624e6bb4bf50f4b76b8414a59ce6d38afb89b423297ced"
+            ],
+            "index": "pypi",
+            "version": "==1.3.0"
         },
         "pyaudio": {
             "hashes": [

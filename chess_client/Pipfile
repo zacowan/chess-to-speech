@@ -8,6 +8,7 @@ pygame = "*"
 requests = "*"
 pyaudio = "*"
 chess = "==1.7.0"
+playsound = "==1.3.0"
 
 [dev-packages]
 

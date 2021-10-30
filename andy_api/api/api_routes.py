@@ -66,6 +66,7 @@ def get_response():
         board_str = request.args.get('board_str')
 
         # Get text from audio file
+        # TODO: if audio cannot be transcribed, provide a fallback
         transcribed_audio = speech_text_processing.transcribe_audio_file(
             request.data)
 
