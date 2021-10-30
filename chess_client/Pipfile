@@ -5,9 +5,9 @@ name = "pypi"
 
 [packages]
 pygame = "*"
-python-chess = "*"
 requests = "*"
 pyaudio = "*"
+chess = "==1.7.0"
 
 [dev-packages]
 
