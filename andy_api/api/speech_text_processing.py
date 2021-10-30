@@ -18,8 +18,8 @@ BUCKET_NAME = "chess-to-speech"
 FILENAME_PREFIX = "audio-files/"
 FILE_TYPE = "audio/wav"
 MOVE_PIECE_PHRASE_SET = "projects/408609438071/locations/global/phraseSets/MovePiece"
-FILE_SAMPLE_RATE = 44100
-OUTPUT_FILE_NAME = "andy_response.mp3"
+FILE_SAMPLE_RATE = 48000
+OUTPUT_FILE_NAME = "andy_response.wav"
 
 
 def upload_audio_file(file_to_upload):
@@ -71,7 +71,7 @@ def generate_audio_response(text):
 
         # Select the type of audio file you want returned
         audio_config = texttospeech.AudioConfig(
-            audio_encoding=texttospeech.AudioEncoding.MP3
+            audio_encoding=texttospeech.AudioEncoding.LINEAR16
         )
 
         # Perform the text-to-speech request on the text input with the selected
