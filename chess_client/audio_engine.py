@@ -7,10 +7,11 @@ from sys import byteorder
 from array import array
 from struct import pack
 from pathlib import Path
-import pyaudio
 import wave
-import theMain
-import restService
+import pyaudio
+
+from . import the_main
+from . import rest_service
 
 # Audio path
 AUDIO_PATH = "./user_audio"
@@ -24,14 +25,14 @@ RATE = 44100
 # Future FEATURE: While the User is speaking Andy stops talking or goes low volume
 
 
-def setupAudioEngine():
+def setup_audio_engine():
     count = 0
     Path(AUDIO_PATH).mkdir(parents=True, exist_ok=True)
-    while not theMain.isClosed():
+    while not the_main.is_closed():
         file_path = f"{AUDIO_PATH}/UserSpeech{str(count)}.wav"
         record_to_file(file_path)
         print(f"File path: {file_path}")
-        restService.sendUserAudio(file_path)  # send to Andy Api
+        rest_service.send_user_audio(file_path)  # send to Andy Api
 
         # This is to create a buffer of .wav files, so that they aren't deleted immediately
         count += 1
@@ -110,7 +111,7 @@ def record():
 
     r = array('h')
 
-    while not theMain.isClosed():
+    while not the_main.is_closed():
         # little endian, signed short
         snd_data = array('h', stream.read(CHUNK_SIZE))
         if byteorder == 'big':
@@ -175,7 +176,7 @@ def record_to_file(path):
 #     data = f.readframes(chunk)
 
 #     # play stream
-#     while data and not theMain.isClosed():
+#     while data and not the_main.isClosed():
 #         stream.write(data)
 #         data = f.readframes(chunk)
 
