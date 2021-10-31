@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "bf66364b150f90d4c1bf2e0df9262024bcaf4c6de070f663ab195e5194d48647"
+            "sha256": "76e9ffdc82513328290f88a727a676ee930426b64ab17bcb81c550e602d3f4e3"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -105,6 +105,14 @@
             ],
             "index": "pypi",
             "version": "==2.9.0"
+        },
+        "google-cloud-firestore": {
+            "hashes": [
+                "sha256:692e2ff732ebf4d20fa5eba3686edec8f3a02a72f177813dccdfbe0770e1d1a2",
+                "sha256:714e1bc1fc51029d78aa64933bef2efc03daedc9565ea79ec91b843b052016ec"
+            ],
+            "index": "pypi",
+            "version": "==2.3.4"
         },
         "google-cloud-speech": {
             "hashes": [
