@@ -85,7 +85,6 @@ def get_response():
 
         return jsonify({
             'response_text': response_text,
-            'board_str': board_str,  # include updated board string in JSON response
             'fulfillment_info': fulfillment_info,
             'board_str': updated_board_str,
         })
