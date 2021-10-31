@@ -19,7 +19,7 @@ ERROR_RESPONSES = [
 ]
 
 
-def handle(intent_model):
+def handle(intent_model, board_str):
     """Handles choosing a response for the MOVE_PIECE intent.
 
     Args:
