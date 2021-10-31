@@ -33,6 +33,7 @@ def handle(intent_model, board_str):
 
     Returns:
         str: the response that should be given, as text.
+        boolean: whether or not the intent was handled successfully.
 
     """
     # TODO: add a check for if a game has started
@@ -58,14 +59,13 @@ def handle(intent_model, board_str):
             static_choice = get_random_choice(HAPPY_PATH_RESPONSES)
 
             # Return a happy path response
-            return static_choice.format(from_location=from_location, to_location=to_location)
+            return static_choice.format(from_location=from_location, to_location=to_location), True
         else: # Player is attempting an illegal move
             static_choice = get_random_choice(ILLEGAL_MOVE_RESPONSES)
             # Return an illegal move response
-            return static_choice
-
+            return static_choice, False
     
     static_choice = get_random_choice(ERROR_RESPONSES)
     from_location = intent_model.output_contexts.parameters["fromLocation"]
 
-    return static_choice.format(from_location=from_location)
+    return static_choice.format(from_location=from_location), False
