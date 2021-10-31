@@ -24,6 +24,7 @@ ILLEGAL_MOVE_RESPONSES = [
     "I would let ya make that move, but there are rules to this game!"
 ]
 
+
 def handle(intent_model, board_str):
     """Handles choosing a response for the MOVE_PIECE intent.
 
@@ -51,21 +52,18 @@ def handle(intent_model, board_str):
             # Make the move
             board.push(chess.Move.from_uci(from_location+to_location))
 
-            # Update latest board string
-            board_str = board.board_fen()
-
             # TODO: See if player is in check or checkmate after move
 
             static_choice = get_random_choice(HAPPY_PATH_RESPONSES)
 
             # Return a happy path response
-            return static_choice.format(from_location=from_location, to_location=to_location), True
-        else: # Player is attempting an illegal move
+            return static_choice.format(from_location=from_location, to_location=to_location), True, board.board_fen()
+        else:  # Player is attempting an illegal move
             static_choice = get_random_choice(ILLEGAL_MOVE_RESPONSES)
             # Return an illegal move response
-            return static_choice, False
-    
-    static_choice = get_random_choice(ERROR_RESPONSES)
-    from_location = intent_model.output_contexts.parameters["fromLocation"]
+            return static_choice, False, board_str
+    else:
+        static_choice = get_random_choice(ERROR_RESPONSES)
+        from_location = intent_model.output_contexts.parameters["fromLocation"]
 
-    return static_choice.format(from_location=from_location), False
+        return static_choice.format(from_location=from_location), False, board_str

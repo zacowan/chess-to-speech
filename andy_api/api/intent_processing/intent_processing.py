@@ -86,10 +86,13 @@ def fulfill_intent(intent_data, board_str):
     if response_type == RESPONSE_TYPES.CHOOSE_SIDE:
         response_choice, success = choose_side.handle(intent_data)
     elif response_type == RESPONSE_TYPES.MOVE_PIECE_FROM:
-        response_choice, success = move_piece_from.handle(intent_data)
+        response_choice, success, updated_board_str = move_piece_from.handle(
+            intent_data, board_str)
     elif response_type == RESPONSE_TYPES.MOVE_PIECE_TO:
-        response_choice, success = move_piece_to.handle(intent_data, board_str)
+        response_choice, success, updated_board_str = move_piece_to.handle(
+            intent_data, board_str)
     else:
+        # TODO: double check this
         # Catch for all static responses
         response_choice = get_random_choice(
             STATIC_RESPONSES.get(response_type))

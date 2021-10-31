@@ -21,6 +21,7 @@ ERROR_RESPONSES = [
 ]
 
 
+# TODO: add logic with board_str
 def handle(intent_model):
     """Handles choosing a response for the CHOOSE_SIDE intent.
 
