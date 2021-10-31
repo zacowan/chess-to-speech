@@ -66,20 +66,33 @@ def fulfill_intent(intent_data, board_str):
             fulfillment.
 
     """
+    if intent_data is None:
+        response_choice = get_random_choice(
+            STATIC_RESPONSES.get(RESPONSE_TYPES.FALLBACK))
+        return response_choice, {
+            'intent_name': RESPONSE_TYPES.FALLBACK.name,
+            'success': False
+        }, board_str
 
     # Determine the response type from the intent
-    response_type = INTENT_MAPPING.get(intent_data.intent.name)
+    response_type = INTENT_MAPPING.get(
+        intent_data.intent.name, RESPONSE_TYPES.FALLBACK)
     response_choice = "No response."
     success = False
+
+    updated_board_str = board_str
 
     # Handle more complex responses
     if response_type == RESPONSE_TYPES.CHOOSE_SIDE:
         response_choice, success = choose_side.handle(intent_data)
     elif response_type == RESPONSE_TYPES.MOVE_PIECE_FROM:
-        response_choice, success = move_piece_from.handle(intent_data)
+        response_choice, success, updated_board_str = move_piece_from.handle(
+            intent_data, board_str)
     elif response_type == RESPONSE_TYPES.MOVE_PIECE_TO:
-        response_choice, success = move_piece_to.handle(intent_data, board_str)
+        response_choice, success, updated_board_str = move_piece_to.handle(
+            intent_data, board_str)
     else:
+        # TODO: double check this
         # Catch for all static responses
         response_choice = get_random_choice(
             STATIC_RESPONSES.get(response_type))
@@ -89,4 +102,4 @@ def fulfill_intent(intent_data, board_str):
     return response_choice, {
         'intent_name': response_type.name,
         'success': success
-    }
+    }, updated_board_str

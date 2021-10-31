@@ -3,10 +3,11 @@ Created on Oct 11, 2021
 
 @author: Legacy
 '''
-import theMain
-import pygame
 import sys
+import pygame
 import chess
+
+from . import the_main
 
 # Path to images
 IMAGES_PATH = './images'
@@ -17,17 +18,17 @@ board = chess.Board()
 
 
 # handles Setting up the Game and the Game State
-def setupGameEngine(screen):
+def setup_game_engine(screen):
     # Lets Other Threads know the Game Engine is Ready. # @IgnorePep8
-    theMain.init_complete = True
+    the_main.init_complete = True
     print("GameEngine Running.")
-    startGame(screen)
+    start_game(screen)
 
 
-def startGame(screen):
-    while not theMain.isClosed():
+def start_game(screen):
+    while not the_main.is_closed():
         screen.fill((255, 255, 255))  # Background Color
-        createBoard(screen)
+        create_board(screen)
         # this provides clicking functionality for the future if we want it @IgnorePep8
         mx, my = pygame.mouse.get_pos()
         # this provides clicking functionality for the future if we want it @IgnorePep8
@@ -35,13 +36,13 @@ def startGame(screen):
         # Event loop, This handles any button presses
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                theMain.close = True
+                the_main.close = True
                 pygame.mixer.quit()
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
-                    theMain.close = True
+                    # the_main.close = True
                     # this provides clicking functionality for the future if we want it @IgnorePep8
                     m1_clicked = True
             if event.type == pygame.KEYDOWN:
@@ -53,21 +54,22 @@ def startGame(screen):
         pygame.display.update()
 
 
-def createBoard(screen):
-    Boardimg = pygame.image.load(f'{IMAGES_PATH}/board.png')
-    screen.blit(Boardimg, (100, 100))
+def create_board(screen):
+    board_img = pygame.image.load(f'{IMAGES_PATH}/board.png')
+    screen.blit(board_img, (100, 100))
     for i in range(8):
         for j in range(8):
             if board.piece_at((i*8)+j):
-                screen.blit(convertToPng(board.piece_at((i*8)+j).symbol()),
+                screen.blit(convert_to_png(board.piece_at((i*8)+j).symbol()),
                             (115 + j * 45, 115 + i * 45))  # @IgnorePep8
 
 
-def changeBoard(newBoard):
+def change_board(newBoard):
+    global board
     board = newBoard
 
 
-def convertToPng(piece):
+def convert_to_png(piece):
     if piece.isupper():
         return pygame.image.load(f"{IMAGES_PATH}/{piece}b.png")
     else:

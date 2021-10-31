@@ -16,10 +16,10 @@ from google.cloud import speech_v1p1beta1 as speech, storage, texttospeech
 
 BUCKET_NAME = "chess-to-speech"
 FILENAME_PREFIX = "audio-files/"
-FILE_TYPE = "audio/webm"
+FILE_TYPE = "audio/wav"
 MOVE_PIECE_PHRASE_SET = "projects/408609438071/locations/global/phraseSets/MovePiece"
 FILE_SAMPLE_RATE = 48000
-OUTPUT_FILE_NAME = "andy_response.mp3"
+OUTPUT_FILE_NAME = "andy_response.wav"
 
 
 def upload_audio_file(file_to_upload):
@@ -53,7 +53,7 @@ def generate_audio_response(text):
         text (str): the text to transform into audio.
 
     Returns:
-        str: the location of the audio file generated.
+        bytes: the audio bytes generated.
 
     """
     try:
@@ -71,7 +71,7 @@ def generate_audio_response(text):
 
         # Select the type of audio file you want returned
         audio_config = texttospeech.AudioConfig(
-            audio_encoding=texttospeech.AudioEncoding.MP3
+            audio_encoding=texttospeech.AudioEncoding.LINEAR16
         )
 
         # Perform the text-to-speech request on the text input with the selected
@@ -80,14 +80,14 @@ def generate_audio_response(text):
             input=synthesis_input, voice=voice, audio_config=audio_config
         )
 
-        # The response's audio_content is binary.
-        with open(OUTPUT_FILE_NAME, "wb") as out:
-            # Clear the contents of the file
-            out.truncate(0)
-            # Write the response to the output file.
-            out.write(response.audio_content)
+        # # The response's audio_content is binary.
+        # with open(OUTPUT_FILE_NAME, "wb") as out:
+        #     # Clear the contents of the file
+        #     out.truncate(0)
+        #     # Write the response to the output file.
+        #     out.write(response.audio_content)
 
-        return OUTPUT_FILE_NAME
+        return response.audio_content
     except Exception as err:
         print(err)
         raise
@@ -134,6 +134,8 @@ def transcribe_audio_file(file_to_transcribe):
                 result.alternatives[0].transcript))
 
         return response.results[0].alternatives[0].transcript
+    except IndexError:
+        return None
     except Exception as err:
         print(err)
         raise

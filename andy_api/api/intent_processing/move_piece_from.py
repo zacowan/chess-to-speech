@@ -30,15 +30,17 @@ def handle(intent_model, board_str):
         boolean: whether or not the intent was handled successfully.
 
     """
+    updated_board_str = board_str
+
     # TODO: add a check for if a game has started
     # TODO: add a check if player has chosen a side
     if intent_model.all_required_params_present is True:
         static_choice = get_random_choice(HAPPY_PATH_RESPONSES)
 
-        # TODO: add check that the move is valid
+        # TODO: add check that the piece exists
 
-        return static_choice, True
+        return static_choice, True, updated_board_str
     else:
         static_choice = get_random_choice(ERROR_RESPONSES)
 
-        return static_choice, False
+        return static_choice, False, updated_board_str

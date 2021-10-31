@@ -5,23 +5,10 @@ Attributes:
     LANGUAGE_CODE: the language code of words being interpreted.
 
 """
-import uuid
-
 from google.cloud import dialogflow
 
 PROJECT_ID = "chess-master-andy-mhyo"
 LANGUAGE_CODE = "en-US"
-
-
-def create_session():
-    """Creates a UUID4 string.
-
-    Returns:
-        str: the unique UUID4 generated.
-
-    """
-    session_id = uuid.uuid4()
-    return str(session_id)
 
 
 def perform_intent_query(session_id, text):
