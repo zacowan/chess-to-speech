@@ -7,7 +7,7 @@ This API will be used to communicate with Andy.
 ### Getting Python Set Up
 
 1. Make sure you have Python version 3.9 installed.
-2. Install pipenv by following the instructions (here)[https://pipenv.pypa.io/en/latest/install/#pragmatic-installation-of-pipenv].
+2. Install pipenv by following the instructions [here](https://github.com/pypa/pipenv).
 3. Inside of the project directory, run `pipenv install`. This will install the required packages specified in `Pipfile`.
 
 ### Give the Proper Permissions to the Run Script
