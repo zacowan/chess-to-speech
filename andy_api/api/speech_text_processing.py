@@ -80,10 +80,7 @@ def generate_audio_response(text):
             input=synthesis_input, voice=voice, audio_config=audio_config
         )
 
-        # Upload the audio file to storage
-        file_name = upload_audio_file(response.audio_content)
-
-        return response.audio_content, file_name
+        return response.audio_content
     except Exception as err:
         print(err)
         raise

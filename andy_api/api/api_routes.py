@@ -4,10 +4,10 @@ Attributes:
     bp: The blueprint that the __init__.py will use to handle routing.
 
 """
+from threading import Thread
 from flask import (
     Blueprint, request, jsonify
 )
-from threading import Thread
 
 from . import speech_text_processing, dialogflow_andy
 from .intent_processing import intent_processing
@@ -21,11 +21,11 @@ def get_audio_response():
     if request.method == "POST":
         session_id = request.args.get('session_id')
         # Convert response to audio
-        response_audio, response_audio_location = speech_text_processing.generate_audio_response(
+        response_audio = speech_text_processing.generate_audio_response(
             request.data)
-        # Log
+        # Log the audio response
         Thread(target=update_intent_log_with_audio_response(
-            session_id, response_audio_location)).start()
+            session_id, response_audio)).start()
         return response_audio
 
 
