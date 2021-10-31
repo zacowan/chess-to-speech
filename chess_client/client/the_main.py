@@ -9,7 +9,6 @@ from pathlib import Path
 from . import window
 from . import game_engine
 from . import audio_detection
-from . import rest_service
 from .utils import AUDIO_PATH
 
 # May not need, dependent on Rest API testing, For now I will leave this here
@@ -37,13 +36,6 @@ def main():
         print("Audio Thread Starting.")
         audio.start()  # Thread that Handles Incoming and Outgoing audio
         print("Audio Thread Running.")
-        # print("Rest Service Thread Being made.")
-        # rest = threading.Thread(
-        #     target=rest_service.setup_rest_service)  # @IgnorePep8
-        # print("Rest Service Thread Completed.")
-        # print("Rest Service Thread Starting.")
-        # rest.start()  # Thread that Handles Incoming and Outgoing API Data
-        # print("Rest Service Thread Running.")
         print("game_engine Starting.")
         # Main thread will handle Visuals
         game_engine.setup_game_engine(screen)
