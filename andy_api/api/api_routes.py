@@ -10,6 +10,7 @@ from flask import (
 
 from . import speech_text_processing, dialogflow_andy
 from .intent_processing import intent_processing
+from .logging import create_intent_log, update_intent_log
 
 bp = Blueprint('api', __name__, url_prefix='/api')
 
@@ -67,9 +68,17 @@ def get_response():
         # grab board string from HTTP arguments
         board_str = request.args.get('board_str')
 
+        # Create a log file
+        log_id = create_intent_log(session_id)
+
         # Get text from audio file
-        transcribed_audio = speech_text_processing.transcribe_audio_file(
+        transcribed_audio, user_input_audio_location = speech_text_processing.transcribe_audio_file(
             request.data)
+        # Log the user's input
+        update_intent_log(log_id, {
+            'user_input_text': transcribed_audio,
+            'user_input_audio_location': user_input_audio_location
+        })
 
         # Detect intent from text
         intent_query_response = None
@@ -81,7 +90,16 @@ def get_response():
         response_text, fulfillment_info, updated_board_str = intent_processing.fulfill_intent(
             intent_query_response, board_str)
 
-        # TODO: Get updated board string
+        # Update the log file with information
+        update_intent_log(log_id, {
+            "board_str_before": board_str,
+            "board_str_after": updated_board_str,
+            "detected_intent": fulfillment_info["intent_name"],
+            "intent_success": fulfillment_info["success"],
+            "andy_response_text": response_text,
+            "user_input_text": transcribed_audio,
+            "user_input_audio_location": user_input_audio_location
+        })
 
         return jsonify({
             'response_text': response_text,

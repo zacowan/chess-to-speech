@@ -100,7 +100,8 @@ def transcribe_audio_file(file_to_transcribe):
         file_to_transcribe (blob): the blob to transcribe.
 
     Returns:
-        str: the text interpreted from the audio.
+        text (str): the text interpreted from the audio.
+        location (str): the location of the audio file in GCP.
 
     """
     try:
@@ -129,13 +130,10 @@ def transcribe_audio_file(file_to_transcribe):
 
         response = client.recognize(config=config, audio=audio)
 
-        for result in response.results:
-            print("Transcript: {}".format(
-                result.alternatives[0].transcript))
-
-        return response.results[0].alternatives[0].transcript
-    except IndexError:
-        return None
+        try:
+            return response.results[0].alternatives[0].transcript, gcs_uri
+        except IndexError:
+            return None, gcs_uri
     except Exception as err:
         print(err)
         raise
