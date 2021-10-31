@@ -15,7 +15,7 @@ import uuid
 from google.cloud import speech_v1p1beta1 as speech, storage, texttospeech
 
 BUCKET_NAME = "chess-to-speech"
-FILENAME_PREFIX = "audio-files/"
+FILENAME_PREFIX = "audio-files-staging/"
 FILE_TYPE = "audio/wav"
 MOVE_PIECE_PHRASE_SET = "projects/408609438071/locations/global/phraseSets/MovePiece"
 FILE_SAMPLE_RATE = 48000
@@ -80,14 +80,10 @@ def generate_audio_response(text):
             input=synthesis_input, voice=voice, audio_config=audio_config
         )
 
-        # # The response's audio_content is binary.
-        # with open(OUTPUT_FILE_NAME, "wb") as out:
-        #     # Clear the contents of the file
-        #     out.truncate(0)
-        #     # Write the response to the output file.
-        #     out.write(response.audio_content)
+        # Upload the audio file to storage
+        file_name = upload_audio_file(response.audio_content)
 
-        return response.audio_content
+        return response.audio_content, file_name
     except Exception as err:
         print(err)
         raise
@@ -131,7 +127,7 @@ def transcribe_audio_file(file_to_transcribe):
         response = client.recognize(config=config, audio=audio)
 
         try:
-            return response.results[0].alternatives[0].transcript, gcs_uri
+            return response.results[0].alternatives[0].transcript, file_name
         except IndexError:
             return None, gcs_uri
     except Exception as err:

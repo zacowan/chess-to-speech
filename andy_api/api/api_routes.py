@@ -7,10 +7,11 @@ Attributes:
 from flask import (
     Blueprint, request, jsonify
 )
+from threading import Thread
 
 from . import speech_text_processing, dialogflow_andy
 from .intent_processing import intent_processing
-from .logging import create_intent_log, update_intent_log
+from .logging import create_intent_log, update_intent_log_with_audio_response
 
 bp = Blueprint('api', __name__, url_prefix='/api')
 
@@ -18,11 +19,13 @@ bp = Blueprint('api', __name__, url_prefix='/api')
 @bp.route("/get-audio-response", methods=["POST"])
 def get_audio_response():
     if request.method == "POST":
-        # TODO: use session_id for logging
         session_id = request.args.get('session_id')
         # Convert response to audio
-        response_audio = speech_text_processing.generate_audio_response(
+        response_audio, response_audio_location = speech_text_processing.generate_audio_response(
             request.data)
+        # Log
+        Thread(target=update_intent_log_with_audio_response(
+            session_id, response_audio_location)).start()
         return response_audio
 
 
@@ -68,17 +71,9 @@ def get_response():
         # grab board string from HTTP arguments
         board_str = request.args.get('board_str')
 
-        # Create a log file
-        log_id = create_intent_log(session_id)
-
         # Get text from audio file
         transcribed_audio, user_input_audio_location = speech_text_processing.transcribe_audio_file(
             request.data)
-        # Log the user's input
-        update_intent_log(log_id, {
-            'user_input_text': transcribed_audio,
-            'user_input_audio_location': user_input_audio_location
-        })
 
         # Detect intent from text
         intent_query_response = None
@@ -90,8 +85,9 @@ def get_response():
         response_text, fulfillment_info, updated_board_str = intent_processing.fulfill_intent(
             intent_query_response, board_str)
 
-        # Update the log file with information
-        update_intent_log(log_id, {
+        # Log the intent request
+        Thread(target=create_intent_log({
+            "session_id": session_id,
             "board_str_before": board_str,
             "board_str_after": updated_board_str,
             "detected_intent": fulfillment_info["intent_name"],
@@ -99,7 +95,7 @@ def get_response():
             "andy_response_text": response_text,
             "user_input_text": transcribed_audio,
             "user_input_audio_location": user_input_audio_location
-        })
+        })).start()
 
         return jsonify({
             'response_text': response_text,
