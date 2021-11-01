@@ -25,7 +25,7 @@ def get_audio_response():
             request.data)
         # Log the audio response
         Thread(target=update_intent_log_with_audio_response(
-            session_id, response_audio)).start()
+            session_id, audio_data=response_audio)).start()
         return response_audio
 
 
@@ -86,8 +86,7 @@ def get_response():
             intent_query_response, board_str)
 
         # Log the intent request
-        Thread(target=create_intent_log({
-            "session_id": session_id,
+        Thread(target=create_intent_log(session_id, data={
             "board_str_before": board_str,
             "board_str_after": updated_board_str,
             "detected_intent": fulfillment_info["intent_name"],
