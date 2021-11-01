@@ -11,7 +11,7 @@ from flask import (
 
 from . import speech_text_processing, dialogflow_andy
 from .intent_processing import intent_processing
-from .logging import create_intent_log, update_intent_log_with_audio_response
+from .logging import create_intent_log, update_intent_log_with_audio_response, create_error_log, ERROR_TYPES
 
 bp = Blueprint('api', __name__, url_prefix='/api')
 
@@ -21,8 +21,14 @@ def get_audio_response():
     if request.method == "POST":
         session_id = request.args.get('session_id')
         # Convert response to audio
-        response_audio = speech_text_processing.generate_audio_response(
-            request.data)
+        try:
+            response_audio = speech_text_processing.generate_audio_response(
+                request.data)
+        except Exception as e:
+            err_msg = f"Error with text-to-speech: {e}"
+            create_error_log(session_id, ERROR_TYPES.TTS, err_msg)
+            # TODO: replace with a return "error" response
+            raise
         # Log the audio response
         Thread(target=update_intent_log_with_audio_response(
             session_id, audio_data=response_audio)).start()
@@ -72,18 +78,36 @@ def get_response():
         board_str = request.args.get('board_str')
 
         # Get text from audio file
-        transcribed_audio, user_input_audio_location = speech_text_processing.transcribe_audio_file(
-            request.data)
+        try:
+            transcribed_audio, user_input_audio_location = speech_text_processing.transcribe_audio_file(
+                request.data)
+        except Exception as e:
+            err_msg = f"Error with speech-to-text: {e}"
+            create_error_log(session_id, ERROR_TYPES.STT, err_msg)
+            # TODO: replace with a return "error" response
+            raise
 
         # Detect intent from text
         intent_query_response = None
         if transcribed_audio is not None:
-            intent_query_response = dialogflow_andy.perform_intent_query(
-                session_id, transcribed_audio)
+            try:
+                intent_query_response = dialogflow_andy.perform_intent_query(
+                    session_id, transcribed_audio)
+            except Exception as e:
+                err_msg = f"Error with intent detection: {e}"
+                create_error_log(session_id, ERROR_TYPES.INTENT, err_msg)
+                # TODO: replace with a return "error" response
+                raise
 
         # Determine Andy's response
-        response_text, fulfillment_info, updated_board_str = intent_processing.fulfill_intent(
-            intent_query_response, board_str)
+        try:
+            response_text, fulfillment_info, updated_board_str = intent_processing.fulfill_intent(
+                intent_query_response, board_str)
+        except Exception as e:
+            err_msg = f"Error performing fulfillment: {e}"
+            create_error_log(session_id, ERROR_TYPES.FULFILLMENT, err_msg)
+            # TODO: replace with a return "error" response
+            raise
 
         # Log the intent request
         Thread(target=create_intent_log(session_id, data={

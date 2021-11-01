@@ -11,7 +11,6 @@ Attributes:
 
 """
 import uuid
-
 from google.cloud import speech_v1p1beta1 as speech, storage, texttospeech
 
 BUCKET_NAME = "chess-to-speech"
@@ -41,8 +40,7 @@ def upload_audio_file(file_to_upload):
         blob.upload_from_string(file_to_upload, content_type=FILE_TYPE)
 
         return blob_name
-    except Exception as err:
-        print(err)
+    except Exception as e:
         raise
 
 
@@ -82,7 +80,6 @@ def generate_audio_response(text):
 
         return response.audio_content
     except Exception as err:
-        print(err)
         raise
 
 
@@ -128,5 +125,4 @@ def transcribe_audio_file(file_to_transcribe):
         except IndexError:
             return None, gcs_uri
     except Exception as err:
-        print(err)
         raise
