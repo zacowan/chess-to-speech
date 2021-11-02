@@ -14,7 +14,7 @@ ERROR_LOGS_COLLECTION = "error_logs_staging"
 
 ERROR_TYPES = Enum(
     "ERROR_TYPES",
-    "STT INTENT FULFILLMENT TTS LOGGING REQUEST UNKNOWN"
+    "STT INTENT FULFILLMENT TTS LOGGING UNKNOWN"
 )
 
 
@@ -71,6 +71,8 @@ def create_intent_log(session_id, data):
                 'timestamp': datetime.now(),
                 'session_id': session_id
             }, merge=True)
+
+            # Set the current log_id for audio response logging
             set_curr_log_id(session_id, doc_ref.id)
         except Exception as e:
             err_msg = f"Error logging intent log: {e}"
@@ -98,6 +100,7 @@ def update_intent_log_with_audio_response(session_id, audio_data):
         doc_ref.set({
             "andy_response_audio_location": andy_response_audio_location
         }, merge=True)
+
         # Reset curr_log_id
         set_curr_log_id(session_id, None)
     except Exception as e:
