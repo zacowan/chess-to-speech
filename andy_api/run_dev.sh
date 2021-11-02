@@ -10,5 +10,8 @@ export GOOGLE_APPLICATION_CREDENTIALS=$ABSOLUTE_PATH_TO_KEY
 export FLASK_APP=api
 export FLASK_ENV=development
 
+# Set the application environment variables
+export LOGGING_SUFFIX=development
+
 # Run the app
 exec flask run

@@ -152,7 +152,7 @@ def get_response():
             "intent_success": fulfillment_info["success"],
             "andy_response_text": response_text,
             "user_input_text": transcribed_audio,
-            "user_input_audio_location": user_input_audio_location
+            "user_input_audio_name": user_input_audio_location
         })).start()
 
         return jsonify({

@@ -1,6 +1,6 @@
 """Handles logging information to Firestore.
 """
-
+import os
 from datetime import datetime
 from enum import Enum
 from google.cloud import firestore
@@ -9,8 +9,11 @@ from .state_manager import set_curr_log_id, get_curr_log_id
 from .speech_text_processing import upload_audio_file
 
 PROJECT_ID = "chess-master-andy-mhyo"
-INTENT_LOGS_COLLECTION = "intent_logs_staging"
-ERROR_LOGS_COLLECTION = "error_logs_staging"
+LOGGING_SUFFIX = os.environ['LOGGING_SUFFIX']
+INTENT_LOGS_BASE_COLLECTION = "intent_logs"
+ERROR_LOGS_BASE_COLLECTION = "error_logs"
+INTENT_LOGS_COLLECTION = f"{INTENT_LOGS_BASE_COLLECTION}_{LOGGING_SUFFIX}"
+ERROR_LOGS_COLLECTION = f"{ERROR_LOGS_BASE_COLLECTION}_{LOGGING_SUFFIX}"
 
 ERROR_TYPES = Enum(
     "ERROR_TYPES",
