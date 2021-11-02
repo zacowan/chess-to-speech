@@ -15,7 +15,7 @@ INTENT_NAME_BASE = "projects/chess-master-andy-mhyo/agent/intents/"
 # The name of each type is separated by a space
 RESPONSE_TYPES = Enum(
     "RESPONSE_TYPES",
-    "HELLO FALLBACK CHOOSE_SIDE MOVE_PIECE_FROM MOVE_PIECE_TO"
+    "HELLO FALLBACK CHOOSE_SIDE MOVE_PIECE_FROM MOVE_PIECE_TO ERROR"
 )
 
 
