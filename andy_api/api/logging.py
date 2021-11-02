@@ -1,4 +1,29 @@
 """Handles logging information to Firestore.
+
+Intent Log Format:
+
+    {
+        "board_str_before": str,
+        "board_str_after": str,
+        "detected_intent": str,
+        "intent_success": bool,
+        "andy_response_text": str,
+        "user_input_text": str,
+        "user_input_audio_name": str,
+        "andy_response_audio_name": str,
+        "timestamp": datetime,
+        "session_id": str
+    }
+
+Error Log Format:
+
+    {
+        'session_id': str,
+        'type': str,
+        'description': str,
+        'timestamp': datetime
+    }
+
 """
 import os
 from datetime import datetime
@@ -101,7 +126,7 @@ def update_intent_log_with_audio_response(session_id, audio_data):
         log_id = get_curr_log_id(session_id)
         doc_ref = db.collection(INTENT_LOGS_COLLECTION).document(log_id)
         doc_ref.set({
-            "andy_response_audio_location": andy_response_audio_location
+            "andy_response_audio_name": andy_response_audio_location
         }, merge=True)
 
         # Reset curr_log_id

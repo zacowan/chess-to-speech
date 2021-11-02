@@ -13,7 +13,7 @@ import simpleaudio as sa
 from . import game_engine
 from .utils import AUDIO_PATH
 
-BASE_API_URL = "http://localhost:5000/api"
+BASE_API_URL = "http://127.0.0.1:5000/api"
 SESSION_ID = str(uuid.uuid4())
 FORMAT = paInt16
 CHANNELS = 1
