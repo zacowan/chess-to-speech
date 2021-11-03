@@ -26,6 +26,7 @@ Error Log Format:
 
 """
 import os
+import traceback
 from datetime import datetime
 from enum import Enum
 from google.cloud import firestore
@@ -103,8 +104,8 @@ def create_intent_log(session_id, audio_data, data):
 
             # Set the current log_id for audio response logging
             set_curr_log_id(session_id, doc_ref.id)
-        except Exception as e:
-            err_msg = f"Error logging intent log: {e}"
+        except Exception:
+            err_msg = f"Error logging intent log: {traceback.format_exc()}"
             create_error_log(session_id, ERROR_TYPES.LOGGING, err_msg)
     else:
         create_error_log(session_id, ERROR_TYPES.LOGGING,
@@ -132,8 +133,8 @@ def update_intent_log_with_audio_response(session_id, audio_data):
 
         # Reset curr_log_id
         set_curr_log_id(session_id, None)
-    except Exception as e:
-        err_msg = f"Error logging audio response to intent log: {e}"
+    except Exception:
+        err_msg = f"Error logging audio response to intent log: {traceback.format_exc()}"
         create_error_log(session_id, ERROR_TYPES.LOGGING, err_msg)
 
 
@@ -156,6 +157,6 @@ def create_error_log(session_id, error_type, description):
             'description': description,
             'timestamp': datetime.now()
         })
-    except Exception as e:
-        err_msg = f"Error logging error log for {error_type.name}: {e}"
+    except Exception:
+        err_msg = f"Error logging error log for {error_type.name}: {traceback.format_exc()}"
         print(err_msg)

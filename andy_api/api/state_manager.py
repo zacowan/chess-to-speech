@@ -6,7 +6,7 @@ Game State Dict:
     {
         "curr_log_id": str | None,
         "game_started": bool | None,
-        "chosen_side": bool | None,
+        "chosen_side": str | None,
         "curr_move_from": str | None,
         "game_finished": bool | None
     }
@@ -31,13 +31,29 @@ def set_curr_log_id(session_id, log_id):
 def get_curr_log_id(session_id):
     """Gets the current log_id for a session."""
     with shelve.open(get_shelve_file(session_id)) as db:
-        return db['curr_log_id']
+        return db.get('curr_log_id')
 
 
 def get_game_state(session_id):
-    """Returns the game state dictionary."""
+    """Returns the game state dictionary.
+
+    Returns:
+        {
+            "game_started": bool | None,
+            "chosen_side": bool | None,
+            "curr_move_from": str | None,
+            "game_finished": bool | None
+        }
+
+    """
     with shelve.open(get_shelve_file(session_id)) as db:
-        return db
+        game_state = {
+            "game_started": db.get("game_started"),
+            "chosen_side": db.get("chosen_side"),
+            "curr_move_from": db.get("curr_move_from"),
+            "game_finished": db.get("game_finished")
+        }
+        return game_state
 
 
 def set_game_started(session_id):
@@ -46,10 +62,10 @@ def set_game_started(session_id):
         db["game_started"] = True
 
 
-def set_chosen_side(session_id):
-    """Sets chosen_side to True."""
+def set_chosen_side(session_id, val):
+    """Sets chosen_side to a new value"""
     with shelve.open(get_shelve_file(session_id)) as db:
-        db["chosen_side"] = True
+        db["chosen_side"] = val
 
 
 def set_curr_move_from(session_id, val):

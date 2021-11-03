@@ -6,6 +6,7 @@ Attributes:
 
 """
 from .utils import get_random_choice
+from api.state_manager import set_curr_move_from
 
 
 HAPPY_PATH_RESPONSES = [
@@ -19,7 +20,7 @@ ERROR_RESPONSES = [
 ]
 
 
-def handle(intent_model, board_str):
+def handle(session_id, intent_model, board_str):
     """Handles choosing a response for the MOVE_PIECE intent.
 
     Args:
@@ -35,9 +36,13 @@ def handle(intent_model, board_str):
     # TODO: add a check for if a game has started
     # TODO: add a check if player has chosen a side
     if intent_model.all_required_params_present is True:
+        from_location = intent_model.parameters["fromLocation"]
         static_choice = get_random_choice(HAPPY_PATH_RESPONSES)
 
         # TODO: add check that the piece exists
+
+        # Update game state
+        set_curr_move_from(session_id, from_location)
 
         return static_choice, True, updated_board_str
     else:
