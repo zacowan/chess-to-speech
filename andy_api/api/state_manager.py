@@ -40,7 +40,7 @@ def get_game_state(session_id):
     Returns:
         {
             "game_started": bool | None,
-            "chosen_side": bool | None,
+            "chosen_side": str | None,
             "curr_move_from": str | None,
             "game_finished": bool | None
         }
