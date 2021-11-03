@@ -6,3 +6,4 @@ __pycache__/
 .DS_Store
 andy_response.mp3
 andy_response.wav
+shelve/

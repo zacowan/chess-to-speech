@@ -11,11 +11,10 @@ Attributes:
 
 """
 import uuid
-
 from google.cloud import speech_v1p1beta1 as speech, storage, texttospeech
 
 BUCKET_NAME = "chess-to-speech"
-FILENAME_PREFIX = "audio-files/"
+FILENAME_PREFIX = "audio-files-staging/"
 FILE_TYPE = "audio/wav"
 MOVE_PIECE_PHRASE_SET = "projects/408609438071/locations/global/phraseSets/MovePiece"
 FILE_SAMPLE_RATE = 48000
@@ -41,8 +40,7 @@ def upload_audio_file(file_to_upload):
         blob.upload_from_string(file_to_upload, content_type=FILE_TYPE)
 
         return blob_name
-    except Exception as err:
-        print(err)
+    except Exception as e:
         raise
 
 
@@ -80,16 +78,8 @@ def generate_audio_response(text):
             input=synthesis_input, voice=voice, audio_config=audio_config
         )
 
-        # # The response's audio_content is binary.
-        # with open(OUTPUT_FILE_NAME, "wb") as out:
-        #     # Clear the contents of the file
-        #     out.truncate(0)
-        #     # Write the response to the output file.
-        #     out.write(response.audio_content)
-
         return response.audio_content
     except Exception as err:
-        print(err)
         raise
 
 
@@ -100,7 +90,8 @@ def transcribe_audio_file(file_to_transcribe):
         file_to_transcribe (blob): the blob to transcribe.
 
     Returns:
-        str: the text interpreted from the audio.
+        text (str): the text interpreted from the audio.
+        location (str): the location of the audio file in GCP.
 
     """
     try:
@@ -129,13 +120,9 @@ def transcribe_audio_file(file_to_transcribe):
 
         response = client.recognize(config=config, audio=audio)
 
-        for result in response.results:
-            print("Transcript: {}".format(
-                result.alternatives[0].transcript))
-
-        return response.results[0].alternatives[0].transcript
-    except IndexError:
-        return None
+        try:
+            return response.results[0].alternatives[0].transcript, file_name
+        except IndexError:
+            return None, gcs_uri
     except Exception as err:
-        print(err)
         raise

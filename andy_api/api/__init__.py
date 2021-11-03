@@ -3,12 +3,16 @@
 This module serves the purpose of initializing the flask application.
 
 """
+from pathlib import Path
 from flask import Flask
 from flask_cors import CORS
 from . import api_routes
+from .state_manager import SHELVE_DIRECTORY
 
 
 def create_app(test_config=None):
+    # Create shelve directory
+    Path(SHELVE_DIRECTORY).mkdir(parents=True, exist_ok=True)
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
     CORS(app)

@@ -11,6 +11,7 @@ google-cloud-storage = "==1.42.3"
 flask-cors = "*"
 google-cloud-texttospeech = "==2.6.0"
 chess = "==1.7.0"
+google-cloud-firestore = "==2.3.4"
 
 [dev-packages]
 
