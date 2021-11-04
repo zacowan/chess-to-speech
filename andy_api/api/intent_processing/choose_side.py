@@ -6,6 +6,7 @@ Attributes:
 
 """
 from .utils import get_random_choice
+from api.state_manager import set_chosen_side, set_game_started
 
 
 HAPPY_PATH_RESPONSES = [
@@ -22,7 +23,7 @@ ERROR_RESPONSES = [
 
 
 # TODO: add logic with board_str
-def handle(intent_model):
+def handle(session_id, intent_model):
     """Handles choosing a response for the CHOOSE_SIDE intent.
 
     Args:
@@ -33,9 +34,6 @@ def handle(intent_model):
         boolean: whether or not the intent was handled successfully.
 
     """
-    # TODO: add a check for if a game has started
-    # TODO: add a check if player has already chosen a side
-
     if intent_model.all_required_params_present is True:
         static_choice = get_random_choice(HAPPY_PATH_RESPONSES)
         board_side = intent_model.parameters["BoardSide"]
@@ -54,6 +52,10 @@ def handle(intent_model):
             andy_position = first_pos
             andy_side = white_side
             user_position = second_pos
+
+        # Update game state
+        set_game_started(session_id)
+        set_chosen_side(session_id, user_side)
 
         return static_choice.format(andy_side=andy_side,
                                     andy_position=andy_position,

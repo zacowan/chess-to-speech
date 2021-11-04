@@ -4,6 +4,7 @@ Attributes:
     bp: The blueprint that the __init__.py will use to handle routing.
 
 """
+import traceback
 from threading import Thread
 from flask import (
     Blueprint, request, jsonify
@@ -50,8 +51,8 @@ def get_audio_response():
         try:
             response_audio = speech_text_processing.generate_audio_response(
                 request.data)
-        except Exception as e:
-            err_msg = f"Error with text-to-speech: {e}"
+        except Exception:
+            err_msg = f"Error with text-to-speech: {traceback.format_exc()}"
             create_error_log(session_id, ERROR_TYPES.TTS, err_msg)
             # Return a static audio response
             return get_static_error_audio()
@@ -127,10 +128,13 @@ def get_response():
         # Determine Andy's response
         try:
             response_text, fulfillment_info, updated_board_str = intent_processing.fulfill_intent(
-                intent_query_response, board_str)
-        except Exception as e:
+                session_id=session_id,
+                board_str=board_str,
+                intent_data=intent_query_response
+            )
+        except Exception:
             # Log the error
-            err_msg = f"Error performing fulfillment: {e}"
+            err_msg = f"Error performing fulfillment: {traceback.format_exc()}"
             create_error_log(session_id, ERROR_TYPES.FULFILLMENT, err_msg)
             # Return an error response
             return get_response_error_return(board_str)

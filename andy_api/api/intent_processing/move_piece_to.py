@@ -6,6 +6,7 @@ Attributes:
 
 """
 from .utils import get_random_choice
+from api.state_manager import set_curr_move_from, get_game_state
 import chess
 
 
@@ -25,7 +26,7 @@ ILLEGAL_MOVE_RESPONSES = [
 ]
 
 
-def handle(intent_model, board_str):
+def handle(session_id, intent_model, board_str):
     """Handles choosing a response for the MOVE_PIECE intent.
 
     Args:
@@ -37,10 +38,8 @@ def handle(intent_model, board_str):
         boolean: whether or not the intent was handled successfully.
 
     """
-    # TODO: add a check for if a game has started
-    # TODO: add a check if player has chosen a side
     if intent_model.all_required_params_present is True:
-        from_location = intent_model.output_contexts[0].parameters["fromLocation"]
+        from_location = get_game_state(session_id)["curr_move_from"]
         to_location = intent_model.parameters["toLocation"]
 
         # Use string representing latest board to create new chess board
@@ -55,6 +54,9 @@ def handle(intent_model, board_str):
             # TODO: See if player is in check or checkmate after move
 
             static_choice = get_random_choice(HAPPY_PATH_RESPONSES)
+
+            # Update game state
+            set_curr_move_from(session_id, None)
 
             # Return a happy path response
             return static_choice.format(from_location=from_location, to_location=to_location), True, board.board_fen()
