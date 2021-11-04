@@ -38,8 +38,6 @@ def handle(session_id, intent_model, board_str):
         boolean: whether or not the intent was handled successfully.
 
     """
-    # TODO: add a check for if a game has started
-    # TODO: add a check if player has chosen a side
     if intent_model.all_required_params_present is True:
         from_location = get_game_state(session_id)["curr_move_from"]
         to_location = intent_model.parameters["toLocation"]
