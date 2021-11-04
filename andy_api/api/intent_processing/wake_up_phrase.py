@@ -22,13 +22,16 @@ HAPPY_PATH_RESPONSES_3 = [
     "That's fine. I didn't want to play with you either."
 ]
 
-def handle(intent_model):
+
+def handle():
     static_choice = get_random_choice(HAPPY_PATH_RESPONSES)
     return static_choice, True
 
-def handle_yes(intent_model):
+
+def handle_yes():
     static_choice = get_random_choice(HAPPY_PATH_RESPONSES_2)
     return static_choice, True
 
-def handle_no(intent_model):
+
+def handle_no():
     return get_random_choice(HAPPY_PATH_RESPONSES_3), True

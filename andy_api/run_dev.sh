@@ -1,7 +1,10 @@
 #!/bin/bash
 
 # Change this to the proper path
-ABSOLUTE_PATH_TO_KEY="C:\Users\selen\Desktop\ChessToSpeech\chess-to-speech\andy_api\service_key_file.json"
+# # For Bricson:
+# ABSOLUTE_PATH_TO_KEY="C:\Users\selen\Desktop\ChessToSpeech\chess-to-speech\andy_api\service_key_file.json"
+# For Zach:
+ABSOLUTE_PATH_TO_KEY="/Users/zacowan/development/chess-to-speech/andy_api/service_key_file.json"
 
 # Set path to service account key
 export GOOGLE_APPLICATION_CREDENTIALS=$ABSOLUTE_PATH_TO_KEY
