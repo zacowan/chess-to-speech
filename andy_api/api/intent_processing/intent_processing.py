@@ -32,7 +32,7 @@ Example Intent Model:
 """
 from api.state_manager import get_game_state
 from .utils import INTENT_MAPPING, RESPONSE_TYPES, get_random_choice
-from . import choose_side, move_piece_from, move_piece_to
+from . import choose_side, move_piece_from, move_piece_to, wake_up_phrase
 
 
 STATIC_RESPONSES = {
@@ -91,7 +91,13 @@ def fulfill_intent(session_id, board_str, intent_data):
 
     # Intents to handle before the game has started
     if not game_state["game_started"]:
-        if response_type == RESPONSE_TYPES.CHOOSE_SIDE:
+        if response_type == RESPONSE_TYPES.WAKE_UP_PROMPT:
+            response_choice, success = wake_up_phrase.handle()
+        elif response_type == RESPONSE_TYPES.WAKE_UP_FOLLOW_UP_YES:
+            response_choice, success = wake_up_phrase.handle_yes()
+        elif response_type == RESPONSE_TYPES.WAKE_UP_FOLLOW_UP_NO:
+            response_choice, success = wake_up_phrase.handle_no()
+        elif response_type == RESPONSE_TYPES.CHOOSE_SIDE:
             response_choice, success = choose_side.handle(
                 session_id, intent_data)
 
