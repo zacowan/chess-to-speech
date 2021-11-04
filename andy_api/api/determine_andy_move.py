@@ -18,9 +18,12 @@ def determine_andy_move(board_str):
 
     Returns:
         str: the response that should be given, as text.
+        str: the updated board_str that should be given.
 
     """
     static_choice = get_random_choice(HAPPY_PATH_RESPONSES)
+
+    updated_board_str = board_str
 
     # TODO: determine move based on board_str, generate new board_str
 
@@ -28,5 +31,7 @@ def determine_andy_move(board_str):
     to_location = "E5"
     piece_name = "pawn"
 
-    return static_choice.format(from_location=from_location,
-                                to_location=to_location, piece_name=piece_name)
+    return static_choice.format(
+        from_location=from_location,
+        to_location=to_location,
+        piece_name=piece_name), updated_board_str

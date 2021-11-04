@@ -70,6 +70,7 @@ def get_andy_move_response():
 
     Query Params:
         board_str: the state of the chess board, as text.
+        session_id: the unique session ID to use with Andy.
 
     Returns:
         An HTTP response, with the data field containing a JSON object. The data
@@ -89,9 +90,16 @@ def get_andy_move_response():
     """
     if request.method == "GET":
         board_str = request.args.get('board_str')
+        session_id = request.args.get('session_id')
+
+        # Make sure query params are present
+        if not session_id or not board_str:
+            raise Exception(
+                "get-audio-response: missing session_id or board_str")
 
         # Determine Andy's response
-        response_text = determine_andy_move.determine_andy_move(board_str)
+        response_text, updated_board_str = determine_andy_move.determine_andy_move(
+            board_str)
 
         # Convert response to audio
         response_audio = speech_text_processing.generate_audio_response(
@@ -100,6 +108,7 @@ def get_andy_move_response():
         return jsonify({
             'response_text': response_text,
             'response_audio': response_audio,
+            'board_str': updated_board_str
         })
 
 
