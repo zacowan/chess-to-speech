@@ -83,46 +83,46 @@ def generate_audio_response(text):
         raise
 
 
-def transcribe_audio_file(file_to_transcribe):
-    """Converts an audio file into text.
+# def transcribe_audio_file(file_to_transcribe):
+#     """Converts an audio file into text.
 
-    Args:
-        file_to_transcribe (blob): the blob to transcribe.
+#     Args:
+#         file_to_transcribe (blob): the blob to transcribe.
 
-    Returns:
-        text (str): the text interpreted from the audio.
-        location (str): the location of the audio file in GCP.
+#     Returns:
+#         text (str): the text interpreted from the audio.
+#         location (str): the location of the audio file in GCP.
 
-    """
-    try:
-        client = speech.SpeechClient()
+#     """
+#     try:
+#         client = speech.SpeechClient()
 
-        file_name = upload_audio_file(file_to_transcribe)
+#         file_name = upload_audio_file(file_to_transcribe)
 
-        gcs_uri = "gs://" + BUCKET_NAME + "/" + file_name
+#         gcs_uri = "gs://" + BUCKET_NAME + "/" + file_name
 
-        audio = speech.RecognitionAudio(uri=gcs_uri)
+#         audio = speech.RecognitionAudio(uri=gcs_uri)
 
-        # Model adaptation
+#         # Model adaptation
 
-        # Speech adaptation configuration
-        speech_adaptation = speech.SpeechAdaptation(
-            phrase_set_references=[MOVE_PIECE_PHRASE_SET])
+#         # Speech adaptation configuration
+#         speech_adaptation = speech.SpeechAdaptation(
+#             phrase_set_references=[MOVE_PIECE_PHRASE_SET])
 
-        # Note: the encoding and sample_rate_hertz should change based on what
-        # file is expected.
-        config = speech.RecognitionConfig(
-            encoding=speech.RecognitionConfig.AudioEncoding.ENCODING_UNSPECIFIED,
-            sample_rate_hertz=FILE_SAMPLE_RATE,
-            language_code="en-US",
-            adaptation=speech_adaptation
-        )
+#         # Note: the encoding and sample_rate_hertz should change based on what
+#         # file is expected.
+#         config = speech.RecognitionConfig(
+#             encoding=speech.RecognitionConfig.AudioEncoding.ENCODING_UNSPECIFIED,
+#             sample_rate_hertz=FILE_SAMPLE_RATE,
+#             language_code="en-US",
+#             adaptation=speech_adaptation
+#         )
 
-        response = client.recognize(config=config, audio=audio)
+#         response = client.recognize(config=config, audio=audio)
 
-        try:
-            return response.results[0].alternatives[0].transcript, file_name
-        except IndexError:
-            return None, gcs_uri
-    except Exception as err:
-        raise
+#         try:
+#             return response.results[0].alternatives[0].transcript, file_name
+#         except IndexError:
+#             return None, gcs_uri
+#     except Exception as err:
+#         raise

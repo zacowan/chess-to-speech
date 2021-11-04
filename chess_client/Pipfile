@@ -10,6 +10,8 @@ pyaudio = "*"
 chess = "==1.7.0"
 webrtcvad = "*"
 simpleaudio = "*"
+install = "*"
+speechrecognition = "*"
 
 [dev-packages]
 
