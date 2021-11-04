@@ -41,15 +41,17 @@ def handle(session_id, intent_model, board_str):
     if intent_model.all_required_params_present is True:
         from_location = get_game_state(session_id)["curr_move_from"]
         to_location = intent_model.parameters["toLocation"]
+        move_sequence = from_location+to_location
+        move_sequence = move_sequence.lower()
 
         # Use string representing latest board to create new chess board
         # This board will be used to check if move is valid and make move if valid
         board = chess.Board(board_str)
 
         # check if move is valid
-        if(chess.Move.from_uci(from_location+to_location) in board.legal_moves):
+        if(chess.Move.from_uci(move_sequence) in board.legal_moves):
             # Make the move
-            board.push(chess.Move.from_uci(from_location+to_location))
+            board.push(chess.Move.from_uci(move_sequence))
 
             # TODO: See if player is in check or checkmate after move
 
