@@ -25,9 +25,7 @@ def run():
 
         # obtain audio from the microphone
         with sr.Microphone() as source:
-            print("Calibrating")
             r.adjust_for_ambient_noise(source)
-            print("Done calibrating\n")
             print("*"*20)
             print("Say something!")
             audio = r.listen(source, phrase_time_limit=8)
@@ -38,11 +36,13 @@ def run():
             # for testing purposes, we're just using the default API key
             # to use another API key, use `r.recognize_google(audio, key="GOOGLE_SPEECH_RECOGNITION_API_KEY")`
             # instead of `r.recognize_google(audio)`
-            print("Google Speech Recognition thinks you said " +
-                  r.recognize_google(audio))
+            detected_text = r.recognize_google(audio)
+            print(f"Detected text: {detected_text}")
         except sr.UnknownValueError:
+            detected_text = None
             print("Google Speech Recognition could not understand audio")
         except sr.RequestError as e:
+            detected_text = None
             print(
                 "Could not request results from Google Speech Recognition service; {0}".format(e))
 
@@ -51,7 +51,7 @@ def run():
             f.write(audio.get_wav_data())
 
         # Get the intent
-        intent_info = get_user_intent()
+        intent_info = get_user_intent(detected_text)
         # Get the audio response
         audio_response = get_audio_response(intent_info)
         # Play the audio response
@@ -63,8 +63,6 @@ def run():
         play_obj = wave_obj.play()
         play_obj.wait_done()  # Wait until sound has finished playing
 
-    print("Audio detection closed")
-
 
 def get_audio_response(text):
     request_url = f"{BASE_API_URL}/get-audio-response?session_id={SESSION_ID}"
@@ -75,8 +73,8 @@ def get_audio_response(text):
         raise Exception
 
 
-def get_user_intent():
-    request_url = f"{BASE_API_URL}/get-response?session_id={SESSION_ID}&board_str={game_engine.board.fen()}"
+def get_user_intent(detected_text):
+    request_url = f"{BASE_API_URL}/get-response?session_id={SESSION_ID}&board_str={game_engine.board.fen()}&detected_text={detected_text}"
     response = requests.post(request_url, open(
         USER_AUDIO_FILENAME, 'rb'), USER_AUDIO_FILENAME)
     if response.status_code == 200:

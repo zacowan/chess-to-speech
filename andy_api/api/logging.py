@@ -60,21 +60,20 @@ def check_intent_log_data(data):
             "intent_success": bool,
             "andy_response_text": str,
             "user_input_text": str,
-            "user_input_audio_name": str
         }
 
     """
     return all(key in data for key in ('board_str_before', 'board_str_after',
                                        'detected_intent', 'intent_success',
-                                       'andy_response_text', 'user_input_text',
-                                       'user_input_audio_name'))
+                                       'andy_response_text', 'user_input_text'))
 
 
-def create_intent_log(session_id, data):
+def create_intent_log(session_id, audio_data, data):
     """Creates a log entry for an intent.
 
     Args:
         session_id (str): the session to associate the log with.
+        audio_data (bytes): the user's audio to log.
         data (dict): the data that the document should contain.
 
     Data Format:
@@ -92,12 +91,14 @@ def create_intent_log(session_id, data):
     # Check for required data
     if check_intent_log_data(data):
         try:
+            user_input_audio_location = upload_audio_file(audio_data)
             db = firestore.Client(project=PROJECT_ID)
             doc_ref = db.collection(INTENT_LOGS_COLLECTION).document()
             doc_ref.set(data)
             doc_ref.set({
                 'timestamp': datetime.now(),
-                'session_id': session_id
+                'session_id': session_id,
+                'user_input_audio_name': user_input_audio_location
             }, merge=True)
 
             # Set the current log_id for audio response logging

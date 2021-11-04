@@ -70,6 +70,7 @@ def get_response():
     Query Params:
         session_id: the unique session ID to use with Andy.
         board_str: FEN representation of board from client.
+        detected_text: the text detected from the user.
 
     Body:
         A Blob that contains the audio to interpret.
@@ -102,36 +103,26 @@ def get_response():
     # pylint: disable=broad-except
     if request.method == "POST":
         session_id = request.args.get('session_id')
+        detected_text = request.args.get('detected_text')
         # grab board string from HTTP arguments
         board_str = request.args.get('board_str')
 
         # Make sure query params are present
-        if not session_id or not board_str:
-            raise Exception("get-response: missing session_id or board_str")
-
-        # Get text from audio file
-        try:
-            transcribed_audio, user_input_audio_location = speech_text_processing.transcribe_audio_file(
-                request.data)
-        except Exception as e:
-            # Log the error
-            err_msg = f"Error with speech-to-text: {e}"
-            create_error_log(session_id, ERROR_TYPES.STT, err_msg)
-            # Return an error response
-            return get_response_error_return(board_str)
+        if not session_id or not board_str or not detected_text:
+            raise Exception(
+                "get-response: missing session_id or board_str or detected_text")
 
         # Detect intent from text
         intent_query_response = None
-        if transcribed_audio is not None:
-            try:
-                intent_query_response = dialogflow_andy.perform_intent_query(
-                    session_id, transcribed_audio)
-            except Exception as e:
-                # Log the error
-                err_msg = f"Error with intent detection: {e}"
-                create_error_log(session_id, ERROR_TYPES.INTENT, err_msg)
-                # Return an error response
-                return get_response_error_return(board_str)
+        try:
+            intent_query_response = dialogflow_andy.perform_intent_query(
+                session_id, detected_text)
+        except Exception as e:
+            # Log the error
+            err_msg = f"Error with intent detection: {e}"
+            create_error_log(session_id, ERROR_TYPES.INTENT, err_msg)
+            # Return an error response
+            return get_response_error_return(board_str)
 
         # Determine Andy's response
         try:
@@ -145,15 +136,17 @@ def get_response():
             return get_response_error_return(board_str)
 
         # Log the intent request on a separate thread
-        Thread(target=create_intent_log(session_id, data={
-            "board_str_before": board_str,
-            "board_str_after": updated_board_str,
-            "detected_intent": fulfillment_info["intent_name"],
-            "intent_success": fulfillment_info["success"],
-            "andy_response_text": response_text,
-            "user_input_text": transcribed_audio,
-            "user_input_audio_name": user_input_audio_location
-        })).start()
+        Thread(target=create_intent_log(
+            session_id,
+            audio_data=request.data,
+            data={
+                "board_str_before": board_str,
+                "board_str_after": updated_board_str,
+                "detected_intent": fulfillment_info["intent_name"],
+                "intent_success": fulfillment_info["success"],
+                "andy_response_text": response_text,
+                "user_input_text": detected_text,
+            })).start()
 
         return jsonify({
             'response_text': response_text,
