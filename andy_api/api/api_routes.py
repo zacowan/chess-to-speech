@@ -18,7 +18,7 @@ from .logging import (
     create_error_log,
     ERROR_TYPES
 )
-from .api_route_helpers import get_response_error_return, get_static_error_audio
+from .api_route_helpers import get_response_error_return, get_static_error_audio, get_best_move
 
 bp = Blueprint('api', __name__, url_prefix='/api')
 
