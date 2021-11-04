@@ -5,11 +5,25 @@
 from flask import (
     jsonify
 )
-
 from .intent_processing import error_fulfillment
+import chess
+import os
 
 
 TTS_ERROR_AUDIO_FILENAME = "./static_audio/tts-error.wav"
+
+def get_engine():
+    dirname = os.path.dirname(__file__)
+    engine_filename = dirname + "/UCI_engine/stockfish"
+    engine = chess.engine.SimpleEngine.popen_uci(engine_filename) #load stockfish as chess engine
+    return engine
+
+def get_best_move(board_str):
+    engine = get_engine()
+    board = chess.Board(board_str)
+    bestMove = engine.play(board, chess.engine.Limit(time=0.1)).move
+    engine.close()
+    return bestMove
 
 
 def get_static_error_audio():
