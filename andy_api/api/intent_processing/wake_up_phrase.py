@@ -14,32 +14,21 @@ HAPPY_PATH_RESPONSES = [
     "Hello, do you want to play chess?"
 ]
 
-ERROR_RESPONSES = [
-    "I'm sorry, can you repeat that?",
-    "Huh?"
+HAPPY_PATH_RESPONSES_2 = [
+    "Great! What side do you want to choose?",
 ]
 
+HAPPY_PATH_RESPONSES_3 = [
+    "That's fine. I didn't want to play with you either."
+]
 
 def handle(intent_model):
-    """Handles choosing a response for the CHOOSE_SIDE intent.
+    static_choice = get_random_choice(HAPPY_PATH_RESPONSES)
+    return static_choice, True
 
-    Args:
-        intent_model: the intent model to parse.
+def handle_yes(intent_model):
+    static_choice = get_random_choice(HAPPY_PATH_RESPONSES_2)
+    return static_choice, True
 
-    Returns:
-        str: the response that should be given, as text.
-
-    """
-
-    if intent_model.all_required_params_present is True:
-        static_choice = get_random_choice(HAPPY_PATH_RESPONSES)
-        startGame = intent_model.parameters["startGame"]
-
-        startResponse = "yes"
-
-        start_game = startResponse
-
-        if startGame == "yes":
-            return static_choice.format(start_game)
-        else:
-            return get_random_choice(ERROR_RESPONSES)
+def handle_no(intent_model):
+    return get_random_choice(HAPPY_PATH_RESPONSES_3), True
