@@ -14,4 +14,4 @@ export FLASK_ENV=development
 export LOGGING_SUFFIX=development
 
 # Run the app
-exec flask run
+exec python -m flask run

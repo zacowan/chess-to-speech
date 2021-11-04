@@ -5,6 +5,7 @@ Attributes:
 
 """
 import traceback
+from api.state_manager import get_game_state
 from threading import Thread
 from flask import (
     Blueprint, request, jsonify
@@ -109,9 +110,10 @@ def get_response():
         board_str = request.args.get('board_str')
 
         # Make sure query params are present
-        if not session_id or not board_str or not detected_text:
+        game_state = get_game_state(session_id)
+        if not session_id or not detected_text or (game_state["game_started"] and not board_str):
             raise Exception(
-                "get-response: missing session_id or board_str or detected_text")
+                "get-response: missing session_id , detected_text, or the game has started and board_str is missing")
 
         # Detect intent from text
         intent_query_response = None
