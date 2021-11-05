@@ -60,6 +60,17 @@ def handle(session_id, intent_model, board_str):
             # Update game state
             set_curr_move_from(session_id, None)
 
+            # check if user has put andy in check or checkmate
+            if(board.is_check()):
+                return static_choice.format(
+                from_location=from_location,
+                to_location=to_location)+"... How did you put me in check?!", True, board.board_fen()
+            if(board.is_checkmate):
+                return static_choice.format(
+                from_location=from_location,
+                to_location=to_location)+"... You beat me- unbelievable!", True, board.board_fen()
+
+
             # Return a happy path response
             return static_choice.format(from_location=from_location, to_location=to_location), True, board.board_fen()
         else:  # Player is attempting an illegal move
