@@ -16,7 +16,7 @@ isGameStarted = False
 
 # Sets up the Default Board
 #board = chess.Board('r1bqkb1r/pppp1Qpp/2n2n2/4p3/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 0 4')
-board=None;
+board = None
 
 # handles Setting up the Game and the Game State
 def setup_game_engine(screen):
