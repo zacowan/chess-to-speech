@@ -6,7 +6,7 @@ Attributes:
 
 """
 from .utils import get_random_choice
-from api.state_manager import set_curr_move_from
+from api.state_manager import set_curr_move_from, set_fulfillment_params
 
 
 HAPPY_PATH_RESPONSES = [
@@ -43,6 +43,10 @@ def handle(session_id, intent_model, board_str):
 
         # Update game state
         set_curr_move_from(session_id, from_location)
+        # Log the fulfillment params
+        set_fulfillment_params(session_id, params={
+            "from_location": from_location
+        })
 
         return static_choice, True, updated_board_str
     else:
