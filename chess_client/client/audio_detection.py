@@ -7,7 +7,9 @@ import uuid
 import requests
 import speech_recognition as sr
 import simpleaudio as sa
-
+import chess
+import traceback
+from . import the_main
 from . import game_engine
 from .utils import AUDIO_PATH
 
@@ -21,14 +23,15 @@ def run():
 
     r = sr.Recognizer()
 
-    while True:
-
+    while not the_main.is_closed():
         # obtain audio from the microphone
         with sr.Microphone() as source:
             r.adjust_for_ambient_noise(source)
             print("*"*20)
             print("Say something!")
+            game_engine.isMicOn= True
             audio = r.listen(source, phrase_time_limit=8)
+            game_engine.isMicOn= False
             print("Recognizing...")
 
         # recognize speech using Google Speech Recognition
@@ -41,6 +44,7 @@ def run():
         except sr.UnknownValueError:
             detected_text = None
             print("Google Speech Recognition could not understand audio")
+            continue
         except sr.RequestError as e:
             detected_text = None
             print(
@@ -52,6 +56,8 @@ def run():
 
         # Get the intent
         intent_info = get_user_intent(detected_text)
+        if not intent_info:
+            continue 
         # Get the audio response
         audio_response = get_audio_response(intent_info)
         # Play the audio response
@@ -70,17 +76,31 @@ def get_audio_response(text):
     if response.status_code == 200:
         return response.content
     else:
+        print("API Error, Status Code:"+response.status_code)
         raise Exception
 
 
 def get_user_intent(detected_text):
-    request_url = f"{BASE_API_URL}/get-response?session_id={SESSION_ID}&board_str={game_engine.board.fen()}&detected_text={detected_text}"
-    response = requests.post(request_url, open(
-        USER_AUDIO_FILENAME, 'rb'), USER_AUDIO_FILENAME)
-    if response.status_code == 200:
-        return response.json()["response_text"]
-    else:
-        return None
+    try:
+        if game_engine.board:
+            request_url = f"{BASE_API_URL}/get-response?session_id={SESSION_ID}&board_str={game_engine.board.fen()}&detected_text={detected_text}"
+        else:
+            request_url = f"{BASE_API_URL}/get-response?session_id={SESSION_ID}&detected_text={detected_text}"
+
+        response = requests.post(request_url, open(
+            USER_AUDIO_FILENAME, 'rb'), USER_AUDIO_FILENAME)
+        if response.status_code == 200:
+            print(response.json()["board_str"])
+            if response.json()["board_str"]:
+                game_engine.board= chess.Board(response.json()["board_str"])
+                game_engine.isGameStarted = True
+            return response.json()["response_text"]
+        else:
+            print("API Error, Status Code:"+response.status_code)
+            return None
+    except Exception as e: 
+        print(e)
+        traceback.print_exc()
 
 
 # # For testing

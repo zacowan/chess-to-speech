@@ -42,6 +42,8 @@ def main():
     except Exception as e:
         global close
         close = True
+        print(e)
+        traceback.print_exc()
 
 
 if __name__ == '__main__':  # @IgnorePep8
