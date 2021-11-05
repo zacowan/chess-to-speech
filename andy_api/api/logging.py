@@ -1,85 +1,67 @@
 """Handles logging information to Firestore.
 
-General Log Format:
+User Request Log:
     {
         "session_id": str,
         "timestamp": datetime,
 
-        "user_request_info": {
-            "text": str,
-            "audio_name": str,
+        "text": str,
+        "audio_name": str,
 
-            "detected_intent": str,
-            "detected_params": dict,
+        "detected_intent": str,
+        "detected_params": dict,
 
-            "detected_fulfillment": str,
-            "fulfillment_success": bool,
-            "fulfillment_params": dict,
+        "detected_fulfillment": str,
+        "fulfillment_success": bool,
+        "fulfillment_params": dict,
 
-            "board_str_before": str,
-            "board_str_after": str,
+        "board_str_before": str,
+        "board_str_after": str,
 
-            "received_at": datetime,
-            "response_at": datetime,
-
-            "error_types": list(str),
-            "error_desc": list(str),
-        }
-
-        "andy_response_info": {
-            "text": str,
-            "audio_name": str,
-
-            "received_at": datetime,
-            "response_at": datetime,
-
-            "error_types": list(str),
-            "error_desc": list(str),
-        }
-
-        "andy_move_info": {
-            "text": str,
-            "audio_name": str,
-            "move_info": {
-                "from": str,
-                "to": str,
-            },
-            "board_str_before": str,
-            "board_str_after": str,
-
-            "received_at": datetime,
-            "response_at": datetime,
-
-            "error_types": list(str),
-            "error_desc": list(str),
-        }
+        "received_at": datetime,
+        "response_at": datetime,
 
         "errors_occurred": bool,
         "error_types": list(str),
+        "error_desc": list(str),
     }
 
-Intent Log Format:
-
+Andy Response Log:
     {
+        "session_id": str,
+        "timestamp": datetime,
+
+        "text": str,
+        "audio_name": str,
+
+        "received_at": datetime,
+        "response_at": datetime,
+
+        "errors_occurred": bool,
+        "error_types": list(str),
+        "error_desc": list(str),
+    }
+
+Andy Move Log:
+    {
+        "session_id": str,
+        "timestamp": datetime,
+
+        "text": str,
+        "audio_name": str,
+        "move_info": {
+            "from": str,
+            "to": str,
+        },
         "board_str_before": str,
         "board_str_after": str,
-        "detected_intent": str,
-        "intent_success": bool,
-        "andy_response_text": str,
-        "user_input_text": str,
-        "user_input_audio_name": str,
-        "andy_response_audio_name": str,
-        "timestamp": datetime,
-        "session_id": str
-    }
 
-Error Log Format:
+        "received_at": datetime,
+        "response_at": datetime,
 
-    {
-        'session_id': str,
-        'type': str,
-        'description': str,
-        'timestamp': datetime
+        "errors_occurred": bool,
+        "error_types": list(str),
+        "error_desc": list(str),
     }
 
 """
