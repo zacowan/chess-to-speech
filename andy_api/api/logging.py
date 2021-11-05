@@ -49,8 +49,6 @@ Andy Move Log:
         "timestamp": datetime,
         "user_request_log_id": str,
 
-        "text": str,
-        "audio_name": str,
         "move_info": {
             "from": str,
             "to": str,
@@ -116,8 +114,6 @@ def log_andy_move(session_id, data):
 
     Data format:
         {
-            "text": str,
-            "audio_data": bytes,
             "move_info": {
                 "from": str,
                 "to": str,
@@ -128,14 +124,6 @@ def log_andy_move(session_id, data):
             "response_at": datetime,
         }
     """
-    # Upload audio_data and get name
-    try:
-        audio_name = upload_audio_file(
-            data.get("audio_data"))
-    except Exception:
-        audio_name = ""
-        err_msg = f"Failed to upload Andy's move audio: {traceback.format_exc()}"
-        log_error(session_id, ERROR_TYPES.AUDIO_UPLOAD, err_msg)
     # Get errors from state_manager
     error_types, error_desc = get_curr_errors(session_id)
     # Set all of the data in a log
@@ -147,8 +135,6 @@ def log_andy_move(session_id, data):
             'session_id': session_id,
             'timestamp': datetime.now(),
             'user_request_log_id': log_id,
-            'text': data.get('text', ''),
-            'audio_name': audio_name,
             'move_info': data.get('move_info', {}),
             'board_str_before': data.get('board_str_before', ''),
             'board_str_after': data.get('board_str_after', ''),

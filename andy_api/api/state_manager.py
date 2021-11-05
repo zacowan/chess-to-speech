@@ -24,7 +24,6 @@ def get_fulfillment_params(session_id):
     """Get the fulfillment params."""
     with shelve.open(get_shelve_file(session_id)) as db:
         params = db.get("fulfillment_params", {})
-        db["fulfillment_params"] = {}
         return params
 
 

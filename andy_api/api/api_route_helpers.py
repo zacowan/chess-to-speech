@@ -5,6 +5,7 @@
 from flask import (
     jsonify
 )
+from .state_manager import get_fulfillment_params
 from .intent_processing import error_fulfillment
 import chess
 import os
@@ -44,7 +45,7 @@ def get_static_error_audio():
     return data
 
 
-def get_response_error_return(board_str):
+def get_response_error_return(session_id, board_str):
     """Returns a generic error response.
 
     Args:
@@ -79,5 +80,6 @@ def get_response_error_return(board_str):
     return {
         "response_text": response_text,
         "fulfillment_info": fulfillment_info,
+        'fulfillment_params': get_fulfillment_params(session_id),
         "board_str": board_str
     }
