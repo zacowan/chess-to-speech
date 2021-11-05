@@ -19,7 +19,7 @@ from .logging import (
     create_error_log,
     ERROR_TYPES
 )
-from .api_route_helpers import get_response_error_return, get_static_error_audio, get_best_move
+from .api_route_helpers import get_response_error_return, get_static_error_audio, get_best_move, make_move
 
 bp = Blueprint('api', __name__, url_prefix='/api')
 
@@ -141,6 +141,11 @@ def get_response():
             # Return an error response
             return get_response_error_return(board_str)
 
+        andy_board_str = updated_board_str
+        if board_str != updated_board_str:
+            andy_move = get_best_move(andy_board_str)
+            andy_board_str = make_move(andy_move)
+
         # Log the intent request on a separate thread
         Thread(target=create_intent_log(
             session_id,
@@ -148,6 +153,7 @@ def get_response():
             data={
                 "board_str_before": board_str,
                 "board_str_after": updated_board_str,
+                "andy_board_str": andy_board_str,
                 "detected_intent": fulfillment_info["intent_name"],
                 "intent_success": fulfillment_info["success"],
                 "andy_response_text": response_text,

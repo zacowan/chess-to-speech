@@ -25,6 +25,11 @@ def get_best_move(board_str):
     engine.close()
     return bestMove
 
+def make_move(board_str, move):
+    board = chess.Board(board_str)
+    board.push(chess.Move.from_uci(move))
+    return board.board_fen
+
 
 def get_static_error_audio():
     """Returns the data of a static audio file for TTS errors.
