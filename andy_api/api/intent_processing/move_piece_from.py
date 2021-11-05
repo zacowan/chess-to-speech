@@ -5,6 +5,7 @@ Attributes:
     ERROR_RESPONSES (list): a list of responses for errors.
 
 """
+from os import stat
 import chess
 
 from .utils import get_random_choice
@@ -16,7 +17,17 @@ HAPPY_PATH_RESPONSES = [
     "And where to?"
 ]
 
-ERROR_RESPONSES = [
+EMPTY_SPACE_RESPONSE = [
+    "What- you movin a ghost piece or sumtin?",
+    "Let me know when you wanna move a real piece..."
+]
+
+WRONG_COLOR_RESPONSE = [
+    "Don't touch my pieces!",
+    "You can win without cheating- move your own colored piece!"
+]
+
+STANDARD_ERROR_RESPONSES = [
     "Sorry, the piece at where?",
     "Sorry, the piece at which location?"
 ]
@@ -45,19 +56,21 @@ def handle(session_id, intent_model, board_str):
 
         # check if space contains piece
         if(board.piece_at(from_location) == None):
-            return "What are you trying to move- there's nothing there?", False, updated_board_str
+            static_choice = get_random_choice(EMPTY_SPACE_RESPONSE)
+            return static_choice, False, updated_board_str
 
         # check that player owns piece
         player_color = board.color_at(from_location)
         from_color = board.turn()
         if(player_color != from_color):
-            return "Don't touch my piece!", False, updated_board_str
+            static_choice = get_random_choice(WRONG_COLOR_RESPONSE)
+            return static_choice, False, updated_board_str
 
         # Update game state
         set_curr_move_from(session_id, from_location)
 
         return static_choice, True, updated_board_str
     else:
-        static_choice = get_random_choice(ERROR_RESPONSES)
+        static_choice = get_random_choice(STANDARD_ERROR_RESPONSES)
 
         return static_choice, False, updated_board_str
