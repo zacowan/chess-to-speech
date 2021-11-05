@@ -6,7 +6,7 @@ Attributes:
 
 """
 from .utils import get_random_choice
-from api.state_manager import set_chosen_side, set_game_started
+from api.state_manager import set_chosen_side, set_game_started, set_fulfillment_params
 
 
 HAPPY_PATH_RESPONSES = [
@@ -56,6 +56,10 @@ def handle(session_id, intent_model):
         # Update game state
         set_game_started(session_id)
         set_chosen_side(session_id, user_side)
+        # Log the params
+        set_fulfillment_params(session_id, params={
+            "chosen_side": user_side
+        })
 
         return static_choice.format(andy_side=andy_side,
                                     andy_position=andy_position,

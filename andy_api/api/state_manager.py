@@ -7,6 +7,7 @@ Game State Dict:
         "curr_log_id": str | None,
         "curr_err_type": list,
         "curr_err_desc": list,
+        "fulfillment_params": dict,
         "game_started": bool | None,
         "chosen_side": str | None,
         "curr_move_from": str | None,
@@ -17,6 +18,20 @@ Game State Dict:
 import shelve
 
 SHELVE_DIRECTORY = "./shelve"
+
+
+def get_fulfillment_params(session_id):
+    """Get the fulfillment params."""
+    with shelve.open(get_shelve_file(session_id)) as db:
+        params = db.get("fulfillment_params", {})
+        db["fulfillment_params"] = {}
+        return params
+
+
+def set_fulfillment_params(session_id, params):
+    """Set the fulfillment params."""
+    with shelve.open(get_shelve_file(session_id)) as db:
+        db["fulfillment_params"] = params
 
 
 def get_curr_errors(session_id):
