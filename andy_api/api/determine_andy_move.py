@@ -53,6 +53,14 @@ def determine_andy_move(board_str):
     new_board = chess.Board(updated_board_str)
     piece_name = new_board.piece_at(to_location)
 
+    if(new_board.is_check()):
+        return "I'll move my {piece_name} at {from_location} to {to_location}... I got ya in check!", updated_board_str
+
+    if(new_board.is_checkmate):
+        return "Let me move my {piece_name} from {from_location} to {to_location}... And... I win!", updated_board_str
+
+    # check if board is check
+
     return static_choice.format(
         from_location=from_location,
         to_location=to_location,
