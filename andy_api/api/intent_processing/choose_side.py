@@ -10,6 +10,9 @@ from api.state_manager import set_chosen_side, set_game_started
 
 import chess
 
+import os
+
+DEMO_BOARD_STR = "r2qk2r/pb4pp/1n2Pb2/2B2Q2/p1p5/2P5/2B2PPP/RN2R1K1 w - - 1 0"
 
 HAPPY_PATH_RESPONSES = [
     "Great, since you're on {user_side} side, you'll go {user_position}.",
@@ -60,7 +63,8 @@ def handle(session_id, intent_model):
         set_chosen_side(session_id, user_side)
 
         starting_board_str = chess.Board().board_fen
-        demo_board_str = "r2qk2r/pb4pp/1n2Pb2/2B2Q2/p1p5/2P5/2B2PPP/RN2R1K1 w - - 1 0"
+        if(os.environ['DEMO_MODE'] == True):
+            starting_board_str = DEMO_BOARD_STR
 
         return static_choice.format(andy_side=andy_side,
                                     andy_position=andy_position,
