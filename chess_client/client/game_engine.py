@@ -12,11 +12,12 @@ from . import the_main
 # Path to images
 IMAGES_PATH = './images'
 isMicOn = False
-isGameStarted = False
+isGameStarted = True
+lastSaid =""
 
 # Sets up the Default Board
-#board = chess.Board('r1bqkb1r/pppp1Qpp/2n2n2/4p3/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 0 4')
-board = None
+board = chess.Board('r1bqkb1r/pppp1Qpp/2n2n2/4p3/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 0 4')
+#board = None
 
 # handles Setting up the Game and the Game State
 def setup_game_engine(screen):
@@ -37,6 +38,20 @@ def start_game(screen):
         if isGameStarted:
             create_board(screen)
             screen.blit(mic_img, (300, 500))
+            if lastSaid:
+                pygame.font.init()
+                myfont = pygame.font.SysFont('Times', 22)
+                stringPrint =""
+                lineNum=0
+                for word in  ("I understood: "+lastSaid).split():
+                    if(len(stringPrint+word)>50):
+                        textsurface = myfont.render(stringPrint, True, (0, 0, 0))
+                        screen.blit(textsurface,(600,475+lineNum))
+                        lineNum+=25
+                        stringPrint =""
+                    stringPrint += word+ " "
+                textsurface = myfont.render(stringPrint, True, (0, 0, 0))
+                screen.blit(textsurface,(600,500+lineNum))
         else:
             welcome_img = pygame.image.load(f'{IMAGES_PATH}/Welcome.png')
             screen.blit(welcome_img, (350, 200))
