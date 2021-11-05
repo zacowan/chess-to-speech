@@ -18,6 +18,7 @@ from .logging import (
     log_andy_response,
     log_error,
     log_user_request,
+    log_andy_move,
     ERROR_TYPES
 )
 from .api_route_helpers import get_response_error_return, get_static_error_audio, get_best_move
@@ -113,6 +114,7 @@ def get_andy_move_response():
 
     """
     if request.method == "GET":
+        received_at = datetime.now()
         board_str = request.args.get('board_str')
         session_id = request.args.get('session_id')
 
@@ -122,12 +124,27 @@ def get_andy_move_response():
                 "get-audio-response: missing session_id or board_str")
 
         # Determine Andy's response
-        response_text, updated_board_str = determine_andy_move.determine_andy_move(
+        response_text, updated_board_str, move_info = determine_andy_move.determine_andy_move(
             board_str)
 
         # Convert response to audio
         response_audio = speech_text_processing.generate_audio_response(
             response_text)
+
+        # Log Andy's move on a separate thread
+        response_at = datetime.now()
+        Thread(target=log_andy_move(
+            session_id,
+            data={
+                'text': response_text,
+                'audio_data': response_audio,
+                'move_info': move_info,
+                'board_str_before': board_str,
+                'board_str_after': updated_board_str,
+                'received_at': received_at,
+                'response_at': response_at
+            }
+        )).start()
 
         return jsonify({
             'response_text': response_text,

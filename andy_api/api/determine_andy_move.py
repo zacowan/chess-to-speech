@@ -11,11 +11,14 @@ HAPPY_PATH_RESPONSES = [
     "Let me move my {piece_name} from {from_location} to {to_location}"
 ]
 
+
 def get_engine():
     dirname = os.path.dirname(__file__)
     engine_filename = dirname + "/UCI_engine/stockfish"
-    engine = chess.engine.SimpleEngine.popen_uci(engine_filename) #load stockfish as chess engine
+    engine = chess.engine.SimpleEngine.popen_uci(
+        engine_filename)  # load stockfish as chess engine
     return engine
+
 
 def get_best_move(board_str):
     engine = get_engine()
@@ -23,6 +26,7 @@ def get_best_move(board_str):
     bestMove = engine.play(board, chess.engine.Limit(time=0.1)).move
     engine.close()
     return bestMove
+
 
 def make_move(board_str, move):
     board = chess.Board(board_str)
@@ -39,6 +43,7 @@ def determine_andy_move(board_str):
     Returns:
         str: the response that should be given, as text.
         str: the updated board_str that should be given.
+        dict: the move_info to log.
 
     """
     static_choice = get_random_choice(HAPPY_PATH_RESPONSES)
@@ -48,12 +53,17 @@ def determine_andy_move(board_str):
     from_location = move[0:2]
     to_location = move[2:4]
 
-    updated_board_str = make_move(move)
+    updated_board_str = make_move(board_str, move)
 
     new_board = chess.Board(updated_board_str)
     piece_name = new_board.piece_at(to_location)
 
+    move_info = {
+        "from": from_location,
+        "to": to_location
+    }
+
     return static_choice.format(
         from_location=from_location,
         to_location=to_location,
-        piece_name=piece_name), updated_board_str
+        piece_name=piece_name), updated_board_str, move_info
