@@ -68,13 +68,12 @@ def handle(session_id, intent_model, board_str):
             # check if user has put andy in check or checkmate
             if(board.is_check()):
                 return static_choice.format(
-                from_location=from_location,
-                to_location=to_location)+"... How did you put me in check?!", True, board.board_fen()
+                    from_location=from_location,
+                    to_location=to_location) + "... How did you put me in check?!", True, board.board_fen()
             if(board.is_checkmate):
                 return static_choice.format(
-                from_location=from_location,
-                to_location=to_location)+"... You beat me- unbelievable!", True, board.board_fen()
-
+                    from_location=from_location,
+                    to_location=to_location) + "... You beat me - unbelievable!", True, board.board_fen()
 
             # Return a happy path response
             return static_choice.format(from_location=from_location, to_location=to_location), True, board.board_fen()
