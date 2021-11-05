@@ -14,7 +14,7 @@ export GOOGLE_APPLICATION_CREDENTIALS=$ABSOLUTE_PATH_TO_KEY
 # Set flask environment variables
 export FLASK_APP=api
 export FLASK_ENV=development
-export DEMO_MODE=False
+export DEMO_MODE=True
 
 # Set the application environment variables
 export LOGGING_SUFFIX=development
