@@ -2,12 +2,32 @@
 
 """
 from .intent_processing.utils import get_random_choice
+import chess
+import os
 
 
 HAPPY_PATH_RESPONSES = [
     "I'll move my {piece_name} at {from_location} to {to_location}",
     "Let me move my {piece_name} from {from_location} to {to_location}"
 ]
+
+def get_engine():
+    dirname = os.path.dirname(__file__)
+    engine_filename = dirname + "/UCI_engine/stockfish"
+    engine = chess.engine.SimpleEngine.popen_uci(engine_filename) #load stockfish as chess engine
+    return engine
+
+def get_best_move(board_str):
+    engine = get_engine()
+    board = chess.Board(board_str)
+    bestMove = engine.play(board, chess.engine.Limit(time=0.1)).move
+    engine.close()
+    return bestMove
+
+def make_move(board_str, move):
+    board = chess.Board(board_str)
+    board.push(chess.Move.from_uci(move))
+    return board.board_fen
 
 
 def determine_andy_move(board_str):
@@ -23,13 +43,15 @@ def determine_andy_move(board_str):
     """
     static_choice = get_random_choice(HAPPY_PATH_RESPONSES)
 
-    updated_board_str = board_str
+    move = get_best_move(board_str)
 
-    # TODO: determine move based on board_str, generate new board_str
+    from_location = move[0:2]
+    to_location = move[2:4]
 
-    from_location = "E3"
-    to_location = "E5"
-    piece_name = "pawn"
+    updated_board_str = make_move(move)
+
+    new_board = chess.Board(updated_board_str)
+    piece_name = new_board.piece_at(to_location)
 
     return static_choice.format(
         from_location=from_location,
