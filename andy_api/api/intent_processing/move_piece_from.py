@@ -5,6 +5,8 @@ Attributes:
     ERROR_RESPONSES (list): a list of responses for errors.
 
 """
+import chess
+
 from .utils import get_random_choice
 from api.state_manager import set_curr_move_from
 
@@ -39,7 +41,17 @@ def handle(session_id, intent_model, board_str):
         from_location = intent_model.parameters["fromLocation"]
         static_choice = get_random_choice(HAPPY_PATH_RESPONSES)
 
-        # TODO: add check that the piece exists
+        board = chess.Board(board_str)
+
+        # check if space contains piece
+        if(board.piece_at(from_location) == None):
+            return "What are you trying to move- there's nothing there?", False, updated_board_str
+
+        # check that player owns piece
+        player_color = board.color_at(from_location)
+        from_color = board.turn()
+        if(player_color != from_color):
+            return "Don't touch my piece!", False, updated_board_str
 
         # Update game state
         set_curr_move_from(session_id, from_location)
