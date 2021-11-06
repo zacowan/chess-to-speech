@@ -28,40 +28,11 @@ STANDARD_ERROR_RESPONSES = [
     "Wait...what's the location of the piece you want to learn more about?"
 ]
 
-# TODO add error responses?
 
-
-col_num = {
-    "a":0,
-    "b":1,
-    "c":2,
-    "d":3,
-    "e":4,
-    "f":5,
-    "g":6,
-    "h":7
-}
-
-row_num = {
-    "8":0,
-    "7":1,
-    "6":2,
-    "5":3,
-    "4":4,
-    "3":5,
-    "2":6,
-    "1":7
-}
-
-
-# (row * 8) + col = piece_num
-def locationToNumber(location):
-    letter = location[0:1]
-    number = location[1:2]
-    col = col_num[letter]
-    row = row_num[number]
-    piece_num = (row*8) + col
-    return piece_num
+def get_piece_at(board_str, location):
+    board = chess.Board(board_str)
+    board_location = chess.parse_square(location.lower())
+    return board.piece_at(board_location)
 
 def handle(session_id, intent_data, board_str):
     """TODO add details about method
@@ -73,7 +44,7 @@ def handle(session_id, intent_data, board_str):
         board = chess.Board(board_str)
         piece_location = intent_data.parameters["pieceLocation"]
         piece_location = piece_location.lower()
-        piece_num = locationToNumber(piece_location)
+        piece_num = get_piece_at(board_str,piece_location)
         piece = board.piece_at(piece_num)
 
         # find specific response depending on piece type
@@ -102,5 +73,3 @@ def handle(session_id, intent_data, board_str):
         else:
             static_choice = get_random_choice(STANDARD_ERROR_RESPONSES)
             return static_choice, False
-
-        # TODO add error messages/check for errors from player?
