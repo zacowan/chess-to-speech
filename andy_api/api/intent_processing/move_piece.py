@@ -20,8 +20,8 @@ CHECKMATE_ADDITIONS = [
 ]
 
 EMPTY_SPACE__ERROR_RESPONSES = [
-    "What- you movin a ghost piece or sumtin?",
-    "Let me know when you wanna move a real piece..."
+    "I don't see a piece at {from_location}, Perhaps I misunderstood?",
+    "It seems like there is no piece at {from_location}, Perhaps I misunderstood? "
 ]
 
 WRONG_COLOR_ERROR_RESPONSES = [
