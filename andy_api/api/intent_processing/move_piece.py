@@ -19,7 +19,7 @@ CHECKMATE_ADDITIONS = [
     "And that puts me in checkmate, you win!"
 ]
 
-EMPTY_SPACE__ERROR_RESPONSES = [
+EMPTY_SPACE_ERROR_RESPONSES = [
     "I don't see a piece at {from_location}, Perhaps I misunderstood?",
     "It seems like there is no piece at {from_location}, Perhaps I misunderstood? "
 ]
@@ -102,8 +102,8 @@ def handle(session_id, intent_model, board_str):
         # Chess logic
         if not get_piece_at(updated_board_str, from_location):
             # No piece at that location
-            static_choice = get_random_choice(EMPTY_SPACE__ERROR_RESPONSES)
-            return static_choice, False, updated_board_str
+            static_choice = get_random_choice(EMPTY_SPACE_ERROR_RESPONSES)
+            return static_choice.format(from_location=from_location), False, updated_board_str
         elif not check_if_turn(updated_board_str, from_location):
             # Player does not own that piece
             static_choice = get_random_choice(WRONG_COLOR_ERROR_RESPONSES)
@@ -152,8 +152,8 @@ def handle(session_id, intent_model, board_str):
         # Chess logic
         if not get_piece_at(updated_board_str, from_location):
             # No piece at that location
-            static_choice = get_random_choice(EMPTY_SPACE__ERROR_RESPONSES)
-            return static_choice, False, updated_board_str
+            static_choice = get_random_choice(EMPTY_SPACE_ERROR_RESPONSES)
+            return static_choice.format(from_location=from_location), False, updated_board_str
         elif not check_if_turn(updated_board_str, from_location):
             # Player does not own that piece
             static_choice = get_random_choice(WRONG_COLOR_ERROR_RESPONSES)
