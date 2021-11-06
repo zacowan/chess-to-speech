@@ -61,8 +61,9 @@ def run():
             f.write(audio.get_wav_data())
 
         # Get the intent
-        intent_info = get_user_intent(
+        intent_response = get_user_intent(
             detected_text, start_recording_at, stop_recording_at)
+        intent_info=intent_response["response_text"]
         if not intent_info:
             continue
         # Get the audio response
@@ -75,8 +76,24 @@ def run():
         wave_obj = sa.WaveObject.from_wave_file(ANDY_AUDIO_FILENAME)
         play_obj = wave_obj.play()
         play_obj.wait_done()  # Wait until sound has finished playing
-
-
+        if intent_response["fulfillment_info"]["intent_name"]=="MOVE_PIECE" and intent_response["fulfillment_info"]["success"]:
+            # Get the intent
+            intent_response = get_andy_move()
+            intent_info=intent_response["response_text"]
+            if not intent_info:
+                continue
+            # Get the audio response
+            audio_response = get_audio_response(intent_info)
+            # Play the audio response
+            f = open(ANDY_AUDIO_FILENAME, "wb")
+            f.truncate(0)
+            f.write(audio_response)
+            f.close()
+            wave_obj = sa.WaveObject.from_wave_file(ANDY_AUDIO_FILENAME)
+            play_obj = wave_obj.play()
+            play_obj.wait_done()  # Wait until sound has finished playing
+            game_engine.board = chess.Board(intent_response["board_str"])   
+            
 def get_audio_response(text):
     request_url = f"{BASE_API_URL}/get-audio-response?session_id={SESSION_ID}"
     response = requests.post(request_url, text)
@@ -86,7 +103,18 @@ def get_audio_response(text):
         print("API Error, Status Code:"+response.status_code)
         raise Exception
 
-
+def get_andy_move():
+    try:
+        request_url = f"{BASE_API_URL}/get-response?session_id={SESSION_ID}&board_str={game_engine.board.fen()}"
+        response = requests.get(request_url)
+        if response.status_code == 200:            
+            return response.json()
+        else:
+            print("API Error, Status Code:"+response.status_code)
+            return None
+    except Exception as e:
+        print(e)
+        
 def get_user_intent(detected_text, start_recording, stop_recording):
     try:
         recording_time_ms = (
@@ -104,8 +132,8 @@ def get_user_intent(detected_text, start_recording, stop_recording):
         if response.status_code == 200:
             if response.json()["board_str"]:
                 game_engine.board = chess.Board(response.json()["board_str"])
-                game_engine.isGameStarted = True
-            return response.json()["response_text"]
+                game_engine.isGameStarted = True                
+            return response.json()
         else:
             print("API Error, Status Code:"+response.status_code)
             return None
