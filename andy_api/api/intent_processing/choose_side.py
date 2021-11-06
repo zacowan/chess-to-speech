@@ -68,6 +68,7 @@ def handle(session_id, intent_model):
         starting_board_str = chess.Board().board_fen()
         if user_side=="black":
             starting_board_str= starting_board_str[::-1]
+
         if(os.environ['DEMO_MODE'] == True):
             starting_board_str = DEMO_BOARD_STR
 
