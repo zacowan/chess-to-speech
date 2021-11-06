@@ -65,7 +65,7 @@ def handle(session_id, intent_model):
             "chosen_side": user_side
         })
 
-        starting_board_str = chess.Board().board_fen
+        starting_board_str = chess.Board().board_fen()
         if(os.environ['DEMO_MODE'] == True):
             starting_board_str = DEMO_BOARD_STR
 
