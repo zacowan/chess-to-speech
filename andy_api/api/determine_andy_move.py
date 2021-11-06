@@ -3,6 +3,7 @@
 """
 from .intent_processing.utils import get_random_choice
 import chess
+import chess.engine
 import os
 
 

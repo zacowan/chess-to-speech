@@ -63,9 +63,9 @@ def run():
         # Get the intent
         intent_response = get_user_intent(
             detected_text, start_recording_at, stop_recording_at)
-        intent_info=intent_response["response_text"]
-        if not intent_info:
+        if not intent_response:
             continue
+        intent_info=intent_response["response_text"]
         # Get the audio response
         audio_response = get_audio_response(intent_info)
         # Play the audio response
@@ -79,9 +79,9 @@ def run():
         if intent_response["fulfillment_info"]["intent_name"]=="MOVE_PIECE" and intent_response["fulfillment_info"]["success"]:
             # Get the intent
             intent_response = get_andy_move()
-            intent_info=intent_response["response_text"]
-            if not intent_info:
+            if not intent_response:
                 continue
+            intent_info=intent_response["response_text"]
             # Get the audio response
             audio_response = get_audio_response(intent_info)
             # Play the audio response
@@ -105,7 +105,7 @@ def get_audio_response(text):
 
 def get_andy_move():
     try:
-        request_url = f"{BASE_API_URL}/get-response?session_id={SESSION_ID}&board_str={game_engine.board.fen()}"
+        request_url = f"{BASE_API_URL}/get-andy-move-response?session_id={SESSION_ID}&board_str={game_engine.board.fen()}"
         response = requests.get(request_url)
         if response.status_code == 200:            
             return response.json()
