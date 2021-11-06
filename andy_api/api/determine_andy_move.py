@@ -30,8 +30,8 @@ def get_best_move(board_str):
 
 def make_move(board_str, move):
     board = chess.Board(board_str)
-    board.push(chess.Move.from_uci(move))
-    return board.board_fen
+    board.push(chess.Move.from_uci(move.lower()))
+    return board.board_fen()
 
 
 def determine_andy_move(board_str):
@@ -56,7 +56,8 @@ def determine_andy_move(board_str):
     updated_board_str = make_move(board_str, move)
 
     new_board = chess.Board(updated_board_str)
-    piece_name = new_board.piece_at(to_location)
+    board_location = chess.parse_square(to_location.lower())
+    piece_name = new_board.piece_at(board_location)
 
     # check if board is check
     move_info = {
