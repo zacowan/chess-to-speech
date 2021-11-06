@@ -36,6 +36,8 @@ def run():
             game_engine.isMicOn = False
             stop_recording_at = datetime.now()
             print("Recognizing...")
+            if(the_main.is_closed()):
+                break
 
         # recognize speech using Google Speech Recognition
         try:
