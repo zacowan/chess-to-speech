@@ -1,4 +1,3 @@
-import state_manager
 """This module handles intent processing for WAKE_UP_PHRASE.
 
 Attributes:
@@ -9,19 +8,21 @@ Attributes:
 from .utils import get_random_choice
 
 
-HAPPY_PATH_RESPONSES = [
+BEFORE_GAME_RESPONSES = [
     "You can start a game of chess with me!",
 ]
 
 GAME_STARTED_RESPONSES = [
-    "You can tell me a piece to move, ask legal moves for a piece, and ask what your best move is!",
+    "You can move a piece, ask legal moves for a piece, and ask what your best move is!",
 ]
 
 
-def handle():
-    if (state_manager.get_game_state["game_started"] == True):
-        return get_random_choice(GAME_STARTED_RESPONSES)
+def handle_before_game():
+    return get_random_choice(BEFORE_GAME_RESPONSES), True
 
-    return get_random_choice(HAPPY_PATH_RESPONSES)
+
+def hande_game_started():
+    return get_random_choice(GAME_STARTED_RESPONSES), True
+
 # If a game has started: tell user they can make a move (if their turn), 2. ask legal moves for a piece, 3. ask what best move is
 # api folder. statemanager.pi ask if game started yet
