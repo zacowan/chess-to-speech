@@ -11,6 +11,7 @@ import chess
 import traceback
 from . import the_main
 from . import game_engine
+from datetime import datetime
 from .utils import AUDIO_PATH
 
 BASE_API_URL = "http://127.0.0.1:5000/api"
@@ -29,9 +30,11 @@ def run():
             r.adjust_for_ambient_noise(source)
             print("*"*20)
             print("Say something!")
-            game_engine.isMicOn= True
+            game_engine.isMicOn = True
+            start_recording_at = datetime.now()
             audio = r.listen(source, phrase_time_limit=8)
-            game_engine.isMicOn= False
+            stop_recording_at = datetime.now()
+            game_engine.isMicOn = False
             print("Recognizing...")
 
         # recognize speech using Google Speech Recognition
@@ -55,9 +58,10 @@ def run():
             f.write(audio.get_wav_data())
 
         # Get the intent
-        intent_info = get_user_intent(detected_text)
+        intent_info = get_user_intent(
+            detected_text, start_recording_at, stop_recording_at)
         if not intent_info:
-            continue 
+            continue
         # Get the audio response
         audio_response = get_audio_response(intent_info)
         # Play the audio response
@@ -80,25 +84,30 @@ def get_audio_response(text):
         raise Exception
 
 
-def get_user_intent(detected_text):
+def get_user_intent(detected_text, start_recording, stop_recording):
     try:
+        recording_time_ms = (
+            stop_recording - start_recording).total_seconds() * 1000
         if game_engine.board:
             request_url = f"{BASE_API_URL}/get-response?session_id={SESSION_ID}&board_str={game_engine.board.fen()}&detected_text={detected_text}"
         else:
             request_url = f"{BASE_API_URL}/get-response?session_id={SESSION_ID}&detected_text={detected_text}"
+
+        # Send recording_time_ms to API
+        request_url += f"&recording_time_ms={str(recording_time_ms)}"
 
         response = requests.post(request_url, open(
             USER_AUDIO_FILENAME, 'rb'), USER_AUDIO_FILENAME)
         if response.status_code == 200:
             print(response.json()["board_str"])
             if response.json()["board_str"]:
-                game_engine.board= chess.Board(response.json()["board_str"])
+                game_engine.board = chess.Board(response.json()["board_str"])
                 game_engine.isGameStarted = True
             return response.json()["response_text"]
         else:
             print("API Error, Status Code:"+response.status_code)
             return None
-    except Exception as e: 
+    except Exception as e:
         print(e)
         traceback.print_exc()
 
