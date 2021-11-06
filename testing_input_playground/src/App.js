@@ -29,8 +29,8 @@ const App = () => {
       let urlString = `http://127.0.0.1:5000/api/get-response?session_id=${SESSION_ID}?board_str=${boardStr}?detected_text=${transcript}?recording_time_ms=${recordingTimeMs}`;
       const response = await fetch(urlString, {
         method: "POST",
-        body: new Blob(),
-        mode: "no-cors",
+        body: "",
+        mode: "cors",
       });
       const data = await response.json();
       console.log(data);

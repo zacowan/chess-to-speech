@@ -15,7 +15,7 @@ def create_app(test_config=None):
     Path(SHELVE_DIRECTORY).mkdir(parents=True, exist_ok=True)
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
-    CORS(app)
+    CORS(app, resources={r"/*": {"origins": "*"}})
     app.config.from_mapping(
         SECRET_KEY="dev",
     )
