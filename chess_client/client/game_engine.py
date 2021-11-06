@@ -6,7 +6,7 @@ Created on Oct 11, 2021
 import sys
 import pygame
 import chess
-
+from . import audio_detection
 from . import the_main
 
 # Path to images
@@ -14,7 +14,8 @@ IMAGES_PATH = './images'
 isMicOn = False
 isGameStarted = False
 lastSaid =""
-
+#move_history=[]
+move_history=["User: Pawn in A2 to Captures Knight in A4", "Andy: Pawn in A7 to A5", "User: Pawn in B2 to B4", "Andy: Pawn in B7 to B5"]
 # Sets up the Default Board
 #board = chess.Board('r1bqkb1r/pppp1Qpp/2n2n2/4p3/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 0 4')
 board = None
@@ -31,31 +32,62 @@ def start_game(screen):
     while not the_main.is_closed():
         screen.fill((255, 255, 255))  # Background Color
         mic_img=None
+        pygame.font.init()
+        myfont = pygame.font.SysFont('Times', 22)
         if isMicOn:
             mic_img = pygame.image.load(f'{IMAGES_PATH}/MicOn2.png')
         else:
             mic_img = pygame.image.load(f'{IMAGES_PATH}/MicOff2.png')
         if isGameStarted:
+            textsurface = myfont.render("Your Session ID: " +audio_detection.SESSION_ID[0:8], True, (0, 0, 0))
+            screen.blit(textsurface,(255,25))
+            textsurface = myfont.render("Move History: ", True, (0, 0, 0))
+            screen.blit(textsurface,(675,25))
             create_board(screen)
-            screen.blit(mic_img, (300, 500))
+            screen.blit(mic_img, (250, 500))
             if lastSaid:
-                pygame.font.init()
-                myfont = pygame.font.SysFont('Times', 22)
                 stringPrint =""
                 lineNum=0
                 for word in  ("I understood: "+lastSaid).split():
                     if(len(stringPrint+word)>40):
                         textsurface = myfont.render(stringPrint, True, (0, 0, 0))
-                        screen.blit(textsurface,(600,475+lineNum))
+                        screen.blit(textsurface,(575,475+lineNum))
                         lineNum+=25
                         stringPrint =""
                     stringPrint += word+ " "
                 textsurface = myfont.render(stringPrint, True, (0, 0, 0))
-                screen.blit(textsurface,(600,475+lineNum))
+                screen.blit(textsurface,(575,475+lineNum))
+            if move_history:
+                stringPrint =""
+                lineNum=0
+                for sentence in move_history:
+                    if lineNum > 400:
+                        break
+                    for word in  (sentence).split():
+                        if(len(stringPrint+word)>40):
+                            textsurface = myfont.render(stringPrint, True, (0, 0, 0))
+                            screen.blit(textsurface,(575,50+lineNum))
+                            lineNum+=25
+                            stringPrint =""
+                        stringPrint += word+ " "
+                        if lineNum> 400:
+                            break
+                    textsurface = myfont.render(stringPrint, True, (0, 0, 0))
+                    screen.blit(textsurface,(575,50+lineNum))
+                    lineNum+=25
+                    stringPrint = ""
+                    stringPrint ="-"*50
+                    textsurface = myfont.render(stringPrint, True, (0, 0, 0))
+                    screen.blit(textsurface,(575,50+lineNum-13))
+                    stringPrint = ""
+
         else:
             welcome_img = pygame.image.load(f'{IMAGES_PATH}/Welcome.png')
-            screen.blit(welcome_img, (350, 200))
+            screen.blit(welcome_img, (350, 175))
             screen.blit(mic_img, (400, 500))
+            textsurface = myfont.render("Your Session ID: " +audio_detection.SESSION_ID[0:8], True, (0, 0, 0))
+            screen.blit(textsurface,(375,25))
+        
         #draw mic
         # this provides clicking functionality for the future if we want it @IgnorePep8
         mx, my = pygame.mouse.get_pos()
@@ -84,12 +116,12 @@ def start_game(screen):
 
 def create_board(screen):
     board_img = pygame.image.load(f'{IMAGES_PATH}/board.png')
-    screen.blit(board_img, (200, 75))
+    screen.blit(board_img, (150, 75))
     for i in range(8):
         for j in range(8):
             if board.piece_at((i*8)+j):
                 screen.blit(convert_to_png(board.piece_at((i*8)+j).symbol()),
-                            (215 + j * 45, 95 + i * 45))  # @IgnorePep8
+                            (165 + j * 45, 95 + i * 45))  # @IgnorePep8
 
 
 def change_board(newBoard):

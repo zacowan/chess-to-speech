@@ -102,7 +102,6 @@ def get_user_intent(detected_text, start_recording, stop_recording):
         response = requests.post(request_url, open(
             USER_AUDIO_FILENAME, 'rb'), USER_AUDIO_FILENAME)
         if response.status_code == 200:
-            print(response.json()["board_str"])
             if response.json()["board_str"]:
                 game_engine.board = chess.Board(response.json()["board_str"])
                 game_engine.isGameStarted = True
