@@ -32,7 +32,7 @@ Example Intent Model:
 """
 from api.state_manager import get_game_state
 from .utils import INTENT_MAPPING, RESPONSE_TYPES, get_random_choice
-from . import choose_side, move_piece_from, move_piece_to, wake_up_phrase
+from . import choose_side, move_piece, wake_up_phrase, possible_actions
 
 
 STATIC_RESPONSES = {
@@ -95,18 +95,19 @@ def fulfill_intent(session_id, board_str, intent_data):
             response_choice, success = wake_up_phrase.handle_yes()
         elif response_type == RESPONSE_TYPES.WAKE_UP_FOLLOW_UP_NO:
             response_choice, success = wake_up_phrase.handle_no()
+        elif response_type == RESPONSE_TYPES.POSSIBLE_ACTIONS:
+            response_choice, success = possible_actions.handle_before_game()
         elif response_type == RESPONSE_TYPES.CHOOSE_SIDE:
             response_choice, success, updated_board_str = choose_side.handle(
                 session_id, intent_data)
 
     # Intents to handle after a game has started and the user has chosen a side
     elif not game_state["game_finished"]:
-        if response_type == RESPONSE_TYPES.MOVE_PIECE_FROM:
-            response_choice, success, updated_board_str = move_piece_from.handle(
+        if response_type == RESPONSE_TYPES.MOVE_PIECE:
+            response_choice, success, updated_board_str = move_piece.handle(
                 session_id, intent_data, board_str)
-        elif response_type == RESPONSE_TYPES.MOVE_PIECE_TO:
-            response_choice, success, updated_board_str = move_piece_to.handle(
-                session_id, intent_data, board_str)
+        elif response_type == RESPONSE_TYPES.POSSIBLE_ACTIONS:
+            response_choice, success = possible_actions.hande_game_started()
 
     # Intents to handle after a game has finished
     else:
