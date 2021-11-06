@@ -30,11 +30,11 @@ def run():
             r.adjust_for_ambient_noise(source)
             print("*"*20)
             print("Say something!")
-            game_engine.isMicOn = True
             start_recording_at = datetime.now()
+            game_engine.isMicOn = True
             audio = r.listen(source, phrase_time_limit=8)
-            stop_recording_at = datetime.now()
             game_engine.isMicOn = False
+            stop_recording_at = datetime.now()
             print("Recognizing...")
 
         # recognize speech using Google Speech Recognition

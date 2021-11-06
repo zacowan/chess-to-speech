@@ -44,14 +44,14 @@ def start_game(screen):
                 stringPrint =""
                 lineNum=0
                 for word in  ("I understood: "+lastSaid).split():
-                    if(len(stringPrint+word)>50):
+                    if(len(stringPrint+word)>40):
                         textsurface = myfont.render(stringPrint, True, (0, 0, 0))
                         screen.blit(textsurface,(600,475+lineNum))
                         lineNum+=25
                         stringPrint =""
                     stringPrint += word+ " "
                 textsurface = myfont.render(stringPrint, True, (0, 0, 0))
-                screen.blit(textsurface,(600,500+lineNum))
+                screen.blit(textsurface,(600,475+lineNum))
         else:
             welcome_img = pygame.image.load(f'{IMAGES_PATH}/Welcome.png')
             screen.blit(welcome_img, (350, 200))
