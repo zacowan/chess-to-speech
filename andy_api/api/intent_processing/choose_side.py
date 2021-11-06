@@ -74,4 +74,4 @@ def handle(session_id, intent_model):
                                     user_side=user_side,
                                     user_position=user_position), True, starting_board_str
     else:
-        return get_random_choice(ERROR_RESPONSES), False
+        return get_random_choice(ERROR_RESPONSES), False, None
