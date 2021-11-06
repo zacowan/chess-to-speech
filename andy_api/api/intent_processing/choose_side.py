@@ -5,6 +5,7 @@ Attributes:
     ERROR_RESPONSES (list): a list of responses for errors.
 
 """
+import os
 from .utils import get_random_choice
 from api.state_manager import set_chosen_side, set_game_started, set_fulfillment_params
 
