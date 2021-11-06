@@ -17,8 +17,8 @@ lastSaid =""
 #move_history=[]
 move_history=["User: Pawn in A2 to Captures Knight in A4", "Andy: Pawn in A7 to A5", "User: Pawn in B2 to B4", "Andy: Pawn in B7 to B5"]
 # Sets up the Default Board
-#board = chess.Board('r1bqkb1r/pppp1Qpp/2n2n2/4p3/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 0 4')
-board = None
+board = chess.Board('rnbqkbnr/pppppppp/8/8/2P5/8/PP1PPPPP/RNBQKBNR b KQkq - 0 1')
+#board = None
 
 # handles Setting up the Game and the Game State
 def setup_game_engine(screen):
@@ -121,7 +121,7 @@ def create_board(screen):
         for j in range(8):
             if board.piece_at((i*8)+j):
                 screen.blit(convert_to_png(board.piece_at((i*8)+j).symbol()),
-                            (165 + j * 45, 95 + i * 45))  # @IgnorePep8
+                            (165 + j * 45, 405 - i * 45))  # @IgnorePep8
 
 
 def change_board(newBoard):
@@ -131,6 +131,7 @@ def change_board(newBoard):
 
 def convert_to_png(piece):
     if piece.isupper():
-        return pygame.image.load(f"{IMAGES_PATH}/{piece}b.png")
-    else:
         return pygame.image.load(f"{IMAGES_PATH}/{piece}w.png")
+    else:
+        return pygame.image.load(f"{IMAGES_PATH}/{piece}b.png")
+
