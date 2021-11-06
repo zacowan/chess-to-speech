@@ -300,9 +300,11 @@ def get_response():
             }
         )).start()
 
+        fulfillment_params = get_fulfillment_params(session_id)
+
         return jsonify({
             'response_text': response_text,
             'fulfillment_info': fulfillment_info,
-            'fulfillment_params': get_fulfillment_params(session_id),
+            'fulfillment_params': fulfillment_params,
             'board_str': updated_board_str,
         })
