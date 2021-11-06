@@ -39,16 +39,14 @@ STATIC_RESPONSES = {
     RESPONSE_TYPES.HELLO: [
         "Hi! How are you?",
         "Hey, what's up?",
-        "Yo, how's it going?"
+        "Hi, how's it going?"
     ],
     RESPONSE_TYPES.FALLBACK: [
         "I didn't get that. Can you say it again?",
         "I missed what you said. What was that?",
         "Sorry, could you say that again?",
         "Can you say that again?",
-        "One more time?",
         "What was that?",
-        "Say that one more time?",
         "I'm not sure I understood that."
     ]
 }
