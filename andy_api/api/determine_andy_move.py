@@ -11,11 +11,14 @@ HAPPY_PATH_RESPONSES = [
     "Let me move my {piece_name} from {from_location} to {to_location}"
 ]
 
+
 def get_engine():
     dirname = os.path.dirname(__file__)
     engine_filename = dirname + "/UCI_engine/stockfish"
-    engine = chess.engine.SimpleEngine.popen_uci(engine_filename) #load stockfish as chess engine
+    engine = chess.engine.SimpleEngine.popen_uci(
+        engine_filename)  # load stockfish as chess engine
     return engine
+
 
 def get_best_move(board_str):
     engine = get_engine()
@@ -23,6 +26,7 @@ def get_best_move(board_str):
     bestMove = engine.play(board, chess.engine.Limit(time=0.1)).move
     engine.close()
     return bestMove
+
 
 def make_move(board_str, move):
     board = chess.Board(board_str)
@@ -39,6 +43,7 @@ def determine_andy_move(board_str):
     Returns:
         str: the response that should be given, as text.
         str: the updated board_str that should be given.
+        dict: the move_info to log.
 
     """
     static_choice = get_random_choice(HAPPY_PATH_RESPONSES)
@@ -48,20 +53,30 @@ def determine_andy_move(board_str):
     from_location = move[0:2]
     to_location = move[2:4]
 
-    updated_board_str = make_move(move)
+    updated_board_str = make_move(board_str, move)
 
     new_board = chess.Board(updated_board_str)
     piece_name = new_board.piece_at(to_location)
 
+    # check if board is check
+    move_info = {
+        "from": from_location,
+        "to": to_location
+    }
+
     if(new_board.is_check()):
-        return "I'll move my {piece_name} at {from_location} to {to_location}... I got ya in check!", updated_board_str
+        return static_choice.format(
+            from_location=from_location,
+            to_location=to_location,
+            piece_name=piece_name) + ', which puts you in check', updated_board_str, move_info
 
     if(new_board.is_checkmate):
-        return "Let me move my {piece_name} from {from_location} to {to_location}... And... I win!", updated_board_str
-
-    # check if board is check
+        return static_choice.format(
+            from_location=from_location,
+            to_location=to_location,
+            piece_name=piece_name) + ", and that's checkmate, I win!", updated_board_str, move_info
 
     return static_choice.format(
         from_location=from_location,
         to_location=to_location,
-        piece_name=piece_name), updated_board_str
+        piece_name=piece_name), updated_board_str, move_info

@@ -108,7 +108,6 @@ def fulfill_intent(session_id, board_str, intent_data):
         elif response_type == RESPONSE_TYPES.POSSIBLE_ACTIONS:
             response_choice, success = possible_actions.hande_game_started()
 
-
     # Intents to handle after a game has finished
     else:
         # PLACEHOLDER
