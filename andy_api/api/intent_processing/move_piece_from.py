@@ -50,6 +50,7 @@ def handle(session_id, intent_model, board_str):
     # TODO: add a check if player has chosen a side
     if intent_model.all_required_params_present is True:
         from_location = intent_model.parameters["fromLocation"]
+        from_location = from_location.lower()
         static_choice = get_random_choice(HAPPY_PATH_RESPONSES)
 
         board = chess.Board(board_str)
