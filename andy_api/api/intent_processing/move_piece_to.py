@@ -6,7 +6,7 @@ Attributes:
 
 """
 from .utils import get_random_choice
-from api.state_manager import set_curr_move_from, get_game_state
+from api.state_manager import set_curr_move_from, get_game_state, set_fulfillment_params
 import chess
 
 
@@ -38,8 +38,8 @@ def handle(session_id, intent_model, board_str):
         boolean: whether or not the intent was handled successfully.
 
     """
+    from_location = get_game_state(session_id)["curr_move_from"]
     if intent_model.all_required_params_present is True:
-        from_location = get_game_state(session_id)["curr_move_from"]
         to_location = intent_model.parameters["toLocation"]
         move_sequence = from_location+to_location
         move_sequence = move_sequence.lower()
@@ -59,26 +59,40 @@ def handle(session_id, intent_model, board_str):
 
             # Update game state
             set_curr_move_from(session_id, None)
+            # Log the fulfillment params
+            set_fulfillment_params(session_id, params={
+                "from_location": from_location,
+                "to_location": to_location
+            })
 
             # check if user has put andy in check or checkmate
             if(board.is_check()):
                 return static_choice.format(
-                from_location=from_location,
-                to_location=to_location)+"... How did you put me in check?!", True, board.board_fen()
+                    from_location=from_location,
+                    to_location=to_location) + "... How did you put me in check?!", True, board.board_fen()
             if(board.is_checkmate):
                 return static_choice.format(
-                from_location=from_location,
-                to_location=to_location)+"... You beat me- unbelievable!", True, board.board_fen()
-
+                    from_location=from_location,
+                    to_location=to_location) + "... You beat me - unbelievable!", True, board.board_fen()
 
             # Return a happy path response
             return static_choice.format(from_location=from_location, to_location=to_location), True, board.board_fen()
         else:  # Player is attempting an illegal move
             static_choice = get_random_choice(ILLEGAL_MOVE_RESPONSES)
+            # Update game state
+            set_curr_move_from(session_id, None)
+            # Log the fulfillment params
+            set_fulfillment_params(session_id, params={
+                "from_location": from_location,
+                "to_location": to_location
+            })
             # Return an illegal move response
             return static_choice, False, board_str
     else:
         static_choice = get_random_choice(ERROR_RESPONSES)
-        from_location = intent_model.output_contexts.parameters["fromLocation"]
+        # Log the fulfillment params
+        set_fulfillment_params(session_id, params={
+            "from_location": from_location
+        })
 
         return static_choice.format(from_location=from_location), False, board_str

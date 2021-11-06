@@ -98,7 +98,7 @@ def fulfill_intent(session_id, board_str, intent_data):
         elif response_type == RESPONSE_TYPES.WAKE_UP_FOLLOW_UP_NO:
             response_choice, success = wake_up_phrase.handle_no()
         elif response_type == RESPONSE_TYPES.CHOOSE_SIDE:
-            response_choice, success = choose_side.handle(
+            response_choice, success, updated_board_str = choose_side.handle(
                 session_id, intent_data)
 
     # Intents to handle after a game has started and the user has chosen a side
