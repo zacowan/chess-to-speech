@@ -32,25 +32,25 @@ STANDARD_ERROR_RESPONSES = [
 
 
 col_num = {
-    "a":0,
-    "b":1,
-    "c":2,
-    "d":3,
-    "e":4,
-    "f":5,
-    "g":6,
-    "h":7
+    "a": 0,
+    "b": 1,
+    "c": 2,
+    "d": 3,
+    "e": 4,
+    "f": 5,
+    "g": 6,
+    "h": 7
 }
 
 row_num = {
-    "8":0,
-    "7":1,
-    "6":2,
-    "5":3,
-    "4":4,
-    "3":5,
-    "2":6,
-    "1":7
+    "8": 0,
+    "7": 1,
+    "6": 2,
+    "5": 3,
+    "4": 4,
+    "3": 5,
+    "2": 6,
+    "1": 7
 }
 
 
@@ -90,7 +90,7 @@ def handle(session_id, intent_model, board_str):
 
         # check that player owns piece
         player_color = board.color_at(piece_num)
-        from_color = board.turn()
+        from_color = board.turn
         if(player_color != from_color):
             static_choice = get_random_choice(WRONG_COLOR_RESPONSE)
             return static_choice, False, updated_board_str
