@@ -2,6 +2,7 @@
 TODO add info about intent
 """
 
+from andy_api.api.intent_processing.move_piece_from import STANDARD_ERROR_RESPONSES
 from .utils import get_random_choice
 # TODO add api state manager variables for this interaction?
 
@@ -22,10 +23,13 @@ HOW_PAWNS_MOVE = "And at {piece_location} we have a pawn. Pawns move vertically 
 
 EMPTY_SPACE_RESPONSE = "Hmmmm there doesn't seem to be anything at {piece_location}"
 
+STANDARD_ERROR_RESPONSES = [
+    "You want to hear more about the piece at which location?",
+    "Wait...what's the location of the piece you want to learn more about?"
+]
+
 # TODO add error responses?
 
-
-# TODO make AT intent.
 
 col_num = {
     "a":0,
@@ -59,38 +63,44 @@ def locationToNumber(location):
     piece_num = (row*8) + col
     return piece_num
 
-def handle(session_id, intent_model, board_str, piece_location):
+def handle(session_id, intent_data, board_str):
     """TODO add details about method
     """
 
-    if intent_model.all_required_params_present is True:
-         # check if space contains piece
+    if intent_data.all_required_params_present is True:
 
+         # check if space contains piece
         board = chess.Board(board_str)
+        piece_location = intent_data.parameters["pieceLocation"]
         piece_location = piece_location.lower()
         piece_num = locationToNumber(piece_location)
         piece = board.piece_at(piece_num)
 
+        # find specific response depending on piece type
         if(piece == None):
             static_choice = get_random_choice(EMPTY_SPACE_RESPONSE.format(piece_location))
-            return static_choice, True, board_str
+            return static_choice, True
         elif(piece == chess.PAWN):
             static_choice = get_random_choice(HOW_PAWNS_MOVE.format(piece_location))
-            return static_choice, True, board_str
+            return static_choice, True
         elif(piece == chess.KNIGHT):
             static_choice = get_random_choice(HOW_KNIGHTS_MOVE.format(piece_location))
-            return static_choice, True, board_str
+            return static_choice, True
         elif(piece == chess.BISHOP):
             static_choice = get_random_choice(HOW_BISHOPS_MOVE.format(piece_location))
-            return static_choice, True, board_str
+            return static_choice, True
         elif(piece == chess.ROOK):
             static_choice = get_random_choice(HOW_ROOKS_MOVE.format(piece_location))
-            return static_choice, True, board_str
+            return static_choice, True
         elif(piece == chess.QUEEN):
             static_choice = get_random_choice(HOW_QUEEN_MOVES.format(piece_location))
-            return static_choice, True, board_str
+            return static_choice, True
         elif(piece == chess.KING):
             static_choice = get_random_choice(HOW_KING_MOVES.format(piece_location))
-            return static_choice, True, board_str
+            return static_choice, True
+        
+        else:
+            static_choice = get_random_choice(STANDARD_ERROR_RESPONSES)
+            return static_choice, False
 
         # TODO add error messages/check for errors from player?
