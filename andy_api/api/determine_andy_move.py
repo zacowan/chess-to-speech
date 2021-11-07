@@ -3,6 +3,7 @@
 """
 from .intent_processing.utils import get_random_choice
 import chess
+import chess.engine
 import os
 
 
@@ -14,7 +15,7 @@ HAPPY_PATH_RESPONSES = [
 
 def get_engine():
     dirname = os.path.dirname(__file__)
-    engine_filename = dirname + "/UCI_engine/stockfish"
+    engine_filename = dirname + "/UCI_engine/stockfish.exe"
     engine = chess.engine.SimpleEngine.popen_uci(
         engine_filename)  # load stockfish as chess engine
     return engine
@@ -30,8 +31,8 @@ def get_best_move(board_str):
 
 def make_move(board_str, move):
     board = chess.Board(board_str)
-    board.push(chess.Move.from_uci(move))
-    return board.board_fen
+    board.push(chess.Move.from_uci(move.lower()))
+    return board.board_fen()
 
 
 def determine_andy_move(board_str):
@@ -48,15 +49,16 @@ def determine_andy_move(board_str):
     """
     static_choice = get_random_choice(HAPPY_PATH_RESPONSES)
 
-    move = get_best_move(board_str)
-
+    move = get_best_move(board_str).uci()
+    print(move)
     from_location = move[0:2]
     to_location = move[2:4]
 
     updated_board_str = make_move(board_str, move)
 
     new_board = chess.Board(updated_board_str)
-    piece_name = new_board.piece_at(to_location)
+    board_location = chess.parse_square(to_location.lower())
+    piece_name = new_board.piece_at(board_location)
 
     # check if board is check
     move_info = {
@@ -70,7 +72,7 @@ def determine_andy_move(board_str):
             to_location=to_location,
             piece_name=piece_name) + ', which puts you in check', updated_board_str, move_info
 
-    if(new_board.is_checkmate):
+    if(new_board.is_checkmate()):
         return static_choice.format(
             from_location=from_location,
             to_location=to_location,
