@@ -26,7 +26,7 @@ def get_best_move(board_str):
     engine = get_engine()
     board = chess.Board(board_str)
     best_move = engine.play(board, chess.engine.Limit(time=0.1)).move
-    engine.close()
+    engine.quit()
     return best_move.uci()
 
 
