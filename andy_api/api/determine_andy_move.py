@@ -4,7 +4,7 @@
 from .intent_processing.utils import get_random_choice
 from .state_manager import set_game_finished
 from .chess_logic import (
-    make_move,
+    get_board_str_with_move,
     get_best_move,
     check_if_check,
     check_if_checkmate,
@@ -45,7 +45,7 @@ def determine_andy_move(session_id, board_str):
     }
 
     # Make the best move
-    updated_board_str = make_move(board_str, move)
+    updated_board_str = get_board_str_with_move(board_str, move)
 
     if check_if_checkmate(updated_board_str):
         set_game_finished(session_id)
