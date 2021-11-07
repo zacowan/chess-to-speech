@@ -7,15 +7,14 @@ ABSOLUTE_PATH_TO_KEY="C:\Users\selen\Desktop\ChessToSpeech\chess-to-speech\andy_
 # Change this to the name of the stockfish file
 # NOTE: this file should be placed in andy_api/stockfish_engine
 STOCKFISH_NAME="stockfish"
-# NOTE: you may have to change the slashes if you are in windows
-STOCKFISH_BASE_DIR=".\stockfish_engine"
-STOCKFISH_LOCATION="$STOCKFISH_BASE_DIR\$STOCKFISH_NAME"
 # Set this to the "mode" you want to run the application in. This will affect
 # where logs are saved and which base script is run.
 #
 # Should be one of: "development" | "demo"
 APP_MODE="development"
 # ---------------------------------------------------------------------------- #
+STOCKFISH_BASE_DIR="./stockfish_engine"
+STOCKFISH_LOCATION="$STOCKFISH_BASE_DIR/$STOCKFISH_NAME"
 
 SCRIPT_NAME="run_base.sh"
 
