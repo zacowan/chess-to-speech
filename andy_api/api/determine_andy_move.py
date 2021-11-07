@@ -72,7 +72,7 @@ def determine_andy_move(board_str):
             to_location=to_location,
             piece_name=piece_name) + ', which puts you in check', updated_board_str, move_info
 
-    if(new_board.is_checkmate):
+    if(new_board.is_checkmate()):
         return static_choice.format(
             from_location=from_location,
             to_location=to_location,
