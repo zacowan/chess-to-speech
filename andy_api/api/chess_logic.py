@@ -85,3 +85,39 @@ def check_if_move_causes_check(board_str, move_sequence):
         return True
     else:
         return False
+
+
+def get_from_location_from_piece_name_and_to_location(board_str, move_info):
+    board = chess.Board(board_str)
+
+    to_location = move_info.get("to_location").lower()
+    piece_name = move_info.get("piece_name")
+
+    # Get a list of all possible from locations based on to_location
+    potential_from_locations = []
+    for move in board.pseudo_legal_moves:
+        to_square_name = chess.square_name(move.to_square())
+        from_square_name = chess.square_name(move.from_square())
+        if to_square_name.lower() == to_location:
+            potential_from_locations.append(from_square_name)
+
+    # Only a single possible move
+    if len(potential_from_locations) == 1:
+        return potential_from_locations[0]
+    elif not piece_name:
+        # Don't know what piece to move
+        return None
+
+    # Need to cross-reference with piece name
+    new_potential_from_locations = []
+    for from_loc in potential_from_locations:
+        piece = board.piece_at(chess.parse_square(from_loc))
+        pname = CHESS_PIECE_NAMES.get(piece.symbol().lower())
+        if pname == piece_name.lower():
+            new_potential_from_locations.append(from_loc)
+
+    if len(new_potential_from_locations) == 1:
+        return new_potential_from_locations[0]
+    else:
+        # Don't know what piece to move
+        return None
