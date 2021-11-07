@@ -9,7 +9,7 @@ from api.state_manager import set_fulfillment_params
 
 HAPPY_PATH_RESPONSES = [
     "According to my calculations, you should move your {piece_name} from {from_location} to {to_location}.",
-    "Your mest move is {from_location} to {to_location}."
+    "Your best move is {from_location} to {to_location}."
 ]
 
 
