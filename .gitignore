@@ -7,3 +7,5 @@ __pycache__/
 andy_response.mp3
 andy_response.wav
 shelve/
+stockfish_engine/
+UCI_engine/
