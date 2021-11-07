@@ -1,9 +1,16 @@
 """This module handles intent processing for MOVE_PIECE.
 """
-import chess
-
 from .utils import get_random_choice
 from api.state_manager import set_fulfillment_params, get_game_state, set_game_finished
+from api.chess_logic import (
+    check_if_check,
+    check_if_checkmate,
+    get_board_str_with_move,
+    get_piece_at,
+    check_if_move_legal,
+    check_if_turn,
+    check_if_move_causes_check
+)
 
 
 HAPPY_PATH_RESPONSES = [
@@ -36,6 +43,11 @@ ILLEGAL_MOVE_ERROR_RESPONSES = [
     "That is not how that piece moves, if you would like help, You Can ask me for help by saying, Andy can you help me?"
 ]
 
+MOVE_CAUSES_CHECK_ERROR_RESPONSES = [
+    "Sorry, you can't do that because it would put you into check.",
+    "That move will put you into check, so you can't do it."
+]
+
 FROM_ERROR_RESPONSES = [
     "Which piece did you want to move?",
     "You wanted to move the piece at which location?"
@@ -45,39 +57,6 @@ TO_ERROR_RESPONSES = [
     "You wanted to move your piece at {from_location} to where?",
     "Where did you want to move your piece at {from_location} to?"
 ]
-
-
-def get_piece_at(board_str, location):
-    board = chess.Board(board_str)
-    board_location = chess.parse_square(location.lower())
-    return board.piece_at(board_location)
-
-
-def check_if_turn(board_str, location):
-    board = chess.Board(board_str)
-    board_location = chess.parse_square(location.lower())
-    return board.turn == board.color_at(board_location)
-
-
-def check_if_move_legal(board_str, move_sequence):
-    board = chess.Board(board_str)
-    return chess.Move.from_uci(move_sequence.lower()) in board.legal_moves
-
-
-def get_board_str_with_move(board_str, move_sequence):
-    board = chess.Board(board_str)
-    board.push_uci(move_sequence.lower())
-    return board.fen()
-
-
-def check_if_check(board_str):
-    board = chess.Board(board_str)
-    return board.is_check()
-
-
-def check_if_checkmate(board_str):
-    board = chess.Board(board_str)
-    return board.is_checkmate()
 
 
 def handle(session_id, intent_model, board_str):
@@ -136,6 +115,11 @@ def handle(session_id, intent_model, board_str):
         else:
             # Illegal move
             static_choice = get_random_choice(ILLEGAL_MOVE_ERROR_RESPONSES)
+
+            # Check if move results in check
+            if check_if_move_causes_check(board_str, from_location + to_location):
+                static_choice = get_random_choice(
+                    MOVE_CAUSES_CHECK_ERROR_RESPONSES)
 
             return static_choice.format(from_location=from_location), False, board_str
 
