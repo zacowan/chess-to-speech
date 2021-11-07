@@ -30,10 +30,10 @@ def get_best_move(board_str):
     return best_move.uci()
 
 
-def make_move(board_str, move):
+def get_board_str_with_move(board_str, move):
     board = chess.Board(board_str)
-    board.push(chess.Move.from_uci(move.lower()))
-    return board.board_fen()
+    board.push_uci(move.lower())
+    return board.fen()
 
 
 def get_piece_name_at(board_str, location):
@@ -56,3 +56,20 @@ def check_if_checkmate(board_str):
 def get_current_color_turn(board_str):
     board = chess.Board(board_str)
     return board.turn
+
+
+def get_piece_at(board_str, location):
+    board = chess.Board(board_str)
+    board_location = chess.parse_square(location.lower())
+    return board.piece_at(board_location)
+
+
+def check_if_turn(board_str, location):
+    board = chess.Board(board_str)
+    board_location = chess.parse_square(location.lower())
+    return board.turn == board.color_at(board_location)
+
+
+def check_if_move_legal(board_str, move_sequence):
+    board = chess.Board(board_str)
+    return chess.Move.from_uci(move_sequence.lower()) in board.legal_moves

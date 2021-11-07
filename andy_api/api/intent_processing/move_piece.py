@@ -4,6 +4,14 @@ import chess
 
 from .utils import get_random_choice
 from api.state_manager import set_fulfillment_params, get_game_state, set_game_finished
+from api.chess_logic import (
+    check_if_check,
+    check_if_checkmate,
+    get_board_str_with_move,
+    get_piece_at,
+    check_if_move_legal,
+    check_if_turn
+)
 
 
 HAPPY_PATH_RESPONSES = [
@@ -45,39 +53,6 @@ TO_ERROR_RESPONSES = [
     "You wanted to move your piece at {from_location} to where?",
     "Where did you want to move your piece at {from_location} to?"
 ]
-
-
-def get_piece_at(board_str, location):
-    board = chess.Board(board_str)
-    board_location = chess.parse_square(location.lower())
-    return board.piece_at(board_location)
-
-
-def check_if_turn(board_str, location):
-    board = chess.Board(board_str)
-    board_location = chess.parse_square(location.lower())
-    return board.turn == board.color_at(board_location)
-
-
-def check_if_move_legal(board_str, move_sequence):
-    board = chess.Board(board_str)
-    return chess.Move.from_uci(move_sequence.lower()) in board.legal_moves
-
-
-def get_board_str_with_move(board_str, move_sequence):
-    board = chess.Board(board_str)
-    board.push_uci(move_sequence.lower())
-    return board.fen()
-
-
-def check_if_check(board_str):
-    board = chess.Board(board_str)
-    return board.is_check()
-
-
-def check_if_checkmate(board_str):
-    board = chess.Board(board_str)
-    return board.is_checkmate()
 
 
 def handle(session_id, intent_model, board_str):
