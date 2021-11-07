@@ -14,6 +14,7 @@ IMAGES_PATH = './images'
 isMicOn = False
 isGameStarted = False
 lastSaid =""
+user_is_black=False
 is_game_over = False
 move_history=[]
 #move_history=["User: Pawn in A2 to Captures Knight in A4", "Andy: Pawn in A7 to A5", "User: Pawn in B2 to B4", "Andy: Pawn in B7 to B5"]
@@ -118,14 +119,23 @@ def start_game(screen):
         pygame.display.update()
 
 
-def create_board(screen):
-    board_img = pygame.image.load(f'{IMAGES_PATH}/board.png')
-    screen.blit(board_img, (150, 75))
-    for i in range(8):
-        for j in range(8):
-            if board.piece_at((i*8)+j):
-                screen.blit(convert_to_png(board.piece_at((i*8)+j).symbol()),
-                            (165 + j * 45, 405 - i * 45))  # @IgnorePep8
+    if not user_is_black:
+        board_img = pygame.image.load(f'{IMAGES_PATH}/board.png')
+        screen.blit(board_img, (150, 75))
+        for i in range(8):
+            for j in range(8):
+                if board.piece_at((i*8)+j):
+                    screen.blit(convert_to_png(board.piece_at((i*8)+j).symbol()),
+                                (165 + j * 45, 405 - i * 45))  # @IgnorePep8
+    else:
+        board_img = pygame.image.load(f'{IMAGES_PATH}/board2.png')
+        #board_img = pygame.transform.flip(board_img, True, True)
+        screen.blit(board_img, (150, 75))
+        for i in range(8):
+            for j in range(8):
+                if board.piece_at((i*8)+j):
+                    screen.blit(convert_to_png(board.piece_at((i*8)+j).symbol()),
+                                (480 - j * 45, 90 + i * 45))  # @IgnorePep8
 
 
 def change_board(newBoard):

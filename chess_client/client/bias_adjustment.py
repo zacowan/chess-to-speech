@@ -32,6 +32,8 @@ dict={
     "d12":"D1 to",
     "whiteside":"White Side",
     "35": "D5",
+    "e75": "E7 to E5",
+    "e46": "E4 to E6",
     "22": "E2"
     
     }
