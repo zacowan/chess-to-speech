@@ -10,7 +10,6 @@ Game State Dict:
         "fulfillment_params": dict,
         "game_started": bool | None,
         "chosen_side": str | None,
-        "curr_move_from": str | None,
         "game_finished": bool | None
     }
 
@@ -87,7 +86,6 @@ def get_game_state(session_id):
         {
             "game_started": bool | None,
             "chosen_side": str | None,
-            "curr_move_from": str | None,
             "game_finished": bool | None
         }
 
@@ -96,7 +94,6 @@ def get_game_state(session_id):
         game_state = {
             "game_started": db.get("game_started"),
             "chosen_side": db.get("chosen_side"),
-            "curr_move_from": db.get("curr_move_from"),
             "game_finished": db.get("game_finished")
         }
         return game_state
@@ -112,12 +109,6 @@ def set_chosen_side(session_id, val):
     """Sets chosen_side to a new value"""
     with shelve.open(get_shelve_file(session_id)) as db:
         db["chosen_side"] = val
-
-
-def set_curr_move_from(session_id, val):
-    """Sets curr_move_from to a new value"""
-    with shelve.open(get_shelve_file(session_id)) as db:
-        db["curr_move_from"] = val
 
 
 def set_game_finished(session_id):

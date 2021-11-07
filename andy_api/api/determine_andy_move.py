@@ -2,6 +2,7 @@
 
 """
 from .intent_processing.utils import get_random_choice
+from .state_manager import set_game_finished
 from .chess_logic import (
     make_move,
     get_best_move,
@@ -17,7 +18,7 @@ HAPPY_PATH_RESPONSES = [
 ]
 
 
-def determine_andy_move(board_str):
+def determine_andy_move(session_id, board_str):
     """Handles determining a text response for Andy's move.
 
     Args:
@@ -46,17 +47,17 @@ def determine_andy_move(board_str):
     # Make the best move
     updated_board_str = make_move(board_str, move)
 
-    if check_if_check(updated_board_str):
-        return static_choice.format(
-            from_location=from_location,
-            to_location=to_location,
-            piece_name=piece_name) + ', which puts you in check', updated_board_str, move_info
-
     if check_if_checkmate(updated_board_str):
+        set_game_finished(session_id)
         return static_choice.format(
             from_location=from_location,
             to_location=to_location,
             piece_name=piece_name) + ", and that's checkmate, I win!", updated_board_str, move_info
+    elif check_if_check(updated_board_str):
+        return static_choice.format(
+            from_location=from_location,
+            to_location=to_location,
+            piece_name=piece_name) + ', which puts you in check.', updated_board_str, move_info
 
     return static_choice.format(
         from_location=from_location,
