@@ -82,6 +82,6 @@ def check_if_move_causes_check(board_str, move_sequence):
     board = chess.Board(board_str)
     move_to_make = chess.Move.from_uci(move_sequence.lower())
     if move_to_make in board.pseudo_legal_moves:
-        return board.gives_check(move_to_make)
+        return True
     else:
         return False
