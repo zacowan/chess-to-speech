@@ -46,5 +46,4 @@ def check_if_check(board_str):
 
 def check_if_checkmate(board_str):
     board = chess.Board(board_str)
-    board.is_into_check()
     return board.is_checkmate()
