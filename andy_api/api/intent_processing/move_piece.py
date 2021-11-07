@@ -3,7 +3,7 @@
 import chess
 
 from .utils import get_random_choice
-from api.state_manager import set_fulfillment_params, get_game_state
+from api.state_manager import set_fulfillment_params, get_game_state, set_game_finished
 
 
 HAPPY_PATH_RESPONSES = [
@@ -125,6 +125,7 @@ def handle(session_id, intent_model, board_str):
             # check if user has put andy in check or checkmate
             if check_if_checkmate(updated_board_str):
                 static_choice += get_random_choice(CHECKMATE_ADDITIONS)
+                set_game_finished(session_id)
             elif check_if_check(updated_board_str):
                 static_choice += get_random_choice(CHECK_ADDITIONS)
 
