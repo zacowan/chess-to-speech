@@ -104,8 +104,7 @@ def fulfill_intent(session_id, board_str, intent_data):
             response_choice, success = how_piece_moves.handle(
                 session_id, intent_data, board_str)
         elif response_type == RESPONSE_TYPES.BEST_MOVE:
-            response_choice, success = best_move.handle(
-                session_id, intent_data, board_str)
+            response_choice, success = best_move.handle(board_str)
         elif response_type == RESPONSE_TYPES.POSSIBLE_ACTIONS:
             response_choice, success = possible_actions.hande_game_started()
 
