@@ -15,7 +15,7 @@ HAPPY_PATH_RESPONSES = [
 
 def get_engine():
     dirname = os.path.dirname(__file__)
-    engine_filename = dirname + "/stockfish_engine/stockfish.exe"
+    engine_filename = dirname + "/stockfish_engine/stockfish"
     engine = chess.engine.SimpleEngine.popen_uci(
         engine_filename)  # load stockfish as chess engine
     return engine
