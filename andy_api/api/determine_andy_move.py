@@ -46,13 +46,13 @@ def determine_andy_move(board_str):
     # Make the best move
     updated_board_str = make_move(board_str, move)
 
-    if(check_if_check(updated_board_str)):
+    if check_if_check(updated_board_str):
         return static_choice.format(
             from_location=from_location,
             to_location=to_location,
             piece_name=piece_name) + ', which puts you in check', updated_board_str, move_info
 
-    if(check_if_checkmate(updated_board_str)):
+    if check_if_checkmate(updated_board_str):
         return static_choice.format(
             from_location=from_location,
             to_location=to_location,

@@ -1,48 +1,41 @@
 """
 TODO add info about intent
 """
-
+import traceback
+from api.logging import log_error, ERROR_TYPES
+from api.chess_logic import get_best_move, get_piece_name_at
 from .utils import get_random_choice
 
-import chess
-import chess.engine
-
-import os
-
-
 HAPPY_PATH_RESPONSES = [
-    "Lemme give ya a hand... Move {from_location} to {to_location}.",
-    "Okay! I know I'm pretty good, so here's a tip- move {from_location} to {to_location}."
+    "According to my calculations, you should move your {piece_name} from {from_location} to {to_location}.",
+    "Your mest move is {from_location} to {to_location}."
 ]
 
 
-STOCKFISH_ENGINE_PATH = "./stockfish_engine/stockfish"
+ERROR_RESPONSES = [
+    "Sorry, I'm not sure what your best move is.",
+    "Sorry, I don't know what you should do next."
+]
 
 
-def get_engine():
-    engine = chess.engine.SimpleEngine.popen_uci(
-        STOCKFISH_ENGINE_PATH)  # load stockfish as chess engine
-    return engine
-
-
-def get_best_move(board_str):
-    engine = get_engine()
-    board = chess.Board(board_str)
-    bestMove = engine.play(board, chess.engine.Limit(time=0.1)).move
-    engine.close()
-    return bestMove
-
-
-def handle(board_str):
+def handle(session_id, board_str):
     """TODO add details about method
     """
     static_choice = get_random_choice(HAPPY_PATH_RESPONSES)
-    best_move = get_best_move(board_str).uci()
+    try:
+        best_move = get_best_move(board_str).uci()
 
-    from_location = best_move[0:2]
-    to_location = best_move[2:4]
+        from_location = best_move[0:2]
+        to_location = best_move[2:4]
+        piece_name = get_piece_name_at(board_str, from_location)
 
-    return static_choice.format(
-        from_location=from_location,
-        to_location=to_location
-    ), True
+        return static_choice.format(
+            piece_name=piece_name,
+            from_location=from_location,
+            to_location=to_location
+        ), True
+    except Exception:
+        err_msg = f"Error with calculating best move for user: {traceback.format_exc()}"
+        log_error(session_id, ERROR_TYPES.BEST_MOVE, err_msg)
+        static_choice = get_random_choice(ERROR_RESPONSES)
+        return static_choice, False
