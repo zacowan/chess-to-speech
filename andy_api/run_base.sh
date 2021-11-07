@@ -22,4 +22,4 @@ export APP_MODE=$APP_MODE
 export LOGGING_SUFFIX=$APP_MODE
 
 # Run the app
-exec flask run
+exec python -m flask run
