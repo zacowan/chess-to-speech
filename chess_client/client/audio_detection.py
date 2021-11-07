@@ -25,7 +25,7 @@ def run():
 
     r = sr.Recognizer()
 
-    while not the_main.is_closed():
+    while not the_main.is_closed() and not game_engine.is_game_over:
         # obtain audio from the microphone
         with sr.Microphone() as source:
             r.adjust_for_ambient_noise(source)
@@ -79,10 +79,13 @@ def run():
         wave_obj = sa.WaveObject.from_wave_file(ANDY_AUDIO_FILENAME)
         play_obj = wave_obj.play()
         play_obj.wait_done()  # Wait until sound has finished playing
-        if intent_response["fulfillment_info"]["intent_name"] == "MOVE_PIECE" and intent_response["fulfillment_info"]["success"]:
+        game_engine.is_game_over = intent_response["game_state"]["game_finished"]
+        
+        if (intent_response["fulfillment_info"]["intent_name"] == "MOVE_PIECE" or (intent_response["fulfillment_info"]["intent_name"] == "CHOOSE_SIDE" and intent_response["game_state"]["chosen_side"]=="black" ))and intent_response["fulfillment_info"]["success"]:
             # Get the intent
-            game_engine.move_history.insert(
-                0, "User: " + intent_response['fulfillment_params']['from_location'] + " to " + intent_response['fulfillment_params']['to_location'])
+            if intent_response["fulfillment_info"]["intent_name"] == "MOVE_PIECE" :
+                game_engine.move_history.insert(
+                    0, "User: " + intent_response['fulfillment_params']['from_location'] + " to " + intent_response['fulfillment_params']['to_location'])
             intent_response = get_andy_move()
             if not intent_response:
                 continue
@@ -98,9 +101,10 @@ def run():
             play_obj = wave_obj.play()
             play_obj.wait_done()  # Wait until sound has finished playing
             game_engine.board = chess.Board(intent_response["board_str"])
+            print(game_engine.board)
             game_engine.move_history.insert(0, "Andy: " + intent_response['move_info']['from'].upper(
             ) + " to " + intent_response['move_info']['to'].upper())
-
+            game_engine.is_game_over= intent_response["game_state"]["game_finished"]
 
 def get_audio_response(text):
     request_url = f"{BASE_API_URL}/get-audio-response?session_id={SESSION_ID}"
@@ -144,6 +148,8 @@ def get_user_intent(detected_text, start_recording, stop_recording):
             if response.json()["board_str"]:
                 game_engine.board = chess.Board(response.json()["board_str"])
                 game_engine.isGameStarted = True
+            if response.json()["game_state"]["chosen_side"]=="black" :
+                game_engine.user_is_black = True
             return response.json()
         else:
             print("API Error, Status Code:"+response.status_code)

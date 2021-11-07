@@ -1,6 +1,9 @@
 # BOTH DICTS ARE LOWERCASE KEYS
 dict = {
     "a22": "A2 to",
+    "peace": "piece",
+    "pizza": "piece",
+    "pissa": "piece",
     "a42": "A4 to",
     "b-5": "B5",
     "b22": "B2 to",
@@ -32,12 +35,17 @@ dict = {
     "f-6": "F6",
     "f-7": "F7",
     "f-8": "F8",
+    "35": "D5",
+    "e75": "E7 to E5",
+    "e46": "E4 to E6",
+    "22": "E2"
 }
 dict2 = {
     "a to a4": "A2 to A4",
-    "b-52d 3": "B2 to D3",
+    "b-52d 3": "B5 to D3",
     "f2 f4": "F2 to F4",
-    "a 4285": "A4 to A5"
+    "a 4285": "A4 to A5",
+    "do you want to be to": "D1 to D2"
 }
 
 
