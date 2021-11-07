@@ -25,7 +25,7 @@ def run():
 
     r = sr.Recognizer()
 
-    while not the_main.is_closed():
+    while not the_main.is_closed() and game_engine.is_game_over:
         # obtain audio from the microphone
         with sr.Microphone() as source:
             r.adjust_for_ambient_noise(source)
@@ -79,7 +79,9 @@ def run():
         wave_obj = sa.WaveObject.from_wave_file(ANDY_AUDIO_FILENAME)
         play_obj = wave_obj.play()
         play_obj.wait_done()  # Wait until sound has finished playing
-        if intent_response["fulfillment_info"]["intent_name"] == "MOVE_PIECE" and intent_response["fulfillment_info"]["success"]:
+        game_engine.is_game_over = intent_response["game_state"]["game_finished"]
+        
+        if (intent_response["fulfillment_info"]["intent_name"] == "MOVE_PIECE" or intent_response["fulfillment_info"]["intent_name"] == "CHOOSE_SIDE" )and intent_response["fulfillment_info"]["success"]:
             # Get the intent
             game_engine.move_history.insert(
                 0, "User: " + intent_response['fulfillment_params']['from_location'] + " to " + intent_response['fulfillment_params']['to_location'])
@@ -100,6 +102,7 @@ def run():
             game_engine.board = chess.Board(intent_response["board_str"])
             game_engine.move_history.insert(0, "Andy: " + intent_response['move_info']['from'].upper(
             ) + " to " + intent_response['move_info']['to'].upper())
+            game_engine.is_game_over= intent_response["fulfillment_info"]["intent_name"]
 
 
 def get_audio_response(text):

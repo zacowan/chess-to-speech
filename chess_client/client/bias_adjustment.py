@@ -1,6 +1,9 @@
 #BOTH DICTS ARE LOWERCASE KEYS
 dict={
     "a22": "A2 to",
+    "peace": "piece",
+    "pizza": "piece",
+    "pissa": "piece",
     "a42": "A4 to",
     "b-5": "B5",
     "b22": "B2 to" ,
@@ -27,14 +30,17 @@ dict={
     "f-2": "F2",
     "1/4":"A4 to",
     "d12":"D1 to",
-    "whiteside":"White Side"
+    "whiteside":"White Side",
+    "35": "D5",
+    "22": "E2"
     
     }
 dict2={
     "a to a4": "A2 to A4",
-    "b-52d 3": "B2 to D3",
+    "b-52d 3": "B5 to D3",
     "f2 f4": "F2 to F4",
-    "a 4285": "A4 to A5"
+    "a 4285": "A4 to A5",
+    "do you want to be to": "D1 to D2"
     }
 def adjust_with_bias(text):
     word_list=text.split()

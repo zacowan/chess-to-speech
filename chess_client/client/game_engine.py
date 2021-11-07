@@ -14,6 +14,7 @@ IMAGES_PATH = './images'
 isMicOn = False
 isGameStarted = False
 lastSaid =""
+is_game_over = True
 move_history=[]
 #move_history=["User: Pawn in A2 to Captures Knight in A4", "Andy: Pawn in A7 to A5", "User: Pawn in B2 to B4", "Andy: Pawn in B7 to B5"]
 # Sets up the Default Board
@@ -45,6 +46,9 @@ def start_game(screen):
             screen.blit(textsurface,(675,25))
             create_board(screen)
             screen.blit(mic_img, (250, 500))
+            if is_game_over:
+                game_over = pygame.image.load(f'{IMAGES_PATH}/DemoOver.png')
+                screen.blit(game_over, (0, 0))
             if lastSaid:
                 stringPrint =""
                 lineNum=0
@@ -61,7 +65,7 @@ def start_game(screen):
                 stringPrint =""
                 lineNum=0
                 for sentence in move_history:
-                    if lineNum > 400:
+                    if lineNum > 375:
                         break
                     for word in  (sentence).split():
                         if(len(stringPrint+word)>40):
@@ -70,7 +74,7 @@ def start_game(screen):
                             lineNum+=25
                             stringPrint =""
                         stringPrint += word+ " "
-                        if lineNum> 400:
+                        if lineNum> 375:
                             break
                     textsurface = myfont.render(stringPrint, True, (0, 0, 0))
                     screen.blit(textsurface,(575,50+lineNum))
