@@ -21,7 +21,7 @@ from .logging import (
     log_andy_move,
     ERROR_TYPES
 )
-from .api_route_helpers import get_response_error_return, get_static_error_audio, get_best_move
+from .api_route_helpers import get_response_error_return, get_static_error_audio
 
 bp = Blueprint('api', __name__, url_prefix='/api')
 
