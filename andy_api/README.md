@@ -28,14 +28,14 @@ Getting access to the Dialogflow API requries the use of a service account. To a
 
 1. Make sure you have completed (Getting Google Cloud SDK Set Up)[#getting-google-cloud-sdk-set-up].
 2. Make sure you have a key for the service account. Name it `service_key_file.json` and make sure it is somewhere easily accessible (like the root directory of this project). You will need to know the **absolute** path of the key file. Make sure that this file is correctly hidden by the `.gitignore`.
-3. Update the path of the key file using the `ABSOLUTE_PATH_TO_KEY` variable in `run_dev.sh`.
+3. Update the path of the key file using the `ABSOLUTE_PATH_TO_KEY` variable in `run_YOUR_NAME.sh`.
 4. Run the command `gcloud auth activate-service-account --key-file=ABSOLUTE_PATH_TO_KEY_FILE` using the **absolute** path of the key file (the same one set in `run.sh`).
 
 ## Running the App
 
 1. Make sure you have completed [Getting Started](#getting-started).
 2. To open a shell for the python virtual environment, run `pipenv shell` inside of the project directory.
-3. While in the python virtual environment, run `./run_dev.sh` to run a script that starts the app.
+3. While in the python virtual environment, run `sh run_YOUR_NAME.sh` to run a script that starts the app.
 4. To stop the app, use `ctrl + c`. To exit the virtual environment, type `exit`.
 
-> Note: for a shortcut command that runs the python virtual environment shell and runs the scripts, run `pipenv run ./run_dev.sh`.
+> Note: for a shortcut command that runs the python virtual environment shell and runs the scripts, run `pipenv run sh run_YOUR_NAME.sh`.
