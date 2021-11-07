@@ -20,7 +20,7 @@ HOW_ROOKS_MOVE = [
 HOW_BISHOPS_MOVE = [
     "Oh {piece_location}- thats A Bishop! Bishops move diagonally any number of squares. They are unable to jump over pieces."]
 
-HOW_KNIGHTS_MOVE = ["{piece_location} holds a Knight. Knights move in an ‘L’ shape’: two squares in a horizontal or vertical direction, then move one square horizontally or vertically. They are the only piece able to jump over other pieces."]
+HOW_KNIGHTS_MOVE = ["{piece_location} holds a Knight. Knights move in an L shape: two squares in a horizontal or vertical direction, then move one square horizontally or vertically. They are the only piece able to jump over other pieces."]
 
 HOW_PAWNS_MOVE = ["And at {piece_location} we have a pawn. Pawns move vertically forward one square, with the option to move two squares if they have not yet moved. Pawns are the only piece to capture different to how they move. The pawns capture one square diagonally in a forward direction. Pawns are unable to move backward on captures or moves. Upon reaching the other side of the board a pawn promotes into any other piece, except for a king. Additionally, pawns can make a special move named En Passant."]
 
