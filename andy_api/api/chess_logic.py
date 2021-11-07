@@ -30,9 +30,9 @@ def get_best_move(board_str):
     return best_move.uci()
 
 
-def get_board_str_with_move(board_str, move):
+def get_board_str_with_move(board_str, move_sequence):
     board = chess.Board(board_str)
-    board.push_uci(move.lower())
+    board.push_uci(move_sequence.lower())
     return board.fen()
 
 
@@ -72,4 +72,16 @@ def check_if_turn(board_str, location):
 
 def check_if_move_legal(board_str, move_sequence):
     board = chess.Board(board_str)
-    return chess.Move.from_uci(move_sequence.lower()) in board.legal_moves
+    try:
+        return chess.Move.from_uci(move_sequence.lower()) in board.legal_moves
+    except ValueError:
+        return False
+
+
+def check_if_move_causes_check(board_str, move_sequence):
+    board = chess.Board(board_str)
+    move_to_make = chess.Move.from_uci(move_sequence.lower())
+    if move_to_make in board.pseudo_legal_moves:
+        return board.gives_check(move_to_make)
+    else:
+        return False

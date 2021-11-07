@@ -1,7 +1,5 @@
 """This module handles intent processing for MOVE_PIECE.
 """
-import chess
-
 from .utils import get_random_choice
 from api.state_manager import set_fulfillment_params, get_game_state, set_game_finished
 from api.chess_logic import (
@@ -10,7 +8,8 @@ from api.chess_logic import (
     get_board_str_with_move,
     get_piece_at,
     check_if_move_legal,
-    check_if_turn
+    check_if_turn,
+    check_if_move_causes_check
 )
 
 
@@ -42,6 +41,11 @@ WRONG_COLOR_ERROR_RESPONSES = [
 ILLEGAL_MOVE_ERROR_RESPONSES = [
     "That is an illegal move, if you would like to know legal moves for the piece at {from_location}. You Can ask what legal move can I do with my piece at {from_location}.",
     "That is not how that piece moves, if you would like help, You Can ask me for help by saying, Andy can you help me?"
+]
+
+MOVE_CAUSES_CHECK_ERROR_RESPONSES = [
+    "Sorry, you can't do that because it would put you into check.",
+    "That move will put you into check, so you can't do it."
 ]
 
 FROM_ERROR_RESPONSES = [
@@ -111,6 +115,11 @@ def handle(session_id, intent_model, board_str):
         else:
             # Illegal move
             static_choice = get_random_choice(ILLEGAL_MOVE_ERROR_RESPONSES)
+
+            # Check if move results in check
+            if check_if_move_causes_check(board_str, from_location + to_location):
+                static_choice = get_random_choice(
+                    MOVE_CAUSES_CHECK_ERROR_RESPONSES)
 
             return static_choice.format(from_location=from_location), False, board_str
 

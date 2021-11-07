@@ -16,7 +16,7 @@ export FLASK_APP=api
 export FLASK_ENV=development
 
 # Set the app mode
-export APP_MODE=$APP_MODE
+export APP_MODE="demo"
 
 # Set the application environment variables
 export LOGGING_SUFFIX=$APP_MODE
