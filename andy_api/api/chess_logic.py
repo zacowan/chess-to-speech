@@ -51,3 +51,8 @@ def check_if_check(board_str):
 def check_if_checkmate(board_str):
     board = chess.Board(board_str)
     return board.is_checkmate()
+
+
+def get_current_color_turn(board_str):
+    board = chess.Board(board_str)
+    return board.turn
