@@ -81,15 +81,12 @@ def run():
         play_obj.wait_done()  # Wait until sound has finished playing
         if intent_response["fulfillment_info"]["intent_name"] == "MOVE_PIECE" and intent_response["fulfillment_info"]["success"]:
             # Get the intent
-            game_engine.move_history.append(
-                "User: " + intent_response['fulfillment_params']['from_location'] + " to " + intent_response['fulfillment_params']['to_location'])
+            game_engine.move_history.insert(
+                0, "User: " + intent_response['fulfillment_params']['from_location'] + " to " + intent_response['fulfillment_params']['to_location'])
             intent_response = get_andy_move()
             if not intent_response:
                 continue
             intent_info = intent_response["response_text"]
-            game_engine.move_history.append("Andy: " + intent_response['move_info']['from'].upper(
-            ) + " to " + intent_response['move_info']['to'].upper())
-
             # Get the audio response
             audio_response = get_audio_response(intent_info)
             # Play the audio response
@@ -101,6 +98,8 @@ def run():
             play_obj = wave_obj.play()
             play_obj.wait_done()  # Wait until sound has finished playing
             game_engine.board = chess.Board(intent_response["board_str"])
+            game_engine.move_history.insert(0, "Andy: " + intent_response['move_info']['from'].upper(
+            ) + " to " + intent_response['move_info']['to'].upper())
 
 
 def get_audio_response(text):

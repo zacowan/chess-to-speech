@@ -248,7 +248,6 @@ def get_response():
             )).start()
             # Send the error response
             return jsonify(err_response)
-
         # Determine Andy's response
         try:
             response_text, fulfillment_info, updated_board_str = intent_processing.fulfill_intent(
