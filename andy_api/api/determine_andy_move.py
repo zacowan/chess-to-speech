@@ -15,7 +15,7 @@ HAPPY_PATH_RESPONSES = [
 
 def get_engine():
     dirname = os.path.dirname(__file__)
-    engine_filename = dirname + "/UCI_engine/stockfish"
+    engine_filename = dirname + "/UCI_engine/stockfish.exe"
     engine = chess.engine.SimpleEngine.popen_uci(
         engine_filename)  # load stockfish as chess engine
     return engine
@@ -49,8 +49,8 @@ def determine_andy_move(board_str):
     """
     static_choice = get_random_choice(HAPPY_PATH_RESPONSES)
 
-    move = get_best_move(board_str)
-
+    move = get_best_move(board_str).uci()
+    print(move)
     from_location = move[0:2]
     to_location = move[2:4]
 
