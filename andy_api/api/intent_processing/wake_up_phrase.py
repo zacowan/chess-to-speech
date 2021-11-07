@@ -15,7 +15,7 @@ HAPPY_PATH_RESPONSES = [
 ]
 
 HAPPY_PATH_RESPONSES_2 = [
-    "Great! What side do you want to choose?",
+    "Great! What side do you want to choose? White or Black?",
 ]
 
 HAPPY_PATH_RESPONSES_3 = [
