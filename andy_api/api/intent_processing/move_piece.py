@@ -19,26 +19,28 @@ CHECKMATE_ADDITIONS = [
     "And that puts me in checkmate, you win!"
 ]
 
-EMPTY_SPACE__ERROR_RESPONSES = [
-    "What- you movin a ghost piece or sumtin?",
-    "Let me know when you wanna move a real piece..."
+EMPTY_SPACE_ERROR_RESPONSES = [
+    "I don't see a piece at {from_location}, Perhaps I misunderstood?",
+    "It seems like there is no piece at {from_location}",
+    "It seems like there is no piece at {from_location}, Perhaps I misunderstood?",
+    "I don't see a piece at {from_location}",
 ]
-
+#TODO added dynamic response needs to be incorportated
 WRONG_COLOR_ERROR_RESPONSES = [
-    "Don't touch my pieces!",
-    "You can win without cheating- move your own colored piece!"
+    "I see that you attempted to move my piece, keep in mind your pieces are the {player_color} pieces.",
+    "The piece at {from_location} is my piece, keep in mind you are playing with the {player_color} pieces."
 ]
-
+#TODO added dynamic response needs to be incorportated
 ILLEGAL_MOVE_ERROR_RESPONSES = [
-    "I heard ya, but that move is illegal."
-    "I would let ya make that move, but there are rules to this game!"
+    "That is an illegal move, if you would like to know legal moves for the piece at {from_location}. You Can ask what legal move can I do with my piece at {from_location}.",
+    "That is not how that piece moves, if you would like help, You Can ask me for help by saying, Andy can you help me?"
 ]
-
+#TODO added dynamic response needs to be incorportated
 FROM_ERROR_RESPONSES = [
     "Which piece did you want to move?",
     "You wanted to move the piece at which location?"
 ]
-
+#TODO added dynamic response needs to be incorportated
 TO_ERROR_RESPONSES = [
     "You wanted to move your piece at {from_location} to where?",
     "Where did you want to move your piece at {from_location} to?"
@@ -102,12 +104,16 @@ def handle(session_id, intent_model, board_str):
         # Chess logic
         if not get_piece_at(updated_board_str, from_location):
             # No piece at that location
-            static_choice = get_random_choice(EMPTY_SPACE__ERROR_RESPONSES)
-            return static_choice, False, updated_board_str
+            static_choice = get_random_choice(EMPTY_SPACE_ERROR_RESPONSES)
+            return static_choice.format(from_location=from_location), False, updated_board_str
         elif not check_if_turn(updated_board_str, from_location):
             # Player does not own that piece
             static_choice = get_random_choice(WRONG_COLOR_ERROR_RESPONSES)
-            return static_choice, False, updated_board_str
+            
+            return static_choice.format(andy_side=andy_side,
+                                    andy_position=andy_position,
+                                    user_side=user_side,
+                                    user_position=user_position), False, updated_board_str
 
         # Check if the move is legal
         if check_if_move_legal(updated_board_str, from_location + to_location):
@@ -152,8 +158,8 @@ def handle(session_id, intent_model, board_str):
         # Chess logic
         if not get_piece_at(updated_board_str, from_location):
             # No piece at that location
-            static_choice = get_random_choice(EMPTY_SPACE__ERROR_RESPONSES)
-            return static_choice, False, updated_board_str
+            static_choice = get_random_choice(EMPTY_SPACE_ERROR_RESPONSES)
+            return static_choice.format(from_location=from_location), False, updated_board_str
         elif not check_if_turn(updated_board_str, from_location):
             # Player does not own that piece
             static_choice = get_random_choice(WRONG_COLOR_ERROR_RESPONSES)

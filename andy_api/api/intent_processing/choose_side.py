@@ -17,12 +17,12 @@ HAPPY_PATH_RESPONSES = [
     "Great, since you're on {user_side} side, you'll go {user_position}.",
     "Good choice, that means you'll go {user_position}.",
     "Sweet, that means I'll go {andy_position} and you'll go {user_position}.",
-    "That leaves me {andy_side}, meaning you'll go {user_position}."
+    "That leaves me with {andy_side}, meaning you'll go {user_position}."
 ]
 
 ERROR_RESPONSES = [
-    "Sorry, you can only choose between black or white. Which side do you choose?",
-    "Oh, you should choose between black or white. What'll it be?"
+    "Sorry, I can only do black or white, which side do you want?",
+    "Sorry, I only have black and white pieces, can you choose between those two options?"
 ]
 
 
@@ -65,7 +65,10 @@ def handle(session_id, intent_model):
             "chosen_side": user_side
         })
 
-        starting_board_str = chess.STARTING_FEN
+        starting_board_str = chess.Board().board_fen()
+        if user_side=="black":
+            starting_board_str= starting_board_str[::-1]
+
         if(os.environ['DEMO_MODE'] == True):
             starting_board_str = DEMO_BOARD_STR
 
