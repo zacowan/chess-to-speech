@@ -127,7 +127,9 @@ def get_andy_move_response():
 
         # Determine Andy's response
         response_text, updated_board_str, move_info = determine_andy_move.determine_andy_move(
-            board_str)
+            session_id,
+            board_str
+        )
 
         # Log Andy's move on a separate thread
         response_at = datetime.now()
@@ -145,7 +147,8 @@ def get_andy_move_response():
         return jsonify({
             'response_text': response_text,
             'board_str': updated_board_str,
-            'move_info': move_info
+            'move_info': move_info,
+            'game_state': get_game_state(session_id)
         })
 
 
@@ -304,4 +307,5 @@ def get_response():
             'fulfillment_info': fulfillment_info,
             'fulfillment_params': get_fulfillment_params(session_id),
             'board_str': updated_board_str,
+            'game_state': get_game_state(session_id)
         })
