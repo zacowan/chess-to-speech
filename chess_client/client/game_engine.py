@@ -14,7 +14,7 @@ IMAGES_PATH = './images'
 isMicOn = False
 isGameStarted = False
 lastSaid =""
-is_game_over = True
+is_game_over = False
 move_history=[]
 #move_history=["User: Pawn in A2 to Captures Knight in A4", "Andy: Pawn in A7 to A5", "User: Pawn in B2 to B4", "Andy: Pawn in B7 to B5"]
 # Sets up the Default Board
