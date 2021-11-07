@@ -11,7 +11,13 @@ from api.state_manager import set_chosen_side, set_game_started, set_fulfillment
 
 import chess
 
+DEFAULT_BOARD_STR = chess.STARTING_FEN
 DEMO_BOARD_STR = "r2qk2r/pb4pp/1n2Pb2/2B2Q2/p1p5/2P5/2B2PPP/RN2R1K1 w - - 1 0"
+APP_MODE = os.environ.get("APP_MODE", "development")
+
+STARTING_BOARD_STR = DEFAULT_BOARD_STR
+if (APP_MODE == "demo"):
+    STARTING_BOARD_STR = DEMO_BOARD_STR
 
 HAPPY_PATH_RESPONSES = [
     "Great, since you're on {user_side} side, you'll go {user_position}. To move a piece say the location of the piece you want to move it from. and then the square you want to move it to, For example you can say A2 to A4",
@@ -65,16 +71,9 @@ def handle(session_id, intent_model):
             "chosen_side": user_side
         })
 
-        starting_board_str = chess.Board().board_fen()
-        if user_side=="black":
-            starting_board_str= starting_board_str[::-1]
-
-        if(os.environ['DEMO_MODE'] == True):
-            starting_board_str = DEMO_BOARD_STR
-
         return static_choice.format(andy_side=andy_side,
                                     andy_position=andy_position,
                                     user_side=user_side,
-                                    user_position=user_position), True, starting_board_str
+                                    user_position=user_position), True, STARTING_BOARD_STR
     else:
         return get_random_choice(ERROR_RESPONSES), False, None
