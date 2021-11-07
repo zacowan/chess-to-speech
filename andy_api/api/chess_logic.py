@@ -33,7 +33,7 @@ def get_best_move(board_str):
 def make_move(board_str, move):
     board = chess.Board(board_str)
     board.push(chess.Move.from_uci(move.lower()))
-    return board.board_fen()
+    return board.fen()
 
 
 def get_piece_name_at(board_str, location):
