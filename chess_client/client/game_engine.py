@@ -14,11 +14,11 @@ IMAGES_PATH = './images'
 isMicOn = False
 isGameStarted = False
 lastSaid =""
-#move_history=[]
-move_history=["User: Pawn in A2 to Captures Knight in A4", "Andy: Pawn in A7 to A5", "User: Pawn in B2 to B4", "Andy: Pawn in B7 to B5"]
+move_history=[]
+#move_history=["User: Pawn in A2 to Captures Knight in A4", "Andy: Pawn in A7 to A5", "User: Pawn in B2 to B4", "Andy: Pawn in B7 to B5"]
 # Sets up the Default Board
-board = chess.Board('rnbqkbnr/pppppppp/8/8/2P5/8/PP1PPPPP/RNBQKBNR b KQkq - 0 1')
-#board = None
+#board = chess.Board('rnbqkbnr/pppppppp/8/8/2P5/8/PP1PPPPP/RNBQKBNR b KQkq - 0 1')
+board = None
 
 # handles Setting up the Game and the Game State
 def setup_game_engine(screen):

@@ -10,6 +10,7 @@ import simpleaudio as sa
 import chess
 import traceback
 from . import the_main
+from . import bias_adjustment
 from . import game_engine
 from datetime import datetime
 from .utils import AUDIO_PATH
@@ -45,6 +46,7 @@ def run():
             # to use another API key, use `r.recognize_google(audio, key="GOOGLE_SPEECH_RECOGNITION_API_KEY")`
             # instead of `r.recognize_google(audio)`
             detected_text = r.recognize_google(audio)
+            detected_text= bias_adjustment.adjust_with_bias(detected_text)
             game_engine.lastSaid=detected_text
             print(f"Detected text: {detected_text}")
         except sr.UnknownValueError:

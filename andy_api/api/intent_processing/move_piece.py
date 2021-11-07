@@ -32,7 +32,7 @@ WRONG_COLOR_ERROR_RESPONSES = [
 ]
 #TODO added dynamic response needs to be incorportated
 ILLEGAL_MOVE_ERROR_RESPONSES = [
-    "That is an illegal move, if you would like to know legal moves for the piece at {from_location}. You Can ask what legal move can I do with my piece at {from_location}."
+    "That is an illegal move, if you would like to know legal moves for the piece at {from_location}. You Can ask what legal move can I do with my piece at {from_location}.",
     "That is not how that piece moves, if you would like help, You Can ask me for help by saying, Andy can you help me?"
 ]
 #TODO added dynamic response needs to be incorportated
