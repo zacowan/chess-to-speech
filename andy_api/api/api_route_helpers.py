@@ -16,7 +16,7 @@ TTS_ERROR_AUDIO_FILENAME = "./static_audio/tts-error.wav"
 
 def get_engine():
     dirname = os.path.dirname(__file__)
-    engine_filename = dirname + "/UCI_engine/stockfish"
+    engine_filename = dirname + "/stockfish_engine/stockfish"
     engine = chess.engine.SimpleEngine.popen_uci(
         engine_filename)  # load stockfish as chess engine
     return engine
