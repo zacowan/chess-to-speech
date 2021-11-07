@@ -1,8 +1,12 @@
 import chess
 import chess.engine
+import os
 
 # This is a relative location to the directory in which you run the script (aka, andy_api/)
-STOCKFISH_ENGINE_LOCATION = "./stockfish_engine/stockfish"
+STOCKFISH_ENGINE_LOCATION = os.environ.get("STOCKFISH_LOCATION")
+
+if not STOCKFISH_ENGINE_LOCATION:
+    raise Exception("You need to specify a location for the stockfish engine.")
 
 CHESS_PIECE_NAMES = {
     'P': 'pawn',
