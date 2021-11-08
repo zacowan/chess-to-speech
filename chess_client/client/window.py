@@ -13,5 +13,5 @@ def start_screen():
     pygame.init()
     pygame.display.set_caption("Chess Master Andy")  # Title for the Window
     screen = pygame.display.set_mode(window_size, 0, 32)
-    #screen = pygame.display.set_mode(window_size,pygame.FULLSCREEN) For those who like living dangerously
+    # screen = pygame.display.set_mode(window_size,pygame.FULLSCREEN) For those who like living dangerously
     return screen

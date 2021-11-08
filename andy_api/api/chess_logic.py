@@ -127,7 +127,7 @@ def get_from_location_from_move_info(board_str, move_info):
             actual_from_loc.append(from_loc)
 
     if len(actual_from_loc) == 1:
-        return actual_from_loc[1]
+        return actual_from_loc[0]
     elif len(actual_from_loc) > 1:
         raise MultiplePiecesCanMoveError()
     else:

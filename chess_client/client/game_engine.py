@@ -92,8 +92,9 @@ def start_game(screen):
                     stringPrint = ""
 
         else:
-            welcome_img = pygame.image.load(f'{IMAGES_PATH}/Welcome.png')
-            screen.blit(welcome_img, (350, 175))
+            welcome_img = pygame.image.load(
+                f'{IMAGES_PATH}/start_screen.png')
+            screen.blit(welcome_img, (0, 0))
             screen.blit(mic_img, (400, 500))
             textsurface = myfont.render(
                 "Your Session ID: " + audio_detection.SESSION_ID[0:8], True, (0, 0, 0))
