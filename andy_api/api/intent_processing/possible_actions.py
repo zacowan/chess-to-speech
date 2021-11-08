@@ -7,22 +7,11 @@ Attributes:
 """
 from .utils import get_random_choice
 
-
-BEFORE_GAME_RESPONSES = [
-    "You can start a game of chess with me!",
-]
-
-GAME_STARTED_RESPONSES = [
-    "You can move a piece, ask legal moves for a piece, and ask what your best move is!",
+HAPPY_PATH_RESPONSES = [
+    "I can perform a move for you, tell you how a piece moves, or give you advice on your next move.",
+    "I can move a piece for you, tell you how pieces move, and help you make your next move."
 ]
 
 
-def handle_before_game():
-    return get_random_choice(BEFORE_GAME_RESPONSES), True
-
-
-def hande_game_started():
-    return get_random_choice(GAME_STARTED_RESPONSES), True
-
-# If a game has started: tell user they can make a move (if their turn), 2. ask legal moves for a piece, 3. ask what best move is
-# api folder. statemanager.pi ask if game started yet
+def handle():
+    return get_random_choice(HAPPY_PATH_RESPONSES), True

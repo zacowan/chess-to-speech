@@ -89,8 +89,6 @@ def fulfill_intent(session_id, board_str, intent_data):
             response_choice, success = wake_up_phrase.handle_yes()
         elif response_type == RESPONSE_TYPES.WAKE_UP_FOLLOW_UP_NO:
             response_choice, success = wake_up_phrase.handle_no()
-        elif response_type == RESPONSE_TYPES.POSSIBLE_ACTIONS:
-            response_choice, success = possible_actions.handle_before_game()
         elif response_type == RESPONSE_TYPES.CHOOSE_SIDE:
             response_choice, success, updated_board_str = choose_side.handle(
                 session_id, intent_data)
@@ -106,7 +104,7 @@ def fulfill_intent(session_id, board_str, intent_data):
         elif response_type == RESPONSE_TYPES.BEST_MOVE:
             response_choice, success = best_move.handle(session_id, board_str)
         elif response_type == RESPONSE_TYPES.POSSIBLE_ACTIONS:
-            response_choice, success = possible_actions.hande_game_started()
+            response_choice, success = possible_actions.handle()
 
     # Intents to handle after a game has finished
     else:
