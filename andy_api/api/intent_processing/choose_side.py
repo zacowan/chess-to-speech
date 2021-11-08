@@ -20,10 +20,10 @@ if (APP_MODE == "demo"):
     STARTING_BOARD_STR = DEMO_BOARD_STR
 
 HAPPY_PATH_RESPONSES = [
-    "Great, since you're on {user_side} side, you'll go {user_position}. To move a piece say the location of the piece you want to move it from. and then the square you want to move it to, For example you can say A2 to A4",
-    "Good choice, that means you'll go {user_position}.To move a piece say the location of the piece you want to move it from, and then the square you want to move it to. For example you can say A2 to A4",
-    "Sweet, that means I'll go {andy_position} and you'll go {user_position}.To move a piece say the location of the piece you want to move it from, and then the square you want to move it to. For example you can say A2 to A4",
-    "That leaves me with {andy_side}, meaning you'll go {user_position}.To move a piece say the location of the piece you want to move it from, and then the square you want to move it to. For example you can say A2 to A4"
+    "Great, since you're on {user_side} side, you'll go {user_position}.",
+    "Good choice, that means you'll go {user_position}.",
+    "Sweet, that means I'll go {andy_position} and you'll go {user_position}.",
+    "That leaves me with {andy_side}, meaning you'll go {user_position}."
 ]
 
 ERROR_RESPONSES = [

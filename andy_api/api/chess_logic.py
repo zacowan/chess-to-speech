@@ -91,33 +91,26 @@ def get_from_location_from_move_info(board_str, move_info):
     board = chess.Board(board_str)
 
     to_location = move_info.get("to_location").lower()
-    piece_name = move_info.get("piece_name")
+    piece_name = move_info.get("piece_name").lower()
 
     # Get a list of all possible from locations based on to_location
-    potential_from_locations = []
-    for move in board.pseudo_legal_moves:
-        to_square_name = chess.square_name(move.to_square()).lower()
-        from_square_name = chess.square_name(move.from_square()).lower()
-        if to_square_name == to_location:
-            potential_from_locations.append(from_square_name)
+    potential_from_loc = []
+    for loc in chess.SQUARE_NAMES:
+        p = board.piece_at(chess.parse_square(loc))
+        if p and CHESS_PIECE_NAMES.get(p.symbol().upper()) == piece_name:
+            potential_from_loc.append(loc)
 
-    # Only a single possible move
-    if len(potential_from_locations) == 1:
-        return potential_from_locations[0]
-    elif not piece_name:
-        # Don't know what piece to move
-        return None
+    if len(potential_from_loc) == 1:
+        return potential_from_loc[0]
 
-    # Need to cross-reference with piece name
-    new_potential_from_locations = []
-    for from_loc in potential_from_locations:
-        piece = board.piece_at(chess.parse_square(from_loc))
-        pname = CHESS_PIECE_NAMES.get(piece.symbol().lower())
-        if pname == piece_name.lower():
-            new_potential_from_locations.append(from_loc)
+    for mv in board.pseudo_legal_moves:
+        from_loc = chess.square_name(mv.from_square)
+        to_loc = chess.square_name(mv.to_square)
+        print(f"To location: {to_location}")
+        print(
+            f"{from_loc}{to_loc}: {from_loc in potential_from_loc and to_loc == to_location}")
+        if from_loc in potential_from_loc and to_loc == to_location:
+            return from_loc
 
-    if len(new_potential_from_locations) == 1:
-        return new_potential_from_locations[0]
-    else:
-        # Don't know what piece to move
-        return None
+    # No legal moves for that piece name and to location
+    return None

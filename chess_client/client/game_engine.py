@@ -126,7 +126,6 @@ def start_game(screen):
 
 
 def create_board(screen):
-    print(board.fen())
     if not user_is_black:
         board_img = pygame.image.load(f'{IMAGES_PATH}/board.png')
         screen.blit(board_img, (150, 75))

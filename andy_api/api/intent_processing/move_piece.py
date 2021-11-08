@@ -41,8 +41,8 @@ WRONG_COLOR_ERROR_RESPONSES = [
 ]
 
 ILLEGAL_MOVE_ERROR_RESPONSES = [
-    "That is an illegal move, if you would like to know legal moves for the piece at {from_location}. You Can ask what legal move can I do with my piece at {from_location}.",
-    "That is not how that piece moves, if you would like help, You Can ask me for help by saying, Andy can you help me?"
+    "Sorry, you can't make that move - it's against the rules. If you're confused, you can ask me how a piece moves.",
+    "That's an illegal move, so I won't be able to do it for you. Could you give me a different move?"
 ]
 
 MOVE_CAUSES_CHECK_ERROR_RESPONSES = [
@@ -55,9 +55,9 @@ ERROR_RESPONSES = [
     "I'm not sure I understand your move, could you tell me again?"
 ]
 
-TO_ERROR_RESPONSES = [
-    "You wanted to move your piece at {from_location} to where?",
-    "Where did you want to move your piece at {from_location} to?"
+NEED_MORE_INFO_RESPONSES = [
+    "Sorry, could you be a little more specific about which piece you want to move?",
+    "Sorry, I need a little bit more information about your move. Could you give me more details?"
 ]
 
 
@@ -72,7 +72,7 @@ def handle(session_id, intent_model, board_str):
     if intent_model.all_required_params_present is True:
         # Get piece locations
         locations = intent_model.parameters["locations"]
-        piece_name = intent_model.parameters["pieceName"] or None
+        piece_name = intent_model.parameters["pieceName"]
         to_location = locations[0]
         from_location = None
 
@@ -89,8 +89,8 @@ def handle(session_id, intent_model, board_str):
             from_location = get_from_location_from_move_info(
                 board_str, move_info)
             if not from_location:
-                # Not sure which piece to move, return error
-                static_choice = get_random_choice(ERROR_RESPONSES)
+                # Illegal move
+                static_choice = get_random_choice(ILLEGAL_MOVE_ERROR_RESPONSES)
 
                 return static_choice, False, board_str
 
@@ -146,33 +146,10 @@ def handle(session_id, intent_model, board_str):
                 static_choice = get_random_choice(
                     MOVE_CAUSES_CHECK_ERROR_RESPONSES)
 
-            return static_choice.format(from_location=from_location), False, board_str
+            return static_choice, False, board_str
 
     else:
         # Not sure which piece to move, return error
         static_choice = get_random_choice(ERROR_RESPONSES)
 
         return static_choice, False, board_str
-    # else:
-    #     # Missing toLocation, but we have fromLocation
-    #     static_choice = get_random_choice(TO_ERROR_RESPONSES)
-
-    #     # Log the fulfillment params
-    #     from_location = intent_model.parameters["fromLocation"]
-    #     set_fulfillment_params(session_id, params={
-    #         "from_location": from_location,
-    #     })
-
-    #     # Chess logic
-    #     if not get_piece_at(board_str, from_location):
-    #         # No piece at that location
-    #         static_choice = get_random_choice(EMPTY_SPACE_ERROR_RESPONSES)
-    #         return static_choice.format(from_location=from_location), False, board_str
-    #     elif not check_if_turn(board_str, from_location):
-    #         # Player does not own that piece
-    #         static_choice = get_random_choice(WRONG_COLOR_ERROR_RESPONSES)
-    #         # Get the player's color
-    #         player_color = get_game_state(session_id).get("chosen_side")
-    #         return static_choice.format(player_color=player_color, from_location=from_location), False, board_str
-
-    #     return static_choice.format(from_location=from_location), False, board_str
