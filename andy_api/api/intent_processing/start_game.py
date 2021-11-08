@@ -9,9 +9,9 @@ from .utils import get_random_choice
 
 
 HAPPY_PATH_RESPONSES = [
-    "Awesome, I'm so excited. But first, which side would you like?",
-    "Okay, what side do you want to play on?",
-    "Alright, let's do this. Which side do you want?"
+    "Awesome, I'm so excited. But first, do you want black or white side?",
+    "Okay, would you like black or white?",
+    "Alright, let's do this. Did you want black side or white side?"
 ]
 
 
