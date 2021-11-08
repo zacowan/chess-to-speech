@@ -20,8 +20,8 @@ HAPPY_PATH_RESPONSES = [
 ]
 
 PROMPT_PLAYER_TURN_GAME_START_SUFFIXES = [
-    ". Whenever you're ready, I can make a move for you or tell you what else you can do.",
-    ". I can make your move or tell you what else you can do whenver you are ready."
+    ". Whenever you're ready, I can make a move for you or tell you what else you can do. To move a piece, you can say 'pawn to E5'.",
+    ". I can make your move or tell you what else you can do whenver you are ready. To move a piece, you can say 'E7 to E5'."
 ]
 
 
