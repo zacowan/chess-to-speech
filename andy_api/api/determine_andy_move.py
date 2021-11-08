@@ -10,12 +10,18 @@ from .chess_logic import (
     check_if_checkmate,
     get_piece_name_at
 )
+from .intent_processing.choose_side import STARTING_BOARD_STR
 
 
 HAPPY_PATH_RESPONSES = [
     "Now I'll move my {piece_name} to {to_location}",
     "Let me move my {piece_name} to {to_location}",
-    "For my turn, I'll move my {piece_name} {from_location} to {to_location}"
+    "For my turn, I'll move my {piece_name} at {from_location} to {to_location}"
+]
+
+PROMPT_PLAYER_TURN_GAME_START_SUFFIXES = [
+    ". Whenever you're ready, I can make a move for you or tell you what else you can do.",
+    ". I can make your move or tell you what else you can do whenver you are ready."
 ]
 
 
@@ -28,6 +34,13 @@ CHECKMATE_SUFFIXES = [
     ", which is checkmate. I win!",
     ", and that's checkmate. I'm the winner!"
 ]
+
+
+def get_suffix(original_board_str):
+    if original_board_str == STARTING_BOARD_STR:
+        return " " + get_random_choice(PROMPT_PLAYER_TURN_GAME_START_SUFFIXES)
+    else:
+        return ""
 
 
 def determine_andy_move(session_id, board_str):
@@ -73,7 +86,10 @@ def determine_andy_move(session_id, board_str):
             to_location=to_location,
             piece_name=piece_name) + suffix, updated_board_str, move_info
 
+    # Get suffix
+    suffix = get_suffix(board_str)
+
     return static_choice.format(
         from_location=from_location,
         to_location=to_location,
-        piece_name=piece_name), updated_board_str, move_info
+        piece_name=piece_name) + suffix, updated_board_str, move_info

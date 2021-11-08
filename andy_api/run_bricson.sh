@@ -2,8 +2,8 @@
 
 # Args
 # The starting board to return, should be one of: "full" | "demo"
-# "demo" by default
-BOARD=${1:-demo}
+# "full" by default
+BOARD=${1:-full}
 
 # Only change the values enclosed in the dashes
 # ---------------------------------------------------------------------------- #
@@ -17,7 +17,7 @@ STOCKFISH_NAME="stockfish"
 #
 # Suffix to append to the end of logs
 # Should be one of: "development" | "demo1" | "demo2"
-LOG_SUFFIX="development"
+LOG_SUFFIX="demo1"
 # ---------------------------------------------------------------------------- #
 STOCKFISH_BASE_DIR="./stockfish_engine"
 STOCKFISH_LOCATION="$STOCKFISH_BASE_DIR/$STOCKFISH_NAME"

@@ -15,9 +15,7 @@ DEFAULT_BOARD_STR = chess.STARTING_FEN
 DEMO_BOARD_STR = "r2qk2r/pb4pp/1n2Pb2/2B2Q2/p1p5/2P5/2B2PPP/RN2R1K1 w - - 1 0"
 BOARD_MODE = os.environ.get("STARTING_BOARD")
 
-STARTING_BOARD_STR = DEFAULT_BOARD_STR
-if (BOARD_MODE == "demo"):
-    STARTING_BOARD_STR = DEMO_BOARD_STR
+STARTING_BOARD_STR = DEMO_BOARD_STR if BOARD_MODE == "demo" else DEFAULT_BOARD_STR
 
 HAPPY_PATH_RESPONSES = [
     "Okay, you'll go {user_position}.",
@@ -26,8 +24,8 @@ HAPPY_PATH_RESPONSES = [
 ]
 
 HAPPY_PATH_SUFFIXES = [
-    "Whenever you're ready, you can make a move or ask for help.",
-    "Feel free to make a move or ask for help."
+    "Whenever you're ready, I can make a move for you or tell you what else you can do.",
+    "I can make your move or tell you what else you can do whenver you are ready."
 ]
 
 ERROR_RESPONSES = [
