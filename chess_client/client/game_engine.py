@@ -39,9 +39,9 @@ def start_game(screen):
         pygame.font.init()
         myfont = pygame.font.SysFont('Times', 22)
         if isMicOn:
-            mic_img = pygame.image.load(f'{IMAGES_PATH}/MicOn2.png')
+            mic_img = pygame.image.load(f'{IMAGES_PATH}/mic_on.png')
         else:
-            mic_img = pygame.image.load(f'{IMAGES_PATH}/MicOff2.png')
+            mic_img = pygame.image.load(f'{IMAGES_PATH}/mic_off.png')
         if isGameStarted:
             textsurface = myfont.render(
                 "Your Session ID: " + audio_detection.SESSION_ID[0:8], True, (0, 0, 0))
@@ -49,7 +49,7 @@ def start_game(screen):
             textsurface = myfont.render("Move History: ", True, (0, 0, 0))
             screen.blit(textsurface, (675, 25))
             create_board(screen)
-            screen.blit(mic_img, (250, 500))
+            screen.blit(mic_img, (305, 492))
             if is_game_over:
                 game_over = pygame.image.load(f'{IMAGES_PATH}/DemoOver.png')
                 screen.blit(game_over, (0, 0))
@@ -95,7 +95,7 @@ def start_game(screen):
             welcome_img = pygame.image.load(
                 f'{IMAGES_PATH}/start_screen.png')
             screen.blit(welcome_img, (0, 0))
-            screen.blit(mic_img, (400, 500))
+            screen.blit(mic_img, (460, 472))
             textsurface = myfont.render(
                 "Your Session ID: " + audio_detection.SESSION_ID[0:8], True, (0, 0, 0))
             screen.blit(textsurface, (375, 25))
