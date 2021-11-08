@@ -2,8 +2,8 @@
 
 # Args
 # The starting board to return, should be one of: "full" | "demo"
-# "demo" by default
-BOARD=${1:-demo}
+# "full" by default
+BOARD=${1:-full}
 
 # Only change the values enclosed in the dashes
 # ---------------------------------------------------------------------------- #
