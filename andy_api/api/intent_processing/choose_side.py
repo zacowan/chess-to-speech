@@ -20,16 +20,27 @@ if (APP_MODE == "demo"):
     STARTING_BOARD_STR = DEMO_BOARD_STR
 
 HAPPY_PATH_RESPONSES = [
-    "Great, since you're on {user_side} side, you'll go {user_position}.",
+    "Okay, you'll go {user_position}.",
     "Good choice, that means you'll go {user_position}.",
-    "Sweet, that means I'll go {andy_position} and you'll go {user_position}.",
-    "That leaves me with {andy_side}, meaning you'll go {user_position}."
+    "Ok, then I'll take {andy_side}."
+]
+
+HAPPY_PATH_SUFFIXES = [
+    "Whenever you're ready, you can make a move or ask for help.",
+    "Feel free to make a move or ask for help."
 ]
 
 ERROR_RESPONSES = [
-    "Sorry, I can only do black or white, which side do you want?",
-    "Sorry, I only have black and white pieces, can you choose between those two options?"
+    "Sorry, black side or white side?",
+    "Did you want black side, or white side?"
 ]
+
+
+def get_suffix(user_side):
+    if user_side == "white":
+        return " " + get_random_choice(HAPPY_PATH_SUFFIXES)
+    else:
+        return ""
 
 
 # TODO: add logic with board_str
@@ -71,9 +82,11 @@ def handle(session_id, intent_model):
             "chosen_side": user_side
         })
 
+        suffix = get_suffix(user_side)
+
         return static_choice.format(andy_side=andy_side,
                                     andy_position=andy_position,
                                     user_side=user_side,
-                                    user_position=user_position), True, STARTING_BOARD_STR
+                                    user_position=user_position) + suffix, True, STARTING_BOARD_STR
     else:
         return get_random_choice(ERROR_RESPONSES), False, None
