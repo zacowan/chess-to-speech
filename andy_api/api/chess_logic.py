@@ -37,11 +37,14 @@ def get_board_str_with_move(board_str, move_sequence):
 
 
 def get_piece_name_at(board_str, location):
-    board = chess.Board(board_str)
-    board_location = chess.parse_square(location.lower())
-    piece = board.piece_at(board_location)
-    if piece:
-        return CHESS_PIECE_NAMES.get(piece.symbol().upper(), None)
+    if location:
+        board = chess.Board(board_str)
+        board_location = chess.parse_square(location.lower())
+        piece = board.piece_at(board_location)
+        if piece:
+            return CHESS_PIECE_NAMES.get(piece.symbol().upper(), None)
+        else:
+            return None
     else:
         return None
 
