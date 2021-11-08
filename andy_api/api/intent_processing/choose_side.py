@@ -13,10 +13,10 @@ import chess
 
 DEFAULT_BOARD_STR = chess.STARTING_FEN
 DEMO_BOARD_STR = "r2qk2r/pb4pp/1n2Pb2/2B2Q2/p1p5/2P5/2B2PPP/RN2R1K1 w - - 1 0"
-APP_MODE = os.environ.get("APP_MODE", "development")
+BOARD_MODE = os.environ.get("STARTING_BOARD")
 
 STARTING_BOARD_STR = DEFAULT_BOARD_STR
-if (APP_MODE == "demo"):
+if (BOARD_MODE == "demo"):
     STARTING_BOARD_STR = DEMO_BOARD_STR
 
 HAPPY_PATH_RESPONSES = [
