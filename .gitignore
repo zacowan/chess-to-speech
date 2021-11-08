@@ -1,0 +1,11 @@
+service_key_file.json
+.vscode
+.project
+.pydevproject
+__pycache__/
+.DS_Store
+andy_response.mp3
+andy_response.wav
+shelve/
+stockfish_engine/
+UCI_engine/

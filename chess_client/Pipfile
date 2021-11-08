@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+pygame = "*"
+requests = "*"
+pyaudio = "*"
+chess = "==1.7.0"
+webrtcvad = "*"
+simpleaudio = "*"
+install = "*"
+speechrecognition = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
