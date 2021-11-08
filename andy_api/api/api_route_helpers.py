@@ -2,7 +2,7 @@
 
 """
 
-from .state_manager import get_fulfillment_params
+from .state_manager import get_fulfillment_params, get_game_state
 from .intent_processing import error_fulfillment
 
 
@@ -60,5 +60,6 @@ def get_response_error_return(session_id, board_str):
         "response_text": response_text,
         "fulfillment_info": fulfillment_info,
         'fulfillment_params': get_fulfillment_params(session_id),
-        "board_str": board_str
+        "board_str": board_str,
+        'game_state': get_game_state(session_id)
     }
