@@ -72,7 +72,7 @@ def handle(session_id, intent_model, board_str):
     if intent_model.all_required_params_present is True:
         # Get piece locations
         locations = intent_model.parameters["locations"]
-        piece_name = intent_model.parameters["pieceName"]
+        piece_name = intent_model.parameters["pieceName"] or None
         to_location = locations[0]
         from_location = None
 
@@ -80,7 +80,7 @@ def handle(session_id, intent_model, board_str):
             # We have a from_location and a to_location
             from_location = locations[0]
             to_location = locations[1]
-        else:
+        elif piece_name:
             # We need to figure out the from_location
             move_info = {
                 "to_location": to_location,
@@ -93,6 +93,11 @@ def handle(session_id, intent_model, board_str):
                 static_choice = get_random_choice(ILLEGAL_MOVE_ERROR_RESPONSES)
 
                 return static_choice, False, board_str
+        else:
+            # Not sure which piece to move, return error
+            static_choice = get_random_choice(NEED_MORE_INFO_RESPONSES)
+
+            return static_choice, False, board_str
 
         # Log the fulfillment params
         set_fulfillment_params(session_id, params={
