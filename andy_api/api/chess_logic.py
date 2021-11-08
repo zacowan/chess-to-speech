@@ -38,7 +38,7 @@ def get_board_str_with_move(board_str, move_sequence):
 
 def get_piece_name_at(board_str, location):
     board = chess.Board(board_str)
-    board_location = chess.parse_square(location)
+    board_location = chess.parse_square(location.lower())
     piece_symbol = board.piece_at(board_location).symbol()
     return CHESS_PIECE_NAMES.get(piece_symbol.upper(), 'unknown piece')
 
@@ -85,3 +85,32 @@ def check_if_move_causes_check(board_str, move_sequence):
         return True
     else:
         return False
+
+
+def get_from_location_from_move_info(board_str, move_info):
+    board = chess.Board(board_str)
+
+    to_location = move_info.get("to_location").lower()
+    piece_name = move_info.get("piece_name").lower()
+
+    # Get a list of all possible from locations based on to_location
+    potential_from_loc = []
+    for loc in chess.SQUARE_NAMES:
+        p = board.piece_at(chess.parse_square(loc))
+        if p and CHESS_PIECE_NAMES.get(p.symbol().upper()) == piece_name:
+            potential_from_loc.append(loc)
+
+    if len(potential_from_loc) == 1:
+        return potential_from_loc[0]
+
+    for mv in board.pseudo_legal_moves:
+        from_loc = chess.square_name(mv.from_square)
+        to_loc = chess.square_name(mv.to_square)
+        print(f"To location: {to_location}")
+        print(
+            f"{from_loc}{to_loc}: {from_loc in potential_from_loc and to_loc == to_location}")
+        if from_loc in potential_from_loc and to_loc == to_location:
+            return from_loc
+
+    # No legal moves for that piece name and to location
+    return None
