@@ -15,7 +15,7 @@ from .chess_logic import (
 HAPPY_PATH_RESPONSES = [
     "Now I'll move my {piece_name} to {to_location}",
     "Let me move my {piece_name} to {to_location}",
-    "For my turn, I'll move {from_location} to {to_location}"
+    "For my turn, I'll move my {piece_name} {from_location} to {to_location}"
 ]
 
 
