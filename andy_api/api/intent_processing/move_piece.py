@@ -17,15 +17,18 @@ from api.chess_logic import (
 
 HAPPY_PATH_RESPONSES = [
     "Okay, moving your {piece_name} to {to_location}.",
-    "Great, your {piece_name} will go to {to_location}."
+    "Great, your {piece_name} will go to {to_location}.",
+    "Cool, {piece_name} to {to_location}."
 ]
 
 CHECK_ADDITIONS = [
-    "That puts me in check!"
+    "That puts me in check!",
+    "And that puts me in check!"
 ]
 
 CHECKMATE_ADDITIONS = [
-    "And that puts me in checkmate, you win!"
+    "And that puts me in checkmate, you win!",
+    "You've checkmated me, you win!"
 ]
 
 EMPTY_SPACE_ERROR_RESPONSES = [
@@ -58,6 +61,11 @@ ERROR_RESPONSES = [
 NEED_MORE_INFO_RESPONSES = [
     "Sorry, could you be a little more specific about which piece you want to move?",
     "Sorry, I need a little bit more information about your move. Could you give me more details?"
+]
+
+NEED_TO_LOCATION_ERROR_RESPONSES = [
+    "Sorry, where do you want to move your {piece_name} to?",
+    "I see that you want to move your {piece_name}. Where to?"
 ]
 
 
@@ -156,5 +164,11 @@ def handle(session_id, intent_model, board_str):
     else:
         # Not sure which piece to move, return error
         static_choice = get_random_choice(ERROR_RESPONSES)
+
+        piece_name = intent_model.parameters["pieceName"] or None
+        if piece_name:
+            # User should specify a to location
+            static_choice = get_random_choice(
+                NEED_TO_LOCATION_ERROR_RESPONSES).format(piece_name=piece_name.lower())
 
         return static_choice, False, board_str
