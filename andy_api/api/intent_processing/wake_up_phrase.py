@@ -19,7 +19,7 @@ HAPPY_PATH_RESPONSES_2 = [
 ]
 
 HAPPY_PATH_RESPONSES_3 = [
-    "That's fine. I didn't want to play with you either."
+    "Ok, let me know if you change your mind."
 ]
 
 
