@@ -5,6 +5,9 @@ import os
 # This is a relative location to the directory in which you run the script (aka, andy_api/)
 STOCKFISH_ENGINE_LOCATION = os.environ.get("STOCKFISH_LOCATION")
 
+# Time limit for calculating best move, in seconds
+BEST_MOVE_ALGORITHM_TIME_LIMIT = 0.2
+
 if not STOCKFISH_ENGINE_LOCATION:
     raise Exception("You need to specify a location for the stockfish engine.")
 
@@ -25,7 +28,8 @@ def get_engine():
 def get_best_move(board_str):
     engine = get_engine()
     board = chess.Board(board_str)
-    best_move = engine.play(board, chess.engine.Limit(time=0.1)).move
+    best_move = engine.play(board, chess.engine.Limit(
+        time=BEST_MOVE_ALGORITHM_TIME_LIMIT)).move
     engine.quit()
     return best_move.uci()
 
@@ -70,7 +74,7 @@ def get_piece_at(board_str, location):
     return board.piece_at(board_location)
 
 
-def check_if_turn(board_str, location):
+def check_if_owns_location(board_str, location):
     board = chess.Board(board_str)
     board_location = chess.parse_square(location.lower())
     return board.turn == board.color_at(board_location)

@@ -20,8 +20,8 @@ HAPPY_PATH_RESPONSES = [
 ]
 
 PROMPT_PLAYER_TURN_GAME_START_SUFFIXES = [
-    ". Whenever you're ready, I can make a move for you or tell you what else you can do. To move a piece, you can say 'pawn to E5'.",
-    ". I can make your move or tell you what else you can do whenver you are ready. To move a piece, you can say 'E7 to E5'."
+    "Whenever you're ready, I can make a move for you or tell you what else you can do. To move a piece, you can say 'pawn to E5', or, 'B3 to F3'.",
+    "I can make your move when you're ready, or I can tell you what else you can do. To move a piece, you can say 'pawn to C4', or, 'E7 to E5'."
 ]
 
 
@@ -38,7 +38,7 @@ CHECKMATE_SUFFIXES = [
 
 def get_suffix(original_board_str):
     if original_board_str == STARTING_BOARD_STR:
-        return " " + get_random_choice(PROMPT_PLAYER_TURN_GAME_START_SUFFIXES)
+        return ". " + get_random_choice(PROMPT_PLAYER_TURN_GAME_START_SUFFIXES)
     else:
         return ""
 
