@@ -102,7 +102,7 @@ def run():
             # Get the intent
             if intent_response["fulfillment_info"]["intent_name"] == "MOVE_PIECE":
                 game_engine.move_history.insert(
-                    0, "User: " + intent_response['fulfillment_params']['from_location'] + " to " + intent_response['fulfillment_params']['to_location'])
+                    0, "User: " + intent_response['fulfillment_params']['from_location'].upper() + " to " + intent_response['fulfillment_params']['to_location'].upper())
             intent_response = get_andy_move()
             if not intent_response:
                 continue

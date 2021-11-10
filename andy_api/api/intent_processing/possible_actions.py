@@ -1,4 +1,4 @@
-"""This module handles intent processing for WAKE_UP_PHRASE.
+"""This module handles intent processing for POSSIBLE_ACTIONS.
 
 Attributes:
     HAPPY_PATH_RESPONSES (list): a list of happy-path responses.
