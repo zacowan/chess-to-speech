@@ -8,7 +8,8 @@ from .utils import get_random_choice, RESPONSE_TYPES
 
 RESPONSES = [
     "Sorry, my brain just stopped working. Could you say that again?",
-    "I'm a little slow today, could you tell me that again?"
+    "Sorry, I'm a little slow today, could you tell me that again?",
+    "Sorry, I'm having some trouble with things. Could you try that again?"
 ]
 
 

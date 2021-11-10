@@ -8,10 +8,12 @@ from api.chess_logic import (
     get_board_str_with_move,
     get_piece_at,
     check_if_move_legal,
-    check_if_turn,
+    check_if_owns_location,
     check_if_move_causes_check,
     get_from_location_from_move_info,
-    get_piece_name_at
+    get_piece_name_at,
+    IllegalMoveError,
+    MultiplePiecesCanMoveError
 )
 
 
@@ -21,51 +23,49 @@ HAPPY_PATH_RESPONSES = [
     "Cool, {piece_name} to {to_location}."
 ]
 
-CHECK_ADDITIONS = [
+CHECK_SUFFIXES = [
     "That puts me in check!",
     "And that puts me in check!"
 ]
 
-CHECKMATE_ADDITIONS = [
+CHECKMATE_SUFFIXES = [
     "And that puts me in checkmate, you win!",
     "You've checkmated me, you win!"
 ]
 
 EMPTY_SPACE_ERROR_RESPONSES = [
-    "I don't see a piece at {from_location}, Perhaps I misunderstood?",
-    "It seems like there is no piece at {from_location}",
-    "It seems like there is no piece at {from_location}, Perhaps I misunderstood?",
-    "I don't see a piece at {from_location}",
+    "Oh, it looks like there isn't a piece there.",
+    "Sorry, I don't see a piece at {from_location}."
 ]
 
 WRONG_COLOR_ERROR_RESPONSES = [
-    "I see that you attempted to move my piece, keep in mind your pieces are the {player_color} pieces.",
-    "The piece at {from_location} is my piece, keep in mind you are playing with the {player_color} pieces."
+    "That piece actually belongs to me, so I'm afraid you can't move it.",
+    "Oh, that's one of my pieces, so you can't move it."
 ]
 
 ILLEGAL_MOVE_ERROR_RESPONSES = [
-    "Sorry, you can't make that move - it's against the rules. If you're confused, you can ask me how a piece moves.",
-    "That's an illegal move, so I won't be able to do it for you. Could you give me a different move?"
+    "Actually, that move would be against the rules, so you can't do it.",
+    "Oh, that's an illegal move. Could you give me a different one?"
 ]
 
 MOVE_CAUSES_CHECK_ERROR_RESPONSES = [
-    "Sorry, you can't do that because it would put you into check.",
-    "That move will put you into check, so you can't do it."
+    "Actually, that move would put you into check, which would be against the rules.",
+    "Oh, that move puts your king in danger, so you can't do it."
 ]
 
 ERROR_RESPONSES = [
-    "Sorry, I didn't understand your move. Say it again?",
-    "I'm not sure I understand your move, could you tell me again?"
+    "Sorry, I didn't understand your move. Could you say it again?",
+    "I'm not sure I get your move, could you tell me again?"
 ]
 
 NEED_MORE_INFO_RESPONSES = [
-    "Sorry, could you be a little more specific about which piece you want to move?",
+    "Sorry, I'm not sure which piece you are trying to move. Can you give me more info?",
     "Sorry, I need a little bit more information about your move. Could you give me more details?"
 ]
 
 NEED_TO_LOCATION_ERROR_RESPONSES = [
-    "Sorry, where do you want to move your {piece_name} to?",
-    "I see that you want to move your {piece_name}. Where to?"
+    "Sorry, where did you want to move your {piece_name} to?",
+    "I hear that you want to move your {piece_name}, but where to?"
 ]
 
 
@@ -94,11 +94,15 @@ def handle(session_id, intent_model, board_str):
                 "to_location": to_location,
                 "piece_name": piece_name,
             }
-            from_location = get_from_location_from_move_info(
-                board_str, move_info)
-            if not from_location:
-                # Illegal move
+            try:
+                from_location = get_from_location_from_move_info(
+                    board_str, move_info)
+            except IllegalMoveError:
                 static_choice = get_random_choice(ILLEGAL_MOVE_ERROR_RESPONSES)
+
+                return static_choice, False, board_str
+            except MultiplePiecesCanMoveError:
+                static_choice = get_random_choice(NEED_MORE_INFO_RESPONSES)
 
                 return static_choice, False, board_str
         else:
@@ -118,14 +122,11 @@ def handle(session_id, intent_model, board_str):
             # No piece at that location
             static_choice = get_random_choice(EMPTY_SPACE_ERROR_RESPONSES)
             return static_choice.format(from_location=from_location), False, board_str
-        elif not check_if_turn(board_str, from_location):
+        elif not check_if_owns_location(board_str, from_location):
             # Player does not own that piece
             static_choice = get_random_choice(WRONG_COLOR_ERROR_RESPONSES)
 
-            # Get the player's color
-            player_color = get_game_state(session_id).get("chosen_side")
-
-            return static_choice.format(player_color=player_color, from_location=from_location), False, board_str
+            return static_choice, False, board_str
 
         # Check if the move is legal
         if check_if_move_legal(board_str, from_location + to_location):
@@ -138,10 +139,10 @@ def handle(session_id, intent_model, board_str):
 
             # check if user has put andy in check or checkmate
             if check_if_checkmate(updated_board_str):
-                static_choice += get_random_choice(CHECKMATE_ADDITIONS)
+                static_choice += get_random_choice(CHECKMATE_SUFFIXES)
                 set_game_finished(session_id)
             elif check_if_check(updated_board_str):
-                static_choice += get_random_choice(CHECK_ADDITIONS)
+                static_choice += get_random_choice(CHECK_SUFFIXES)
 
             # Get the piece name
             actual_piece_name = get_piece_name_at(board_str, from_location)

@@ -7,11 +7,14 @@ Attributes:
 """
 from .utils import get_random_choice
 
+
 HAPPY_PATH_RESPONSES = [
-    "I can perform a move for you, tell you how a named piece moves, or give you advice on your next move.",
-    "I can move a piece for you, tell you how named pieces move, and help you make your next move."
+    "Awesome, I'm so excited. But first, do you want black or white side?",
+    "Okay, would you like black or white?",
+    "Alright, let's do this. Did you want black side or white side?"
 ]
 
 
 def handle():
-    return get_random_choice(HAPPY_PATH_RESPONSES), True
+    static_choice = get_random_choice(HAPPY_PATH_RESPONSES)
+    return static_choice, True

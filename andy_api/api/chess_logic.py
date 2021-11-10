@@ -5,6 +5,9 @@ import os
 # This is a relative location to the directory in which you run the script (aka, andy_api/)
 STOCKFISH_ENGINE_LOCATION = os.environ.get("STOCKFISH_LOCATION")
 
+# Time limit for calculating best move, in seconds
+BEST_MOVE_ALGORITHM_TIME_LIMIT = 0.2
+
 if not STOCKFISH_ENGINE_LOCATION:
     raise Exception("You need to specify a location for the stockfish engine.")
 
@@ -25,7 +28,8 @@ def get_engine():
 def get_best_move(board_str):
     engine = get_engine()
     board = chess.Board(board_str)
-    best_move = engine.play(board, chess.engine.Limit(time=0.1)).move
+    best_move = engine.play(board, chess.engine.Limit(
+        time=BEST_MOVE_ALGORITHM_TIME_LIMIT)).move
     engine.quit()
     return best_move.uci()
 
@@ -37,11 +41,14 @@ def get_board_str_with_move(board_str, move_sequence):
 
 
 def get_piece_name_at(board_str, location):
-    board = chess.Board(board_str)
-    board_location = chess.parse_square(location.lower())
-    piece = board.piece_at(board_location)
-    if piece:
-        return CHESS_PIECE_NAMES.get(piece.symbol().upper(), None)
+    if location:
+        board = chess.Board(board_str)
+        board_location = chess.parse_square(location.lower())
+        piece = board.piece_at(board_location)
+        if piece:
+            return CHESS_PIECE_NAMES.get(piece.symbol().upper(), None)
+        else:
+            return None
     else:
         return None
 
@@ -67,7 +74,7 @@ def get_piece_at(board_str, location):
     return board.piece_at(board_location)
 
 
-def check_if_turn(board_str, location):
+def check_if_owns_location(board_str, location):
     board = chess.Board(board_str)
     board_location = chess.parse_square(location.lower())
     return board.turn == board.color_at(board_location)
@@ -90,6 +97,14 @@ def check_if_move_causes_check(board_str, move_sequence):
         return False
 
 
+class IllegalMoveError(Exception):
+    pass
+
+
+class MultiplePiecesCanMoveError(Exception):
+    pass
+
+
 def get_from_location_from_move_info(board_str, move_info):
     board = chess.Board(board_str)
 
@@ -105,15 +120,19 @@ def get_from_location_from_move_info(board_str, move_info):
 
     if len(potential_from_loc) == 1:
         return potential_from_loc[0]
+    elif len(potential_from_loc) == 0:
+        raise IllegalMoveError()
 
+    actual_from_loc = []
     for mv in board.pseudo_legal_moves:
         from_loc = chess.square_name(mv.from_square)
         to_loc = chess.square_name(mv.to_square)
-        print(f"To location: {to_location}")
-        print(
-            f"{from_loc}{to_loc}: {from_loc in potential_from_loc and to_loc == to_location}")
         if from_loc in potential_from_loc and to_loc == to_location:
-            return from_loc
+            actual_from_loc.append(from_loc)
 
-    # No legal moves for that piece name and to location
-    return None
+    if len(actual_from_loc) == 1:
+        return actual_from_loc[0]
+    elif len(actual_from_loc) > 1:
+        raise MultiplePiecesCanMoveError()
+    else:
+        raise IllegalMoveError()
