@@ -38,14 +38,31 @@ dict = {
     "35": "D5",
     "e75": "E7 to E5",
     "e46": "E4 to E6",
-    "22": "E2"
+    "22": "E2",
+    "route": "Rook",
+    "bh": "B8",
+    "d8s": "D8",
+    "asics": "A6",
+    "pontiac": "pawn to",
+    "ponte": "pawn to",
+    "pain": "pawn"
 }
+
 dict2 = {
     "a to a4": "A2 to A4",
     "b-52d 3": "B5 to D3",
     "f2 f4": "F2 to F4",
     "a 4285": "A4 to A5",
-    "do you want to be to": "D1 to D2"
+    "do you want to be to": "D1 to D2",
+    "mp3": "Pawn to E3",
+    "ponte III": "Pawn to E3",
+    "e2 e street": "E2 to E3",
+    "b2b freed": "B2 to B3",
+    "contact force": "Pawn to F4",
+    "santa de ford": "Pawn to F4",
+    "home to b6": "Pawn to B6",
+    "haunted essex": "pawn to B6",
+    "king two d8": "King to D8"
 }
 
 

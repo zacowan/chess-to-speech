@@ -46,6 +46,10 @@ PIECE_NAME_MISMATCH_PREFIXES = [
     "Actually, that's a {actual_piece_name}."
 ]
 
+EMPTY_SPACE_WITH_PIECE_NAME_PREFIXES = [
+    "There isn't a piece right there, but"
+]
+
 EMPTY_SPACE_RESPONSE = [
     "Actually, there isn't a piece at {piece_location}."
 ]
@@ -57,18 +61,24 @@ STANDARD_ERROR_RESPONSES = [
 
 
 def get_prefix(board_str, piece_name, piece_location):
+    # There may or may not be a piece_location, but there is always a piece_name
+    if not piece_location:
+        return ""
     actual_piece_name = get_piece_name_at(board_str, piece_location)
-    if piece_name.lower() != actual_piece_name:
+    # Piece names do not match AND actual piece name is not none
+    if piece_name.lower() != actual_piece_name and actual_piece_name:
         return get_random_choice(PIECE_NAME_MISMATCH_PREFIXES).format(
             actual_piece_name=actual_piece_name,
             spoken_piece_name=piece_name.lower()
         ) + " "
+    # Piece name does match AND actual piece name is not none
     elif piece_location and actual_piece_name:
         return get_random_choice(LOCATION_INCLUDED_PREFIXES).format(
             piece_name=actual_piece_name
         ) + " "
+    # Actual piece name is none, but piece name is not none
     else:
-        return ""
+        return get_random_choice(EMPTY_SPACE_WITH_PIECE_NAME_PREFIXES) + " "
 
 
 def handle(session_id, intent_data, board_str):
@@ -77,6 +87,7 @@ def handle(session_id, intent_data, board_str):
 
     if piece_location or piece_name:
         if not piece_name:
+            # There is a piece_location, but not a piece name
             piece_name = get_piece_name_at(board_str, piece_location)
             if not piece_name:
                 static_choice = get_random_choice(

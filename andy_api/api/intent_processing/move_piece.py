@@ -8,7 +8,7 @@ from api.chess_logic import (
     get_board_str_with_move,
     get_piece_at,
     check_if_move_legal,
-    check_if_turn,
+    check_if_owns_location,
     check_if_move_causes_check,
     get_from_location_from_move_info,
     get_piece_name_at,
@@ -122,7 +122,7 @@ def handle(session_id, intent_model, board_str):
             # No piece at that location
             static_choice = get_random_choice(EMPTY_SPACE_ERROR_RESPONSES)
             return static_choice.format(from_location=from_location), False, board_str
-        elif not check_if_turn(board_str, from_location):
+        elif not check_if_owns_location(board_str, from_location):
             # Player does not own that piece
             static_choice = get_random_choice(WRONG_COLOR_ERROR_RESPONSES)
 

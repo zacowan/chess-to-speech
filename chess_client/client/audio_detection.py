@@ -21,14 +21,30 @@ USER_AUDIO_FILENAME = f"{AUDIO_PATH}/user_audio.wav"
 ANDY_AUDIO_FILENAME = f"{AUDIO_PATH}/andy_audio.wav"
 
 
+# Speech recognition constants
+STARTING_ENERGY_THRESHOLD = 3000
+VOICE_FACTOR = 2.5
+MINIMUM_ENERGY_THRESHOLD = 150
+
+
 def run():
 
     r = sr.Recognizer()
+
+    # Recognition settings
+    # This controls the default threshold for what we consider to be background noise
+    r.energy_threshold = STARTING_ENERGY_THRESHOLD
+    # This controls the factor that voice is louder than the threshold
+    r.dynamic_energy_ratio = VOICE_FACTOR
 
     while not the_main.is_closed() and not game_engine.is_game_over:
         # obtain audio from the microphone
         with sr.Microphone() as source:
             r.adjust_for_ambient_noise(source)
+            # Create a minimum for the energy threshold
+            if r.energy_threshold < MINIMUM_ENERGY_THRESHOLD:
+                r.energy_threshold = MINIMUM_ENERGY_THRESHOLD
+            print(f"Energy threshold: {r.energy_threshold}")
             print("*"*20)
             print("Say something!")
             start_recording_at = datetime.now()
@@ -36,6 +52,7 @@ def run():
             audio = r.listen(source, phrase_time_limit=8)
             game_engine.isMicOn = False
             stop_recording_at = datetime.now()
+            print(f"{(stop_recording_at-start_recording_at).total_seconds()*1000} ms")
             print("Recognizing...")
             if(the_main.is_closed()):
                 break
@@ -80,12 +97,12 @@ def run():
         play_obj = wave_obj.play()
         play_obj.wait_done()  # Wait until sound has finished playing
         game_engine.is_game_over = intent_response["game_state"]["game_finished"]
-        
-        if (intent_response["fulfillment_info"]["intent_name"] == "MOVE_PIECE" or (intent_response["fulfillment_info"]["intent_name"] == "CHOOSE_SIDE" and intent_response["game_state"]["chosen_side"]=="black" ))and intent_response["fulfillment_info"]["success"]:
+
+        if (intent_response["fulfillment_info"]["intent_name"] == "MOVE_PIECE" or (intent_response["fulfillment_info"]["intent_name"] == "CHOOSE_SIDE" and intent_response["game_state"]["chosen_side"] == "black")) and intent_response["fulfillment_info"]["success"]:
             # Get the intent
-            if intent_response["fulfillment_info"]["intent_name"] == "MOVE_PIECE" :
+            if intent_response["fulfillment_info"]["intent_name"] == "MOVE_PIECE":
                 game_engine.move_history.insert(
-                    0, "User: " + intent_response['fulfillment_params']['from_location'] + " to " + intent_response['fulfillment_params']['to_location'])
+                    0, "User: " + intent_response['fulfillment_params']['from_location'].upper() + " to " + intent_response['fulfillment_params']['to_location'].upper())
             intent_response = get_andy_move()
             if not intent_response:
                 continue
@@ -104,7 +121,8 @@ def run():
             print(game_engine.board)
             game_engine.move_history.insert(0, "Andy: " + intent_response['move_info']['from'].upper(
             ) + " to " + intent_response['move_info']['to'].upper())
-            game_engine.is_game_over= intent_response["game_state"]["game_finished"]
+            game_engine.is_game_over = intent_response["game_state"]["game_finished"]
+
 
 def get_audio_response(text):
     request_url = f"{BASE_API_URL}/get-audio-response?session_id={SESSION_ID}"
@@ -148,7 +166,7 @@ def get_user_intent(detected_text, start_recording, stop_recording):
             if response.json()["board_str"]:
                 game_engine.board = chess.Board(response.json()["board_str"])
                 game_engine.isGameStarted = True
-            if response.json()["game_state"]["chosen_side"]=="black" :
+            if response.json()["game_state"]["chosen_side"] == "black":
                 game_engine.user_is_black = True
             return response.json()
         else:

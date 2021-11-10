@@ -24,8 +24,8 @@ HAPPY_PATH_RESPONSES = [
 ]
 
 HAPPY_PATH_SUFFIXES = [
-    "Whenever you're ready, I can make a move for you or tell you what else you can do. To move a piece, you can say 'pawn to E5'.",
-    "I can make your move or tell you what else you can do whenver you are ready. To move a piece, you can say 'E7 to E5'."
+    "Whenever you're ready, I can make a move for you or tell you what else you can do. To move a piece, you can say 'pawn to E5', or, 'B3 to F3'.",
+    "I can make your move when you're ready, or I can tell you what else you can do. To move a piece, you can say 'pawn to C4', or, 'E7 to E5'."
 ]
 
 ERROR_RESPONSES = [
