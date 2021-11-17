@@ -33,6 +33,7 @@ def setup_game_engine(screen):
 
 
 def start_game(screen):
+    clock = pygame.time.Clock()
     while not the_main.is_closed():
         screen.fill((255, 255, 255))  # Background Color
         mic_img = None
@@ -124,6 +125,8 @@ def start_game(screen):
                     sys.exit()
 
         pygame.display.update()
+        # Limit frame rate to 60 fps
+        clock.tick(60)
 
 
 def create_board(screen):
