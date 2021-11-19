@@ -4,9 +4,11 @@ Created on Oct 9, 2021
 @author: Legacy
 '''
 import threading
+import traceback
 from pathlib import Path
 
 from . import window
+from . import tutorial
 from . import game_engine
 from . import audio_detection
 from .utils import AUDIO_PATH
@@ -29,6 +31,10 @@ def main():
         print("Window being made.")
         screen = window.start_screen()  # Create Window
         print("Window Completed.")
+        # Let user go through tutorial, wait until done
+        print("Starting tutorial.")
+        tutorial.run(screen)
+        print("User finished tutorial.")
         print("Audio Thread Being made.")
         audio = threading.Thread(
             target=audio_detection.run)  # @IgnorePep8
