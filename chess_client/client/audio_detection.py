@@ -168,8 +168,18 @@ def run():
             game_engine.move_history.insert(0, "Andy: " + intent_response['move_info']['from'].upper(
             ) + " to " + intent_response['move_info']['to'].upper())
             game_engine.is_game_over = intent_response["game_state"]["game_finished"]
-
-
+        if (intent_response["fulfillment_info"]["intent_name"] == "RESTART_GAME"):
+            game_engine.move_history.clear()
+            game_engine.isGameStarted = False
+            game_engine.lastSaid = ""
+            game_engine.user_is_black = False
+            game_engine.is_game_over = False
+        if (intent_response["fulfillment_info"]["intent_name"] == "UNDO_MOVE"):
+            if game_engine.move_history.size()>1:
+                game_engine.move_history.pop(0)
+                game_engine.move_history.pop(0)
+            else:
+                print("Attempted to Pop and empty move history list")
 def get_audio_response(text):
     request_url = f"{BASE_API_URL}/get-audio-response?session_id={SESSION_ID}"
     print(f"Body: {text}")
