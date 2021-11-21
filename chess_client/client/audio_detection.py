@@ -112,8 +112,7 @@ def run():
         play_obj.wait_done()  # Wait until sound has finished playing
         game_engine.is_game_over = intent_response["game_state"]["game_finished"]
         if intent_response["game_state"]["game_finished"]:
-            timerActive =false
-            timer = 0
+            timerActive = False
         if intent_response["fulfillment_info"]["intent_name"] == "FALLBACK" or not prefix =="":
             failCounter+=1
             timerThreshold+=10
