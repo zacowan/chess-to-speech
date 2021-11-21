@@ -44,7 +44,11 @@ dict = {
     "route": "Rook",
     "bh": "B8",
     "ask for": "F4",
-    "d8s": "D8"
+    "d8s": "D8",
+    "asics": "A6",
+    "pontiac": "pawn to",
+    "ponte": "pawn to",
+    "pain": "pawn"
 }
 
 dict2 = {
@@ -57,7 +61,7 @@ dict2 = {
     "ponte III": "Pawn to E3",
     "e2 e street": "E2 to E3",
     "b2b freed": "B2 to B3",
-    "contact force" : "Pawn to F4",
+    "contact force": "Pawn to F4",
     "santa de ford": "Pawn to F4",
     "home to b6": "Pawn to B6",
     "haunted essex" : "pawn to B6",

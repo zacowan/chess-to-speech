@@ -19,9 +19,9 @@ HAPPY_PATH_RESPONSES = [
     "For my turn, I'll move my {piece_name} at {from_location} to {to_location}"
 ]
 
-PROMPT_PLAYER_TURN_GAME_START_SUFFIXES = [
+PROMPT_PLAYER_TURN_GAME_START_PREFIXES = [
     "Whenever you're ready, I can make a move for you or tell you what else you can do. To move a piece, you can say 'pawn to E5', or, 'B3 to F3'.",
-    "I can make your move when you're ready, or I can tell you what else you can do. To move a piece, you can say 'pawn to C4', or, 'E7 to E5'."
+    "By the way, I can make your move whenever you're ready, or I can tell you what else you can do. To move a piece, you can say 'pawn to C4', or, 'E7 to E5'."
 ]
 
 
@@ -36,9 +36,9 @@ CHECKMATE_SUFFIXES = [
 ]
 
 
-def get_suffix(original_board_str):
+def get_prefix(original_board_str):
     if original_board_str == STARTING_BOARD_STR:
-        return ". " + get_random_choice(PROMPT_PLAYER_TURN_GAME_START_SUFFIXES)
+        return get_random_choice(PROMPT_PLAYER_TURN_GAME_START_PREFIXES) + " "
     else:
         return ""
 
@@ -86,10 +86,10 @@ def determine_andy_move(session_id, board_str):
             to_location=to_location,
             piece_name=piece_name) + suffix, updated_board_str, move_info
 
-    # Get suffix
-    suffix = get_suffix(board_str)
+    # Get prefix
+    prefix = get_prefix(board_str)
 
-    return static_choice.format(
+    return prefix + static_choice.format(
         from_location=from_location,
         to_location=to_location,
-        piece_name=piece_name) + suffix, updated_board_str, move_info
+        piece_name=piece_name), updated_board_str, move_info
