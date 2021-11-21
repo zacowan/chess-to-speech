@@ -20,7 +20,6 @@ SESSION_ID = str(uuid.uuid4())
 USER_AUDIO_FILENAME = f"{AUDIO_PATH}/user_audio.wav"
 ANDY_AUDIO_FILENAME = f"{AUDIO_PATH}/andy_audio.wav"
 
-
 # Speech recognition constants
 STARTING_ENERGY_THRESHOLD = 3000
 VOICE_FACTOR = 2.5
@@ -28,7 +27,12 @@ MINIMUM_ENERGY_THRESHOLD = 150
 
 
 def run():
-
+    timer=datetime.now()
+    timerActive= False
+    prefix = ""
+    timerThreshold= 45
+    failCounterThreshold=2
+    failCounter = 0
     r = sr.Recognizer()
 
     # Recognition settings
@@ -68,8 +72,18 @@ def run():
             print(f"Detected text: {detected_text}")
         except sr.UnknownValueError:
             detected_text = None
+            print("Loadded")
+            print((datetime.now()-timer).total_seconds())
             print("Google Speech Recognition could not understand audio")
-            continue
+            if timerActive and (datetime.now()-timer).total_seconds()>timerThreshold:
+                print("TRIGGER")
+                timer=datetime.now()
+                timerActive= False
+                detected_text = "What is my best move?"
+                prefix ="You seem to be taking a while, "
+                print(prefix)
+            else:
+                continue
         except sr.RequestError as e:
             detected_text = None
             print(
@@ -87,7 +101,7 @@ def run():
         print(intent_response["fulfillment_info"]["intent_name"])
         intent_info = intent_response["response_text"]
         # Get the audio response
-        audio_response = get_audio_response(intent_info)
+        audio_response = get_audio_response(prefix+intent_info)
         # Play the audio response
         f = open(ANDY_AUDIO_FILENAME, "wb")
         f.truncate(0)
@@ -97,13 +111,44 @@ def run():
         play_obj = wave_obj.play()
         play_obj.wait_done()  # Wait until sound has finished playing
         game_engine.is_game_over = intent_response["game_state"]["game_finished"]
-
+        if intent_response["game_state"]["game_finished"]:
+            timerActive = False
+        if intent_response["fulfillment_info"]["intent_name"] == "FALLBACK" or not prefix =="":
+            failCounter+=1
+            timerThreshold+=10
+            if failCounter==failCounterThreshold:
+                failCounterThreshold+=1
+                failCounter+=4
+                
+                detected_text = "What Can I do"
+                intent_response = get_user_intent(detected_text, start_recording_at, stop_recording_at)
+                if not intent_response:
+                    continue
+                print(intent_response["fulfillment_info"]["intent_name"])
+                intent_info = intent_response["response_text"]
+                # Get the audio response
+                audio_response = get_audio_response("You seem to be having difficulty asking me to do something, "+intent_info)
+                # Play the audio response
+                f = open(ANDY_AUDIO_FILENAME, "wb")
+                f.truncate(0)
+                f.write(audio_response)
+                f.close()
+                wave_obj = sa.WaveObject.from_wave_file(ANDY_AUDIO_FILENAME)
+                play_obj = wave_obj.play()
+                play_obj.wait_done()  # Wait until sound has finished playing     
+        else:
+            failCounter=0
+        prefix =""
         if (intent_response["fulfillment_info"]["intent_name"] == "MOVE_PIECE" or (intent_response["fulfillment_info"]["intent_name"] == "CHOOSE_SIDE" and intent_response["game_state"]["chosen_side"] == "black")) and intent_response["fulfillment_info"]["success"]:
             # Get the intent
             if intent_response["fulfillment_info"]["intent_name"] == "MOVE_PIECE":
                 game_engine.move_history.insert(
                     0, "User: " + intent_response['fulfillment_params']['from_location'].upper() + " to " + intent_response['fulfillment_params']['to_location'].upper())
             intent_response = get_andy_move()
+            if not timerActive:
+                timerActive = True
+                timer = datetime.now()
+                timerThreshold = 45
             if not intent_response:
                 continue
             intent_info = intent_response["response_text"]
