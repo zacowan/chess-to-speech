@@ -81,7 +81,6 @@ def run():
                 timerActive= False
                 detected_text = "What is my best move?"
                 prefix ="You seem to be taking a while, "
-                print(prefix)
             else:
                 continue
         except sr.RequestError as e:
@@ -100,20 +99,22 @@ def run():
             continue
         print(intent_response["fulfillment_info"]["intent_name"])
         intent_info = intent_response["response_text"]
-        # Get the audio response
-        audio_response = get_audio_response(prefix+intent_info)
-        # Play the audio response
-        f = open(ANDY_AUDIO_FILENAME, "wb")
-        f.truncate(0)
-        f.write(audio_response)
-        f.close()
-        wave_obj = sa.WaveObject.from_wave_file(ANDY_AUDIO_FILENAME)
-        play_obj = wave_obj.play()
-        play_obj.wait_done()  # Wait until sound has finished playing
-        game_engine.is_game_over = intent_response["game_state"]["game_finished"]
+        print(not intent_response["fulfillment_info"]["intent_name"] == "FALLBACK" or not failCounter==failCounterThreshold)
+        if not intent_response["fulfillment_info"]["intent_name"] == "FALLBACK" or not failCounter+1==failCounterThreshold:
+            # Get the audio response
+            audio_response = get_audio_response(prefix+intent_info)
+            # Play the audio response
+            f = open(ANDY_AUDIO_FILENAME, "wb")
+            f.truncate(0)
+            f.write(audio_response)
+            f.close()
+            wave_obj = sa.WaveObject.from_wave_file(ANDY_AUDIO_FILENAME)
+            play_obj = wave_obj.play()
+            play_obj.wait_done()  # Wait until sound has finished playing
+            game_engine.is_game_over = intent_response["game_state"]["game_finished"]
         if intent_response["game_state"]["game_finished"]:
             timerActive = False
-        if intent_response["fulfillment_info"]["intent_name"] == "FALLBACK" or not prefix =="":
+        if (intent_response["fulfillment_info"]["intent_name"] == "FALLBACK" or not prefix =="") and game_engine.isGameStarted:
             failCounter+=1
             timerThreshold+=10
             if failCounter==failCounterThreshold:
