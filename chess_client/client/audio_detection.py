@@ -174,6 +174,7 @@ def run():
             game_engine.lastSaid = ""
             game_engine.user_is_black = False
             game_engine.is_game_over = False
+            game_engine.board = None
         if (intent_response["fulfillment_info"]["intent_name"] == "UNDO_MOVE"):
             if game_engine.move_history.size()>1:
                 game_engine.move_history.pop(0)
