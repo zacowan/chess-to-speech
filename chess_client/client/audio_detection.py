@@ -31,6 +31,8 @@ def run():
     timerActive= False
     prefix = ""
     timerThreshold= 45
+    failCounterThreshold=2
+    failCounter = 0
     r = sr.Recognizer()
 
     # Recognition settings
@@ -100,7 +102,6 @@ def run():
         intent_info = intent_response["response_text"]
         # Get the audio response
         audio_response = get_audio_response(prefix+intent_info)
-        prefix =""
         # Play the audio response
         f = open(ANDY_AUDIO_FILENAME, "wb")
         f.truncate(0)
@@ -113,7 +114,32 @@ def run():
         if intent_response["game_state"]["game_finished"]:
             timerActive =false
             timer = 0
-
+        if intent_response["fulfillment_info"]["intent_name"] == "FALLBACK" or not prefix =="":
+            failCounter+=1
+            timerThreshold+=10
+            if failCounter==failCounterThreshold:
+                failCounterThreshold+=1
+                failCounter+=4
+                
+                detected_text = "What Can I do"
+                intent_response = get_user_intent(detected_text, start_recording_at, stop_recording_at)
+                if not intent_response:
+                    continue
+                print(intent_response["fulfillment_info"]["intent_name"])
+                intent_info = intent_response["response_text"]
+                # Get the audio response
+                audio_response = get_audio_response("You seem to be having difficulty asking me to do something, "+intent_info)
+                # Play the audio response
+                f = open(ANDY_AUDIO_FILENAME, "wb")
+                f.truncate(0)
+                f.write(audio_response)
+                f.close()
+                wave_obj = sa.WaveObject.from_wave_file(ANDY_AUDIO_FILENAME)
+                play_obj = wave_obj.play()
+                play_obj.wait_done()  # Wait until sound has finished playing     
+        else:
+            failCounter=0
+        prefix =""
         if (intent_response["fulfillment_info"]["intent_name"] == "MOVE_PIECE" or (intent_response["fulfillment_info"]["intent_name"] == "CHOOSE_SIDE" and intent_response["game_state"]["chosen_side"] == "black")) and intent_response["fulfillment_info"]["success"]:
             # Get the intent
             if intent_response["fulfillment_info"]["intent_name"] == "MOVE_PIECE":
@@ -123,6 +149,7 @@ def run():
             if not timerActive:
                 timerActive = True
                 timer = datetime.now()
+                timerThreshold = 45
             if not intent_response:
                 continue
             intent_info = intent_response["response_text"]
