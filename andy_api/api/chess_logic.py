@@ -39,6 +39,11 @@ def get_board_str_with_move(board_str, move_sequence):
     board.push_uci(move_sequence.lower())
     return board.fen()
 
+def get_new_board():
+    board = chess.Board()
+    board_str = board.fen()
+    return board_str
+
 
 def get_piece_name_at(board_str, location):
     if location:
