@@ -132,7 +132,7 @@ def handle(session_id, intent_model, board_str):
         if check_if_move_legal(board_str, from_location + to_location):
             # Update stack of board strings with last board string before move
             board_stack = get_board_stack(session_id)
-            board_stack.append(board_str)
+            board_stack.push(board_str)
             set_board_stack(session_id, board_stack)
 
             # Update the board_str
