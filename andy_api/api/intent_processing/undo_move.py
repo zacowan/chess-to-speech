@@ -13,7 +13,7 @@ ERROR_RESPONSES = [
 ]
 
 
-def handle(session_id):
+def handle(session_id, board_str):
     """TODO add details about method
     """
     static_choice = get_random_choice(HAPPY_PATH_RESPONSES)
@@ -21,7 +21,7 @@ def handle(session_id):
     # Update board stack and grab board string before user made last move.
     board_stack = get_board_stack(session_id)
     if(board_stack.empty()):
-        return get_random_choice(ERROR_RESPONSES)
+        return get_random_choice(ERROR_RESPONSES), False, board_str
     updated_board_str = board_stack.pop()
     set_board_stack(session_id, board_stack)
 

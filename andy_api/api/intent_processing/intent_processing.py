@@ -102,7 +102,7 @@ def fulfill_intent(session_id, board_str, intent_data):
         elif response_type == RESPONSE_TYPES.POSSIBLE_ACTIONS:
             response_choice, success = possible_actions.handle()
         elif response_type == RESPONSE_TYPES.UNDO_MOVE:
-            response_choice, success, updated_board_str = undo_move.handle(session_id)
+            response_choice, success, updated_board_str = undo_move.handle(session_id, board_str)
 
     # Intents to handle after a game has finished
     else:
