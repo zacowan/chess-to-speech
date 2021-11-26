@@ -130,10 +130,6 @@ def handle(session_id, intent_model, board_str):
 
         # Check if the move is legal
         if check_if_move_legal(board_str, from_location + to_location):
-            # Update stack of board strings with last board string before move
-            board_stack = get_board_stack(session_id)
-            board_stack.push(board_str)
-            set_board_stack(session_id, board_stack)
 
             # Update the board_str
             updated_board_str = get_board_str_with_move(
@@ -151,6 +147,11 @@ def handle(session_id, intent_model, board_str):
 
             # Get the piece name
             actual_piece_name = get_piece_name_at(board_str, from_location)
+
+            # Update stack of board strings with last board string before move
+            board_stack = get_board_stack(session_id)
+            board_stack.push(board_str)
+            set_board_stack(session_id, board_stack)
 
             return static_choice.format(
                 piece_name=actual_piece_name,
