@@ -150,7 +150,7 @@ def handle(session_id, intent_model, board_str):
 
             # Update stack of board strings with last board string before move
             board_stack = get_board_stack(session_id)
-            board_stack.push(board_str)
+            board_stack.append(board_str)
             set_board_stack(session_id, board_stack)
 
             return static_choice.format(
