@@ -80,14 +80,13 @@ def run():
         audio_response = get_audio_response(
             prefix + intent_response["response_text"])
 
-        # Play Andy's audio response
-        play_audio_response(audio_response)
-
-        # Code that has not been refactored is below here:
-
         response_game_state = intent_response["game_state"]
         response_intent_name = intent_response["fulfillment_info"]["intent_name"]
         fulfillment_success = intent_response["fulfillment_info"]["success"]
+
+        # Play Andy's audio response, as long as the user hasn't encountered FALLBACK too many times
+        if not response_intent_name == "FALLBACK" or not failCounter + 1 == failCounterThreshold:
+            play_audio_response(audio_response)
 
         # Successful fulfillments only
         if fulfillment_success:
@@ -109,9 +108,23 @@ def run():
                     timerActive = True
                     timer = datetime.now()
                     timerThreshold = 45
+            elif response_intent_name == "RESTART_GAME":
+                # Clear all of the game state
+                game_engine.move_history.clear()
+                game_engine.isGameStarted = False
+                game_engine.lastSaid = ""
+                game_engine.user_is_black = False
+                game_engine.is_game_over = False
+                game_engine.board = None
+            elif response_intent_name == "UNDO_MOVE":
+                if len(game_engine.move_history) > 1:
+                    game_engine.move_history.pop(0)
+                    game_engine.move_history.pop(0)
+                else:
+                    print("Attempted to Pop and empty move history list")
 
         # Successful or failed fulfillments
-        if response_intent_name == "FALLBACK" or not prefix == "":
+        if game_engine.isGameStarted and (response_intent_name == "FALLBACK" or not prefix == ""):
             failCounter += 1
             timerThreshold += 10
             if failCounter == failCounterThreshold:
