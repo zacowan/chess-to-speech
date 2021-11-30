@@ -17,10 +17,6 @@ def handle(session_id, board_str):
     """TODO add details about method
     """
 
-    # Log the fulfillment params
-    set_fulfillment_params(session_id, params={
-        "cur_board_str": board_str
-    })
 
     static_choice = get_random_choice(HAPPY_PATH_RESPONSES)
 
