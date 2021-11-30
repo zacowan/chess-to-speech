@@ -2,13 +2,13 @@
 
 Based on https://github.com/wiseman/py-webrtcvad/blob/master/example.py.
 """
-import wave
 import uuid
 import requests
 import speech_recognition as sr
 import simpleaudio as sa
 import chess
 import traceback
+from typing import Tuple, Any, Union
 from . import the_main
 from . import bias_adjustment
 from . import game_engine
@@ -24,6 +24,58 @@ ANDY_AUDIO_FILENAME = f"{AUDIO_PATH}/andy_audio.wav"
 STARTING_ENERGY_THRESHOLD = 3000
 VOICE_FACTOR = 2.5
 MINIMUM_ENERGY_THRESHOLD = 150
+
+
+def record_audio(r: sr.Recognizer) -> Tuple[sr.AudioData, datetime, datetime]:
+    """
+    Records audio from the microphone.
+
+    Returns:
+        Audio data captured.
+        The time that recording started at.
+        The time that recording stopped at.
+    """
+    with sr.Microphone() as source:
+        r.adjust_for_ambient_noise(source)
+        # Create a minimum for the energy threshold
+        if r.energy_threshold < MINIMUM_ENERGY_THRESHOLD:
+            r.energy_threshold = MINIMUM_ENERGY_THRESHOLD
+        print(f"Energy threshold: {r.energy_threshold}")
+        print("*"*20)
+        print("Say something!")
+        start_recording_at = datetime.now()
+        game_engine.isMicOn = True
+        audio = r.listen(source, phrase_time_limit=8)
+        game_engine.isMicOn = False
+        stop_recording_at = datetime.now()
+        print(f"{(stop_recording_at-start_recording_at).total_seconds()*1000} ms")
+
+    return audio, start_recording_at, stop_recording_at
+
+
+def recognize_audio(r: sr.Recognizer, audio: sr.AudioData) -> Union[str, None]:
+    """
+    Recognizes speech from audio data.
+
+    Returns:
+        The detected text, adjusted with bias corrections, or None if nothing
+        was detected.
+    """
+    try:
+        # for testing purposes, we're just using the default API key
+        # to use another API key, use `r.recognize_google(audio, key="GOOGLE_SPEECH_RECOGNITION_API_KEY")`
+        # instead of `r.recognize_google(audio)`
+        detected_text = r.recognize_google(audio)
+        detected_text = bias_adjustment.adjust_with_bias(detected_text)
+        game_engine.lastSaid = detected_text
+        print(f"Detected text: {detected_text}")
+        return detected_text
+    except sr.UnknownValueError:
+        return None
+    except sr.RequestError as e:
+        print(
+            "Could not request results from Google Speech Recognition service; {0}".format(e))
+        return None
 
 
 def run():
@@ -42,40 +94,18 @@ def run():
     r.dynamic_energy_ratio = VOICE_FACTOR
 
     while not the_main.is_closed() and not game_engine.is_game_over:
-        # obtain audio from the microphone
-        with sr.Microphone() as source:
-            r.adjust_for_ambient_noise(source)
-            # Create a minimum for the energy threshold
-            if r.energy_threshold < MINIMUM_ENERGY_THRESHOLD:
-                r.energy_threshold = MINIMUM_ENERGY_THRESHOLD
-            print(f"Energy threshold: {r.energy_threshold}")
-            print("*"*20)
-            print("Say something!")
-            start_recording_at = datetime.now()
-            game_engine.isMicOn = True
-            audio = r.listen(source, phrase_time_limit=8)
-            game_engine.isMicOn = False
-            stop_recording_at = datetime.now()
-            print(f"{(stop_recording_at-start_recording_at).total_seconds()*1000} ms")
-            print("Recognizing...")
-            if(the_main.is_closed()):
-                break
+        # Obtain audio from the microphone
+        audio, start_recording_at, stop_recording_at = record_audio(r)
+        # Don't try to continue if the game stopped while recording
+        if the_main.is_closed():
+            break
 
-        # recognize speech using Google Speech Recognition
-        try:
-            # for testing purposes, we're just using the default API key
-            # to use another API key, use `r.recognize_google(audio, key="GOOGLE_SPEECH_RECOGNITION_API_KEY")`
-            # instead of `r.recognize_google(audio)`
-            detected_text = r.recognize_google(audio)
-            detected_text = bias_adjustment.adjust_with_bias(detected_text)
-            game_engine.lastSaid = detected_text
-            print(f"Detected text: {detected_text}")
-        except sr.UnknownValueError:
-            detected_text = None
-            print("Loadded")
-            print((datetime.now()-timer).total_seconds())
-            print("Google Speech Recognition could not understand audio")
-            if timerActive and (datetime.now()-timer).total_seconds() > timerThreshold:
+        # Get text from audio
+        detected_text = recognize_audio(r, audio)
+
+        # If we don't detect anything and we exceed a timeout, prompt the user with a move
+        if not detected_text:
+            if timerActive and (datetime.now() - timer).total_seconds() > timerThreshold:
                 print("TRIGGER")
                 timer = datetime.now()
                 timerActive = False
@@ -83,11 +113,8 @@ def run():
                 prefix = "You seem to be taking a while, "
                 print(prefix)
             else:
+                # Go back to the start of the loop
                 continue
-        except sr.RequestError as e:
-            detected_text = None
-            print(
-                "Could not request results from Google Speech Recognition service; {0}".format(e))
 
         # Generate an audio file
         with open(USER_AUDIO_FILENAME, "wb") as f:
@@ -96,9 +123,13 @@ def run():
         # Get the intent
         intent_response = get_user_intent(
             detected_text, start_recording_at, stop_recording_at)
+        # If no intent was detected, go back to the start of the loop
         if not intent_response:
             continue
         print(intent_response["fulfillment_info"]["intent_name"])
+
+        # Code that has not been refactored is below here:
+
         intent_info = intent_response["response_text"]
         # Get the audio response
         audio_response = get_audio_response(prefix+intent_info)
