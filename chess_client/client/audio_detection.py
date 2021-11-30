@@ -8,7 +8,7 @@ import speech_recognition as sr
 import simpleaudio as sa
 import chess
 import traceback
-from typing import Tuple, Any, Union
+from typing import Tuple, Union
 from . import the_main
 from . import bias_adjustment
 from . import game_engine
@@ -24,6 +24,19 @@ ANDY_AUDIO_FILENAME = f"{AUDIO_PATH}/andy_audio.wav"
 STARTING_ENERGY_THRESHOLD = 3000
 VOICE_FACTOR = 2.5
 MINIMUM_ENERGY_THRESHOLD = 150
+
+
+def play_audio_response(audio_data: bytes):
+    """
+    Plays Andy's audio response from raw bytes.
+    """
+    f = open(ANDY_AUDIO_FILENAME, "wb")
+    f.truncate(0)
+    f.write(audio_data)
+    f.close()
+    wave_obj = sa.WaveObject.from_wave_file(ANDY_AUDIO_FILENAME)
+    play_obj = wave_obj.play()
+    play_obj.wait_done()  # Wait until sound has finished playing
 
 
 def record_audio(r: sr.Recognizer) -> Tuple[sr.AudioData, datetime, datetime]:
@@ -128,19 +141,17 @@ def run():
             continue
         print(intent_response["fulfillment_info"]["intent_name"])
 
+        intent_info = intent_response["response_text"]
+
+        # Get Andy's audio response
+        audio_response = get_audio_response(
+            prefix + intent_response["response_text"])
+
+        # Play Andy's audio response
+        play_audio_response(audio_response)
+
         # Code that has not been refactored is below here:
 
-        intent_info = intent_response["response_text"]
-        # Get the audio response
-        audio_response = get_audio_response(prefix+intent_info)
-        # Play the audio response
-        f = open(ANDY_AUDIO_FILENAME, "wb")
-        f.truncate(0)
-        f.write(audio_response)
-        f.close()
-        wave_obj = sa.WaveObject.from_wave_file(ANDY_AUDIO_FILENAME)
-        play_obj = wave_obj.play()
-        play_obj.wait_done()  # Wait until sound has finished playing
         game_engine.is_game_over = intent_response["game_state"]["game_finished"]
         if intent_response["game_state"]["game_finished"]:
             timerActive = False
@@ -209,7 +220,7 @@ def get_audio_response(text):
     if response.status_code == 200:
         return response.content
     else:
-        print("API Error, Status Code:"+response.status_code)
+        print("API Error, Status Code:" + response.status_code)
         raise Exception
 
 
@@ -220,39 +231,49 @@ def get_andy_move():
         if response.status_code == 200:
             return response.json()
         else:
-            print("API Error, Status Code:"+response.status_code)
+            print("API Error, Status Code:" + response.status_code)
             return None
     except Exception as e:
         print(e)
+        return None
 
 
 def get_user_intent(detected_text, start_recording, stop_recording):
     try:
         recording_time_ms = (
             stop_recording - start_recording).total_seconds() * 1000
-        if game_engine.board:
-            request_url = f"{BASE_API_URL}/get-response?session_id={SESSION_ID}&board_str={game_engine.board.fen()}&detected_text={detected_text}"
-        else:
-            request_url = f"{BASE_API_URL}/get-response?session_id={SESSION_ID}&detected_text={detected_text}"
 
-        # Send recording_time_ms to API
+        request_url = f"{BASE_API_URL}/get-response?session_id={SESSION_ID}&detected_text={detected_text}"
+
+        # Add board string to request URL
+        if game_engine.board:
+            request_url += f"&board_str={game_engine.board.fen()}"
+
+        # Add recording time to request URL
         request_url += f"&recording_time_ms={str(recording_time_ms)}"
 
+        # Make the request
         response = requests.post(request_url, open(
             USER_AUDIO_FILENAME, 'rb'), USER_AUDIO_FILENAME)
+
         if response.status_code == 200:
-            if response.json()["board_str"]:
-                game_engine.board = chess.Board(response.json()["board_str"])
+            response_json = response.json()
+
+            if response_json["board_str"]:
+                game_engine.board = chess.Board(response_json["board_str"])
                 game_engine.isGameStarted = True
-            if response.json()["game_state"]["chosen_side"] == "black":
+
+            if response_json["game_state"]["chosen_side"] == "black":
                 game_engine.user_is_black = True
-            return response.json()
+
+            return response_json
         else:
-            print("API Error, Status Code:"+response.status_code)
+            print("API Error, Status Code:" + response.status_code)
             return None
     except Exception as e:
         print(e)
         traceback.print_exc()
+        return None
 
 
 # # For testing
