@@ -6,6 +6,7 @@ Created on November 16, 2021.
 
 """
 import pygame
+from . import audio_detection
 
 TUTORIAL_SCREEN_LOCATIONS = [
     "./images/title_screen.png",
@@ -21,6 +22,10 @@ def run(screen: pygame.Surface):
     """Main method for going through the tutorial screens."""
     clock = pygame.time.Clock()
 
+    my_font = pygame.font.SysFont('Times', 22)
+    session_id_text = my_font.render(
+        "Your Session ID: " + audio_detection.SESSION_ID[0:8], True, (0, 0, 0))
+
     # Preload images
     screens: list[pygame.Surface] = []
     for loc in TUTORIAL_SCREEN_LOCATIONS:
@@ -34,6 +39,7 @@ def run(screen: pygame.Surface):
         if not drawn:
             screen.fill(WHITE_FILL)
             screen.blit(screens[curr_screen], (0, 0))
+            screen.blit(session_id_text, (20, 560))
             pygame.display.update()
             drawn = True
 
