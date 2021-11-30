@@ -28,6 +28,7 @@ def handle(session_id, board_str):
 
     # Log the fulfillment params
     set_fulfillment_params(session_id, params={
+        "curr_board_str": board_str,
         "updated_board_str": updated_board_str
     })
 
