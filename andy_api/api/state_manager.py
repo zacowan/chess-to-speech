@@ -11,6 +11,7 @@ Game State Dict:
         "game_started": bool | None,
         "chosen_side": str | None,
         "game_finished": bool | None
+        "difficulty_selection:: str | None
     }
 
 """
@@ -87,7 +88,8 @@ def get_game_state(session_id):
             "game_started": bool | None,
             "chosen_side": str | None,
             "game_finished": bool | None,
-            "board_stack": [] | None
+            "board_stack": [] | None,
+            "difficulty_selection": str | None
         }
 
     """
@@ -96,7 +98,8 @@ def get_game_state(session_id):
             "game_started": db.get("game_started"),
             "chosen_side": db.get("chosen_side"),
             "game_finished": db.get("game_finished"),
-            "board_stack": db.get("board_stack")
+            "board_stack": db.get("board_stack"),
+            "difficulty_selection": db.get("difficulty_selection")
         }
         return game_state
 
@@ -111,6 +114,12 @@ def set_chosen_side(session_id, val):
     """Sets chosen_side to a new value."""
     with shelve.open(get_shelve_file(session_id)) as db:
         db["chosen_side"] = val
+
+
+def set_difficulty_selection(session_id, val):
+    """Sets difficulty_selection to a new value"""
+    with shelve.open(get_shelve_file(session_id)) as db:
+        db["difficulty_selection"] = val
 
 
 def set_game_finished(session_id):
