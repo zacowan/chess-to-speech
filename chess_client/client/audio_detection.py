@@ -12,7 +12,7 @@ from typing import Tuple, Union
 from . import the_main
 from . import bias_adjustment
 from . import game_engine
-from datetime import datetime
+from datetime import date, datetime
 from .utils import AUDIO_PATH
 
 BASE_API_URL = "http://127.0.0.1:5000/api"
@@ -101,6 +101,7 @@ def run():
                     timerActive = True
                     timer = datetime.now()
                     timerThreshold = 45
+            # TODO: change this to the new DIFFICULTY_SELECTION intent when ready
             elif response_intent_name == "CHOOSE_SIDE" and game_engine.user_is_black:
                 # Make Andy's first move
                 handle_move_andy_piece()
@@ -116,12 +117,15 @@ def run():
                 game_engine.user_is_black = False
                 game_engine.is_game_over = False
                 game_engine.board = None
+                timerActive = False
             elif response_intent_name == "UNDO_MOVE":
                 if len(game_engine.move_history) > 1:
                     game_engine.move_history.pop(0)
                     game_engine.move_history.pop(0)
                 else:
                     print("Attempted to Pop and empty move history list")
+            # Reset the timer
+            timer = datetime.now()
 
         # Successful or failed fulfillments
         if game_engine.isGameStarted and (response_intent_name == "FALLBACK" or not prefix == ""):

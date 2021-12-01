@@ -135,7 +135,7 @@ def create_board(screen):
         screen.blit(board_img, (150, 75))
         for i in range(8):
             for j in range(8):
-                if board.piece_at((i*8)+j):
+                if board and board.piece_at((i*8)+j):
                     screen.blit(convert_to_png(board.piece_at((i*8)+j).symbol()),
                                 (165 + j * 45, 405 - i * 45))  # @IgnorePep8
     else:
@@ -144,7 +144,7 @@ def create_board(screen):
         screen.blit(board_img, (150, 75))
         for i in range(8):
             for j in range(8):
-                if board.piece_at((i*8)+j):
+                if board and board.piece_at((i*8)+j):
                     screen.blit(convert_to_png(board.piece_at((i*8)+j).symbol()),
                                 (480 - j * 45, 90 + i * 45))  # @IgnorePep8
 
