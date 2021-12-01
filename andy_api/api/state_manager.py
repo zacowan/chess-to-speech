@@ -118,6 +118,7 @@ def set_game_finished(session_id):
     with shelve.open(get_shelve_file(session_id)) as db:
         db["game_finished"] = True
 
+
 def restart_game(session_id):
     """Resets game state to what it is before game has started."""
     with shelve.open(get_shelve_file(session_id)) as db:
@@ -125,3 +126,18 @@ def restart_game(session_id):
         db["chosen_side"] = None
         db["game_finished"] = False
         db["board_stack"] = []
+
+
+def get_board_stack(session_id):
+    """Gets current board stack with board state before player's last move."""
+    with shelve.open(get_shelve_file(session_id)) as db:
+        if(db.get('board_stack') == None):
+            return []
+        else:
+            return db.get('board_stack')
+
+
+def set_board_stack(session_id, val):
+    """Sets current board stack, should be called every time BEFORE player makes VALID move."""
+    with shelve.open(get_shelve_file(session_id)) as db:
+        db["board_stack"] = val
