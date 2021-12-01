@@ -142,6 +142,12 @@ def handle(session_id, intent_model, board_str):
             if check_if_checkmate(updated_board_str):
                 static_choice += get_random_choice(CHECKMATE_SUFFIXES)
                 set_game_finished(session_id)
+                # Log the fulfillment params with a victory
+                set_fulfillment_params(session_id, params={
+                    "from_location": from_location,
+                    "to_location": to_location,
+                    "won": True
+                })
             elif check_if_check(updated_board_str):
                 static_choice += get_random_choice(CHECK_SUFFIXES)
 
