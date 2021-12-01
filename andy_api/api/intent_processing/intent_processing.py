@@ -29,7 +29,7 @@ Example Intent Model:
 """
 from api.state_manager import get_game_state
 from .utils import INTENT_MAPPING, RESPONSE_TYPES, get_random_choice
-from . import choose_side, move_piece, start_game, how_piece_moves, possible_actions, best_move, restart_game
+from . import choose_side, move_piece, start_game, how_piece_moves, possible_actions, best_move, restart_game, restart_game_yes, restart_game_no
 
 
 STATIC_RESPONSES = {
@@ -102,7 +102,11 @@ def fulfill_intent(session_id, board_str, intent_data):
         elif response_type == RESPONSE_TYPES.POSSIBLE_ACTIONS:
             response_choice, success = possible_actions.handle()
         elif response_type == RESPONSE_TYPES.RESTART_GAME:
-            response_choice, success, updated_board_str = restart_game.handle(session_id)
+            response_choice, success, board_str = restart_game.handle(session_id, board_str)
+        elif response_type == RESPONSE_TYPES.RESTART_GAME_YES:
+            response_choice, success, board_str = restart_game_yes.handle(session_id, board_str)
+        elif response_type == RESPONSE_TYPES.RESTART_GAME_NO:
+            response_choice, success, board_str = restart_game_no.handle(session_id, board_str)
 
     # Intents to handle after a game has finished
     else:
