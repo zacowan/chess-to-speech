@@ -1,6 +1,7 @@
 import chess
 import chess.engine
 import os
+import random
 
 # This is a relative location to the directory in which you run the script (aka, andy_api/)
 STOCKFISH_ENGINE_LOCATION = os.environ.get("STOCKFISH_LOCATION")
@@ -32,6 +33,12 @@ def get_best_move(board_str):
         time=BEST_MOVE_ALGORITHM_TIME_LIMIT)).move
     engine.quit()
     return best_move.uci()
+
+def get_random_move(board_str):
+    board = chess.Board(board_str)
+    legal_moves = list(board.legal_moves)
+    move = random.choice (legal_moves)
+    return move.uci()
 
 
 def get_board_str_with_move(board_str, move_sequence):
