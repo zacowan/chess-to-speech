@@ -108,7 +108,7 @@ def run():
                     timerActive = True
                     timer = datetime.now()
                     timerThreshold = 45
-            elif response_intent_name == "RESTART_GAME":
+            elif response_intent_name == "RESTART_GAME_YES":
                 # Clear all of the game state
                 game_engine.move_history.clear()
                 game_engine.isGameStarted = False
