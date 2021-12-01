@@ -29,7 +29,18 @@ Example Intent Model:
 """
 from api.state_manager import get_game_state
 from .utils import INTENT_MAPPING, RESPONSE_TYPES, get_random_choice
-from . import choose_side, move_piece, start_game, how_piece_moves, possible_actions, best_move, undo_move
+from . import (
+    choose_side,
+    move_piece,
+    start_game,
+    how_piece_moves,
+    possible_actions,
+    best_move,
+    restart_game,
+    restart_game_yes,
+    restart_game_no,
+    undo_move
+)
 
 
 STATIC_RESPONSES = {
@@ -101,12 +112,23 @@ def fulfill_intent(session_id, board_str, intent_data):
             response_choice, success = best_move.handle(session_id, board_str)
         elif response_type == RESPONSE_TYPES.POSSIBLE_ACTIONS:
             response_choice, success = possible_actions.handle()
+        elif response_type == RESPONSE_TYPES.RESTART_GAME:
+            response_choice, success = restart_game.handle()
+        elif response_type == RESPONSE_TYPES.RESTART_GAME_YES:
+            response_choice, success, updated_board_str = restart_game_yes.handle(
+                session_id, board_str)
+        elif response_type == RESPONSE_TYPES.RESTART_GAME_NO:
+            response_choice, success = restart_game_no.handle()
         elif response_type == RESPONSE_TYPES.UNDO_MOVE:
-            response_choice, success, updated_board_str = undo_move.handle(session_id, board_str)
+            response_choice, success, updated_board_str = undo_move.handle(
+                session_id, board_str)
 
     # Intents to handle after a game has finished
     else:
         # PLACEHOLDER
+        # This should be replaced with response handlers for "yes" and "no" and
+        # we would have to add "Would you like to play again?" after the user
+        # wins or loses from a move.
         response_choice = get_random_choice(
             STATIC_RESPONSES.get(response_type))
         success = True
