@@ -11,7 +11,8 @@ from .chess_logic import (
     check_if_checkmate,
     get_piece_name_at
 )
-from .intent_processing.choose_side import STARTING_BOARD_STR
+from .intent_processing.select_difficulty import STARTING_BOARD_STR
+import random
 
 
 HAPPY_PATH_RESPONSES = [
@@ -64,7 +65,11 @@ def determine_andy_move(session_id, board_str):
     if difficulty == "hard":
         move = get_best_move(board_str)
     else:
-        move = get_random_move(board_str)
+        chance = random.randrange(1,11)
+        if chance <= 4:
+            move = get_best_move(board_str)
+        else:
+            move = get_random_move(board_str)
 
     # Get logging information
     from_location = move[0:2]
