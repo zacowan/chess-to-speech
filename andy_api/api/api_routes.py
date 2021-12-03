@@ -19,11 +19,88 @@ from .logging import (
     log_error,
     log_user_request,
     log_andy_move,
+    log_help_response,
     ERROR_TYPES
 )
-from .api_route_helpers import get_response_error_return, get_static_error_audio
+from .api_route_helpers import get_response_error_return, get_static_error_audio, get_help_response
 
 bp = Blueprint('api', __name__, url_prefix='/api')
+
+
+@bp.route("/get-help-audio-response", methods=["GET"])
+def get_help_audio_response():
+    """Route for getting help when a user might be confused.
+
+    Likely called in the event of hitting FALLBACK too many times, or not
+    talking for awhile.
+
+    Query Params:
+        session_id: the unique session ID to use with Andy.
+        help_type: one of "FALLBACK" or "TIMEOUT"
+
+    Returns:
+        An HTTP response, with the data field containing the raw bytes of the
+        audio file. The data field will only be present if the status code of
+        the response is 200.
+
+    """
+    if request.method == "GET":
+        received_at = datetime.now()
+        session_id = request.args.get('session_id')
+        help_type = request.args.get('help_type')
+
+        # Make sure query params are present
+        if not session_id or not help_type:
+            raise Exception(
+                "get-help-audio-response: missing session_id or help_type")
+
+        # Make sure help_type is one of the expected values
+        if help_type not in ["FALLBACK", "TIMEOUT"]:
+            raise Exception(
+                "get-help-audio-response: help_type is not 'FALLBACK' or 'TIMEOUT'")
+
+        # Get the text response
+        text_response = get_help_response(help_type)
+
+        # Get the audio response
+        try:
+            response_audio = speech_text_processing.generate_audio_response(
+                text_response)
+        except Exception:
+            err_msg = f"Error with text-to-speech: {traceback.format_exc()}"
+            log_error(session_id, ERROR_TYPES.TTS, err_msg)
+            # Get the error response
+            err_response = get_static_error_audio()
+            # Log the request
+            response_at = datetime.now()
+            Thread(target=log_help_response(
+                session_id,
+                data={
+                    "help_type": help_type,
+                    "text": text_response,
+                    "audio_data": err_response,
+                    "received_at": received_at,
+                    "response_at": response_at
+                }
+            )).start()
+            # Return the error response
+            return err_response
+
+        # Log the request
+        response_at = datetime.now()
+        Thread(target=log_help_response(
+            session_id,
+            data={
+                "help_type": help_type,
+                "text": text_response,
+                "audio_data": response_audio,
+                "received_at": received_at,
+                "response_at": response_at
+            }
+        )).start()
+
+        # Return
+        return response_audio
 
 
 @bp.route("/get-audio-response", methods=["POST"])

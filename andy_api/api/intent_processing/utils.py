@@ -35,7 +35,7 @@ INTENT_MAPPING = {
 def get_random_choice(choices):
     """Returns a random choice from a list.
     Args:
-        choices (dict): the list of choices to choose from.
+        choices (list): the list of choices to choose from.
     Returns:
         str: a random choice from the list, as text.
     """
