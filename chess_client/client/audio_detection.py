@@ -12,8 +12,9 @@ from typing import Tuple, Union
 from . import the_main
 from . import bias_adjustment
 from . import game_engine
-from datetime import date, datetime
+from datetime import datetime
 from .utils import AUDIO_PATH
+from .help_timer_counter import HelpTimerCounter
 
 BASE_API_URL = "http://127.0.0.1:5000/api"
 SESSION_ID = str(uuid.uuid4())
@@ -27,12 +28,7 @@ MINIMUM_ENERGY_THRESHOLD = 150
 
 
 def run():
-    timer = datetime.now()
-    timerActive = False
-    prefix = ""
-    timerThreshold = 45
-    failCounterThreshold = 2
-    failCounter = 0
+    timer_counter = HelpTimerCounter()
     r = sr.Recognizer()
 
     # Recognition settings
@@ -51,15 +47,14 @@ def run():
         # Get text from audio
         detected_text = recognize_audio(r, audio)
 
-        # If we don't detect anything and we exceed a timeout, prompt the user with a move
+        # If we don't detect anything and we exceed a timeout, tell the user we can provide them with a move
         if not detected_text:
-            if timerActive and (datetime.now() - timer).total_seconds() > timerThreshold:
+            if timer_counter.check_timer():
                 print("TRIGGER")
-                timer = datetime.now()
-                timerActive = False
-                detected_text = "What is my best move?"
-                prefix = "You seem to be taking a while, "
-                print(prefix)
+                timer_counter.stop_timer()
+                audio_response = get_help_response("TIMEOUT")
+                play_audio_response(audio_response)
+                continue
             else:
                 # Go back to the start of the loop
                 continue
@@ -76,87 +71,64 @@ def run():
             continue
         print(intent_response["fulfillment_info"]["intent_name"])
 
-        # Get Andy's audio response
-        audio_response = get_audio_response(
-            prefix + intent_response["response_text"])
-
         response_game_state = intent_response["game_state"]
         response_intent_name = intent_response["fulfillment_info"]["intent_name"]
         fulfillment_success = intent_response["fulfillment_info"]["success"]
 
-        # Play Andy's audio response, as long as the user hasn't encountered FALLBACK too many times
-        if not response_intent_name == "FALLBACK" or not failCounter + 1 == failCounterThreshold:
+        # Successful or failed fulfillments
+        if game_engine.isGameStarted and response_intent_name == "FALLBACK" and timer_counter.update_counter():
+            timer_counter.hit_counter()
+            # Get the audio response
+            audio_response = get_help_response("FALLBACK")
+            # Play the audio response
+            play_audio_response(audio_response)
+        else:
+            if response_intent_name != "FALLBACK":
+                timer_counter.reset_counter()
+            timer_counter.update_timer()
+            # Get Andy's audio response
+            audio_response = get_audio_response(
+                intent_response["response_text"])
+
+            # Play the audio response
             play_audio_response(audio_response)
 
-        # Successful fulfillments only
-        if fulfillment_success:
-            if response_intent_name == "MOVE_PIECE":
-                # Update move history
-                from_loc = intent_response['fulfillment_params']['from_location']
-                to_loc = intent_response['fulfillment_params']['to_location']
-                update_move_history(True, from_loc, to_loc)
-                # Move Andy's piece
-                handle_move_andy_piece()
-                if not timerActive:
-                    timerActive = True
-                    timer = datetime.now()
-                    timerThreshold = 45
-            # TODO: change this to the new DIFFICULTY_SELECTION intent when ready
-            elif response_intent_name == "CHOOSE_SIDE" and game_engine.user_is_black:
-                # Make Andy's first move
-                handle_move_andy_piece()
-                if not timerActive:
-                    timerActive = True
-                    timer = datetime.now()
-                    timerThreshold = 45
-            elif response_intent_name == "RESTART_GAME_YES":
-                # Clear all of the game state
-                game_engine.move_history.clear()
-                game_engine.isGameStarted = False
-                game_engine.lastSaid = ""
-                game_engine.user_is_black = False
-                game_engine.is_game_over = False
-                game_engine.board = None
-                timerActive = False
-            elif response_intent_name == "UNDO_MOVE":
-                if len(game_engine.move_history) > 1:
-                    game_engine.move_history.pop(0)
-                    game_engine.move_history.pop(0)
-                else:
-                    print("Attempted to Pop and empty move history list")
-            # Reset the timer
-            timer = datetime.now()
-
-        # Successful or failed fulfillments
-        if game_engine.isGameStarted and (response_intent_name == "FALLBACK" or not prefix == ""):
-            failCounter += 1
-            timerThreshold += 10
-            if failCounter == failCounterThreshold:
-                failCounterThreshold += 1
-                failCounter += 4
-
-                # TODO: change this to avoid logging these kinds of things
-                detected_text = "What Can I do"
-                intent_response = get_user_intent(
-                    detected_text, start_recording_at, stop_recording_at)
-                if not intent_response:
+            # Successful fulfillments only
+            if fulfillment_success:
+                if response_intent_name == "MOVE_PIECE":
+                    # Update move history
+                    from_loc = intent_response['fulfillment_params']['from_location']
+                    to_loc = intent_response['fulfillment_params']['to_location']
+                    update_move_history(True, from_loc, to_loc)
+                    # Move Andy's piece
+                    handle_move_andy_piece()
+                # TODO: change this to the new DIFFICULTY_SELECTION intent when ready
+                elif response_intent_name == "CHOOSE_SIDE" and game_engine.user_is_black:
+                    # Make Andy's first move
+                    handle_move_andy_piece()
+                elif response_intent_name == "RESTART_GAME_YES":
+                    # Clear all of the game state
+                    game_engine.move_history.clear()
+                    game_engine.isGameStarted = False
+                    game_engine.lastSaid = ""
+                    game_engine.user_is_black = False
+                    game_engine.is_game_over = False
+                    game_engine.board = None
+                    timer_counter = HelpTimerCounter()
                     continue
-                print(intent_response["fulfillment_info"]["intent_name"])
-                # Get the audio response
-                audio_response = get_audio_response(
-                    "You seem to be having difficulty asking me to do something, " + intent_response["response_text"])
-                # Play the audio response
-                play_audio_response(audio_response)
-        else:
-            failCounter = 0
+                elif response_intent_name == "UNDO_MOVE":
+                    if len(game_engine.move_history) > 1:
+                        game_engine.move_history.pop(0)
+                        game_engine.move_history.pop(0)
+                    else:
+                        print("Attempted to Pop and empty move history list")
+                # Enable the counter when we encounter a successful intent
+                timer_counter.start_timer()
 
         # Update game state
         game_engine.is_game_over = response_game_state["game_finished"]
         if game_engine.is_game_over:
-            timerActive = False
-
-        # Reset the prefix
-        prefix = ""
+            timer_counter.stop_timer()
 
 
 def play_audio_response(audio_data: bytes):
@@ -252,6 +224,19 @@ def update_move_history(user_move: bool, from_location: str, to_location: str):
     game_engine.move_history.insert(0, entry)
 
 
+def get_help_response(help_type):
+    """
+    help_type is one of ["TIMEOUT", "FALLBACK"]
+    """
+    request_url = f"{BASE_API_URL}/get-help-audio-response?session_id={SESSION_ID}&help_type={help_type}"
+    response = requests.get(request_url)
+    if response.status_code == 200:
+        return response.content
+    else:
+        print("API Error, Status Code:" + str(response.status_code))
+        raise Exception
+
+
 def get_audio_response(text):
     request_url = f"{BASE_API_URL}/get-audio-response?session_id={SESSION_ID}"
     print(f"Body: {text}")
@@ -259,7 +244,7 @@ def get_audio_response(text):
     if response.status_code == 200:
         return response.content
     else:
-        print("API Error, Status Code:" + response.status_code)
+        print("API Error, Status Code:" + str(response.status_code))
         raise Exception
 
 
@@ -270,7 +255,7 @@ def get_andy_move():
         if response.status_code == 200:
             return response.json()
         else:
-            print("API Error, Status Code:" + response.status_code)
+            print("API Error, Status Code:" + str(response.status_code))
             return None
     except Exception as e:
         print(e)
@@ -307,7 +292,7 @@ def get_user_intent(detected_text, start_recording, stop_recording):
 
             return response_json
         else:
-            print("API Error, Status Code:" + response.status_code)
+            print("API Error, Status Code:" + str(response.status_code))
             return None
     except Exception as e:
         print(e)
