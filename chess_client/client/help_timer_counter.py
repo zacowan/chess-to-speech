@@ -1,6 +1,6 @@
 from datetime import datetime
 
-STARTING_COUNTER_THRESHOLD = 3
+STARTING_COUNTER_THRESHOLD = 2
 TIMER_THRESHOLD = 20  # seconds
 
 
