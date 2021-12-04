@@ -39,7 +39,8 @@ from . import (
     restart_game,
     restart_game_yes,
     restart_game_no,
-    undo_move
+    undo_move,
+    quit_game
 )
 
 
@@ -122,6 +123,12 @@ def fulfill_intent(session_id, board_str, intent_data):
         elif response_type == RESPONSE_TYPES.UNDO_MOVE:
             response_choice, success, updated_board_str = undo_move.handle(
                 session_id, board_str)
+        elif response_type == RESPONSE_TYPES.QUIT_GAME:
+            response_choice, success = quit_game.handle()
+        elif response_type == RESPONSE_TYPES.QUIT_GAME_YES:
+            response_choice, success = quit_game.handle_yes(session_id)
+        elif response_type == RESPONSE_TYPES.QUIT_GAME_NO:
+            response_choice, success = quit_game.handle_no()
 
     # Intents to handle after a game has finished
     else:
