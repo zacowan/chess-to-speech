@@ -10,23 +10,17 @@ TTS_ERROR_AUDIO_FILENAME = "./static_audio/tts-error.wav"
 
 
 def get_help_response(help_type):
-    if help_type == "FALLBACK":
-        # Tell the user what the possible moves are
-        prefix = "If you're wondering what I can do, "
-        text_response = utils.get_random_choice(
-            possible_actions.HAPPY_PATH_RESPONSES)
-        return prefix + text_response
-    elif help_type == "TIMEOUT":
+    if help_type == "TIMEOUT":
         # Tell the user that they can ask what their best move is
         prefix = "If you'd like some help, "
         text_response = utils.get_random_choice([
-            "I can tell you what your best move would be. Just let me know.",
-            "I could give you your best possible move. Just let me know."
+            "I can tell you what your best move would be, just let me know.",
+            "I could give you your best possible move, just let me know."
         ])
         return prefix + text_response
     else:
-        # Default: tell the user what the possible moves are
-        prefix = "If you're wondering what to do, "
+        # FALLBACK or Default: tell the user what the possible moves are
+        prefix = "I don't think I can help with that, but if you're wondering what I can do, "
         text_response = utils.get_random_choice(
             possible_actions.HAPPY_PATH_RESPONSES)
         return prefix + text_response

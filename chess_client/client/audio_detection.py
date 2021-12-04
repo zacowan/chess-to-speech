@@ -82,6 +82,7 @@ def run():
             audio_response = get_help_response("FALLBACK")
             # Play the audio response
             play_audio_response(audio_response)
+            timer_counter.update_timer()
         else:
             if response_intent_name != "FALLBACK":
                 timer_counter.reset_counter()

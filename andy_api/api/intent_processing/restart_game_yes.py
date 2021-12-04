@@ -8,8 +8,8 @@ from api.state_manager import set_fulfillment_params
 from api.state_manager import restart_game
 
 HAPPY_PATH_RESPONSES = [
-    "Okay- let's play again.",
-    "Okay- let's restarts the game."
+    "Okay - let's try a new game then.",
+    "Okay, we'll go back to the start then."
 ]
 
 

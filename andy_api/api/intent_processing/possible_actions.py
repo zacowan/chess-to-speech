@@ -8,8 +8,8 @@ Attributes:
 from .utils import get_random_choice
 
 HAPPY_PATH_RESPONSES = [
-    "I can perform a move for you, tell you how a named piece moves, give you advice on your best move, undo your last move, or restart the game.",
-    "I can move a piece for you, tell you how named pieces move, help you make your best move, undo your last move, and restart the game."
+    "I can perform a move for you, tell you how a named piece moves, give you advice on your best move, undo your last move, or restart the game. We can also stop playing whenever you're done.",
+    "I can move a piece for you, tell you how named pieces move, help you make your best move, undo your last move, and restart the game. We can also end the game at any time."
 ]
 
 
