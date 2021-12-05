@@ -135,6 +135,8 @@ def restart_game(session_id):
         db["chosen_side"] = None
         db["game_finished"] = False
         db["board_stack"] = []
+        db["difficulty_selection"] = None
+        
 
 
 def get_board_stack(session_id):
