@@ -103,8 +103,7 @@ def run():
                     update_move_history(True, from_loc, to_loc)
                     # Move Andy's piece
                     handle_move_andy_piece()
-                # TODO: change this to the new DIFFICULTY_SELECTION intent when ready
-                elif response_intent_name == "CHOOSE_SIDE" and game_engine.user_is_black:
+                elif response_intent_name == "SELECT_DIFFICULTY" and game_engine.user_is_black:
                     # Make Andy's first move
                     handle_move_andy_piece()
                 elif response_intent_name == "RESTART_GAME_YES":

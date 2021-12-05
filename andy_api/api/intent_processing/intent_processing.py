@@ -40,7 +40,8 @@ from . import (
     restart_game_yes,
     restart_game_no,
     undo_move,
-    quit_game
+    quit_game,
+    select_difficulty
 )
 
 
@@ -98,7 +99,10 @@ def fulfill_intent(session_id, board_str, intent_data):
         if response_type == RESPONSE_TYPES.START_GAME:
             response_choice, success = start_game.handle()
         elif response_type == RESPONSE_TYPES.CHOOSE_SIDE:
-            response_choice, success, updated_board_str = choose_side.handle(
+            response_choice, success = choose_side.handle(
+                session_id, intent_data)
+        elif response_type == RESPONSE_TYPES.SELECT_DIFFICULTY:
+            response_choice, success, updated_board_str = select_difficulty.handle(
                 session_id, intent_data)
 
     # Intents to handle after a game has started and the user has chosen a side

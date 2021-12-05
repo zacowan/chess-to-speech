@@ -2,15 +2,17 @@
 
 """
 from .intent_processing.utils import get_random_choice
-from .state_manager import set_game_finished
+from .state_manager import set_game_finished, get_game_state
 from .chess_logic import (
     get_board_str_with_move,
     get_best_move,
+    get_random_move,
     check_if_check,
     check_if_checkmate,
     get_piece_name_at
 )
-from .intent_processing.choose_side import STARTING_BOARD_STR
+from .intent_processing.select_difficulty import STARTING_BOARD_STR
+import random
 
 
 HAPPY_PATH_RESPONSES = [
@@ -57,8 +59,17 @@ def determine_andy_move(session_id, board_str):
     """
     static_choice = get_random_choice(HAPPY_PATH_RESPONSES)
 
-    # Get the best move
-    move = get_best_move(board_str)
+    # Get the best move or a random move depending on difficulty
+    game_state = get_game_state(session_id)
+    difficulty = game_state["difficulty_selection"]
+    if difficulty == "hard":
+        move = get_best_move(board_str)
+    else:
+        chance = random.randrange(1,11)
+        if chance <= 4:
+            move = get_best_move(board_str)
+        else:
+            move = get_random_move(board_str)
 
     # Get logging information
     from_location = move[0:2]
