@@ -3,7 +3,7 @@ TODO add info about intent
 """
 
 from .utils import get_random_choice
-from .choose_side import STARTING_BOARD_STR
+from .select_difficulty import STARTING_BOARD_STR
 from api.state_manager import set_fulfillment_params
 from api.state_manager import restart_game
 
