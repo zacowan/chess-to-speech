@@ -15,8 +15,8 @@ BOARD_MODE = os.environ.get("STARTING_BOARD")
 STARTING_BOARD_STR = DEMO_BOARD_STR if BOARD_MODE == "demo" else DEFAULT_BOARD_STR
 
 HAPPY_PATH_RESPONSES = [
-    "Great, let's get started.",
-    "Okay, let's begin."
+    "Great, I'll go {difficulty_selection} on you. Now, let's get started.",
+    "Okay, I'll go {difficulty_selection} on you. Now, let's begin."
 ]
 
 HAPPY_PATH_SUFFIXES = [
@@ -26,7 +26,7 @@ HAPPY_PATH_SUFFIXES = [
 
 ERROR_RESPONSES = [
     "Sorry, did you want an easy game, or a hard game?",
-    "Sorry, did you want me to go easy or hard on you?"
+    "Sorry, did you want me to go easy, or hard on you?"
 ]
 
 

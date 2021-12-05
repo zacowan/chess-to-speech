@@ -15,8 +15,8 @@ HAPPY_PATH_RESPONSES = [
 ]
 
 HAPPY_PATH_SUFFIXES = [
-    "Now, would you like an easy or a hard game?",
-    "Next, would you like me to go easy or hard on you?"
+    "Now, would you like an easy game, or a hard game?",
+    "Next, would you like me to go easy, or hard on you?"
 ]
 
 ERROR_RESPONSES = [
