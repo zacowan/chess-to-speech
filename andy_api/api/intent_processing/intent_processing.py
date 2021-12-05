@@ -58,6 +58,10 @@ STATIC_RESPONSES = {
         "Can you say that again?",
         "What was that?",
         "I'm not sure I understood that."
+    ],
+    RESPONSE_TYPES.CANCEL_SLOT_FILLING: [
+        "Okay.",
+        "Alright."
     ]
 }
 
@@ -93,6 +97,15 @@ def fulfill_intent(session_id, board_str, intent_data):
         response_choice = get_random_choice(
             STATIC_RESPONSES.get(response_type))
         success = True
+    elif intent_data.cancels_slot_filling:
+        # Handle saying something like "nevermind" when forgetting to fill in a slot
+        response_choice = get_random_choice(
+            STATIC_RESPONSES.get(RESPONSE_TYPES.CANCEL_SLOT_FILLING))
+        success = True
+        return response_choice, {
+            'intent_name': RESPONSE_TYPES.CANCEL_SLOT_FILLING.name,
+            'success': success
+        }, board_str
 
     # Intents to handle before the game has started
     if not game_state["game_started"]:
