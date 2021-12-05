@@ -15,19 +15,20 @@ BOARD_MODE = os.environ.get("STARTING_BOARD")
 STARTING_BOARD_STR = DEMO_BOARD_STR if BOARD_MODE == "demo" else DEFAULT_BOARD_STR
 
 HAPPY_PATH_RESPONSES = [
-    "Great. You've selected {difficulty_selection} difficulty.",
-    "Perfect. This game will be played in {difficulty_selection} difficulty"
+    "Great, let's get started.",
+    "Okay, let's begin."
 ]
 
 HAPPY_PATH_SUFFIXES = [
-    "Whenever you're ready, I can make a move for you or tell you what else you can do. To move a piece, you can say 'pawn to E5', or, 'B3 to F3'.",
-    "I can make your move when you're ready, or I can tell you what else you can do. To move a piece, you can say 'pawn to C4', or, 'E7 to E5'."
+    "Whenever you're ready, I can make a move for you. To move a piece, you can say something like 'pawn to E5', or, 'B3 to F3'. We'll play till one of us wins, or whenever you'd like to stop.",
+    "When you're ready to move a piece, you can say something like 'pawn to C4', or, 'E7 to E5'. We'll play out the game till the end, or when you tell me you're done."
 ]
 
 ERROR_RESPONSES = [
-    "Sorry, you must select between easy difficulty and hard difficulty.",
-    "Sorry- I didn't understand your difficulty selection. Please choose either easy or hard."
+    "Sorry, did you want an easy game, or a hard game?",
+    "Sorry, did you want me to go easy or hard on you?"
 ]
+
 
 def get_suffix(session_id):
     game_state = get_game_state(session_id)
@@ -37,6 +38,7 @@ def get_suffix(session_id):
         return " " + get_random_choice(HAPPY_PATH_SUFFIXES)
     else:
         return ""
+
 
 def handle(session_id, intent_model):
     if intent_model.all_required_params_present is True:
