@@ -15,8 +15,8 @@ HAPPY_PATH_RESPONSES = [
 ]
 
 HAPPY_PATH_SUFFIXES = [
-    "Now, would you like to play on easy difficulty or hard difficulty?",
-    "You must choose between easy difficulty and hard difficulty. What is your choice?"
+    "Now, would you like an easy or a hard game?",
+    "Next, would you like me to go easy or hard on you?"
 ]
 
 ERROR_RESPONSES = [
@@ -68,6 +68,6 @@ def handle(session_id, intent_model):
         return static_choice.format(andy_side=andy_side,
                                     andy_position=andy_position,
                                     user_side=user_side,
-                                    user_position=user_position) + suffix, True
+                                    user_position=user_position) + ' ' + suffix, True
     else:
         return get_random_choice(ERROR_RESPONSES), False
