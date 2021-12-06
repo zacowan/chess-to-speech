@@ -11,7 +11,7 @@ BOARD=${1:-full}
 ABSOLUTE_PATH_TO_KEY="C:\Users\selen\Desktop\ChessToSpeech\chess-to-speech\andy_api\service_key_file.json"
 # Change this to the name of the stockfish file
 # NOTE: this file should be placed in andy_api/stockfish_engine
-STOCKFISH_NAME="stockfish"
+STOCKFISH_NAME="stockfish.exe"
 # Set this to the "mode" you want to run the application in. This will affect
 # where logs are saved and which base script is run.
 #

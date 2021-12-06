@@ -96,7 +96,7 @@ def run():
 
             # Successful fulfillments only
             if fulfillment_success:
-                if response_intent_name == "MOVE_PIECE":
+                if response_intent_name == "MOVE_PIECE" or response_intent_name == "CASTLE":
                     # Update move history
                     from_loc = intent_response['fulfillment_params']['from_location']
                     to_loc = intent_response['fulfillment_params']['to_location']
