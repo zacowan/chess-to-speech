@@ -17,7 +17,7 @@ import random
 
 HAPPY_PATH_RESPONSES = [
     "Now I'll move my {piece_name} to {to_location}",
-    "Let me move my {piece_name} to {to_location}",
+    "Now, let me move my {piece_name} to {to_location}",
     "For my turn, I'll move my {piece_name} at {from_location} to {to_location}"
 ]
 
@@ -65,7 +65,7 @@ def determine_andy_move(session_id, board_str):
     if difficulty == "hard":
         move = get_best_move(board_str)
     else:
-        chance = random.randrange(1,11)
+        chance = random.randrange(1, 11)
         if chance <= 4:
             move = get_best_move(board_str)
         else:

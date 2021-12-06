@@ -10,8 +10,10 @@ Game State Dict:
         "fulfillment_params": dict,
         "game_started": bool | None,
         "chosen_side": str | None,
-        "game_finished": bool | None
-        "difficulty_selection:: str | None
+        "game_finished": bool | None,
+        "board_stack": [] | None,
+        "difficulty_selection": str | None,
+        "gave_initial_possible_actions": bool | None,
     }
 
 """
@@ -89,7 +91,8 @@ def get_game_state(session_id):
             "chosen_side": str | None,
             "game_finished": bool | None,
             "board_stack": [] | None,
-            "difficulty_selection": str | None
+            "difficulty_selection": str | None,
+            "gave_initial_possible_actions": bool | None,
         }
 
     """
@@ -99,9 +102,16 @@ def get_game_state(session_id):
             "chosen_side": db.get("chosen_side"),
             "game_finished": db.get("game_finished"),
             "board_stack": db.get("board_stack"),
-            "difficulty_selection": db.get("difficulty_selection")
+            "difficulty_selection": db.get("difficulty_selection"),
+            "gave_initial_possible_actions": db.get("gave_initial_possible_actions")
         }
         return game_state
+
+
+def set_gave_initial_possible_actions(session_id):
+    """Sets gave_initial_possible_actions to True."""
+    with shelve.open(get_shelve_file(session_id)) as db:
+        db["gave_initial_possible_actions"] = True
 
 
 def set_game_started(session_id):
@@ -136,7 +146,7 @@ def restart_game(session_id):
         db["game_finished"] = False
         db["board_stack"] = []
         db["difficulty_selection"] = None
-        
+        db["gave_initial_possible_actions"] = None
 
 
 def get_board_stack(session_id):
