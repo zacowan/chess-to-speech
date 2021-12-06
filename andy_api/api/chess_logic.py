@@ -1,6 +1,10 @@
+from typing import Tuple, cast
 import chess
 import chess.engine
 import os
+import random
+
+from api.state_manager import get_game_state
 
 # This is a relative location to the directory in which you run the script (aka, andy_api/)
 STOCKFISH_ENGINE_LOCATION = os.environ.get("STOCKFISH_LOCATION")
@@ -32,6 +36,13 @@ def get_best_move(board_str):
         time=BEST_MOVE_ALGORITHM_TIME_LIMIT)).move
     engine.quit()
     return best_move.uci()
+
+
+def get_random_move(board_str):
+    board = chess.Board(board_str)
+    legal_moves = list(board.legal_moves)
+    move = random.choice(legal_moves)
+    return move.uci()
 
 
 def get_board_str_with_move(board_str, move_sequence):
@@ -85,12 +96,17 @@ def check_if_move_legal(board_str, move_sequence):
     try:
         return chess.Move.from_uci(move_sequence.lower()) in board.legal_moves
     except ValueError:
+        # Throws if locations are the same (for example, h1h1)
         return False
 
 
 def check_if_move_causes_check(board_str, move_sequence):
     board = chess.Board(board_str)
-    move_to_make = chess.Move.from_uci(move_sequence.lower())
+    try:
+        move_to_make = chess.Move.from_uci(move_sequence.lower())
+    except ValueError:
+        # Throws if locations are the same (for example, h1h1)
+        return False
     if move_to_make in board.pseudo_legal_moves:
         return True
     else:
@@ -103,6 +119,42 @@ class IllegalMoveError(Exception):
 
 class MultiplePiecesCanMoveError(Exception):
     pass
+
+
+def get_castle_locations(board_str, castle_side, user_side) -> Tuple[str, str]:
+    """Returns from_location, to_location"""
+    castle_side = check_castle(board_str, castle_side, user_side)
+    if castle_side == "king" and user_side == "white":
+        return 'E1', 'G1'
+    elif castle_side == "king" and user_side == "black":
+        return 'E8', 'G8'
+    elif castle_side == "queen" and user_side == "white":
+        return 'E1', 'C1'
+    else:
+        return 'E8', 'C8'
+
+
+def check_castle(board_str, castle_side, user_side):
+    board = chess.Board(board_str)
+    castle_side = castle_side.lower()
+    if(user_side == "white"):
+        user_side = chess.WHITE
+        if(castle_side == "left"):
+            castle_side = "queen"
+        elif(castle_side == "right"):
+            castle_side = "king"
+    if(user_side == "black"):
+        user_side = chess.BLACK
+        if(castle_side == "left"):
+            castle_side = "king"
+        elif(castle_side == "right"):
+            castle_side = "queen"
+    if board.has_castling_rights(user_side):
+        if ((castle_side == "king" and board.has_kingside_castling_rights(user_side)) or
+                (castle_side == "queen" and board.has_queenside_castling_rights(user_side))):
+            return castle_side
+    else:
+        return None
 
 
 def get_from_location_from_move_info(board_str, move_info):

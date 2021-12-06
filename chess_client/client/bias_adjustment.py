@@ -31,6 +31,8 @@ dict = {
     "1/4": "A4 to",
     "d12": "D1 to",
     "whiteside": "White Side",
+    "whites": "White",
+    "lights": "White",
     "f-5": "F5",
     "f-6": "F6",
     "f-7": "F7",
@@ -41,6 +43,7 @@ dict = {
     "22": "E2",
     "route": "Rook",
     "bh": "B8",
+    "ask for": "F4",
     "d8s": "D8",
     "asics": "A6",
     "pontiac": "pawn to",
@@ -62,7 +65,9 @@ dict2 = {
     "santa de ford": "Pawn to F4",
     "home to b6": "Pawn to B6",
     "haunted essex": "pawn to B6",
-    "king two d8": "King to D8"
+    "king two d8": "King to D8",
+    "ponte ford": "Pawn to A4",
+    "queen to be one": "Queen to B1"
 }
 
 

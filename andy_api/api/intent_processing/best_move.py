@@ -8,7 +8,7 @@ from .utils import get_random_choice
 from api.state_manager import set_fulfillment_params
 
 HAPPY_PATH_RESPONSES = [
-    "Well, I'd reccomend moving your {piece_name} from {from_location} to {to_location}.",
+    "I'd reccomend moving your {piece_name} from {from_location} to {to_location}.",
     "I think you should move your {piece_name} at {from_location} to {to_location}."
 ]
 

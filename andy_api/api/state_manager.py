@@ -10,7 +10,10 @@ Game State Dict:
         "fulfillment_params": dict,
         "game_started": bool | None,
         "chosen_side": str | None,
-        "game_finished": bool | None
+        "game_finished": bool | None,
+        "board_stack": [] | None,
+        "difficulty_selection": str | None,
+        "gave_initial_possible_actions": bool | None,
     }
 
 """
@@ -86,7 +89,10 @@ def get_game_state(session_id):
         {
             "game_started": bool | None,
             "chosen_side": str | None,
-            "game_finished": bool | None
+            "game_finished": bool | None,
+            "board_stack": [] | None,
+            "difficulty_selection": str | None,
+            "gave_initial_possible_actions": bool | None,
         }
 
     """
@@ -94,9 +100,18 @@ def get_game_state(session_id):
         game_state = {
             "game_started": db.get("game_started"),
             "chosen_side": db.get("chosen_side"),
-            "game_finished": db.get("game_finished")
+            "game_finished": db.get("game_finished"),
+            "board_stack": db.get("board_stack"),
+            "difficulty_selection": db.get("difficulty_selection"),
+            "gave_initial_possible_actions": db.get("gave_initial_possible_actions")
         }
         return game_state
+
+
+def set_gave_initial_possible_actions(session_id):
+    """Sets gave_initial_possible_actions to True."""
+    with shelve.open(get_shelve_file(session_id)) as db:
+        db["gave_initial_possible_actions"] = True
 
 
 def set_game_started(session_id):
@@ -106,12 +121,44 @@ def set_game_started(session_id):
 
 
 def set_chosen_side(session_id, val):
-    """Sets chosen_side to a new value"""
+    """Sets chosen_side to a new value."""
     with shelve.open(get_shelve_file(session_id)) as db:
         db["chosen_side"] = val
+
+
+def set_difficulty_selection(session_id, val):
+    """Sets difficulty_selection to a new value"""
+    with shelve.open(get_shelve_file(session_id)) as db:
+        db["difficulty_selection"] = val
 
 
 def set_game_finished(session_id):
     """Sets game_finished to True."""
     with shelve.open(get_shelve_file(session_id)) as db:
         db["game_finished"] = True
+
+
+def restart_game(session_id):
+    """Resets game state to what it is before game has started."""
+    with shelve.open(get_shelve_file(session_id)) as db:
+        db["game_started"] = False
+        db["chosen_side"] = None
+        db["game_finished"] = False
+        db["board_stack"] = []
+        db["difficulty_selection"] = None
+        db["gave_initial_possible_actions"] = None
+
+
+def get_board_stack(session_id):
+    """Gets current board stack with board state before player's last move."""
+    with shelve.open(get_shelve_file(session_id)) as db:
+        if(db.get('board_stack') == None):
+            return []
+        else:
+            return db.get('board_stack')
+
+
+def set_board_stack(session_id, val):
+    """Sets current board stack, should be called every time BEFORE player makes VALID move."""
+    with shelve.open(get_shelve_file(session_id)) as db:
+        db["board_stack"] = val

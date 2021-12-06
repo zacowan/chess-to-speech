@@ -63,6 +63,22 @@ Andy Move Log:
         "error_desc": list(str),
     }
 
+Help Response Log:
+    {
+        "session_id": str,
+        "timestamp": datetime,
+
+        "help_type": str,
+        "text": str,
+        "audio_name": str,
+
+        "request_time_ms": number,
+
+        "errors_occurred": bool,
+        "error_types": list(str),
+        "error_desc": list(str),
+    }
+
 """
 import os
 import traceback
@@ -78,9 +94,11 @@ LOGGING_SUFFIX = os.environ['LOGGING_SUFFIX']
 USER_REQUEST_LOGS_BASE_COLLECTION = "user_request_logs"
 ANDY_RESPONSE_LOGS_BASE_COLLECTION = "andy_response_logs"
 ANDY_MOVE_LOGS_BASE_COLLECTION = "andy_move_logs"
+HELP_RESPONSE_LOGS_BASE_COLLECTION = "help_response_logs"
 ANDY_MOVE_LOGS_COLLECTION = f"{ANDY_MOVE_LOGS_BASE_COLLECTION}_{LOGGING_SUFFIX}"
 USER_REQUEST_LOGS_COLLECTION = f"{USER_REQUEST_LOGS_BASE_COLLECTION}_{LOGGING_SUFFIX}"
 ANDY_RESPONSE_LOGS_COLLECTION = f"{ANDY_RESPONSE_LOGS_BASE_COLLECTION}_{LOGGING_SUFFIX}"
+HELP_RESPONSE_LOGS_COLLECTION = f"{HELP_RESPONSE_LOGS_BASE_COLLECTION}_{LOGGING_SUFFIX}"
 
 ERROR_TYPES = Enum(
     "ERROR_TYPES",
@@ -103,6 +121,37 @@ def log_error(session_id, err_type, err_desc):
     # Set the err_type and err_desc using state_manager
     set_curr_errors(session_id, err_type.name, err_desc)
     print_error(err_type, err_desc)
+
+
+def log_help_response(session_id, data):
+    # Upload audio_data and get name
+    try:
+        audio_name = upload_audio_file(
+            data.get("audio_data"))
+    except Exception:
+        audio_name = ""
+        err_msg = f"Failed to upload help response audio: {traceback.format_exc()}"
+        log_error(session_id, ERROR_TYPES.AUDIO_UPLOAD, err_msg)
+    # Get errors from state_manager
+    error_types, error_desc = get_curr_errors(session_id)
+    # Set all of the data in a log
+    try:
+        db = firestore.Client(project=PROJECT_ID)
+        doc_ref = db.collection(HELP_RESPONSE_LOGS_COLLECTION).document()
+        doc_ref.set({
+            'session_id': session_id,
+            'timestamp': datetime.now(),
+            'help_type': data.get('help_type', ''),
+            'text': data.get('text', ''),
+            'audio_name': audio_name,
+            'request_time_ms': compute_request_time(data.get('received_at', datetime.now()), data.get('response_at', datetime.now())),
+            'errors_occurred': len(error_types) > 0,
+            'error_types': error_types,
+            'error_desc': error_desc
+        })
+    except Exception:
+        err_msg = f"Error logging help response: {traceback.format_exc()}"
+        print_error(ERROR_TYPES.LOGGING, err_msg)
 
 
 def log_andy_move(session_id, data):

@@ -33,6 +33,7 @@ def setup_game_engine(screen):
 
 
 def start_game(screen):
+    clock = pygame.time.Clock()
     while not the_main.is_closed():
         screen.fill((255, 255, 255))  # Background Color
         mic_img = None
@@ -124,6 +125,8 @@ def start_game(screen):
                     sys.exit()
 
         pygame.display.update()
+        # Limit frame rate to 60 fps
+        clock.tick(60)
 
 
 def create_board(screen):
@@ -132,7 +135,7 @@ def create_board(screen):
         screen.blit(board_img, (150, 75))
         for i in range(8):
             for j in range(8):
-                if board.piece_at((i*8)+j):
+                if board and board.piece_at((i*8)+j):
                     screen.blit(convert_to_png(board.piece_at((i*8)+j).symbol()),
                                 (165 + j * 45, 405 - i * 45))  # @IgnorePep8
     else:
@@ -141,7 +144,7 @@ def create_board(screen):
         screen.blit(board_img, (150, 75))
         for i in range(8):
             for j in range(8):
-                if board.piece_at((i*8)+j):
+                if board and board.piece_at((i*8)+j):
                     screen.blit(convert_to_png(board.piece_at((i*8)+j).symbol()),
                                 (480 - j * 45, 90 + i * 45))  # @IgnorePep8
 

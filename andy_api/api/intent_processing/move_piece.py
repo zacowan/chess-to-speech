@@ -1,7 +1,7 @@
 """This module handles intent processing for MOVE_PIECE.
 """
 from .utils import get_random_choice
-from api.state_manager import set_fulfillment_params, get_game_state, set_game_finished
+from api.state_manager import set_fulfillment_params, get_game_state, set_game_finished, get_board_stack, set_board_stack, set_gave_initial_possible_actions
 from api.chess_logic import (
     check_if_check,
     check_if_checkmate,
@@ -15,12 +15,17 @@ from api.chess_logic import (
     IllegalMoveError,
     MultiplePiecesCanMoveError
 )
+from api.intent_processing import possible_actions
 
 
 HAPPY_PATH_RESPONSES = [
     "Okay, moving your {piece_name} to {to_location}.",
     "Great, your {piece_name} will go to {to_location}.",
     "Cool, {piece_name} to {to_location}."
+]
+
+FIRST_MOVE_SUFFIXES = [
+    "By the way, in addition to helping you move a piece, I can tell you how a named piece moves, give you advice on your best move, undo your last move, restart the game, or end the game."
 ]
 
 CHECK_SUFFIXES = [
@@ -130,6 +135,7 @@ def handle(session_id, intent_model, board_str):
 
         # Check if the move is legal
         if check_if_move_legal(board_str, from_location + to_location):
+
             # Update the board_str
             updated_board_str = get_board_str_with_move(
                 board_str, from_location + to_location)
@@ -139,13 +145,31 @@ def handle(session_id, intent_model, board_str):
 
             # check if user has put andy in check or checkmate
             if check_if_checkmate(updated_board_str):
-                static_choice += get_random_choice(CHECKMATE_SUFFIXES)
+                static_choice += ' ' + get_random_choice(CHECKMATE_SUFFIXES)
                 set_game_finished(session_id)
+                # Log the fulfillment params with a victory
+                set_fulfillment_params(session_id, params={
+                    "from_location": from_location,
+                    "to_location": to_location,
+                    "won": True
+                })
             elif check_if_check(updated_board_str):
-                static_choice += get_random_choice(CHECK_SUFFIXES)
+                static_choice += ' ' + get_random_choice(CHECK_SUFFIXES)
 
             # Get the piece name
             actual_piece_name = get_piece_name_at(board_str, from_location)
+
+            # Update stack of board strings with last board string before move
+            board_stack = get_board_stack(session_id)
+            board_stack.append(board_str)
+            set_board_stack(session_id, board_stack)
+
+            # Add first move suffix, if needed
+            if not get_game_state(
+                    session_id)["gave_initial_possible_actions"]:
+                static_choice += ' ' + \
+                    get_random_choice(FIRST_MOVE_SUFFIXES)
+                set_gave_initial_possible_actions(session_id)
 
             return static_choice.format(
                 piece_name=actual_piece_name,

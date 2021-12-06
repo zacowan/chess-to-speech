@@ -2,26 +2,28 @@
 
 """
 from .intent_processing.utils import get_random_choice
-from .state_manager import set_game_finished
+from .state_manager import set_game_finished, get_game_state
 from .chess_logic import (
     get_board_str_with_move,
     get_best_move,
+    get_random_move,
     check_if_check,
     check_if_checkmate,
     get_piece_name_at
 )
-from .intent_processing.choose_side import STARTING_BOARD_STR
+from .intent_processing.select_difficulty import STARTING_BOARD_STR
+import random
 
 
 HAPPY_PATH_RESPONSES = [
     "Now I'll move my {piece_name} to {to_location}",
-    "Let me move my {piece_name} to {to_location}",
+    "Now, let me move my {piece_name} to {to_location}",
     "For my turn, I'll move my {piece_name} at {from_location} to {to_location}"
 ]
 
 PROMPT_PLAYER_TURN_GAME_START_PREFIXES = [
-    "Whenever you're ready, I can make a move for you or tell you what else you can do. To move a piece, you can say 'pawn to E5', or, 'B3 to F3'.",
-    "By the way, I can make your move whenever you're ready, or I can tell you what else you can do. To move a piece, you can say 'pawn to C4', or, 'E7 to E5'."
+    "Whenever you're ready, I can make a move for you. To move a piece, you can say something like 'pawn to E5', or, 'B3 to F3'. We'll play till one of us wins, or whenever you'd like to stop.",
+    "When you're ready to move a piece, you can say something like 'pawn to C4', or, 'E7 to E5'. We'll play out the game till the end, or when you tell me you're done."
 ]
 
 
@@ -57,8 +59,17 @@ def determine_andy_move(session_id, board_str):
     """
     static_choice = get_random_choice(HAPPY_PATH_RESPONSES)
 
-    # Get the best move
-    move = get_best_move(board_str)
+    # Get the best move or a random move depending on difficulty
+    game_state = get_game_state(session_id)
+    difficulty = game_state["difficulty_selection"]
+    if difficulty == "hard":
+        move = get_best_move(board_str)
+    else:
+        chance = random.randrange(1, 11)
+        if chance <= 4:
+            move = get_best_move(board_str)
+        else:
+            move = get_random_move(board_str)
 
     # Get logging information
     from_location = move[0:2]
