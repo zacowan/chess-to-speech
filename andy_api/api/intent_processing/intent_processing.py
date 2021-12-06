@@ -118,6 +118,9 @@ def fulfill_intent(session_id, board_str, intent_data):
         elif response_type == RESPONSE_TYPES.SELECT_DIFFICULTY:
             response_choice, success, updated_board_str = select_difficulty.handle(
                 session_id, intent_data)
+        else:
+            response_type = RESPONSE_TYPES.FALLBACK
+            success = False
 
     # Intents to handle after a game has started and the user has chosen a side
     elif not game_state["game_finished"]:
@@ -150,6 +153,9 @@ def fulfill_intent(session_id, board_str, intent_data):
             response_choice, success = quit_game.handle_yes(session_id)
         elif response_type == RESPONSE_TYPES.QUIT_GAME_NO:
             response_choice, success = quit_game.handle_no()
+        else:
+            response_type = RESPONSE_TYPES.FALLBACK
+            success = False
 
     # Intents to handle after a game has finished
     else:
