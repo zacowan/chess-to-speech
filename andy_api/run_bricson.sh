@@ -17,7 +17,7 @@ STOCKFISH_NAME="stockfish.exe"
 #
 # Suffix to append to the end of logs
 # Should be one of: "development" | "demo1" | "demo2"
-LOG_SUFFIX="demo1"
+LOG_SUFFIX="demo2"
 # ---------------------------------------------------------------------------- #
 STOCKFISH_BASE_DIR="./stockfish_engine"
 STOCKFISH_LOCATION="$STOCKFISH_BASE_DIR/$STOCKFISH_NAME"
