@@ -125,7 +125,7 @@ def fulfill_intent(session_id, board_str, intent_data):
             response_choice, success, updated_board_str = move_piece.handle(
                 session_id, intent_data, board_str)
         elif response_type == RESPONSE_TYPES.CASTLE:
-            response_choice, success = castle.handle(
+            response_choice, success, updated_board_str = castle.handle(
                 session_id, intent_data, board_str)
         elif response_type == RESPONSE_TYPES.HOW_PIECE_MOVES:
             response_choice, success = how_piece_moves.handle(

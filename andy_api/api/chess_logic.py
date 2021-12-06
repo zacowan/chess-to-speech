@@ -1,4 +1,4 @@
-from typing import cast
+from typing import Tuple, cast
 import chess
 import chess.engine
 import os
@@ -37,10 +37,11 @@ def get_best_move(board_str):
     engine.quit()
     return best_move.uci()
 
+
 def get_random_move(board_str):
     board = chess.Board(board_str)
     legal_moves = list(board.legal_moves)
-    move = random.choice (legal_moves)
+    move = random.choice(legal_moves)
     return move.uci()
 
 
@@ -119,8 +120,23 @@ class IllegalMoveError(Exception):
 class MultiplePiecesCanMoveError(Exception):
     pass
 
+
+def get_castle_locations(board_str, castle_side, user_side) -> Tuple[str, str]:
+    """Returns from_location, to_location"""
+    castle_side = check_castle(board_str, castle_side, user_side)
+    if castle_side == "king" and user_side == "white":
+        return 'E1', 'G1'
+    elif castle_side == "king" and user_side == "black":
+        return 'E8', 'G8'
+    elif castle_side == "queen" and user_side == "white":
+        return 'E1', 'C1'
+    else:
+        return 'E8', 'C8'
+
+
 def check_castle(board_str, castle_side, user_side):
     board = chess.Board(board_str)
+    castle_side = castle_side.lower()
     if(user_side == "white"):
         user_side = chess.WHITE
         if(castle_side == "left"):
@@ -134,12 +150,11 @@ def check_castle(board_str, castle_side, user_side):
         elif(castle_side == "right"):
             castle_side = "queen"
     if board.has_castling_rights(user_side):
-        if ((castle_side=="king" and board.has_kingside_castling_rights(user_side)) or
-            (castle_side=="queen" and board.has_queenside_castling_rights(user_side))):
+        if ((castle_side == "king" and board.has_kingside_castling_rights(user_side)) or
+                (castle_side == "queen" and board.has_queenside_castling_rights(user_side))):
             return castle_side
-    else: return False
-
-        
+    else:
+        return None
 
 
 def get_from_location_from_move_info(board_str, move_info):
