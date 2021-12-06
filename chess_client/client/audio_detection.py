@@ -49,7 +49,7 @@ def run():
 
         # If we don't detect anything and we exceed a timeout, tell the user we can provide them with a move
         if not detected_text:
-            if timer_counter.check_timer():
+            if game_engine.isGameStarted and timer_counter.check_timer():
                 print("TRIGGER")
                 timer_counter.stop_timer()
                 audio_response = get_help_response("TIMEOUT")

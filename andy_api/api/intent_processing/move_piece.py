@@ -49,7 +49,7 @@ WRONG_COLOR_ERROR_RESPONSES = [
 ]
 
 ILLEGAL_MOVE_ERROR_RESPONSES = [
-    "Actually, that move would be against the rules, so you can't do it.",
+    "Actually, that would be against the rules, so you can't do it.",
     "Oh, that's an illegal move. Could you give me a different one?"
 ]
 
