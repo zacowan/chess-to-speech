@@ -64,9 +64,10 @@ dict2 = {
     "contact force": "Pawn to F4",
     "santa de ford": "Pawn to F4",
     "home to b6": "Pawn to B6",
-    "haunted essex" : "pawn to B6",
+    "haunted essex": "pawn to B6",
     "king two d8": "King to D8",
-    "ponte ford": "Pawn to A4"
+    "ponte ford": "Pawn to A4",
+    "queen to be one": "Queen to B1"
 }
 
 
