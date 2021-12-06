@@ -73,7 +73,8 @@ def handle(session_id, intent_model, board_str):
         # Log the fulfillment params
         set_fulfillment_params(session_id, params={
             "from_location": from_location,
-            "to_location": to_location
+            "to_location": to_location,
+            "castle_side": castle_side
         })
 
         # Chess logic
@@ -100,6 +101,7 @@ def handle(session_id, intent_model, board_str):
                 set_fulfillment_params(session_id, params={
                     "from_location": from_location,
                     "to_location": to_location,
+                    "castle_side": castle_side,
                     "won": True
                 })
             elif check_if_check(updated_board_str):
