@@ -1,7 +1,10 @@
+from typing import cast
 import chess
 import chess.engine
 import os
 import random
+
+from api.state_manager import get_game_state
 
 # This is a relative location to the directory in which you run the script (aka, andy_api/)
 STOCKFISH_ENGINE_LOCATION = os.environ.get("STOCKFISH_LOCATION")
@@ -115,6 +118,28 @@ class IllegalMoveError(Exception):
 
 class MultiplePiecesCanMoveError(Exception):
     pass
+
+def check_castle(board_str, castle_side, user_side):
+    board = chess.Board(board_str)
+    if(user_side == "white"):
+        user_side = chess.WHITE
+        if(castle_side == "left"):
+            castle_side = "queen"
+        elif(castle_side == "right"):
+            castle_side = "king"
+    if(user_side == "black"):
+        user_side = chess.BLACK
+        if(castle_side == "left"):
+            castle_side = "king"
+        elif(castle_side == "right"):
+            castle_side = "queen"
+    if board.has_castling_rights(user_side):
+        if ((castle_side=="king" and board.has_kingside_castling_rights(user_side)) or
+            (castle_side=="queen" and board.has_queenside_castling_rights(user_side))):
+            return castle_side
+    else: return False
+
+        
 
 
 def get_from_location_from_move_info(board_str, move_info):
