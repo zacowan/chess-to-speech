@@ -166,21 +166,95 @@ class CompiledLog:
         }
 
 
-def user_request_csv():
+def read_pre(loc: str, l: list[tuple[str, CompiledLog]]) -> list[CompiledLog]:
+    """
+
+    Name
+    Played
+    Knowledge
+    Skill
+    Enjoy
+
+    """
+    ret: list[CompiledLog] = []
+    with open(loc, newline='') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            name = row["Name"]
+            played = True if row['Played'] == 'Yes' else False
+            familiarity = row['Knowledge'] + row['Skill']
+            enjoy = row['Enjoy']
+
+            for n, cl in l:
+                if n == name:
+                    cl.played_chess_before = played
+                    cl.chess_familiarity_score = familiarity
+                    cl.chess_fun_score = enjoy
+                    ret.append(cl)
+
+    return ret
+
+
+def read_post(loc: str) -> list[tuple[str, CompiledLog]]:
+    """
+
+    session_id
+    Name
+    Q1 (p)
+    Q2 (n)
+    Q3 (p)
+    Q4 (n)
+    Q5 (p)
+    Q6 (n)
+    Q7 (p)
+    Q8 (n)
+    Q9 (p)
+    Q10 (n)
+
+    """
+    ret: list[tuple[str, CompiledLog]] = []
+    with open(loc, newline='') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            session_id = row['session_id']
+            name = row["Name"]
+            positives = row['Q1'] + row['Q3'] + \
+                row['Q5'] + row['Q7'] + row['Q9']
+            negatives = row['Q2'] + row['Q4'] + \
+                row['Q6'] + row['Q8'] + row['Q10']
+
+            l = CompiledLog(session_id)
+            l.sus = positives - negatives
+            ret.append((name, l))
+
+    return ret
+
+
+def generate_user_request_csv(ret: CompiledLog):
     try:
-        session_id = '9b3594bb-c5ba-4357-85ae-e54b6cc72411'
+        session_id = ret.session_id
         db = firestore.Client(project=PROJECT_ID)
         docs = db.collection(USER_REQUEST_LOGS_COLLECTION).where(
-            'session_id', '==', '9b3594bb-c5ba-4357-85ae-e54b6cc72411').order_by('timestamp').stream()
+            'session_id', '>=', session_id).order_by('timestamp').limit(50).stream()
 
-        with open(f'user_request_logs_{session_id[0:8]}.csv', 'w', newline='') as csvfile:
+        with open(f'user_requests_log_{session_id}.csv', 'w', newline='') as csvfile:
             fieldnames = ['timestamp', 'text', 'detected_fulfillment',
                           'fulfillment_success', 'recording_time_ms', 'time_to_response_ms', 'response_text', 'audio_name']
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
             writer.writeheader()
+            start_time = None
+            prev_time = None
             for doc in docs:
                 req_dict = doc.to_dict()
+
+                if req_dict['session_id'][0:8] != session_id:
+                    break
+
+                if not start_time:
+                    start_time = req_dict['timestamp']
+
+                prev_time = req_dict['timestamp']
 
                 # Get Andy response information
                 andy_response_doc = req_dict['linked_logs'][0].get().to_dict()
@@ -188,14 +262,41 @@ def user_request_csv():
                 req_dict['time_to_response_ms'] = req_dict['request_time_ms'] + \
                     andy_response_doc['request_time_ms']
 
+                # Update compiled log
+                ret.sum_time_to_response += req_dict['time_to_response_ms']
+                ret.sum_recording_time += req_dict['recording_time']
+                ret.num_utterances += 1
+                ret.num_fallback += 1 if req_dict['detected_fulfillment'] == 'FALLBACK' else 0
+                if req_dict['fulfillment_success'] == True:
+                    ret.num_fulfillment_success += 1
+                else:
+                    ret.num_fulfillment_fail += 1
+
                 for k in USER_REQUEST_REMOVED_KEYS:
                     del req_dict[k]
 
                 writer.writerow(req_dict)
 
+            # Update game time
+            ret.game_length_sec = (prev_time - start_time).total_seconds()
+
     except Exception:
         print("Error: %s", traceback.format_exc())
+        exit(-1)
 
 
 if __name__ == "__main__":
-    user_request_csv()
+    # Read post-survey and pre-survey, construct CompiledLog for each
+    l = read_post("post_survey.csv")
+    compiled_logs: list[CompiledLog] = read_pre("pre_survey.csv", l)
+    # Read GCP logs, update CompiledLog for each
+    for cl in compiled_logs:
+        generate_user_request_csv(cl)
+    # Write CompiledLog to csv
+    with open('compiled_logs.csv', 'w', newline='') as csvfile:
+        writer = csv.DictWriter(csvfile, list(
+            compiled_logs[0].to_dict().keys()))
+
+        writer.writeheader()
+        for cl in compiled_logs:
+            writer.writerow(cl.to_dict())
