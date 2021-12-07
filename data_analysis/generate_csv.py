@@ -124,6 +124,10 @@ USER_REQUEST_REMOVED_KEYS = [
     'num_fallback': number,
     'num_fulfillment_success': number,
     'num_fulfillment_fail': number,
+    'played_chess_before': bool,
+    'chess_familiarity_score': number,
+    'chess_fun_score': number,
+    'sus': number,
 }
 
 """
@@ -140,6 +144,10 @@ class CompiledLog:
         self.num_fallback = 0
         self.num_fulfillment_success = 0
         self.num_fulfillment_fail = 0
+        self.played_chess_before = None
+        self.chess_familiarity_score = None
+        self.chess_fun_score = None
+        self.sus = None
 
     def to_dict(self) -> dict:
         return {
@@ -150,7 +158,11 @@ class CompiledLog:
             "num_utterances": self.num_utterances,
             "num_fallback": self.num_fallback,
             "num_fulfillment_success": self.num_fulfillment_success,
-            "num_fulfillment_fail": self.num_fulfillment_fail
+            "num_fulfillment_fail": self.num_fulfillment_fail,
+            "played_chess_before": self.played_chess_before,
+            "chess_familiarity_score": self.chess_familiarity_score,
+            "chess_fun_score": self.chess_fun_score,
+            "sus": self.sus
         }
 
 
