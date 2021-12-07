@@ -86,9 +86,10 @@ Error Types:
 from google.cloud import firestore
 import traceback
 import csv
+from datetime import datetime
 
 PROJECT_ID = "chess-master-andy-mhyo"
-LOGGING_SUFFIX = "development"
+LOGGING_SUFFIX = "demo1"
 
 USER_REQUEST_LOGS_BASE_COLLECTION = "user_request_logs"
 ANDY_RESPONSE_LOGS_BASE_COLLECTION = "andy_response_logs"
@@ -152,8 +153,8 @@ class CompiledLog:
     def to_dict(self) -> dict:
         return {
             "session_id": self.session_id,
-            "average_time_to_response_ms": self.sum_time_to_response / self.num_utterances,
-            "average_recording_time_ms": self.sum_recording_time / self.num_utterances,
+            "average_time_to_response_ms": self.sum_time_to_response / self.num_utterances if self.num_utterances != 0 else 0,
+            "average_recording_time_ms": self.sum_recording_time / self.num_utterances if self.num_utterances != 0 else 0,
             "game_length_sec": self.game_length_sec,
             "num_utterances": self.num_utterances,
             "num_fallback": self.num_fallback,
@@ -182,8 +183,8 @@ def read_pre(loc: str, l: list[tuple[str, CompiledLog]]) -> list[CompiledLog]:
         for row in reader:
             name = row["Name"]
             played = True if row['Played'] == 'Yes' else False
-            familiarity = row['Knowledge'] + row['Skill']
-            enjoy = row['Enjoy']
+            familiarity = int(row['Knowledge']) + int(row['Skill'])
+            enjoy = int(row['Enjoy'])
 
             for n, cl in l:
                 if n == name:
@@ -218,10 +219,10 @@ def read_post(loc: str) -> list[tuple[str, CompiledLog]]:
         for row in reader:
             session_id = row['session_id']
             name = row["Name"]
-            positives = row['Q1'] + row['Q3'] + \
-                row['Q5'] + row['Q7'] + row['Q9']
-            negatives = row['Q2'] + row['Q4'] + \
-                row['Q6'] + row['Q8'] + row['Q10']
+            positives = int(row['Q1']) + int(row['Q3']) + \
+                int(row['Q5']) + int(row['Q7']) + int(row['Q9'])
+            negatives = int(row['Q2']) + int(row['Q4']) + \
+                int(row['Q6']) + int(row['Q8']) + int(row['Q10'])
 
             l = CompiledLog(session_id)
             l.sus = positives - negatives
@@ -235,36 +236,44 @@ def generate_user_request_csv(ret: CompiledLog):
         session_id = ret.session_id
         db = firestore.Client(project=PROJECT_ID)
         docs = db.collection(USER_REQUEST_LOGS_COLLECTION).where(
-            'session_id', '>=', session_id).order_by('timestamp').limit(50).stream()
+            'session_id', '>=', session_id).limit(50).stream()
 
-        with open(f'user_requests_log_{session_id}.csv', 'w', newline='') as csvfile:
+        with open(f'logs_by_session_id/user_requests_log_{session_id}.csv', 'w', newline='') as csvfile:
             fieldnames = ['timestamp', 'text', 'detected_fulfillment',
                           'fulfillment_success', 'recording_time_ms', 'time_to_response_ms', 'response_text', 'audio_name']
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
             writer.writeheader()
-            start_time = None
-            prev_time = None
+            start_time: datetime = None
+            end_time: datetime = None
             for doc in docs:
                 req_dict = doc.to_dict()
 
+                print(
+                    f"Expected: {session_id} | Actual: {req_dict['session_id'][0:8]}")
                 if req_dict['session_id'][0:8] != session_id:
                     break
 
                 if not start_time:
                     start_time = req_dict['timestamp']
+                    end_time = start_time
 
-                prev_time = req_dict['timestamp']
+                end_time = max(end_time, req_dict['timestamp'])
 
                 # Get Andy response information
-                andy_response_doc = req_dict['linked_logs'][0].get().to_dict()
-                req_dict['response_text'] = andy_response_doc['text']
-                req_dict['time_to_response_ms'] = req_dict['request_time_ms'] + \
-                    andy_response_doc['request_time_ms']
+                if len(req_dict['linked_logs']) > 0:
+                    andy_response_doc = req_dict['linked_logs'][0].get(
+                    ).to_dict()
+                    req_dict['response_text'] = andy_response_doc['text']
+                    req_dict['time_to_response_ms'] = req_dict['request_time_ms'] + \
+                        andy_response_doc['request_time_ms']
+                else:
+                    req_dict['response_text'] = None
+                    req_dict['time_to_response_ms'] = req_dict['request_time_ms']
 
                 # Update compiled log
                 ret.sum_time_to_response += req_dict['time_to_response_ms']
-                ret.sum_recording_time += req_dict['recording_time']
+                ret.sum_recording_time += req_dict['recording_time_ms']
                 ret.num_utterances += 1
                 ret.num_fallback += 1 if req_dict['detected_fulfillment'] == 'FALLBACK' else 0
                 if req_dict['fulfillment_success'] == True:
@@ -278,7 +287,8 @@ def generate_user_request_csv(ret: CompiledLog):
                 writer.writerow(req_dict)
 
             # Update game time
-            ret.game_length_sec = (prev_time - start_time).total_seconds()
+            if start_time and end_time:
+                ret.game_length_sec = (end_time - start_time).total_seconds()
 
     except Exception:
         print("Error: %s", traceback.format_exc())

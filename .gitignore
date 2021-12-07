@@ -9,3 +9,4 @@ andy_response.wav
 shelve/
 stockfish_engine/
 UCI_engine/
+data_analysis/logs_by_session_id/*.csv

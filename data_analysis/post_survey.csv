@@ -1,0 +1,24 @@
+Timestamp,session_id,Name,Q1,Q2,Q3,Q4,Q5,Q6,Q7,Q8,Q9,Q10,Improve,"Is there any additional info you feel would be beneficial for us to know, in order to improve our system?"
+11/8/2021 12:57:50,3c4efe7d,Melinda Chhu,3,2,3,2,2,3,4,3,4,2,4,"When saying ""move pawn to location"" if multiple pawns can be moved to the location they don't ask which one to move. It was also a little difficult to read the tile coordinates - could change the graphic so there is the coordinates on each tile. Don't know how much control you have over this but there is a gap in speaking and a response."
+11/8/2021 12:59:48,8dac81bd,James Horn,2,2,4,1,3,5,3,4,3,1,3,I feel like most of the issues came from understanding my speech.
+11/8/2021 13:03:17,394b8cad,Nathan Hilton,3,1,3,2,4,4,5,3,3,3,4,"As someone who does not play chess that often, I forgot some of the names of the pieces. Other than that it worked well when it could understand me."
+11/8/2021 13:05:35,e669dfe7,Thomas Hancock,3,1,3,1,4,3,5,3,5,1,5,
+11/8/2021 13:11:20,7a82aab5,Salome Asatiani,3,3,3,1,5,4,4,3,4,1,3,I needed to repeat instructions but that's because of my accent. Other than that it worked fine. The work you have done so far is impressive! 
+11/8/2021 13:12:37,35a422fe,Lucas Liseth,4,2,5,2,4,2,5,1,4,2,4,
+11/8/2021 13:17:08,1f9e4d3a,Turner Shultz,4,1,4,1,5,1,5,1,5,1,4,No
+11/8/2021 13:21:37,042e3260,Cameron Self,4,2,3,2,3,3,5,2,4,3,3,"I unfortunately didn't test any sort of help phrases, just the technical aspect. For the most part, it went very smooth in my experience. The only issue I had was with the ability to castle. I tried to say ""castle"", or ""castle kingside"" when it was an option, however, the system did not recognize that. Instead, saying ""King to G8"" worked. This might be unintuitive for newer players."
+11/8/2021 13:25:17,a119ea7a,Grant Wise,4,4,1,2,2,4,2,4,2,3,2,It took me a second to realize that I don't actually have to press the microphone button. It also had a good amount of issues figuring out what I was saying.
+11/8/2021 13:32:24,ec702a9a,Ammar Abdullah,2,2,4,1,5,1,4,4,3,2,3,"I don't know if it's possible, but making the lag time between Andy saying something and the mic being listened to is pretty long. I'd have a move ready to say and right after Andy would do something, I'd say it. But since there's a lot of lag time, it doesn't actually hear me, or worse, it hears only half of what I say and I have to do it all over again because Andy is confused. I'm not sure if this is something you can fix but that's definetely the biggest thing. Other than that, this was awesome"
+11/8/2021 13:34:16,d78be7f6,Nikolas Urcuyo,4,2,3,3,4,4,4,3,3,2,4,Just making the speech recognition a little more consistent
+11/8/2021 13:41:23,19947c42,yingbo ma,5,1,3,2,3,2,3,2,3,5,5,"Speech recognition process takes a long time; As a user I don't know when I should start talking, is the system waiting for me to say something or it is recognizing my voice."
+11/8/2021 13:45:21,e54992ef,Sarah Brown,1,2,3,2,2,4,2,4,2,2,2,It looks like Andy is at default going to make the most optimal move like a professional player - might this be a problem for a UI trying to teach people how to play chess? Also it seems to have trouble detecting many of the board positions via speech
+11/10/2021 12:55:41,e0ad8390,David Peguero,3,2,4,2,4,3,2,4,4,1,5,"Nothing at the moment, since I only tried very simple commands like basic moves. "
+11/10/2021 13:03:54,e3d93f51,Jack Tian,5,1,5,2,5,1,3,2,5,2,4,
+11/10/2021 13:14:34,02d5e8cd,Alejandro Kirsch,2,1,3,3,4,4,4,5,3,1,1,The system should be able to catch terms much easier. Since it is just looking for a specific phrase sequence the probability that something is a chess move should be much higher. Thus certain words should be removed from the systems lexicon since they are wholly unnecessary like Honda.
+11/10/2021 13:22:33,ce7934a5,Olivia Feller,3,2,4,2,4,2,4,3,4,2,3,"It didn't understand when I just said ""white"", only ""white side"", so that is something to take into consideration. Also, there was no way for me to go back and change my move once it misunderstood my move. It;s a cool system but for right now I'm not sure what the benefit of this is over just playing on chess.com so I think it would be good if it could teach chess or do something different."
+11/10/2021 13:25:48,01a4bab0,John Gray,3,1,5,2,3,4,5,1,4,2,3,"Beware of accents, it'd sometimes get my words wrong."
+11/10/2021 13:31:44,9d0fccef,Mark McGinnis,3,1,5,1,5,1,4,2,4,2,4,that was awesome great job guys!
+11/10/2021 13:36:58,3fdealeb,Andrew Maxim,4,1,4,2,4,2,4,1,4,1,5,
+11/10/2021 13:41:10,750b49c9,Santosh Tirumala,3,1,5,1,5,1,5,1,5,2,4,
+11/24/2021 10:55:35,d4ae8da4,Nate Cowan,2,1,4,1,3,1,5,2,5,2,3,
+11/24/2021 11:21:47,b99ab92a,Sydney Cowan,3,1,4,1,4,1,5,2,3,1,3,
