@@ -83,6 +83,9 @@ Error Types:
     "INTENT FULFILLMENT TTS LOGGING AUDIO_UPLOAD BEST_MOVE UNKNOWN"
 
 """
+from google.cloud import firestore
+import traceback
+import csv
 
 PROJECT_ID = "chess-master-andy-mhyo"
 LOGGING_SUFFIX = "development"
@@ -97,6 +100,65 @@ USER_REQUEST_LOGS_COLLECTION = f"{USER_REQUEST_LOGS_BASE_COLLECTION}_{LOGGING_SU
 ANDY_RESPONSE_LOGS_COLLECTION = f"{ANDY_RESPONSE_LOGS_BASE_COLLECTION}_{LOGGING_SUFFIX}"
 HELP_RESPONSE_LOGS_COLLECTION = f"{HELP_RESPONSE_LOGS_BASE_COLLECTION}_{LOGGING_SUFFIX}"
 
+USER_REQUEST_REMOVED_KEYS = [
+    'session_id',
+    'detected_intent',
+    'board_str_before',
+    'board_str_after',
+    'error_types',
+    'error_desc',
+    'linked_logs',
+    'fulfillment_params',
+    'request_time_ms',
+    'errors_occurred'
+]
+
+"""
+
+{
+    'session_id': str,
+    'average_time_to_response_ms': number,
+    'average_recording_time_ms': number,
+    'game_length_sec': number,
+    'num_fallback': number,
+    'num_fulfillment_success': number,
+    'num_fulfillment_fail': number,
+}
+
+"""
+compiled_log = {}
+
 
 def user_request_csv():
-    pass
+    try:
+        session_id = '9b3594bb-c5ba-4357-85ae-e54b6cc72411'
+        db = firestore.Client(project=PROJECT_ID)
+        docs = db.collection(USER_REQUEST_LOGS_COLLECTION).where(
+            'session_id', '==', '9b3594bb-c5ba-4357-85ae-e54b6cc72411').order_by('timestamp').stream()
+
+        with open(f'user_request_logs_{session_id[0:8]}.csv', 'w', newline='') as csvfile:
+            fieldnames = ['timestamp', 'text', 'detected_fulfillment',
+                          'fulfillment_success', 'recording_time_ms', 'time_to_response_ms', 'response_text', 'audio_name']
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+            writer.writeheader()
+            for doc in docs:
+                req_dict = doc.to_dict()
+
+                # Get Andy response information
+                andy_response_doc = req_dict['linked_logs'][0].get().to_dict()
+                req_dict['response_text'] = andy_response_doc['text']
+                req_dict['time_to_response_ms'] = req_dict['request_time_ms'] + \
+                    andy_response_doc['request_time_ms']
+
+                for k in USER_REQUEST_REMOVED_KEYS:
+                    del req_dict[k]
+
+                writer.writerow(req_dict)
+
+    except Exception:
+        print("Error: %s", traceback.format_exc())
+
+
+if __name__ == "__main__":
+    user_request_csv()
