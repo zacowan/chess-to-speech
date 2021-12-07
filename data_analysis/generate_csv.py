@@ -120,13 +120,38 @@ USER_REQUEST_REMOVED_KEYS = [
     'average_time_to_response_ms': number,
     'average_recording_time_ms': number,
     'game_length_sec': number,
+    'num_utterances': number,
     'num_fallback': number,
     'num_fulfillment_success': number,
     'num_fulfillment_fail': number,
 }
 
 """
-compiled_log = {}
+compiled_logs: list[dict] = []
+
+
+class CompiledLog:
+    def __init__(self, id) -> None:
+        self.session_id = id
+        self.sum_time_to_response = 0
+        self.sum_recording_time = 0
+        self.game_length_sec = 0
+        self.num_utterances = 0
+        self.num_fallback = 0
+        self.num_fulfillment_success = 0
+        self.num_fulfillment_fail = 0
+
+    def to_dict(self) -> dict:
+        return {
+            "session_id": self.session_id,
+            "average_time_to_response_ms": self.sum_time_to_response / self.num_utterances,
+            "average_recording_time_ms": self.sum_recording_time / self.num_utterances,
+            "game_length_sec": self.game_length_sec,
+            "num_utterances": self.num_utterances,
+            "num_fallback": self.num_fallback,
+            "num_fulfillment_success": self.num_fulfillment_success,
+            "num_fulfillment_fail": self.num_fulfillment_fail
+        }
 
 
 def user_request_csv():
