@@ -1,0 +1,21 @@
+timestamp,text,detected_fulfillment,fulfillment_success,recording_time_ms,time_to_response_ms,response_text,audio_name
+2021-12-06 13:37:55.405516+00:00,I can help one person,POSSIBLE_ACTIONS,True,9383.288,991.1000000000001,"I can move a piece for you, tell you how named pieces move, help you make your best move, undo your last move, and restart the game. We can also end the game at any time.",audio-files-staging/d09f9b79-ab7c-4f1a-be2b-e26f49a2929c
+2021-12-06 13:35:36.446452+00:00,how do you feel about,FALLBACK,False,5932.000999999999,823.354,I didn't get that. Can you say it again?,audio-files-staging/d3b6eda7-32ab-4ea9-82e9-dd5804e092a9
+2021-12-06 13:37:15.005229+00:00,except like flooring start light for me,RESTART_GAME,True,6314.835,1279.162,"It seems like you want to start over, is that right?",audio-files-staging/df353621-6e40-4d8e-bd81-364ed18a5115
+2021-12-06 13:36:17.344382+00:00,one Improvement I did notice last time,FALLBACK,False,15726.909,820.693,I missed what you said. What was that?,audio-files-staging/93bf8fef-31a1-455d-a6e3-139ecc93df80
+2021-12-06 13:35:54.911221+00:00,it's not 100% accurate but it's perfect,FALLBACK,False,11729.896999999999,759.396,"Sorry, could you say that again?",audio-files-staging/67c2185a-0cce-4a52-99f5-9b40f9d00288
+2021-12-06 13:37:30.955506+00:00,y'all let me take the test over,FALLBACK,False,7122.7119999999995,855.4069999999999,I didn't get that. Can you say it again?,audio-files-staging/a97930e3-f7ff-4bd6-b78a-b5ac464c490f
+2021-12-06 13:35:00.296899+00:00,how to design,FALLBACK,False,2582.4280000000003,817.0619999999999,What was that?,audio-files-staging/06c04de4-045b-46b9-9299-3e0fd191dc35
+2021-12-06 13:33:18.761304+00:00,I need some advice,BEST_MOVE,True,3966.939,1465.7549999999999,I'd reccomend moving your queen from d8 to g5.,audio-files-staging/65eb6224-03c8-4985-9188-6e7cb410525c
+2021-12-06 13:34:52.745741+00:00,cool I mean,FALLBACK,False,3476.6330000000003,692.107,What was that?,audio-files-staging/444d268c-01a3-42ad-91a9-ce66ac1f9a8d
+2021-12-06 13:36:33.301795+00:00,yeah what we are,FALLBACK,False,9387.166000000001,510.16399999999993,,audio-files-staging/5fe8f200-867b-4b36-9a6b-6e07b9f18bcc
+2021-12-06 13:35:12.426358+00:00,when you got user input,FALLBACK,False,6206.921,649.1080000000001,,audio-files-staging/645c1a89-d893-4bbf-9602-6992cb2c4e9a
+2021-12-06 13:33:31.449577+00:00,Luke McQueen from VA to G5,FALLBACK,False,4628.5689999999995,693.262,What was that?,audio-files-staging/05b12b85-9346-442f-8429-0b426c9ad3a7
+2021-12-06 13:32:04.783058+00:00,black-site,CHOOSE_SIDE,True,11594.444,890.237,"Good choice, that means you'll go second. Now, would you like an easy game, or a hard game?",audio-files-staging/66f225ea-62e0-4f5d-8885-5ba35088736d
+2021-12-06 13:31:35.018361+00:00,hi Andy let's play chess,START_GAME,True,4698.04,764.389,"Alright, let's do this. Did you want black side or white side?",audio-files-staging/887577f1-2a6f-458b-af1b-dd7ddeb6c852
+2021-12-06 13:33:41.803189+00:00,move a queen to d8 to G5,MOVE_PIECE,True,4370.75,780.414,Now I'll move my queen to c1,audio-files-staging/6113de8e-b597-4995-8e2a-2551e2a8c299
+2021-12-06 13:32:17.282126+00:00,I would like an easy game,SELECT_DIFFICULTY,True,2220.43,1529.2979999999998,"Whenever you're ready, I can make a move for you. To move a piece, you can say something like 'pawn to E5', or, 'B3 to F3'. We'll play till one of us wins, or whenever you'd like to stop. Now I'll move my pawn to d4",audio-files-staging/17081e26-089e-4707-a42b-a7eefb61c89f
+2021-12-06 13:32:51.516051+00:00,E7 to E6,MOVE_PIECE,True,7681.631,989.924,"Now, let me move my bishop to g5",audio-files-staging/4d4186fd-ddba-48b7-aaf6-d3b86edfaf17
+2021-12-06 13:37:00.588701+00:00,feel bad,FALLBACK,False,5223.177,1308.403,I didn't get that. Can you say it again?,audio-files-staging/a04a99cb-bbe7-4b13-adb6-9a392d59c447
+2021-12-06 13:33:59.382059+00:00,give me some advice,BEST_MOVE,True,6083.265,2632.746,I think you should move your queen at g5 to c1.,audio-files-staging/3d5511b1-1855-4a7f-9729-e2f0133a9a39
+2021-12-06 13:31:47.353357+00:00,Kellogg's website,FALLBACK,False,2082.9300000000003,685.838,"Sorry, could you say that again?",audio-files-staging/3a3871da-873c-4740-96aa-653aa3eb907c

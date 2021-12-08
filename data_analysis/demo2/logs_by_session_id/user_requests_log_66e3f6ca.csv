@@ -1,0 +1,18 @@
+timestamp,text,detected_fulfillment,fulfillment_success,recording_time_ms,time_to_response_ms,response_text,audio_name
+2021-12-06 13:43:06.584451+00:00,I want to give up,QUIT_GAME,True,14868.344000000001,1140.529,It sounds like you're all done - would you like to quit?,audio-files-staging/364e0c9e-e82c-435a-9481-6fdefc168eb7
+2021-12-06 13:39:42.740464+00:00,iwantblacks,FALLBACK,False,1470.503,763.608,I missed what you said. What was that?,audio-files-staging/aeb83701-9bb9-4994-8cb1-9b53f92176c7
+2021-12-06 13:39:34.149158+00:00,which is better,FALLBACK,False,1599.893,1127.867,I missed what you said. What was that?,audio-files-staging/a2207274-4d6e-4ff1-9720-13ca94b11bfb
+2021-12-06 13:40:35.280184+00:00,Pawn to B5,MOVE_PIECE,True,2389.4829999999997,744.5409999999999,Now I'll move my pawn to e4,audio-files-staging/017ebe12-44e7-4a73-a2ed-c7c2d6bfe16c
+2021-12-06 13:42:00.734141+00:00,pawn to G5,MOVE_PIECE,True,2134.824,1003.839,"For my turn, I'll move my bishop at f1 to b5",audio-files-staging/7cbf6de3-fdd2-4508-9ab8-d94356b1ae9e
+2021-12-06 13:41:04.469458+00:00,what should I do,BEST_MOVE,True,2560.755,1372.002,I think you should move your bishop at c8 to b7.,audio-files-staging/0d484268-f9c5-43a7-ad63-27a66cdd3dee
+2021-12-06 13:39:57.040319+00:00,I want black side,CHOOSE_SIDE,True,6886.649,1237.109,"Good choice, that means you'll go second. Now, would you like an easy game, or a hard game?",audio-files-staging/02421824-c2e0-4eca-8777-0d9605a64ee7
+2021-12-06 13:43:16.558297+00:00,I want to quit,QUIT_GAME,True,1921.334,1142.873,It sounds like you're all done - would you like to quit?,audio-files-staging/b05e5c1b-a1e5-4187-966e-b17481f2d928
+2021-12-06 13:42:43.395256+00:00,yes I want to give,QUIT_GAME,True,13118.805999999999,1384.3709999999999,It sounds like you're all done - would you like to quit?,audio-files-staging/6bb94419-25bf-42f9-9de8-65fa1831e113
+2021-12-06 13:41:39.406521+00:00,where can I queen go,MOVE_PIECE,False,3094.131,1239.431,"I hear that you want to move your queen, but where to?",audio-files-staging/7b4edd8e-e9df-4502-b381-2302f84a034b
+2021-12-06 13:39:23.284662+00:00,hey Andy let's play chess,START_GAME,True,3584.42,873.4570000000001,"Awesome, I'm so excited. But first, do you want black or white side?",audio-files-staging/8b41e5e8-3816-435e-8524-655aaf114a88
+2021-12-06 13:40:10.074622+00:00,I want a hard again,SELECT_DIFFICULTY,True,2706.0170000000003,1027.3560000000002,"When you're ready to move a piece, you can say something like 'pawn to C4', or, 'E7 to E5'. We'll play out the game till the end, or when you tell me you're done. Now I'll move my pawn to d4",audio-files-staging/1ce0862f-757f-42b0-8daf-48aeaba92e60
+2021-12-06 13:42:18.199709+00:00,I give up,QUIT_GAME,True,3391.225,831.8,It sounds like you're all done - would you like to quit?,audio-files-staging/18108acf-4bcb-4c52-a38d-a8fa3a0937d8
+2021-12-06 13:41:14.071275+00:00,let's do that.,FALLBACK,False,2148.645,783.908,I missed what you said. What was that?,audio-files-staging/7e2435e9-4b2e-431f-8503-24d09d79c32e
+2021-12-06 13:43:26.736921+00:00,yes I do,QUIT_GAME_YES,True,1917.0819999999999,1109.652,"Alright, good game! I hope we can play again soon.",audio-files-staging/29dd01a4-c13f-4f61-ae4a-f8669e999fd4
+2021-12-06 13:41:23.323839+00:00,C8 to B7,MOVE_PIECE,True,2728.967,848.172,"For my turn, I'll move my knight at b1 to d2",audio-files-staging/ef7c2169-f70b-414a-ab4b-d9ee132b905a
+2021-12-06 13:41:49.964923+00:00,Ponzi file,MOVE_PIECE,False,2775.014,922.677,"I hear that you want to move your queen, but where to?",audio-files-staging/6da63f74-57e2-4f26-8771-ced0a622141d

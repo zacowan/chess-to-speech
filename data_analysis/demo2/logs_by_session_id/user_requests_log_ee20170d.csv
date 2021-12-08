@@ -1,0 +1,19 @@
+timestamp,text,detected_fulfillment,fulfillment_success,recording_time_ms,time_to_response_ms,response_text,audio_name
+2021-12-06 13:22:32.091175+00:00,Castle to G1,CASTLE,False,4505.788,849.7239999999999,"Sorry, where did you want to castle to?",audio-files-staging/c4735587-ed7c-4f5a-8a89-913c325b7c9c
+2021-12-06 13:19:04.501066+00:00,call takeaway,FALLBACK,False,1363.508,852.305,I didn't get that. Can you say it again?,audio-files-staging/7b42e27d-a33a-4e86-b713-b787cf2225f2
+2021-12-06 13:18:54.665226+00:00,hey Andy let's play chess,START_GAME,True,2900.929,873.7180000000001,"Alright, let's do this. Did you want black side or white side?",audio-files-staging/24c44197-f92e-4bd4-9d2c-de8cf5f49a41
+2021-12-06 13:23:25.192321+00:00,yeah I'd like to quit,QUIT_GAME,True,2153.841,692.969,"I hear that you're all finished, is that right?",audio-files-staging/aa267f90-d4cd-4f6e-bac0-c08f6b59e42f
+2021-12-06 13:21:09.139711+00:00,khon to debord,FALLBACK,False,3965.098,773.4200000000001,I'm not sure I understood that.,audio-files-staging/12c67f3c-af02-45ae-a70c-a50ed4a460da
+2021-12-06 13:23:15.294314+00:00,quit the game,QUIT_GAME,True,9494.987,878.606,It sounds like you're all done - would you like to quit?,audio-files-staging/e196e80b-6a79-4a8a-8110-4748b355d8a4
+2021-12-06 13:20:09.232503+00:00,did you go easy,FALLBACK,False,8100.301,777.6789999999999,What was that?,audio-files-staging/9ad887eb-1ea0-4356-bf16-0d601f1a2426
+2021-12-06 13:21:17.485301+00:00,Pawn to D4,MOVE_PIECE,True,2473.393,815.021,"Now, let me move my pawn to c6",audio-files-staging/81030f9d-dfa8-49a8-8ea1-0046ee253beb
+2021-12-06 13:20:17.558950+00:00,could you do easy,SELECT_DIFFICULTY,True,3148.4269999999997,1577.754,"Great, then I'll go easy on you. Now, let's get started. Whenever you're ready, I can make a move for you. To move a piece, you can say something like 'pawn to E5', or, 'B3 to F3'. We'll play till one of us wins, or whenever you'd like to stop.",audio-files-staging/9dc8cdb2-807d-45b5-98c6-760fc3057f7e
+2021-12-06 13:19:50.202557+00:00,I'd like you to go hard,FALLBACK,False,26841.937,757.879,"Sorry, could you say that again?",audio-files-staging/f3f57d40-ae61-4c97-a041-141795585b08
+2021-12-06 13:21:43.778105+00:00,Knight to F3,MOVE_PIECE,True,2433.9849999999997,922.549,"Now, let me move my pawn to d6",audio-files-staging/5eb407c2-a5d8-4427-aed6-09ddbab260f8
+2021-12-06 13:21:33.155855+00:00,Knight to E3,MOVE_PIECE,False,3604.0800000000004,1039.283,"Oh, that's an illegal move. Could you give me a different one?",audio-files-staging/931d66a5-ac2e-47c1-b8c6-e33758bb8caa
+2021-12-06 13:22:50.510310+00:00,Castle right side,CASTLE,True,11926.188,1180.772,"For my turn, I'll move my knight at g8 to f6",audio-files-staging/ba1c98bf-7006-4270-9e70-7b000750af4d
+2021-12-06 13:20:42.458380+00:00,Pawn to E4,MOVE_PIECE,True,2774.801,995.1479999999999,Now I'll move my pawn to g6,audio-files-staging/65689d6d-55d6-4ab2-9780-da24bf8beb05
+2021-12-06 13:22:00.623925+00:00,Bishop to C4,MOVE_PIECE,True,5141.586,905.909,"Now, let me move my bishop to g7",audio-files-staging/12f1e6ab-df1b-44b8-a874-91234cd73f72
+2021-12-06 13:19:13.299970+00:00,White Side,CHOOSE_SIDE,True,1900.365,1182.259,"Ok, then I'll take black. Next, would you like me to go easy, or hard on you?",audio-files-staging/e178e415-6750-403f-9303-ea2d13c8c2d1
+2021-12-06 13:22:21.176717+00:00,can you Castle,CASTLE,False,10255.691,757.608,"Sorry, where did you want to castle to?",audio-files-staging/bbeca277-a0fa-435e-8560-5a4961af6d86
+2021-12-06 13:23:34.249960+00:00,yep that's all right,QUIT_GAME_YES,True,2478.51,1368.2579999999998,"Alright, good game! I hope we can play again soon.",audio-files-staging/d0544a20-05b7-4673-a6ed-093af8a37741

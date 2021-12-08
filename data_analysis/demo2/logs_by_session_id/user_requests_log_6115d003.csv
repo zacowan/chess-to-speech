@@ -1,0 +1,14 @@
+timestamp,text,detected_fulfillment,fulfillment_success,recording_time_ms,time_to_response_ms,response_text,audio_name
+2021-12-08 13:23:17.040247+00:00,E2 to E4,MOVE_PIECE,True,2731.701,1259.957,"Now, let me move my pawn to b6",audio-files-staging/cb224f3f-806e-43c9-8768-00d401ad1a74
+2021-12-08 13:22:15.453919+00:00,D2 to D4,MOVE_PIECE,True,5651.443,928.175,"For my turn, I'll move my pawn at h7 to h6",audio-files-staging/e144d5bc-81d0-4ff7-8771-32ede16eb240
+2021-12-08 13:24:00.652956+00:00,undo my last move,UNDO_MOVE,True,10560.948,982.134,"Sure thing, moving the pieces back to where they were before.",audio-files-staging/27f717e7-b55c-4675-a165-684421e6f469
+2021-12-08 13:20:10.573254+00:00,Andy,START_GAME,True,8386.606,954.0440000000001,"Awesome, I'm so excited. But first, do you want black or white side?",audio-files-staging/2e0ee91b-1a4d-4890-8ab3-2e5f475f2e69
+2021-12-08 13:21:49.408005+00:00,easy,SELECT_DIFFICULTY,True,19478.325,1690.302,"Okay, then I'll go easy on you. Now, let's begin. When you're ready to move a piece, you can say something like 'pawn to C4', or, 'E7 to E5'. We'll play out the game till the end, or when you tell me you're done.",audio-files-staging/b29c83b8-9e24-413a-b086-6b9543a553c5
+2021-12-08 13:22:54.171022+00:00,what's my best move,BEST_MOVE,True,13183.746,1756.6889999999999,I think you should move your pawn at e2 to e4.,audio-files-staging/a5c45261-f1e0-48b5-9eac-795d00a9c7ea
+2021-12-08 13:23:43.216900+00:00,Leroy's C3,FALLBACK,False,12010.289999999999,1043.367,Can you say that again?,audio-files-staging/21d55388-29ba-40a9-9b4d-c75c6d7d8c46
+2021-12-08 13:20:57.015187+00:00,White Side,CHOOSE_SIDE,True,9381.831,1139.422,"Ok, then I'll take black. Next, would you like me to go easy, or hard on you?",audio-files-staging/7b66e3de-18cf-44d3-96f7-e87dac355069
+2021-12-08 13:24:13.789411+00:00,E2 to E4,MOVE_PIECE,True,4137.544,894.0719999999999,"For my turn, I'll move my pawn at c7 to c6",audio-files-staging/30b9e499-8bcf-4d54-8023-dea73f906271
+2021-12-08 13:24:38.410342+00:00,and my game,FALLBACK,False,11327.184000000001,1000.664,I missed what you said. What was that?,audio-files-staging/bd1fded9-7c3c-4ef1-934a-57ac48d28b6f
+2021-12-08 13:23:06.650001+00:00,Ute Ford,FALLBACK,False,3310.075,893.145,I'm not sure I understood that.,audio-files-staging/e741463b-7861-46c2-8dc3-4e1de19235e0
+2021-12-08 13:24:48.953764+00:00,dentist the game,FALLBACK,False,1986.624,1024.462,What was that?,audio-files-staging/15e8d227-c510-46c2-828e-6c6743db6d49
+2021-12-08 13:24:58.088019+00:00,that's really cool though,FALLBACK,False,2177.294,670.356,,audio-files-staging/e9985d89-f55b-4fdd-94fc-81feaaf4026a

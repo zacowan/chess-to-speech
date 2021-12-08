@@ -1,0 +1,21 @@
+timestamp,text,detected_fulfillment,fulfillment_success,recording_time_ms,time_to_response_ms,response_text,audio_name
+2021-12-06 13:27:41.414694+00:00,Bishop to D7,MOVE_PIECE,True,3136.915,754.2909999999999,Now I'll move my queen to d7,audio-files-staging/e0067f1e-4565-41f7-a6f5-fc2e938bac9a
+2021-12-06 13:28:22.701588+00:00,in the game,FALLBACK,False,2151.898,829.365,Can you say that again?,audio-files-staging/e88761f9-96d8-43c2-94eb-70d7e5dc6934
+2021-12-06 13:28:02.921076+00:00,Queen daddy seven,MOVE_PIECE,False,1900.542,776.0809999999999,"Actually, that would be against the rules, so you can't do it.",audio-files-staging/24e1b197-b8fb-47ba-b5aa-c45a69618111
+2021-12-06 13:26:53.412429+00:00,Bishop to B5,MOVE_PIECE,True,7320.797,1125.864,Now I'll move my knight to a6,audio-files-staging/30957f5b-87eb-405d-817e-a6d7cc0a5d0e
+2021-12-06 13:28:13.070242+00:00,in the game,FALLBACK,False,2301.621,898.5060000000001,I didn't get that. Can you say it again?,audio-files-staging/e1da46c2-4662-4de8-857f-6c89325de088
+2021-12-06 13:26:04.088884+00:00,Pawn to E4,MOVE_PIECE,True,7336.712,924.011,"For my turn, I'll move my pawn at f7 to f6",audio-files-staging/3f1a1978-a5b0-488a-9683-efb004c2488c
+2021-12-06 13:24:44.557630+00:00,hey Andy let's play chess,START_GAME,True,3197.763,807.9970000000001,"Alright, let's do this. Did you want black side or white side?",audio-files-staging/24a6e842-8776-4e74-bcaf-0bd66b33913f
+2021-12-06 13:28:30.259151+00:00,endgame,FALLBACK,False,2473.011,422.85200000000003,,audio-files-staging/9103fd9f-531b-4af6-b9d7-5903c228c382
+2021-12-06 13:29:04.134168+00:00,send the game,FALLBACK,False,2665.476,715.219,I missed what you said. What was that?,audio-files-staging/f21f8554-ee28-452d-9d14-106b96941098
+2021-12-06 13:27:31.842507+00:00,District 27,FALLBACK,False,6013.751,684.826,I'm not sure I understood that.,audio-files-staging/45be725b-20c6-4170-a758-ac7fdf9597a8
+2021-12-06 13:28:54.985478+00:00,and the game,FALLBACK,False,6824.628,1103.9740000000002,I'm not sure I understood that.,audio-files-staging/79177f3f-063a-4b7b-8955-360e8abcf7dd
+2021-12-06 13:29:20.751660+00:00,end the game,QUIT_GAME,True,3176.121,702.535,It sounds like you're all done - would you like to quit?,audio-files-staging/99f88554-c6e6-44ca-9f76-2054232d27b5
+2021-12-06 13:24:59.315543+00:00,White Side,CHOOSE_SIDE,True,6740.38,801.4599999999999,"Ok, then I'll take black. Now, would you like an easy game, or a hard game?",audio-files-staging/9ac433d2-19c0-4112-aca5-5fc7f79d66ea
+2021-12-06 13:27:56.077210+00:00,27,FALLBACK,False,2710.361,765.139,What was that?,audio-files-staging/80b4b72e-8c46-4eca-b975-ec12914b9826
+2021-12-06 13:27:11.857813+00:00,Queen to G4,MOVE_PIECE,True,6013.8460000000005,1177.5720000000001,"For my turn, I'll move my pawn at g7 to g5",audio-files-staging/c45fd746-220a-4de8-ae87-56d5c91954fb
+2021-12-06 13:25:37.780122+00:00,easy,SELECT_DIFFICULTY,True,2037.261,1169.729,"Okay, then I'll go easy on you. Now, let's begin. When you're ready to move a piece, you can say something like 'pawn to C4', or, 'E7 to E5'. We'll play out the game till the end, or when you tell me you're done.",audio-files-staging/070ad290-0d0d-4329-86bc-31a62e54465e
+2021-12-06 13:29:12.971057+00:00,and the game,FALLBACK,False,2557.3320000000003,771.968,What was that?,audio-files-staging/87d6e36f-2927-4aba-814c-036b2cf26a99
+2021-12-06 13:25:29.442224+00:00,Louisiana,FALLBACK,False,19459.296,809.4929999999999,I missed what you said. What was that?,audio-files-staging/f7556968-2014-4def-91b4-666a6e1a6c53
+2021-12-06 13:26:33.332270+00:00,Bishop to D5,MOVE_PIECE,False,4927.5960000000005,2332.169,"Actually, that would be against the rules, so you can't do it.",audio-files-staging/fd5ddca5-8218-4a68-8a16-3e5f5d7b5c6b
+2021-12-06 13:29:44.980326+00:00,and yes,QUIT_GAME_YES,True,10412.64,1320.672,"Okay, thanks for playing with me!",audio-files-staging/dad93e1e-4d35-48c9-8fa7-80c7289454e5

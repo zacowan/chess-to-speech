@@ -89,7 +89,7 @@ import csv
 from datetime import datetime
 
 PROJECT_ID = "chess-master-andy-mhyo"
-LOGGING_SUFFIX = "demo1"
+LOGGING_SUFFIX = "demo2"
 
 USER_REQUEST_LOGS_BASE_COLLECTION = "user_request_logs"
 ANDY_RESPONSE_LOGS_BASE_COLLECTION = "andy_response_logs"
@@ -238,7 +238,7 @@ def generate_user_request_csv(ret: CompiledLog):
         docs = db.collection(USER_REQUEST_LOGS_COLLECTION).where(
             'session_id', '>=', session_id).limit(50).stream()
 
-        with open(f'logs_by_session_id/user_requests_log_{session_id}.csv', 'w', newline='') as csvfile:
+        with open(f'demo2/logs_by_session_id/user_requests_log_{session_id}.csv', 'w', newline='') as csvfile:
             fieldnames = ['timestamp', 'text', 'detected_fulfillment',
                           'fulfillment_success', 'recording_time_ms', 'time_to_response_ms', 'response_text', 'audio_name']
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
@@ -297,13 +297,14 @@ def generate_user_request_csv(ret: CompiledLog):
 
 if __name__ == "__main__":
     # Read post-survey and pre-survey, construct CompiledLog for each
-    l = read_post("post_survey.csv")
-    compiled_logs: list[CompiledLog] = read_pre("pre_survey.csv", l)
+    l = read_post("demo2/post_survey_demo2.csv")
+    compiled_logs: list[CompiledLog] = read_pre(
+        "demo2/pre_survey_demo2.csv", l)
     # Read GCP logs, update CompiledLog for each
     for cl in compiled_logs:
         generate_user_request_csv(cl)
     # Write CompiledLog to csv
-    with open('compiled_logs.csv', 'w', newline='') as csvfile:
+    with open('demo2/compiled_logs_demo2.csv', 'w', newline='') as csvfile:
         writer = csv.DictWriter(csvfile, list(
             compiled_logs[0].to_dict().keys()))
 

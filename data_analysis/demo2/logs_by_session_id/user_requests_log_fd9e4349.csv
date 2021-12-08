@@ -1,0 +1,20 @@
+timestamp,text,detected_fulfillment,fulfillment_success,recording_time_ms,time_to_response_ms,response_text,audio_name
+2021-12-06 13:11:41.085922+00:00,yes I'm all finished,QUIT_GAME,True,13267.868999999999,957.2429999999999,It sounds like you're all done - would you like to quit?,audio-files-staging/d408fa67-c2ef-46aa-bed6-5f646016b3eb
+2021-12-06 13:10:01.580508+00:00,okay so let's move my knight in G8,FALLBACK,False,5033.842,1031.248,I'm not sure I understood that.,audio-files-staging/5faab020-81d2-4d18-9f52-15739e8b18e8
+2021-12-06 13:06:57.650427+00:00,Pandy let's play chess,START_GAME,True,3291.919,774.0500000000001,"Awesome, I'm so excited. But first, do you want black or white side?",audio-files-staging/af06b2a9-3bd5-4961-bd94-ac589016b21f
+2021-12-06 13:10:45.770201+00:00,860,FALLBACK,False,2623.987,518.002,,audio-files-staging/8d00f017-0e75-4e4d-8088-632156f8c6ac
+2021-12-06 13:12:14.142103+00:00,yes that's right,QUIT_GAME_YES,True,16103.565,712.1659999999999,"Okay, thanks for playing with me!",audio-files-staging/3a3567a4-9fdc-46ab-bea2-b586a946c227
+2021-12-06 13:09:16.484936+00:00,E7 to E6,MOVE_PIECE,True,3607.122,866.202,Now I'll move my knight to h3,audio-files-staging/c2d63df9-5439-43f6-8e38-89fe20014726
+2021-12-06 13:10:11.732713+00:00,move my knight from GA to H6,MOVE_PIECE,True,3608.8740000000003,735.3340000000001,"Now, let me move my knight to f2",audio-files-staging/0dc73827-59c7-4a46-9c30-62373e3921c7
+2021-12-06 13:08:54.271468+00:00,b7 to E6,MOVE_PIECE,False,5990.919,938.194,"Oh, that's an illegal move. Could you give me a different one?",audio-files-staging/9c016e8c-5eec-48d5-a1fe-9b587925607f
+2021-12-06 13:11:06.967277+00:00,can you move a piece for me,HOW_PIECE_MOVES,False,2624.3089999999997,1196.299,"Sorry, I'm not sure which piece you want to know more about.",audio-files-staging/c3eeb60c-aeae-485c-95cb-3cf6820f0c40
+2021-12-06 13:11:20.569507+00:00,let's finish up for today,QUIT_GAME,True,5079.033,809.847,"I hear that you're all finished, is that right?",audio-files-staging/312c5c90-5602-4618-975e-3c72961e2bf5
+2021-12-06 13:08:10.024531+00:00,D7 to D5,MOVE_PIECE,True,8385.721,828.9970000000001,Now I'll move my pawn to f3,audio-files-staging/bc10df52-691e-456f-b485-d93c192a89ab
+2021-12-06 13:07:19.140800+00:00,I'll take black,CHOOSE_SIDE,True,12332.273000000001,914.5439999999999,"Okay, you'll go second. Next, would you like me to go easy, or hard on you?",audio-files-staging/210a9b33-a542-4340-beee-a14aee74efc1
+2021-12-06 13:08:39.389412+00:00,what's my next best move,BEST_MOVE,True,7022.688999999999,1764.3500000000001,I'd reccomend moving your pawn from e7 to e5.,audio-files-staging/bd213c07-6896-44a1-9acf-7331d1a05f45
+2021-12-06 13:09:05.242861+00:00,let's do e76,FALLBACK,False,2619.873,832.521,I missed what you said. What was that?,audio-files-staging/47fb1e07-f959-4f7a-9219-036cc00f0e87
+2021-12-06 13:10:28.097035+00:00,86th,FALLBACK,False,4628.763,661.6210000000001,What was that?,audio-files-staging/e7f6c1db-bf6a-427f-85ab-36a0302275e1
+2021-12-06 13:07:38.369276+00:00,Andy go easy on him,SELECT_DIFFICULTY,True,9269.61,1191.0749999999998,"When you're ready to move a piece, you can say something like 'pawn to C4', or, 'E7 to E5'. We'll play out the game till the end, or when you tell me you're done. Now I'll move my pawn to g4",audio-files-staging/6d485a5b-e8f1-46f9-8d2f-e661fd1bda95
+2021-12-06 13:09:40.150028+00:00,how does a knight move,HOW_PIECE_MOVES,True,9981.007,1222.955,"Knights move in an L shape: two squares in a horizontal or vertical direction, then one additional square horizontally or vertically. They are the only piece able to jump over other pieces.",audio-files-staging/e926cdd4-451f-4f68-86cd-f0454a7ea6b8
+2021-12-06 13:10:36.388632+00:00,86-88,FALLBACK,False,3201.658,641.969,I missed what you said. What was that?,audio-files-staging/24577464-811c-404b-bb77-41c3e970567a
+2021-12-06 13:11:51.103623+00:00,yes let's quit,QUIT_GAME,True,2130.452,926.385,"I hear that you're all finished, is that right?",audio-files-staging/59d4cd89-2144-4431-a7c2-007c771708b4

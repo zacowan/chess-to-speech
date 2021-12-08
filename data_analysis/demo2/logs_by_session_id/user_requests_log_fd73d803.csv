@@ -1,0 +1,21 @@
+timestamp,text,detected_fulfillment,fulfillment_success,recording_time_ms,time_to_response_ms,response_text,audio_name
+2021-12-06 12:53:36.238776+00:00,easy game,SELECT_DIFFICULTY,True,10429.068,1286.8899999999999,"Great, then I'll go easy on you. Now, let's get started. Whenever you're ready, I can make a move for you. To move a piece, you can say something like 'pawn to E5', or, 'B3 to F3'. We'll play till one of us wins, or whenever you'd like to stop.",audio-files-staging/fe342834-fad3-4adf-96f0-1cc22a22786e
+2021-12-06 12:57:34.056502+00:00,I would like to resign,FALLBACK,False,3668.2239999999997,1206.109,Can you say that again?,audio-files-staging/544de7d7-11d8-4aa8-8f9c-aac9927bdd69
+2021-12-06 12:56:45.160558+00:00,King to G1,MOVE_PIECE,True,3012.512,1061.0230000000001,Now I'll move my knight to g8,audio-files-staging/14a93ff0-b0dd-4f61-8250-7cc44b9cee6c
+2021-12-06 12:55:03.742066+00:00,night to eat E2,MOVE_PIECE,True,9793.639000000001,1260.864,"For my turn, I'll move my pawn at f7 to f5",audio-files-staging/63e3e923-06a6-4f3c-a573-4ebb450f9ca5
+2021-12-06 12:56:32.817106+00:00,kangta G1,FALLBACK,False,14549.451,1802.051,I'm not sure I understood that.,audio-files-staging/9c6baf72-1df7-4ddd-9868-c913c1e075ca
+2021-12-06 12:54:47.168532+00:00,92,FALLBACK,False,13482.829,689.726,I missed what you said. What was that?,audio-files-staging/361544f9-d46a-4606-9db9-90c1f1ac93b2
+2021-12-06 12:56:05.588766+00:00,Bishop to A6,MOVE_PIECE,True,4521.474,687.7860000000001,"Now, let me move my pawn to c6",audio-files-staging/ae12346e-5120-424d-9186-420063107989
+2021-12-06 12:58:06.807602+00:00,am I able to resign,FALLBACK,False,5395.879,726.1339999999999,,audio-files-staging/674a5751-ac28-4c3e-9ee6-71c7f8dd172e
+2021-12-06 12:59:16.405969+00:00,that's right,QUIT_GAME_YES,True,15847.156,1478.518,"Okay, thanks for playing with me!",audio-files-staging/749ee2ea-2c29-4d8a-a01b-0cb575bce196
+2021-12-06 12:53:11.885893+00:00,White,CHOOSE_SIDE,True,4509.090999999999,1063.989,"Ok, then I'll take black. Now, would you like an easy game, or a hard game?",audio-files-staging/63da0768-ab94-424a-b4d3-51fbb32dbdc8
+2021-12-06 12:55:47.226387+00:00,night from E2 to C3,MOVE_PIECE,True,3240.197,822.738,"Now, let me move my knight to a6",audio-files-staging/abd6648c-3fca-4b91-833f-cfb82182af88
+2021-12-06 12:54:09.542476+00:00,Pawn to E3,MOVE_PIECE,True,1662.21,1468.777,"Now, let me move my knight to h6",audio-files-staging/eea5d1e6-1ed3-4333-92da-6c2d866a63ac
+2021-12-06 12:55:38.202536+00:00,92 Secret,FALLBACK,False,9490.503999999999,563.5079999999999,Can you say that again?,audio-files-staging/983ec2a1-1337-4d4e-9cc7-590209981bdd
+2021-12-06 12:57:52.517272+00:00,I resign,FALLBACK,False,9473.139,1556.3829999999998,I'm not sure I understood that.,audio-files-staging/fa8f89e2-82cb-4e08-b7dc-9dd782a7acb4
+2021-12-06 12:58:50.848149+00:00,can we end the game,QUIT_GAME,True,9451.893,1491.6950000000002,"I hear that you're all finished, is that right?",audio-files-staging/bd07bc9a-93d9-4558-986e-362893a1e458
+2021-12-06 12:57:04.546270+00:00,Queen to G4,MOVE_PIECE,True,7361.2609999999995,1351.8690000000001,Now I'll move my pawn to b6,audio-files-staging/cb8d84ba-cfe5-40f7-92df-9a112e584fe7
+2021-12-06 12:58:30.492941+00:00,what is my best move,BEST_MOVE,True,1963.7389999999998,1936.9080000000001,I think you should move your queen at g4 to e2.,audio-files-staging/21eec210-5ca3-45ac-bb85-bfc7f5688615
+2021-12-06 12:54:00.517962+00:00,Honda E3,FALLBACK,False,2794.8689999999997,949.3779999999999,I missed what you said. What was that?,audio-files-staging/36191669-7af7-42a1-999a-b4e9cc1327cf
+2021-12-06 12:55:19.208361+00:00,Knight to C3,MOVE_PIECE,False,2862.612,892.163,"Sorry, I need a little bit more information about your move. Could you give me more details?",audio-files-staging/568933fc-5503-4f38-a77d-123258eab208
+2021-12-06 12:52:59.848542+00:00,hey Andy let's play chess,START_GAME,True,4497.858,1228.213,"Okay, would you like black or white side?",audio-files-staging/c4f28007-166a-4a0c-8b9e-2d058d18c44d
