@@ -1,0 +1,15 @@
+timestamp,text,detected_fulfillment,fulfillment_success,recording_time_ms,time_to_response_ms,response_text,audio_name
+2021-11-08 13:39:21.820663+00:00,hey Andy let's play Trust,START_GAME,True,7729.237999999999,1086.989,"Awesome, I'm so excited. But first, do you want black or white side?",audio-files-staging/68813b4d-36af-4409-9dee-872def5d783e
+2021-11-08 13:43:03.121194+00:00,g7 to H6,MOVE_PIECE,True,3347.4590000000003,1014.182,"Now I'll move my queen to h5, and that's checkmate. I'm the winner!",audio-files-staging/fe08e695-9330-4813-9255-73392de84d36
+2021-11-08 13:41:56.339600+00:00,Asics,MOVE_PIECE,False,12478.621000000001,1098.304,"Sorry, where did you want to move your knight to?",audio-files-staging/1ea53bbf-3e5e-4c96-93c3-6e8140f24788
+2021-11-08 13:41:24.129754+00:00,2 A6,MOVE_PIECE,False,2046.942,1085.272,"That piece actually belongs to me, so I'm afraid you can't move it.",audio-files-staging/4b797ce4-4e9b-448c-af2f-4c0c1fca5fda
+2021-11-08 13:41:16.365234+00:00,bh to Asics,FALLBACK,True,8365.943,721.646,Can you say that again?,audio-files-staging/78b6a2c6-1287-4fbf-b9fa-e2f6a4899d1b
+2021-11-08 13:42:21.327365+00:00,H6,MOVE_PIECE,True,7255.979,821.4639999999999,Let me move my bishop to h6,audio-files-staging/3dd6127b-80dd-4f00-9fcd-ddea7c0585a7
+2021-11-08 13:40:55.138979+00:00,C7 to C6,MOVE_PIECE,True,7422.317,827.023,Let me move my knight to c3,audio-files-staging/44840b19-a3cb-450a-8929-a0c1290f5429
+2021-11-08 13:42:51.356935+00:00,b7 to H6,MOVE_PIECE,False,2559.1020000000003,763.538,"Actually, that move would be against the rules, so you can't do it.",audio-files-staging/a06c63ce-d8cb-467d-943a-2287a4674573
+2021-11-08 13:42:39.204197+00:00,the H6,MOVE_PIECE,False,1685.922,809.635,"Sorry, I need a little bit more information about your move. Could you give me more details?",audio-files-staging/eb242f12-f437-442e-a3ba-8d0f8c087f23
+2021-11-08 13:40:02.477681+00:00,the black side please,CHOOSE_SIDE,True,9151.448,1143.5149999999999,"Now I'll move my pawn to e4 . I can make your move or tell you what else you can do whenver you are ready. To move a piece, you can say 'E7 to E5'.",audio-files-staging/0dcd7e6e-2879-4e01-864e-c389dfe1e1d8
+2021-11-08 13:39:33.976746+00:00,here is it saying something,FALLBACK,True,2650.601,1130.608,What was that?,audio-files-staging/50aabcd7-a412-40db-bc21-24ba8223cf40
+2021-11-08 13:41:34.972606+00:00,night night to Asics,MOVE_PIECE,False,2201.864,1130.558,"I hear that you want to move your knight, but where to?",audio-files-staging/a5609a98-bb7b-49ae-8591-79afa4e7938c
+2021-11-08 13:39:43.429435+00:00,hey Andy let's play chess,START_GAME,True,3924.576,1174.4720000000002,"Awesome, I'm so excited. But first, do you want black or white side?",audio-files-staging/228aa3bb-ece8-441d-95c0-2170ec0bca78
+2021-11-08 13:40:34.606367+00:00,F7 to F6,MOVE_PIECE,True,11200.708999999999,931.5880000000001,Let me move my pawn to d4,audio-files-staging/88efd93d-2fc6-4db1-af9f-44ee2422ff1e

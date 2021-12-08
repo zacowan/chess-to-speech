@@ -1,0 +1,26 @@
+timestamp,text,detected_fulfillment,fulfillment_success,recording_time_ms,time_to_response_ms,response_text,audio_name
+2021-11-10 13:21:12.802422+00:00,can you at least put that shit on you for,FALLBACK,True,2838.201,951.0719999999999,"Sorry, could you say that again?",audio-files-staging/fe3a5755-7c4a-4911-808b-7818dc520e6b
+2021-11-10 13:19:51.862700+00:00,D1 to d8,MOVE_PIECE,False,2222.703,934.4630000000001,"Actually, that move would be against the rules, so you can't do it.",audio-files-staging/384eb30d-9690-4491-a569-d0f0fd181d94
+2021-11-10 13:23:12.478931+00:00,but my Pawn on sucking e f****** 6,MOVE_PIECE,False,5180.313,780.771,"Actually, that move would be against the rules, so you can't do it.",audio-files-staging/1a95ae8c-b55f-4873-82ed-250864aaea3e
+2021-11-10 13:20:37.539101+00:00,put my queen on d8,MOVE_PIECE,False,2539.1110000000003,1032.613,"Actually, that move would be against the rules, so you can't do it.",audio-files-staging/7d0c7e90-248b-4a98-8923-40314fb32015
+2021-11-10 13:21:23.122734+00:00,Pawn to E4 cooking for Andy,MOVE_PIECE,True,3243.313,1066.111,Let me move my pawn to c5,audio-files-staging/4671dd66-43be-4e60-a252-9376a5fdc47a
+2021-11-10 13:22:08.169505+00:00,I want to move your pawn what is that c5 to C7,MOVE_PIECE,False,5184.579000000001,1162.126,"Oh, that's one of my pieces, so you can't move it.",audio-files-staging/5129efdc-49cf-4325-8f9a-86aacef541ac
+2021-11-10 13:20:29.569443+00:00,perform d12d 8,FALLBACK,True,4327.004,950.629,What was that?,audio-files-staging/d6d1f44b-fdc8-45ab-b94c-5f2859ccd102
+2021-11-10 13:24:09.042652+00:00,f*** you Andy,START_GAME,False,2045.299,820.283,I missed what you said. What was that?,audio-files-staging/65b15898-a5e7-452e-a017-0845bba722e8
+2021-11-10 13:22:34.707480+00:00,im black your white let's go,CHOOSE_SIDE,False,2815.13,796.568,I missed what you said. What was that?,audio-files-staging/5d2d6dab-e404-48a7-be07-88b1cef980a4
+2021-11-10 13:23:27.404214+00:00,actually for once that's not against the rules put my ponnani f****** 6,FALLBACK,True,5742.724,666.893,I'm not sure I understood that.,audio-files-staging/79f6f2b7-03bd-4ff3-a723-fa7b3216d3dd
+2021-11-10 13:21:45.009202+00:00,gotta do that put that phone back,FALLBACK,True,3754.967,5971.295999999999,I'm not sure I understood that.,audio-files-staging/862842f6-6d7b-420f-9651-a012fd9fe67d
+2021-11-10 13:19:00.983761+00:00,Yoki play Bug House,START_GAME,True,8124.766,1210.7910000000002,"Okay, would you like black or white?",audio-files-staging/2050cb70-8a5b-480c-b01c-bcfe0a243dd8
+2021-11-10 13:24:00.697708+00:00,96e motherfuking 6,FALLBACK,True,4822.244000000001,750.719,I'm not sure I understood that.,audio-files-staging/87d4c0c4-67a7-4a4a-82d2-93d0f84f8f75
+2021-11-10 13:20:51.577437+00:00,alright sikka poonani 5,FALLBACK,True,3344.679,1590.1599999999999,I'm not sure I understood that.,audio-files-staging/72e50d9c-63e7-4672-9f6b-871672bf53c2
+2021-11-10 13:21:02.270592+00:00,dick my damn phone on E5,FALLBACK,True,3668.0519999999997,941.287,I'm not sure I understood that.,audio-files-staging/206958c6-8d55-433f-8c29-5e6d03708453
+2021-11-10 13:20:18.184356+00:00,perform d12d 8,FALLBACK,True,3439.732,1281.153,"Sorry, could you say that again?",audio-files-staging/45c07d1a-db42-4ddc-b505-1a76719733c3
+2021-11-10 13:22:23.968160+00:00,tuckus I want to be black now,CHOOSE_SIDE,False,2518.514,5788.2029999999995,I didn't get that. Can you say it again?,audio-files-staging/6642d1c6-3814-4676-8744-d600926e5902
+2021-11-10 13:19:11.264983+00:00,orange outside Orange,FALLBACK,True,2951.961,778.0329999999999,What was that?,audio-files-staging/1bd4304b-cb34-4e66-9625-b4b13eaa327f
+2021-11-10 13:22:45.958175+00:00,a suck you,FALLBACK,True,2816.335,1781.412,What was that?,audio-files-staging/3ab3e143-c0bd-421e-bbb7-3540bd87ca43
+2021-11-10 13:19:19.895713+00:00,give me the purple side and E,FALLBACK,True,2893.368,1112.141,"Sorry, could you say that again?",audio-files-staging/4d56a7a5-0c3e-479b-8005-0da403c60abc
+2021-11-10 13:19:31.655972+00:00,got Andy alright give me white,CHOOSE_SIDE,True,4593.312,1277.857,"Good choice, that means you'll go first. Whenever you're ready, I can make a move for you or tell you what else you can do. To move a piece, you can say 'pawn to E5', or, 'B3 to F3'.",audio-files-staging/46087e4a-1898-4559-8450-30865b0e9138
+2021-11-10 13:21:54.508551+00:00,put your f****** Pawn back in D,MOVE_PIECE,False,3093.827,973.3910000000001,"I hear that you want to move your pawn, but where to?",audio-files-staging/1f6392b0-404e-4016-9659-070169f3f16a
+2021-11-10 13:20:03.810544+00:00,I disagree do it,POSSIBLE_ACTIONS,True,3203.348,1433.3049999999998,"I can perform a move for you, tell you how a named piece moves, or give you advice on your next move.",audio-files-staging/16483ac5-4c0d-4856-9483-5f3ac819484e
+2021-11-10 13:22:55.611288+00:00,call my Pawn E5 b****,MOVE_PIECE,True,3602.5119999999997,1132.453,Now I'll move my knight to c6,audio-files-staging/149408d8-e68d-45e7-8f73-2ab2cfd1c27e
+2021-11-10 13:23:47.103410+00:00,you put my Pawn on East 6 I will break you Andy,MOVE_PIECE,False,7810.076,797.356,"Oh, that's an illegal move. Could you give me a different one?",audio-files-staging/6c707c6f-f120-48db-a3c6-6800b881e796

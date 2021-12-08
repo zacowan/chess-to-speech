@@ -1,0 +1,12 @@
+timestamp,text,detected_fulfillment,fulfillment_success,recording_time_ms,time_to_response_ms,response_text,audio_name
+2021-11-08 13:10:08.885405+00:00,no.,FALLBACK,True,6272.251,915.096,I'm not sure I understood that.,audio-files-staging/be01f745-5f24-4f55-ae5b-751f4007f0a9
+2021-11-08 13:09:19.658841+00:00,White Side,CHOOSE_SIDE,True,2865.5409999999997,1122.237,"Ok, then I'll take black. I can make your move or tell you what else you can do whenver you are ready. To move a piece, you can say 'E7 to E5'.",audio-files-staging/37e34b69-ebbf-47ec-8e61-0c3907f59430
+2021-11-08 13:09:44.917618+00:00,E2 to E4,MOVE_PIECE,True,10812.986,765.104,"For my turn, I'll move my pawn at c7 to c5",audio-files-staging/4c9a122c-005f-4401-8b33-ac3e270fd873
+2021-11-08 13:10:18.819506+00:00,F2 to F4,MOVE_PIECE,True,3264.964,1271.1550000000002,Let me move my pawn to e6,audio-files-staging/499eb92c-5e96-4afd-9ce9-d4c7406886b5
+2021-11-08 13:11:01.871574+00:00,g1 to E320 g1 to F3,ERROR,False,5400.776,1117.048,"Sorry, I'm having some trouble with things. Could you try that again?",audio-files-staging/21db503a-7e89-4e39-b897-ab73474632a9
+2021-11-08 13:11:45.979565+00:00,42 to,FALLBACK,True,5779.254,712.457,Can you say that again?,audio-files-staging/c0b04e9a-435e-4c45-bf3c-9077e26f1791
+2021-11-08 13:09:07.423735+00:00,Bandy let's play chess,START_GAME,True,8001.334,1046.59,"Alright, let's do this. Did you want black side or white side?",audio-files-staging/1d66bfd2-2447-4b66-ae45-fd294f58ae5a
+2021-11-08 13:11:19.414790+00:00,g1 to F3,MOVE_PIECE,True,8405.423,976.2469999999998,Now I'll move my pawn to d5,audio-files-staging/1458c4ab-0a62-4afd-bea6-c3019eab5916
+2021-11-08 13:11:33.609037+00:00,no okay,FALLBACK,True,2027.441,672.859,"Sorry, could you say that again?",audio-files-staging/f982ade8-8c40-4cb8-b0e3-a7aaf987eb5c
+2021-11-08 13:10:41.933591+00:00,g1 to E3,MOVE_PIECE,False,7893.316000000001,688.636,"Actually, that move would be against the rules, so you can't do it.",audio-files-staging/b39d31d9-2435-4a98-bac7-5024aa6f76bb
+2021-11-08 13:12:00.002949+00:00,enter as honest as possible right now,FALLBACK,True,7187.371,420.242,,audio-files-staging/d8c3d454-34e9-4b7b-bd50-74d33e6a47bf

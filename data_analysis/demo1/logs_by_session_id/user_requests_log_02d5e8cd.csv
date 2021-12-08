@@ -1,0 +1,27 @@
+timestamp,text,detected_fulfillment,fulfillment_success,recording_time_ms,time_to_response_ms,response_text,audio_name
+2021-11-10 13:08:22.292218+00:00,Pawn to A3,MOVE_PIECE,True,3408.4829999999997,914.204,Now I'll move my queen to e7,audio-files-staging/8ee6eb9e-f0d9-4b0d-8137-85304bdf2911
+2021-11-10 13:10:13.153933+00:00,Honda F3,FALLBACK,True,3304.577,760.5029999999999,I'm not sure I understood that.,audio-files-staging/703dbc7a-e4d2-4c94-beaa-c29fb2132bb7
+2021-11-10 13:10:36.480007+00:00,Pawn to E3,MOVE_PIECE,True,4801.446999999999,730.0229999999999,Now I'll move my knight to f6,audio-files-staging/019927b0-55e6-45bf-8ad4-a71b419a57db
+2021-11-10 13:07:56.833022+00:00,A3,MOVE_PIECE,True,1789.6270000000002,744.673,Now I'll move my bishop to a3,audio-files-staging/feff9f4b-2841-445e-a598-5af383dcd7eb
+2021-11-10 13:05:59.044067+00:00,tree,MOVE_PIECE,False,1686.029,1123.129,"Sorry, where did you want to move your pawn to?",audio-files-staging/ba3f25a9-e019-4a13-bd73-f18143cd999d
+2021-11-10 13:06:42.280708+00:00,983,FALLBACK,True,5183.4,941.6800000000001,I missed what you said. What was that?,audio-files-staging/8a87bdc5-dd1e-4f8e-b01b-f9092c3f5557
+2021-11-10 13:04:59.650465+00:00,White,CHOOSE_SIDE,True,9179.468,1238.854,"Okay, you'll go first. I can make your move when you're ready, or I can tell you what else you can do. To move a piece, you can say 'pawn to C4', or, 'E7 to E5'.",audio-files-staging/b3d481c6-330e-457e-8267-2f9335b979c6
+2021-11-10 13:09:20.422252+00:00,Knight to H4,MOVE_PIECE,True,6870.177,1212.291,Now I'll move my queen to h4,audio-files-staging/2fc8b912-d8c8-425b-a6af-1aee97839382
+2021-11-10 13:04:36.442624+00:00,Andy let's play chess,START_GAME,True,2486.4480000000003,1093.087,"Awesome, I'm so excited. But first, do you want black or white side?",audio-files-staging/af31c057-ab66-4a8d-b15c-82e02b7e2c13
+2021-11-10 13:11:10.201365+00:00,Bishop to be to Bishop to B2,MOVE_PIECE,True,15722.654999999999,839.345,Let me move my pawn to d6,audio-files-staging/c30d4c16-2b74-426f-948c-401fb0fd3d2e
+2021-11-10 13:10:22.362173+00:00,Pawn to F3,MOVE_PIECE,False,2948.029,634.8789999999999,"Actually, that move would put you into check, which would be against the rules.",audio-files-staging/ddfcba81-d85c-4f04-bb4c-bc69c29b5fff
+2021-11-10 13:07:17.650658+00:00,Knights 283,MOVE_PIECE,False,4565.255999999999,936.2379999999999,"Sorry, where did you want to move your knight to?",audio-files-staging/d82e75ab-3b56-4b3d-bd7f-1bc494353d64
+2021-11-10 13:07:02.897434+00:00,A3,MOVE_PIECE,False,1894.711,1219.623,"Sorry, I need a little bit more information about your move. Could you give me more details?",audio-files-staging/189602e4-97b7-479e-ae95-ea7f82188f8a
+2021-11-10 13:08:59.078280+00:00,Knight to F3,MOVE_PIECE,True,4567.4400000000005,1008.578,"For my turn, I'll move my bishop at c8 to b7",audio-files-staging/84399a78-335e-4f0a-9774-d9adfd08a30e
+2021-11-10 13:11:34.667131+00:00,Bishop 2D 3D moving,MOVE_PIECE,False,10734.39,1045.02,"Oh, that's an illegal move. Could you give me a different one?",audio-files-staging/02f2207b-1c36-45d1-a46c-813788afff69
+2021-11-10 13:08:42.607389+00:00,Pawn to C4,MOVE_PIECE,True,8685.441,1035.42,Let me move my pawn to b6,audio-files-staging/be955eb6-cc39-4d4a-bcff-e002b4798c8f
+2021-11-10 13:10:00.322364+00:00,I know all of the rules of Chess that I'm terrible at chess I never beating anyone Pawn to F3,MOVE_PIECE,False,11222.545,887.1560000000001,"Actually, that move would put you into check, which would be against the rules.",audio-files-staging/39ab407d-721d-434d-8013-81333eb5d592
+2021-11-10 13:06:50.975873+00:00,the A3,MOVE_PIECE,False,1662.9089999999999,1042.883,"Sorry, I need a little bit more information about your move. Could you give me more details?",audio-files-staging/aa4a0030-79c2-4ded-a0d4-e5fd016a725f
+2021-11-10 13:07:28.966535+00:00,night a tree,MOVE_PIECE,False,4028.542,1007.2379999999999,"I hear that you want to move your knight, but where to?",audio-files-staging/47b256a0-523f-49bb-9c7b-f1c89a39a9ad
+2021-11-10 13:05:49.799886+00:00,Dietrich,MOVE_PIECE,False,6015.612,995.08,"Sorry, where did you want to move your pawn to?",audio-files-staging/211529e6-e6a9-4fb5-b842-6365e518e6a5
+2021-11-10 13:05:24.414678+00:00,Honda C3,FALLBACK,True,8424.689,971.7470000000001,I didn't get that. Can you say it again?,audio-files-staging/1f42a0a7-1520-4eb4-afab-7fef1304a3c6
+2021-11-10 13:06:11.305486+00:00,C3,MOVE_PIECE,True,4544.169,845.785,Let me move my pawn to e5,audio-files-staging/1e9d5b80-e8a9-4caf-b50c-78e57e40c660
+2021-11-10 13:05:35.307545+00:00,pawn to Vedra,MOVE_PIECE,False,3842.727,1078.433,"I hear that you want to move your pawn, but where to?",audio-files-staging/8d8e5fac-1a84-49a4-9a81-258550d87321
+2021-11-10 13:09:42.468584+00:00,contact free,FALLBACK,True,5654.491,791.8599999999999,What was that?,audio-files-staging/3d5e4717-ca62-4c70-941f-b949a0347ae0
+2021-11-10 13:08:12.193037+00:00,Pandey 3,FALLBACK,True,3241.804,872.389,I'm not sure I understood that.,audio-files-staging/ae98d766-de7b-46b6-ad02-8364e3807f3c
+2021-11-10 13:07:42.435457+00:00,correct that's exactly what I said,MOVE_PIECE,False,4838.013,5779.112,"I hear that you want to move your knight, but where to?",audio-files-staging/fc95b289-d84b-4a6f-bdde-16e166c7c31e

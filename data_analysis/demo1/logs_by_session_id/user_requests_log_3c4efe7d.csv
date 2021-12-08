@@ -1,0 +1,14 @@
+timestamp,text,detected_fulfillment,fulfillment_success,recording_time_ms,time_to_response_ms,response_text,audio_name
+2021-11-08 12:54:11.295385+00:00,mukan 66,FALLBACK,True,9575.976,1151.866,"Sorry, could you say that again?",audio-files-staging/82a3faa7-3176-43a0-b183-03c0ebf01206
+2021-11-08 12:52:54.522043+00:00,it's just I feel bad he 76,FALLBACK,True,7830.164,1122.85,"Sorry, could you say that again?",audio-files-staging/019335e7-5faf-4e22-899b-7511c120e9f4
+2021-11-08 12:53:41.972480+00:00,move on to 6,FALLBACK,True,2942.801,1300.673,What was that?,audio-files-staging/273c61c7-a6dd-48b3-adf3-15697a96fd0f
+2021-11-08 12:51:41.717184+00:00,move Pawn to G5,MOVE_PIECE,True,4286.492,1487.2199999999998,Now I'll move my knight to c3,audio-files-staging/eb0c7e9c-7af0-425b-bafc-21e48cce5cc5
+2021-11-08 12:54:22.935787+00:00,move Pawn to C6,MOVE_PIECE,False,4028.454,1354.573,"Actually, that move would be against the rules, so you can't do it.",audio-files-staging/e3c53f41-3c0f-43ca-946e-b3cac8d5671e
+2021-11-08 12:50:50.975839+00:00,let's play chess,START_GAME,True,1512.694,1374.598,"Alright, let's do this. Did you want black side or white side?",audio-files-staging/11d18e17-94c5-4ed7-9473-48ccba5e676e
+2021-11-08 12:52:05.619689+00:00,move Pawn to C6,MOVE_PIECE,True,7810.706,1528.1750000000002,"For my turn, I'll move my pawn at d2 to d4",audio-files-staging/49191a75-e291-44ba-9205-81cbe7da06fd
+2021-11-08 12:51:16.327582+00:00,black side,CHOOSE_SIDE,True,8149.557,1217.1029999999998,"Let me move my pawn to e4 . I can make your move or tell you what else you can do whenver you are ready. To move a piece, you can say 'E7 to E5'.",audio-files-staging/d2e7a7a8-e9c6-457d-a1f1-1d8dd665aa49
+2021-11-08 12:53:29.166825+00:00,how did you change,BEST_MOVE,True,1254.395,1580.9450000000002,"Well, I'd reccomend moving your pawn from h7 to h6.",audio-files-staging/56335ed9-b43c-407d-8f33-78cf4d2c90db
+2021-11-08 12:52:29.348945+00:00,b7 to Asics,MOVE_PIECE,False,5951.331,6392.714,"Sorry, I'm not sure which piece you are trying to move. Can you give me more info?",audio-files-staging/dda8ddae-7442-4941-91a0-19380eb4a3b7
+2021-11-08 12:50:38.329020+00:00,still have to pass on it to pick up my voice,FALLBACK,True,9425.995,3337.544,I missed what you said. What was that?,audio-files-staging/a9ca26ed-75a0-41dc-967c-c23e41b62d2b
+2021-11-08 12:54:42.862081+00:00,by the way you don't have to play,START_GAME,False,8361.923,895.128,I missed what you said. What was that?,audio-files-staging/00001a4e-d073-493e-a981-4dde289f0dfd
+2021-11-08 12:53:09.392167+00:00,Movie 7 2 x 6,HOW_PIECE_MOVES,True,7080.959,1053.248,"Oh, that's a pawn. Pawns move vertically forward one square, or optionally, two squares if they haven't been moved yet. They can attack forward one square diagonally, but they are unable to move backwards.",audio-files-staging/bce1761d-4e94-425a-a580-73d658389074

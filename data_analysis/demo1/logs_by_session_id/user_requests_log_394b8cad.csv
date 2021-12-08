@@ -1,0 +1,12 @@
+timestamp,text,detected_fulfillment,fulfillment_success,recording_time_ms,time_to_response_ms,response_text,audio_name
+2021-11-08 12:59:58.504621+00:00,G4,MOVE_PIECE,False,7998.6759999999995,1021.931,"Sorry, I need a little bit more information about your move. Could you give me more details?",audio-files-staging/ae3855df-a5b7-4179-98fe-107c21b261cb
+2021-11-08 12:59:21.950114+00:00,Pawn to D4,MOVE_PIECE,True,4160.154,1098.1040000000003,Let me move my knight to f6,audio-files-staging/602705e5-abfe-4fcf-9e50-539ec5a37690
+2021-11-08 13:00:53.968453+00:00,khon to E3,FALLBACK,True,3239.0029999999997,1155.322,"Sorry, could you say that again?",audio-files-staging/fd81f1dd-3fd9-4a9c-897c-53b181a46e2b
+2021-11-08 12:59:37.811019+00:00,Knight to F3,MOVE_PIECE,True,4096.617,1207.007,Now I'll move my pawn to d5,audio-files-staging/0e0e0395-0de3-4eb4-8271-cff65749557d
+2021-11-08 13:00:26.823671+00:00,I'm not sure if it's a 6,FALLBACK,True,16856.542999999998,954.0479999999999,"Sorry, could you say that again?",audio-files-staging/3da2b614-b80a-4bc1-b936-0afb8b519b29
+2021-11-08 13:00:43.862940+00:00,286,FALLBACK,True,4649.924,937.436,"Sorry, could you say that again?",audio-files-staging/720dbae1-71a3-42be-b931-6713c6e08a60
+2021-11-08 13:01:03.056694+00:00,MP3,FALLBACK,True,1552.0819999999999,1319.324,"Sorry, could you say that again?",audio-files-staging/a3fd835a-d934-487d-b5e3-6e36d735f58b
+2021-11-08 13:01:17.105447+00:00,Queen to C4,MOVE_PIECE,False,6567.845,1385.6979999999999,"Oh, that's an illegal move. Could you give me a different one?",audio-files-staging/2c9f6ac2-9ec6-41d7-98a4-9d90e40d56b3
+2021-11-08 12:58:51.808841+00:00,that's a good one day Andy let's play,START_GAME,True,8109.562000000001,971.531,"Alright, let's do this. Did you want black side or white side?",audio-files-staging/04e0e946-4d51-4b8a-a3fe-78c8f13063ec
+2021-11-08 13:01:29.931946+00:00,Pawn to C3,MOVE_PIECE,True,3690.627,1036.478,Now I'll move my bishop to f5,audio-files-staging/ac797acf-f249-43c9-bbe6-5fa4ee4eccf8
+2021-11-08 12:59:02.826736+00:00,hassan White Side,CHOOSE_SIDE,True,1964.903,1466.351,"Ok, then I'll take black. Whenever you're ready, I can make a move for you or tell you what else you can do. To move a piece, you can say 'pawn to E5'.",audio-files-staging/a326855f-59c3-478e-8944-3391c58642f4

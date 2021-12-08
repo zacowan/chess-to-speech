@@ -1,0 +1,11 @@
+timestamp,text,detected_fulfillment,fulfillment_success,recording_time_ms,time_to_response_ms,response_text,audio_name
+2021-11-08 13:19:25.941478+00:00,I'm the already have your post service it up completely for you over here,FALLBACK,True,3286.036,733.8969999999999,I didn't get that. Can you say it again?,audio-files-staging/9462ccc8-5f64-4497-ac80-58e21d525d55
+2021-11-08 13:17:05.200670+00:00,do I need to hit the microphone black,CHOOSE_SIDE,True,13054.096,1327.7980000000002,"Let me move my pawn to e4 . I can make your move or tell you what else you can do whenver you are ready. To move a piece, you can say 'E7 to E5'.",audio-files-staging/70fb73c7-c44b-4904-aeb0-03e21225674d
+2021-11-08 13:17:43.850233+00:00,G7 to G6,MOVE_PIECE,True,3267.5879999999997,1162.2530000000002,Now I'll move my knight to f3,audio-files-staging/229c6246-08ac-4655-b5da-1b75b1e8e6b1
+2021-11-08 13:18:15.311784+00:00,Bishop G7,MOVE_PIECE,True,5205.607,1093.1390000000001,"For my turn, I'll move my pawn at h2 to h3",audio-files-staging/94f69830-e6b3-49c1-a5d3-07c4296ca72b
+2021-11-08 13:18:33.135093+00:00,Castle,FALLBACK,True,3904.771,1025.519,Can you say that again?,audio-files-staging/c8cc706e-fe01-46c2-b367-74f1ff25acf1
+2021-11-08 13:16:44.300825+00:00,hey Andy let's play chess,START_GAME,True,8139.452,868.603,"Okay, would you like black or white?",audio-files-staging/0d8c9864-997d-4589-8649-af58c562a271
+2021-11-08 13:17:28.112827+00:00,D7 D6,MOVE_PIECE,True,3629.1839999999997,1031.239,Let me move my pawn to d4,audio-files-staging/e8593807-a5a1-44a2-be60-4f5d932f7345
+2021-11-08 13:17:58.528457+00:00,Knight to F6,MOVE_PIECE,True,2364.229,968.5029999999999,Let me move my knight to c3,audio-files-staging/d0d7ac88-05f6-40e1-9a76-00bf9b1c2bda
+2021-11-08 13:18:51.702684+00:00,Castle King side,MOVE_PIECE,False,11887.82,1008.9569999999999,"Sorry, where did you want to move your king to?",audio-files-staging/d827b613-fbd7-4d25-99a6-c03fabfb3e50
+2021-11-08 13:19:09.840631+00:00,King to G8,MOVE_PIECE,True,3290.184,1179.0839999999998,Now I'll move my bishop to e3,audio-files-staging/6b099c1b-74f1-487b-8e54-775fcc4cb805

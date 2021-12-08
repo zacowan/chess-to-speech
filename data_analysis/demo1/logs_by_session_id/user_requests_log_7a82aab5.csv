@@ -1,0 +1,9 @@
+timestamp,text,detected_fulfillment,fulfillment_success,recording_time_ms,time_to_response_ms,response_text,audio_name
+2021-11-08 13:07:19.353966+00:00,B2B freed,FALLBACK,True,10795.23,702.235,I didn't get that. Can you say it again?,audio-files-staging/3c29de57-43e6-42ac-9987-e037f33c2d2e
+2021-11-08 13:05:35.702340+00:00,hey Andy let's play chess,START_GAME,True,4686.317,1016.7220000000001,"Alright, let's do this. Did you want black side or white side?",audio-files-staging/27705aa8-6404-4940-b371-4bc9bc1b98f9
+2021-11-08 13:06:55.232597+00:00,E2 to E3,MOVE_PIECE,True,5399.561000000001,1165.023,Now I'll move my knight to f6,audio-files-staging/36cdc1ac-66d4-42aa-8cfe-c2d882d4ce0f
+2021-11-08 13:06:42.394711+00:00,E2 E Street,FALLBACK,True,4159.993,686.06,I missed what you said. What was that?,audio-files-staging/e66dad59-7d48-4e37-a85e-96b3fe064c06
+2021-11-08 13:07:54.673313+00:00,are you am I,FALLBACK,True,5059.1900000000005,778.0709999999999,I'm not sure I understood that.,audio-files-staging/f3fc33b9-0b7f-4e8b-b21f-d0848474f6ea
+2021-11-08 13:07:31.285308+00:00,B2 to B3,MOVE_PIECE,True,4802.71,821.527,"For my turn, I'll move my pawn at e7 to e5",audio-files-staging/d7bbab1a-62bc-48e7-85be-33a61d21bb14
+2021-11-08 13:06:04.247301+00:00,White Side,CHOOSE_SIDE,True,3435.5699999999997,994.9850000000001,"Okay, you'll go first. I can make your move or tell you what else you can do whenver you are ready. To move a piece, you can say 'E7 to E5'.",audio-files-staging/7a2425a4-1998-44fd-afe9-11015c86374c
+2021-11-08 13:05:54.103780+00:00,what type,FALLBACK,True,8806.189,1014.233,I'm not sure I understood that.,audio-files-staging/114a417e-2d6d-49b8-bbcf-88f39a8252d9

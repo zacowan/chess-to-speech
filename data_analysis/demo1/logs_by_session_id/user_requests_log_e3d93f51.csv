@@ -1,0 +1,11 @@
+timestamp,text,detected_fulfillment,fulfillment_success,recording_time_ms,time_to_response_ms,response_text,audio_name
+2021-11-10 13:00:38.921296+00:00,White,CHOOSE_SIDE,True,9523.875,1277.461,"Good choice, that means you'll go first. Whenever you're ready, I can make a move for you or tell you what else you can do. To move a piece, you can say 'pawn to E5', or, 'B3 to F3'.",audio-files-staging/64621422-2cdb-4080-b5cd-ae32fc8917ae
+2021-11-10 13:01:09.430433+00:00,E2 to E4,MOVE_PIECE,True,3051.445,1136.8220000000001,Now I'll move my pawn to c5,audio-files-staging/f824eeac-ba52-4d3c-960a-c41c364ee20b
+2021-11-10 13:01:48.600641+00:00,Knight to F3,MOVE_PIECE,True,3985.634,999.0219999999999,"For my turn, I'll move my knight at b8 to c6",audio-files-staging/bd970cfc-0f96-47f8-b2ed-d585e83371ac
+2021-11-10 13:02:54.298598+00:00,and I do Post,POSSIBLE_ACTIONS,True,2348.857,1135.786,"I can move a piece for you, tell you how named pieces move, and help you make your next move.",audio-files-staging/f7d2b001-7da0-420c-9224-17b11e638ca2
+2021-11-10 13:02:28.436596+00:00,I don't know what to do,BEST_MOVE,True,2555.113,1603.8290000000002,"Well, I'd reccomend moving your knight from f3 to d4.",audio-files-staging/fd1b39d5-5dfc-406a-adc1-3e886cbc3e6a
+2021-11-10 13:01:26.204306+00:00,Bishop to C4,MOVE_PIECE,True,4651.8730000000005,690.366,Let me move my pawn to e6,audio-files-staging/7b70efcd-d967-436b-a63c-44101e5f49c9
+2021-11-10 13:00:59.990702+00:00,d234,FALLBACK,True,3631.596,1067.5829999999999,"Sorry, could you say that again?",audio-files-staging/10f167a3-dace-4d43-bba4-842af9129256
+2021-11-10 13:00:19.715544+00:00,handy let's play chess,START_GAME,True,4028.5539999999996,1147.696,"Awesome, I'm so excited. But first, do you want black or white side?",audio-files-staging/3539eace-7541-4fd1-a17b-7e083e13e771
+2021-11-10 13:02:12.357031+00:00,Pawn to D4,MOVE_PIECE,True,2559.4649999999997,1164.83,Let me move my pawn to d4,audio-files-staging/a8b1c709-a4d5-44e7-8013-ab10e101c0b3
+2021-11-10 13:02:44.186881+00:00,really cool,FALLBACK,True,2665.5350000000003,716.39,"Sorry, could you say that again?",audio-files-staging/3bbda3cb-14d8-4b52-a7ed-068d871923fb

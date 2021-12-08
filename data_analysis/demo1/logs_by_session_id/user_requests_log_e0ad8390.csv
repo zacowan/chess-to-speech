@@ -1,0 +1,11 @@
+timestamp,text,detected_fulfillment,fulfillment_success,recording_time_ms,time_to_response_ms,response_text,audio_name
+2021-11-10 12:51:00.034372+00:00,black-site ND,CHOOSE_SIDE,True,10029.803,1130.596,"Whenever you're ready, I can make a move for you or tell you what else you can do. To move a piece, you can say 'pawn to E5', or, 'B3 to F3'. Now I'll move my pawn to d4",audio-files-staging/1f1b27a7-555a-43c5-8906-a572598f67ba
+2021-11-10 12:53:07.808360+00:00,I just know what to say,BEST_MOVE,True,6892.599999999999,1045.849,,audio-files-staging/14650ea8-355d-49bb-bc59-9b6e49cc1820
+2021-11-10 12:52:52.592841+00:00,find the post service,FALLBACK,True,6655.9,1035.674,I didn't get that. Can you say it again?,audio-files-staging/ca83e2e9-0920-41bb-89b9-5c65c3a97a33
+2021-11-10 12:50:31.790967+00:00,I'll try to get to an en passant position,FALLBACK,True,7809.334,877.4069999999999,I'm not sure I understood that.,audio-files-staging/fd85688d-1a6b-4dc0-9554-3fd6df6bf64d
+2021-11-10 12:51:44.443505+00:00,Pawn to D6,MOVE_PIECE,True,3964.797,722.627,Now I'll move my knight to f3,audio-files-staging/5eff2725-d1e9-42cf-8e60-c22e35e9b223
+2021-11-10 12:51:59.080778+00:00,Queen to D7,MOVE_PIECE,True,2133.411,1176.06,"For my turn, I'll move my pawn at g2 to g3",audio-files-staging/53ffa396-3948-431d-9dac-0977630abec0
+2021-11-10 12:52:30.880560+00:00,Queen to A4,MOVE_PIECE,True,9813.115,935.5229999999999,"Let me move my queen to a4, and that means you're in check.",audio-files-staging/9277d3f3-a3fa-427b-a573-72203c4a2228
+2021-11-10 12:52:14.778969+00:00,284,FALLBACK,True,1424.182,971.3199999999999,Can you say that again?,audio-files-staging/14bc9225-b77c-43c6-a4c9-4d49f86764bf
+2021-11-10 12:51:28.270061+00:00,Knight to F6,MOVE_PIECE,True,6332.879,1182.199,Now I'll move my pawn to c4,audio-files-staging/96c26ebb-8e0c-4992-b84d-b53e6c47c73b
+2021-11-10 12:50:40.596641+00:00,hey Andy let's play chess,START_GAME,True,2152.99,1398.643,"Alright, let's do this. Did you want black side or white side?",audio-files-staging/8c688ba2-ef63-41b8-979a-5c2d342e281e

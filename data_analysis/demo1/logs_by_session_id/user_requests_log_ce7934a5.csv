@@ -1,0 +1,10 @@
+timestamp,text,detected_fulfillment,fulfillment_success,recording_time_ms,time_to_response_ms,response_text,audio_name
+2021-11-10 13:17:03.533994+00:00,Knight to C3,MOVE_PIECE,True,12541.72,986.734,"For my turn, I'll move my knight at e4 to c3",audio-files-staging/435dea97-4529-4782-93f5-2c017baa8f4d
+2021-11-10 13:16:37.956939+00:00,Pawn to E4,MOVE_PIECE,True,5677.371,1043.58,Now I'll move my knight to e4,audio-files-staging/a6e48015-7d41-4385-8b38-25c5a8483f53
+2021-11-10 13:17:57.653122+00:00,Fantasy 3,MOVE_PIECE,True,2137.238,1075.51,Let me move my knight to d1,audio-files-staging/5b269df7-2d4f-4b13-86dd-f469b6cb48ad
+2021-11-10 13:17:47.827195+00:00,Pawn takes Knight,MOVE_PIECE,False,11456.59,1040.2179999999998,"Sorry, where did you want to move your pawn to?",audio-files-staging/ce54aa44-86aa-46dc-a4fe-c10ec4fcb4e7
+2021-11-10 13:16:17.308440+00:00,Pawn to D4,MOVE_PIECE,True,4477.568,944.337,"For my turn, I'll move my knight at g8 to f6",audio-files-staging/32920109-688b-41f3-bb48-92cda43c2213
+2021-11-10 13:17:30.386282+00:00,taunted,FALLBACK,True,5613.396,1091.3220000000001,Can you say that again?,audio-files-staging/575e08a3-fb43-44ae-95b7-07c7dd4dff48
+2021-11-10 13:15:28.275481+00:00,hey Andy let's play chess,START_GAME,True,2909.199,1301.338,"Okay, would you like black or white?",audio-files-staging/eb515d3b-1d84-479e-9d82-4d73bf5536a5
+2021-11-10 13:18:18.550257+00:00,okay I can like let other people go since like I'm going to play a whole game,START_GAME,False,8854.141,1473.9189999999999,I didn't get that. Can you say it again?,audio-files-staging/07aa1cc8-dfc5-4ccc-80a8-3dc670634d21
+2021-11-10 13:15:55.935869+00:00,White Side,CHOOSE_SIDE,True,14334.231000000002,1585.181,"Good choice, that means you'll go first. I can make your move when you're ready, or I can tell you what else you can do. To move a piece, you can say 'pawn to C4', or, 'E7 to E5'.",audio-files-staging/43f2b26a-5b9d-4cc9-9bf6-3dbde5fd5990

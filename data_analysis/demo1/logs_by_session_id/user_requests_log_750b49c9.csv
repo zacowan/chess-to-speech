@@ -1,0 +1,14 @@
+timestamp,text,detected_fulfillment,fulfillment_success,recording_time_ms,time_to_response_ms,response_text,audio_name
+2021-11-10 13:37:12.744864+00:00,what else can I do,POSSIBLE_ACTIONS,True,3673.794,1320.8090000000002,"I can perform a move for you, tell you how a named piece moves, or give you advice on your next move.",audio-files-staging/b384c307-8594-40f4-a3f2-8ae303729d78
+2021-11-10 13:38:51.440452+00:00,remove Rook from H1 to G1,MOVE_PIECE,True,5889.859,2236.766,Now I'll move my knight to g4,audio-files-staging/71cb80fb-9db7-4e5e-90b5-454e76bf8cf8
+2021-11-10 13:37:48.974102+00:00,move my Pawn from you to T4,MOVE_PIECE,True,7384.2480000000005,5707.396,Now I'll move my pawn to d5,audio-files-staging/eb0ca47d-765e-45e3-8455-f56247e32b9d
+2021-11-10 13:39:36.901396+00:00,I'm done using the system,FALLBACK,True,2730.584,871.673,What was that?,audio-files-staging/ae5ab847-7b7d-485f-9441-c920d85680c9
+2021-11-10 13:39:27.940314+00:00,alright,FALLBACK,True,2151.4449999999997,771.434,Can you say that again?,audio-files-staging/7ceacbb6-feeb-4f19-9343-4c24a64d5e10
+2021-11-10 13:36:56.510645+00:00,Knight to F3,MOVE_PIECE,True,2921.261,1108.967,Let me move my pawn to e6,audio-files-staging/4d2386b3-bf0f-4931-bd0c-aeefde0e66d2
+2021-11-10 13:36:37.601287+00:00,White Side,CHOOSE_SIDE,True,3929.249,1102.124,"Okay, you'll go first. I can make your move when you're ready, or I can tell you what else you can do. To move a piece, you can say 'pawn to C4', or, 'E7 to E5'.",audio-files-staging/b3cb17be-bfac-4085-9487-d2239e1e8bda
+2021-11-10 13:38:07.262164+00:00,remove pawn from H2 to H4,MOVE_PIECE,True,6419.333,1202.225,"For my turn, I'll move my knight at g8 to f6",audio-files-staging/976ea49e-baf9-4cd3-acfa-f5ee443b015e
+2021-11-10 13:36:24.520397+00:00,hey Andy let's play chess,START_GAME,True,4334.487,1801.767,"Alright, let's do this. Did you want black side or white side?",audio-files-staging/54aa477a-d7d5-4321-b029-38e3184b3330
+2021-11-10 13:38:29.775222+00:00,Bishop from F1 to H3,MOVE_PIECE,False,7422.916,6221.224,"Actually, that move would be against the rules, so you can't do it.",audio-files-staging/b460c929-b3f4-4cf1-8f5c-a90ed1ccc7f2
+2021-11-10 13:39:56.386569+00:00,I'm done,FALLBACK,True,10521.384,707.938,Can you say that again?,audio-files-staging/42f2db02-9de2-441d-ab14-24b07e916c4f
+2021-11-10 13:39:17.606325+00:00,move knife from,BEST_MOVE,True,2133.378,1424.598,I think you should move your pawn at d2 to d4.,audio-files-staging/9551e686-d92b-4a7b-bf45-4b22115c3f79
+2021-11-10 13:37:27.407518+00:00,can you perform a move for me,BEST_MOVE,True,2833.2639999999997,1520.636,"Well, I'd reccomend moving your pawn from e2 to e4.",audio-files-staging/fe066932-e049-4f2f-a8ff-4597f9fc62fa
