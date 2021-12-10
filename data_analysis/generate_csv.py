@@ -89,7 +89,7 @@ import csv
 from datetime import datetime
 
 PROJECT_ID = "chess-master-andy-mhyo"
-LOGGING_SUFFIX = "demo2"
+LOGGING_SUFFIX = "demo1"
 
 USER_REQUEST_LOGS_BASE_COLLECTION = "user_request_logs"
 ANDY_RESPONSE_LOGS_BASE_COLLECTION = "andy_response_logs"
@@ -100,6 +100,9 @@ ANDY_MOVE_LOGS_COLLECTION = f"{ANDY_MOVE_LOGS_BASE_COLLECTION}_{LOGGING_SUFFIX}"
 USER_REQUEST_LOGS_COLLECTION = f"{USER_REQUEST_LOGS_BASE_COLLECTION}_{LOGGING_SUFFIX}"
 ANDY_RESPONSE_LOGS_COLLECTION = f"{ANDY_RESPONSE_LOGS_BASE_COLLECTION}_{LOGGING_SUFFIX}"
 HELP_RESPONSE_LOGS_COLLECTION = f"{HELP_RESPONSE_LOGS_BASE_COLLECTION}_{LOGGING_SUFFIX}"
+
+REQUEST_LOG_OUTPUT_DIR = f"{LOGGING_SUFFIX}/logs_by_session_id"
+COMPILED_LOGS_PATH = f"{LOGGING_SUFFIX}/compiled_logs_{LOGGING_SUFFIX}.csv"
 
 USER_REQUEST_REMOVED_KEYS = [
     'session_id',
@@ -219,13 +222,13 @@ def read_post(loc: str) -> list[tuple[str, CompiledLog]]:
         for row in reader:
             session_id = row['session_id']
             name = row["Name"]
-            positives = int(row['Q1']) + int(row['Q3']) + \
-                int(row['Q5']) + int(row['Q7']) + int(row['Q9'])
-            negatives = int(row['Q2']) + int(row['Q4']) + \
-                int(row['Q6']) + int(row['Q8']) + int(row['Q10'])
+            odds = 5 - int(row['Q1']) + 5 - int(row['Q3']) + \
+                5 - int(row['Q5']) + 5 - int(row['Q7']) + 5 - int(row['Q9'])
+            evens = int(row['Q2']) - 1 + int(row['Q4']) - 1 + \
+                int(row['Q6']) - 1 + int(row['Q8']) - 1 + int(row['Q10']) - 1
 
             l = CompiledLog(session_id)
-            l.sus = positives - negatives
+            l.sus = (odds + evens) * 2.5
             ret.append((name, l))
 
     return ret
@@ -238,7 +241,7 @@ def generate_user_request_csv(ret: CompiledLog):
         docs = db.collection(USER_REQUEST_LOGS_COLLECTION).where(
             'session_id', '>=', session_id).limit(50).stream()
 
-        with open(f'demo2/logs_by_session_id/user_requests_log_{session_id}.csv', 'w', newline='') as csvfile:
+        with open(f'{REQUEST_LOG_OUTPUT_DIR}/user_requests_log_{session_id}.csv', 'w', newline='') as csvfile:
             fieldnames = ['timestamp', 'text', 'detected_fulfillment',
                           'fulfillment_success', 'recording_time_ms', 'time_to_response_ms', 'response_text', 'audio_name']
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
@@ -297,14 +300,14 @@ def generate_user_request_csv(ret: CompiledLog):
 
 if __name__ == "__main__":
     # Read post-survey and pre-survey, construct CompiledLog for each
-    l = read_post("demo2/post_survey_demo2.csv")
+    l = read_post(f"{LOGGING_SUFFIX}/post_survey_{LOGGING_SUFFIX}.csv")
     compiled_logs: list[CompiledLog] = read_pre(
-        "demo2/pre_survey_demo2.csv", l)
+        f"{LOGGING_SUFFIX}/pre_survey_{LOGGING_SUFFIX}.csv", l)
     # Read GCP logs, update CompiledLog for each
     for cl in compiled_logs:
         generate_user_request_csv(cl)
     # Write CompiledLog to csv
-    with open('demo2/compiled_logs_demo2.csv', 'w', newline='') as csvfile:
+    with open(COMPILED_LOGS_PATH, 'w', newline='') as csvfile:
         writer = csv.DictWriter(csvfile, list(
             compiled_logs[0].to_dict().keys()))
 
