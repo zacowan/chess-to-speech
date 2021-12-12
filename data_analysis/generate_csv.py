@@ -89,7 +89,7 @@ import csv
 from datetime import datetime
 
 PROJECT_ID = "chess-master-andy-mhyo"
-LOGGING_SUFFIX = "demo1"
+LOGGING_SUFFIX = "demo2"
 
 USER_REQUEST_LOGS_BASE_COLLECTION = "user_request_logs"
 ANDY_RESPONSE_LOGS_BASE_COLLECTION = "andy_response_logs"
@@ -222,10 +222,10 @@ def read_post(loc: str) -> list[tuple[str, CompiledLog]]:
         for row in reader:
             session_id = row['session_id']
             name = row["Name"]
-            odds = 5 - int(row['Q1']) + 5 - int(row['Q3']) + \
-                5 - int(row['Q5']) + 5 - int(row['Q7']) + 5 - int(row['Q9'])
-            evens = int(row['Q2']) - 1 + int(row['Q4']) - 1 + \
-                int(row['Q6']) - 1 + int(row['Q8']) - 1 + int(row['Q10']) - 1
+            odds = int(row['Q1']) - 1 + int(row['Q3']) - 1 + \
+                int(row['Q5']) - 1 + int(row['Q7']) - 1 + int(row['Q9']) - 1
+            evens = 5 - int(row['Q2']) + 5 - int(row['Q4']) + \
+                5 - int(row['Q6']) + 5 - int(row['Q8']) + 5 - int(row['Q10'])
 
             l = CompiledLog(session_id)
             l.sus = (odds + evens) * 2.5
