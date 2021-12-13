@@ -1,0 +1,10 @@
+timestamp,text,detected_fulfillment,fulfillment_success,recording_time_ms,time_to_response_ms,response_text,audio_name
+2021-11-08 13:03:22.655210+00:00,Charlie Knight to C3,MOVE_PIECE,True,5416.169,1070.989,Now I'll move my pawn to d5,audio-files-staging/2daa6098-0470-4559-b90f-a2034926b11e
+2021-11-08 13:04:24.876369+00:00,thank you so much,FALLBACK,True,6937.495,1063.208,I didn't get that. Can you say it again?,audio-files-staging/dd2526db-93bf-4696-a7a5-a2801032fe9c
+2021-11-08 13:03:49.789589+00:00,Pawn to E4,MOVE_PIECE,True,8258.497,1055.243,"For my turn, I'll move my pawn at d5 to d4",audio-files-staging/c82bfae2-e967-44eb-aa9a-bff013836398
+2021-11-08 13:02:50.965335+00:00,Ponte III,FALLBACK,True,2113.229,1716.145,I missed what you said. What was that?,audio-files-staging/602219f0-63dc-44b7-9793-627867e06cf7
+2021-11-08 13:04:11.571988+00:00,so-so,FALLBACK,True,8064.370999999999,741.06,Can you say that again?,audio-files-staging/2d3c59a6-23bc-4d00-ad79-0ceba2f19621
+2021-11-08 13:02:59.457664+00:00,E3,MOVE_PIECE,False,1390.39,962.492,"Sorry, I need a little bit more information about your move. Could you give me more details?",audio-files-staging/1ef1d795-60ac-4da1-a78a-f2bdcbab3f60
+2021-11-08 13:02:16.787927+00:00,And1 play chess,START_GAME,True,3582.283,1093.519,"Awesome, I'm so excited. But first, do you want black or white side?",audio-files-staging/21177fd9-e463-4d0c-b0e5-b22c14d795f0
+2021-11-08 13:02:33.367809+00:00,White Side,CHOOSE_SIDE,True,6777.191,1122.02,"Okay, you'll go first. Whenever you're ready, I can make a move for you or tell you what else you can do. To move a piece, you can say 'pawn to E5'.",audio-files-staging/ea06ed13-95e5-4d15-b698-b6970d6658f0
+2021-11-08 13:03:10.994459+00:00,to E3,FALLBACK,True,1558.011,1012.1179999999999,Can you say that again?,audio-files-staging/0c8f382c-603e-4361-bbc5-545717840678

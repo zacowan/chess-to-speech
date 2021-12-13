@@ -1,0 +1,12 @@
+timestamp,text,detected_fulfillment,fulfillment_success,recording_time_ms,time_to_response_ms,response_text,audio_name
+2021-11-08 13:13:13.407922+00:00,black,CHOOSE_SIDE,True,3367.698,1104.778,"Now I'll move my pawn to e4 . Whenever you're ready, I can make a move for you or tell you what else you can do. To move a piece, you can say 'pawn to E5'.",audio-files-staging/86749c62-8d2a-45a3-8425-07c76b9b2533
+2021-11-08 13:15:12.953516+00:00,Home to B6,FALLBACK,True,3839.3799999999997,1359.054,I didn't get that. Can you say it again?,audio-files-staging/b2f314b1-d59d-4cb9-b9e7-c9d77bdcc218
+2021-11-08 13:12:40.122166+00:00,Benito's president Press News,FALLBACK,True,6778.569,982.0219999999999,I'm not sure I understood that.,audio-files-staging/43539f70-7f4f-4c93-b64d-86c3785e2013
+2021-11-08 13:15:36.801138+00:00,Pawn to B6,MOVE_PIECE,True,3820.8920000000003,1371.243,"For my turn, I'll move my knight at f3 to e5",audio-files-staging/f29753f1-fc6d-456b-8b4a-43f012b2aab1
+2021-11-08 13:14:19.732658+00:00,contact force,FALLBACK,True,9002.734,813.23,I didn't get that. Can you say it again?,audio-files-staging/1611417a-d0ec-49c4-a166-c39a5fe68cda
+2021-11-08 13:13:35.948987+00:00,early Miss so much better,FALLBACK,True,3006.662,685.201,I'm not sure I understood that.,audio-files-staging/3c8ffb4a-e47a-47d8-bc00-15692c0ea5b3
+2021-11-08 13:14:38.338464+00:00,Santa Fe Ford,FALLBACK,True,10883.403,999.4779999999998,"Sorry, could you say that again?",audio-files-staging/d0b4b2d5-63a5-406b-a690-988992d66cab
+2021-11-08 13:14:54.603810+00:00,Pawn to F4,MOVE_PIECE,False,9194.508000000002,1149.218,"Oh, that's an illegal move. Could you give me a different one?",audio-files-staging/d43abb6a-3616-41f0-9fa6-e6d8a2a6ec8b
+2021-11-08 13:15:25.414908+00:00,poem to Basics,FALLBACK,True,4819.835,1032.387,I'm not sure I understood that.,audio-files-staging/c91fe4fc-7354-4cbc-8dbe-55918af86e6b
+2021-11-08 13:12:48.508402+00:00,let's play chess,START_GAME,True,1921.493,1311.223,"Awesome, I'm so excited. But first, do you want black or white side?",audio-files-staging/941b81fc-d333-4993-bc44-5d2a7e91dde9
+2021-11-08 13:13:45.071457+00:00,Pawn to E5,MOVE_PIECE,True,2277.73,1021.068,Now I'll move my knight to f3,audio-files-staging/df7195dc-51d6-405a-aa84-86e82cc2b163

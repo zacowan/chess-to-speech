@@ -1,0 +1,14 @@
+timestamp,text,detected_fulfillment,fulfillment_success,recording_time_ms,time_to_response_ms,response_text,audio_name
+2021-11-08 13:32:23.718537+00:00,I like the way you guys have a the board laid out here using like the capital and lowercase to differentiate the colors yet.,FALLBACK,True,8828.583,677.671,I'm not sure I understood that.,audio-files-staging/51163a0e-3ff0-42ec-9964-9de41d63ae06
+2021-11-08 13:33:29.400666+00:00,ashitaka yet,FALLBACK,True,5948.848,788.011,"Sorry, could you say that again?",audio-files-staging/f88fa9eb-63f3-4485-b21d-d5892fe82ff8
+2021-11-08 13:31:25.376621+00:00,2 C3,MOVE_PIECE,False,1919.3990000000001,1213.156,"Oh, it looks like there isn't a piece there.",audio-files-staging/14244da5-e048-49db-bc46-50350b62e742
+2021-11-08 13:31:02.654053+00:00,A2 to A4,MOVE_PIECE,True,11866.797999999999,961.9069999999999,Now I'll move my pawn to e5,audio-files-staging/66a3a849-94d3-442c-a00f-7a9a5752c0c3
+2021-11-08 13:30:33.306177+00:00,YouTube E4,FALLBACK,True,2176.104,714.5450000000001,What was that?,audio-files-staging/4859b6ff-3a4d-4ceb-a182-714db10c842a
+2021-11-08 13:30:22.506721+00:00,B2 to V4,MOVE_PIECE,False,4248.1720000000005,680.025,"Actually, that move would be against the rules, so you can't do it.",audio-files-staging/5018b28a-43f5-41ba-ae3b-4f6626fa9ccb
+2021-11-08 13:30:41.031077+00:00,E2 B4,MOVE_PIECE,False,2432.532,1098.695,"Actually, that move would be against the rules, so you can't do it.",audio-files-staging/c5b06c3b-d318-45a2-b019-b21c7174e5a8
+2021-11-08 13:31:36.912141+00:00,B1 to C3,MOVE_PIECE,True,4163.216,1027.0059999999999,Now I'll move my pawn to d5,audio-files-staging/fe6f57ab-e6d2-4b8c-a1da-35a2239fce08
+2021-11-08 13:32:38.828201+00:00,automatic speech recognition,FALLBACK,True,5588.124,1031.971,I missed what you said. What was that?,audio-files-staging/9fc1631b-abe4-41b0-a586-f578850272ac
+2021-11-08 13:31:55.544080+00:00,C3 to D5,MOVE_PIECE,True,5781.5070000000005,939.825,"For my turn, I'll move my queen at d8 to d5",audio-files-staging/1b8059eb-95b2-427c-bf0f-093cfb77feed
+2021-11-08 13:29:41.090243+00:00,let's play chess,START_GAME,True,1595.134,1219.795,"Alright, let's do this. Did you want black side or white side?",audio-files-staging/ba6e9469-7f61-4cff-9037-c4df848f6f5b
+2021-11-08 13:29:33.658022+00:00,don't need to press a button or something,FALLBACK,True,5003.097000000001,990.2719999999999,Can you say that again?,audio-files-staging/b2e2bedd-3d6c-4024-a9ea-21cc4856baeb
+2021-11-08 13:30:03.137313+00:00,I'll take White,CHOOSE_SIDE,True,12009.655999999999,1992.2150000000001,"Good choice, that means you'll go first. I can make your move or tell you what else you can do whenver you are ready. To move a piece, you can say 'E7 to E5'.",audio-files-staging/0d1143a2-256d-4ba3-92df-4636252e4ff6

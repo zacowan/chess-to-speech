@@ -1,0 +1,10 @@
+timestamp,text,detected_fulfillment,fulfillment_success,recording_time_ms,time_to_response_ms,response_text,audio_name
+2021-11-08 12:55:46.442072+00:00,hey Andy let's play chess,START_GAME,True,8039.257,1027.571,"Awesome, I'm so excited. But first, do you want black or white side?",audio-files-staging/454b3b58-f908-4e01-964a-abf73b8796d2
+2021-11-08 12:57:41.592703+00:00,A4 brookshade 684,MOVE_PIECE,False,4371.265,974.582,"Sorry, I need a little bit more information about your move. Could you give me more details?",audio-files-staging/c4a0c8d3-3f77-4ba9-ad67-ebf51a644586
+2021-11-08 12:56:00.498613+00:00,black,CHOOSE_SIDE,True,4705.336,1163.915,"Let me move my pawn to e4 . Whenever you're ready, I can make a move for you or tell you what else you can do. To move a piece, you can say 'pawn to E5'.",audio-files-staging/c4546a31-73aa-47b5-a66b-573f13be5259
+2021-11-08 12:58:02.740607+00:00,yes that's okay so I'm going to get this setup for you,FALLBACK,True,8153.888999999999,762.4179999999999,I'm not sure I understood that.,audio-files-staging/7f4aca6a-87eb-4671-95b0-1e8727250937
+2021-11-08 12:56:44.065830+00:00,1285,FALLBACK,True,1831.983,692.068,"Sorry, could you say that again?",audio-files-staging/0b403449-41c8-455a-a049-e21d63d61f7f
+2021-11-08 12:57:24.594964+00:00,Route 286,FALLBACK,True,4135.472,1056.886,I missed what you said. What was that?,audio-files-staging/eaf33f45-8eca-4b1c-9728-57cbbfdc18d6
+2021-11-08 12:56:36.459893+00:00,Fantage V,FALLBACK,True,8401.605,815.4159999999999,Can you say that again?,audio-files-staging/f40bea94-4f4e-49cb-8761-dff4c1ee5dc1
+2021-11-08 12:56:55.630875+00:00,Pawn to H5,MOVE_PIECE,True,4652.491999999999,978.6609999999998,"For my turn, I'll move my pawn at d2 to d4",audio-files-staging/e4946d15-bb5a-4ca0-91b5-3ece946b9792
+2021-11-08 12:55:31.100964+00:00,hey Andy what's up,FALLBACK,True,10412.201,897.9570000000001,I'm not sure I understood that.,audio-files-staging/56af2b61-3e1a-40d4-a924-287bab8be69f

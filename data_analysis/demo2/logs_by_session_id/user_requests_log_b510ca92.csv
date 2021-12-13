@@ -1,0 +1,41 @@
+timestamp,text,detected_fulfillment,fulfillment_success,recording_time_ms,time_to_response_ms,response_text,audio_name
+2021-12-08 13:04:56.344600+00:00,I accidentally,FALLBACK,False,3050.642,735.6030000000001,What was that?,audio-files-staging/71e3cd9d-0170-4247-824e-27b0cf31a398
+2021-12-08 13:04:33.398603+00:00,Party 5,FALLBACK,False,4096.939,1006.02,I'm not sure I understood that.,audio-files-staging/a6c2f95d-849f-4957-898f-354268c4ed6e
+2021-12-08 13:09:53.449602+00:00,take the f****** Pawn,MOVE_PIECE,False,2477.255,897.9939999999999,"Sorry, where did you want to move your pawn to?",audio-files-staging/15134510-d9c9-4267-ab7a-1a25c3b6c611
+2021-12-08 13:10:59.098513+00:00,put my night on D5,MOVE_PIECE,True,3242.455,1137.121,"For my turn, I'll move my queen at d8 to d5",audio-files-staging/629b2075-9d5b-469e-bd61-453e7c1dd80d
+2021-12-08 13:03:40.958780+00:00,let's go White,CHOOSE_SIDE,True,7555.397,1025.176,"Ok, then I'll take black. Now, would you like an easy game, or a hard game?",audio-files-staging/e9ae5336-0e8b-45e9-a9b8-db948b81a81f
+2021-12-08 13:11:17.196824+00:00,quit Uncle Buck you,QUIT_GAME,True,2946.224,1101.496,"I hear that you're all finished, is that right?",audio-files-staging/3596f618-167d-4d30-925b-df167c903185
+2021-12-08 13:11:30.989172+00:00,uncle uncompassionate,FALLBACK,False,2840.68,2613.7549999999997,"Sorry, could you say that again?",audio-files-staging/44cf2928-f771-4ad7-a700-4b8dc529a082
+2021-12-08 13:02:55.189674+00:00,I want to be purple dammit,FALLBACK,False,7289.341,804.643,Can you say that again?,audio-files-staging/84b1f4a2-369b-442c-a5df-332d3dc8e3a0
+2021-12-08 13:03:54.779760+00:00,card game give me a hard game,SELECT_DIFFICULTY,True,2952.895,1749.915,"Great, then I'll go hard on you. Now, let's get started. Whenever you're ready, I can make a move for you. To move a piece, you can say something like 'pawn to E5', or, 'B3 to F3'. We'll play till one of us wins, or whenever you'd like to stop.",audio-files-staging/bde73c09-cbcc-4d08-b389-095086c2b9c2
+2021-12-08 13:10:03.542499+00:00,Nike 2D f****** 5,MOVE_PIECE,False,2858.358,1044.634,"Sorry, I don't see a piece at A2.",audio-files-staging/f28bf57d-c8a8-44d2-bb35-b995c99c5afd
+2021-12-08 13:07:36.011629+00:00,before,FALLBACK,False,4353.716,1018.207,What was that?,audio-files-staging/b569c864-8318-433b-b8b8-05319e692272
+2021-12-08 13:04:20.362448+00:00,Queen to d8,MOVE_PIECE,False,3005.925,822.268,"Oh, that's an illegal move. Could you give me a different one?",audio-files-staging/eb402fa1-f69f-410a-9b54-4d6371a4d4d4
+2021-12-08 13:07:18.510869+00:00,put my phone on eforyou s***,FALLBACK,False,5290.436,825.5999999999999,I'm not sure I understood that.,audio-files-staging/3031d4ec-85f7-4b5a-a7f8-28143411e95b
+2021-12-08 13:07:46.830055+00:00,put my phone on Ivar,FALLBACK,False,4176.400000000001,407.034,,audio-files-staging/d93d0bbd-a08f-4f59-b64d-38b6de8dfbaa
+2021-12-08 13:06:12.670307+00:00,bharani 4,MOVE_PIECE,True,2192.213,1543.185,"For my turn, I'll move my pawn at e7 to e5",audio-files-staging/b000688a-edfe-44c9-b854-10b8ecd3d201
+2021-12-08 13:05:33.047476+00:00,594,MOVE_PIECE,False,2623.593,1020.557,"I hear that you want to move your pawn, but where to?",audio-files-staging/3fdb95cd-89c0-4fa8-8ff1-ab82b31aefb1
+2021-12-08 13:08:10.152252+00:00,I stick the horsey dude on C3,FALLBACK,False,4289.697,1027.49,I'm not sure I understood that.,audio-files-staging/f89db23e-b7e1-476e-99b7-552d35299ae9
+2021-12-08 13:12:05.913393+00:00,surrender,FALLBACK,False,4647.148999999999,919.271,I didn't get that. Can you say it again?,audio-files-staging/e6e4004d-4e87-4fcd-9d8b-73968004967a
+2021-12-08 13:05:47.233291+00:00,on the floor,MOVE_PIECE,False,4501.226,1322.699,"Sorry, where did you want to move your pawn to?",audio-files-staging/69561bd0-0302-47d2-ade0-c0bd2225d3b3
+2021-12-08 13:06:51.299269+00:00,practically always,FALLBACK,False,12786.060000000001,651.3679999999999,Can you say that again?,audio-files-staging/cbbde4f8-193d-42a4-a0d1-8548d88fab4b
+2021-12-08 13:08:31.185782+00:00,so a night,MOVE_PIECE,False,2771.576,1354.592,"Sorry, where did you want to move your knight to?",audio-files-staging/98acac24-4a56-4938-80b6-ca8699f22c05
+2021-12-08 13:10:18.859221+00:00,what is it sephi 95c 75,FALLBACK,False,6502.077,895.5840000000001,Can you say that again?,audio-files-staging/f3a9ebd8-c7fd-4e89-8cbf-8681d791e4e1
+2021-12-08 13:02:39.285230+00:00,want to play some f****** check,START_GAME,True,2708.9539999999997,691.501,"Alright, let's do this. Did you want black side or white side?",audio-files-staging/a207c23e-f8be-4bd1-9402-21d66ae390f1
+2021-12-08 13:08:56.671014+00:00,take D5,MOVE_PIECE,False,2352.157,1189.921,"Sorry, I'm not sure which piece you are trying to move. Can you give me more info?",audio-files-staging/0cf855f9-39d0-4d3e-aa9d-a72673b118c2
+2021-12-08 13:03:16.153743+00:00,I want play whatever side you text,START_GAME,True,5373.095,5299.475,"Okay, would you like black or white side?",audio-files-staging/28645562-fe91-4036-b117-a42206025da5
+2021-12-08 13:04:44.808468+00:00,my damn Pawn on goddamn E5,MOVE_PIECE,False,4330.695000000001,1114.17,"Oh, that's an illegal move. Could you give me a different one?",audio-files-staging/1e82e45f-375f-4ac9-95e4-92d239029d83
+2021-12-08 13:05:15.905661+00:00,looking for looking for,MOVE_PIECE,False,2624.38,5937.376,"I hear that you want to move your pawn, but where to?",audio-files-staging/484647db-2020-4045-8b56-782124884308
+2021-12-08 13:06:02.889301+00:00,s*** on me,MOVE_PIECE,False,3159.16,1002.681,"Sorry, where did you want to move your pawn to?",audio-files-staging/9ca7ace6-bf0c-4ef8-90b3-b7aae50dff98
+2021-12-08 13:07:01.878281+00:00,give me E4,MOVE_PIECE,False,4777.523,1444.7060000000001,"Sorry, I need a little bit more information about your move. Could you give me more details?",audio-files-staging/a9c63130-183e-4962-834e-576343953a3f
+2021-12-08 13:08:41.334982+00:00,C3,MOVE_PIECE,True,2048.5820000000003,1126.589,"Now, let me move my pawn to d5",audio-files-staging/75406ba4-f61d-40dc-a525-bdf9d07e0602
+2021-12-08 13:03:03.835882+00:00,just pick something random right,FALLBACK,False,3105.108,752.407,I missed what you said. What was that?,audio-files-staging/3c4101ec-7986-40ce-ac66-c3c732c83a1a
+2021-12-08 13:05:04.806946+00:00,Buckeye Pawn on a f****** for,MOVE_PIECE,False,3006.323,809.4200000000001,"I hear that you want to move your pawn, but where to?",audio-files-staging/7a35ca82-7d09-46fb-9e7d-dc3a9bf50b42
+2021-12-08 13:09:42.039536+00:00,alright I need you to put my night on,MOVE_PIECE,False,11372.049,2104.111,"Sorry, where did you want to move your knight to?",audio-files-staging/14212a61-0577-4416-887e-5e520f711f08
+2021-12-08 13:08:21.838456+00:00,customer horse on C3,FALLBACK,False,4244.124,961.1019999999999,Can you say that again?,audio-files-staging/534c0049-b2a1-41c1-b7f3-65624ef01116
+2021-12-08 13:09:12.630361+00:00,is only one piece that can take D5 and that's my f****** a horse,HOW_PIECE_MOVES,True,5460.586,1209.855,"Oh, that's a pawn. Pawns move vertically forward one square, or optionally, two squares if they haven't been moved yet. They can attack forward one square diagonally, but they are unable to move backwards.",audio-files-staging/e07cef6f-c6c6-4b7f-8a17-bb8639f78bad
+2021-12-08 13:02:30.949157+00:00,lesgo,FALLBACK,False,2792.494,857.481,Can you say that again?,audio-files-staging/b1943c40-f2d1-4431-9fbe-e1b71128bf9b
+2021-12-08 13:10:34.995722+00:00,C7 to D5 dammit,MOVE_PIECE,False,4672.682,1439.784,"That piece actually belongs to me, so I'm afraid you can't move it.",audio-files-staging/58b43846-301a-4a7f-9cf6-f61ee258587f
+2021-12-08 13:11:48.401634+00:00,I lose,FALLBACK,False,2027.534,6054.018,Can you say that again?,audio-files-staging/03950c81-1aa2-4987-8667-2a74db274510
+2021-12-08 13:10:48.529805+00:00,btd5 gamut,FALLBACK,False,3455.0640000000003,726.2719999999999,I missed what you said. What was that?,audio-files-staging/5e19f5ef-6312-4bb9-84a6-7d65c3354b98
+2021-12-08 13:02:21.434061+00:00,telescope,FALLBACK,False,4243.848,5904.521,I'm not sure I understood that.,audio-files-staging/81289193-27a0-48f1-952c-02c824217931

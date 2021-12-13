@@ -1,0 +1,18 @@
+timestamp,text,detected_fulfillment,fulfillment_success,recording_time_ms,time_to_response_ms,response_text,audio_name
+2021-11-08 13:24:46.112684+00:00,D2 to D4,MOVE_PIECE,True,3818.142,894.346,Let me move my knight to f6,audio-files-staging/8f45a972-0f8a-4f54-a8eb-696b17340533
+2021-11-08 13:24:19.523703+00:00,hey Andy let's play chess,START_GAME,True,8019.51,867.214,"Okay, would you like black or white?",audio-files-staging/d4570c1a-3b4f-409e-b1e4-eea326372c32
+2021-11-08 13:28:45.684090+00:00,yeah,FALLBACK,True,7620.845,1077.745,What was that?,audio-files-staging/f5df349e-5655-440d-8089-2d6f597bd4de
+2021-11-08 13:25:06.719972+00:00,d-45,FALLBACK,True,6934.927,1072.136,What was that?,audio-files-staging/fca8caed-4f70-4a92-b178-7aed1383843b
+2021-11-08 13:27:04.390826+00:00,what should I do next,BEST_MOVE,True,2387.046,1329.299,I think you should move your bishop at f1 to d3.,audio-files-staging/56effba5-9d67-4be0-a0a3-026e7a828619
+2021-11-08 13:25:40.618273+00:00,g1 to G3 g1 to f,MOVE_PIECE,False,8254.25,1001.1589999999999,"Oh, that's an illegal move. Could you give me a different one?",audio-files-staging/96d861a3-120c-4cc6-a3eb-80f94406e408
+2021-11-08 13:28:55.265470+00:00,I walked back here asking,FALLBACK,True,3497.534,927.202,I'm not sure I understood that.,audio-files-staging/f68c2740-c873-41e9-8437-ad2f739a2240
+2021-11-08 13:24:27.913441+00:00,White,CHOOSE_SIDE,True,1663.635,1275.62,"Okay, you'll go first. I can make your move or tell you what else you can do whenver you are ready. To move a piece, you can say 'E7 to E5'.",audio-files-staging/2b767ca6-b31d-47d8-96e9-b0045ef96a16
+2021-11-08 13:28:11.145057+00:00,what should I do again,BEST_MOVE,True,5159.382,1378.562,I think you should move your bishop at c1 to g5.,audio-files-staging/9e571937-fd52-40d2-927c-02d9ccb6c587
+2021-11-08 13:25:15.508013+00:00,B1 to C3,MOVE_PIECE,True,3199.073,2405.514,Now I'll move my pawn to d5,audio-files-staging/3644ffea-5ac0-412d-827c-0396bc4244fb
+2021-11-08 13:28:31.199333+00:00,what Leaf program handles the AI is stockfish,FALLBACK,True,9451.530999999999,929.866,I didn't get that. Can you say it again?,audio-files-staging/07203df9-fe3e-4187-bb3e-e2ca02d8a7b6
+2021-11-08 13:27:49.442133+00:00,can I move the bishop on the right to D3,MOVE_PIECE,True,4141.479,1038.401,Let me move my knight to f6,audio-files-staging/366f00cf-78cf-4cbc-940c-900cf91a4c05
+2021-11-08 13:26:00.627455+00:00,g1 to F3,MOVE_PIECE,True,11670.747000000001,1070.0430000000001,"For my turn, I'll move my pawn at a7 to a6",audio-files-staging/5c9badea-4bb7-46e7-b56a-46ceb737bd69
+2021-11-08 13:27:36.597646+00:00,what do the Bishops look like what do the Bishops look like,MOVE_PIECE,False,8556.442000000001,972.652,"I hear that you want to move your bishop, but where to?",audio-files-staging/e7ee7951-9d69-46de-a7e2-206d10b26a9f
+2021-11-08 13:27:15.368445+00:00,how does the bishop move again,HOW_PIECE_MOVES,True,2626.2949999999996,1191.058,"Actually, that's a None. Bishops move diagonally any number of squares. They are unable to jump over pieces.",audio-files-staging/500bf4eb-f66a-4dd6-b056-05dd9c12c213
+2021-11-08 13:26:25.837593+00:00,E2 to E4 E2 to,MOVE_PIECE,True,8341.528,902.0709999999999,"For my turn, I'll move my pawn at d5 to e4",audio-files-staging/5c0efa3a-e9d4-417c-b3fb-d8264acf3a1d
+2021-11-08 13:26:45.002496+00:00,can I move my knight from C3 to E4,MOVE_PIECE,True,4266.832,5758.358,Let me move my knight to e4,audio-files-staging/b958c528-c067-40cf-ac8e-d291b025a1c3

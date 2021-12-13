@@ -1,0 +1,15 @@
+timestamp,text,detected_fulfillment,fulfillment_success,recording_time_ms,time_to_response_ms,response_text,audio_name
+2021-12-08 13:15:24.783724+00:00,navigate to,FALLBACK,False,4927.816,1209.225,I'm not sure I understood that.,audio-files-staging/d88523b7-06df-4d4d-86a7-e0d6487a63db
+2021-12-08 13:14:27.266547+00:00,Honda G4,FALLBACK,False,3756.591,830.235,"Sorry, could you say that again?",audio-files-staging/67a58ee8-0d5e-4b43-8070-334da232d5df
+2021-12-08 13:13:01.397667+00:00,another project,FALLBACK,False,2517.4660000000003,962.991,I'm not sure I understood that.,audio-files-staging/3b0e727f-0fea-487b-9a24-0bc0b2a2fa82
+2021-12-08 13:14:02.484456+00:00,easy mode,SELECT_DIFFICULTY,True,2237.647,1256.411,"Okay, then I'll go easy on you. Now, let's begin. Whenever you're ready, I can make a move for you. To move a piece, you can say something like 'pawn to E5', or, 'B3 to F3'. We'll play till one of us wins, or whenever you'd like to stop.",audio-files-staging/98bc765f-cc60-4daa-83e2-d01ff8d543d9
+2021-12-08 13:13:31.113720+00:00,White,CHOOSE_SIDE,True,1397.0320000000002,1614.7800000000002,"Good choice, that means you'll go first. Next, would you like me to go easy, or hard on you?",audio-files-staging/90ae86f9-7d22-4d2e-8cb5-fbd6c810fd15
+2021-12-08 13:13:11.978347+00:00,hey Andy let's play chess,START_GAME,True,3605.2,912.947,"Alright, let's do this. Did you want black side or white side?",audio-files-staging/bb57ba42-ceaf-48de-b16e-158ed9c605c9
+2021-12-08 13:15:51.926627+00:00,955,FALLBACK,False,3456.403,390.126,,audio-files-staging/865b7172-c997-4693-9c32-159ca635982f
+2021-12-08 13:13:44.710544+00:00,dizzy,FALLBACK,False,2092.634,1117.926,I didn't get that. Can you say it again?,audio-files-staging/af4a601c-5845-4a72-8ff9-5562410b5f73
+2021-12-08 13:16:13.542977+00:00,stop playing,QUIT_GAME,True,2582.907,750.014,It sounds like you're all done - would you like to quit?,audio-files-staging/5066d730-0045-4b5d-8eee-862ad42bf77a
+2021-12-08 13:13:53.749177+00:00,Yeezy,FALLBACK,False,1922.419,736.9680000000001,I didn't get that. Can you say it again?,audio-files-staging/2d94cf2b-ae75-43f0-b34d-536dd59714a6
+2021-12-08 13:14:38.094167+00:00,Pawn to D4,MOVE_PIECE,True,3583.168,1268.905,"Now, let me move my pawn to b6",audio-files-staging/23f9addf-5cf1-4e5d-9ce0-b3dc7e94f771
+2021-12-08 13:13:23.560088+00:00,Wi-Fi,FALLBACK,False,2385.4320000000002,1102.516,Can you say that again?,audio-files-staging/d5f4e54f-3cfd-4e62-a217-6d3a0ac0299e
+2021-12-08 13:15:07.113250+00:00,Knight to C3,MOVE_PIECE,True,4285.2699999999995,809.484,"Now, let me move my pawn to d5",audio-files-staging/1e39cc95-460e-4ed3-a869-49bd76b923c5
+2021-12-08 13:15:35.701778+00:00,92-85,FALLBACK,False,3156.4519999999998,5894.8099999999995,"Sorry, could you say that again?",audio-files-staging/b338ffd7-4a2c-4fe2-a43c-af9402ea0891

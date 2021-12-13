@@ -1,0 +1,15 @@
+timestamp,text,detected_fulfillment,fulfillment_success,recording_time_ms,time_to_response_ms,response_text,audio_name
+2021-11-08 13:23:48.478793+00:00,School,FALLBACK,True,10619.868,729.2909999999999,"Sorry, could you say that again?",audio-files-staging/4417ca61-3ac7-4db5-a79f-4dc4cb88472b
+2021-11-08 13:23:30.204978+00:00,sedif,FALLBACK,True,1325.0839999999998,1069.404,I'm not sure I understood that.,audio-files-staging/bad2f438-a9e2-41c1-8bc3-98f4cb890207
+2021-11-08 13:22:43.703692+00:00,honestly can't wait to be 600df to Ace,FALLBACK,True,4972.341,747.815,"Sorry, could you say that again?",audio-files-staging/7a0d9eec-4925-48f9-a43e-f69b0342fc9f
+2021-11-08 13:20:48.604017+00:00,black,CHOOSE_SIDE,True,1304.261,979.215,"For my turn, I'll move my pawn at e2 to e4 . Whenever you're ready, I can make a move for you or tell you what else you can do. To move a piece, you can say 'pawn to E5'.",audio-files-staging/47cb00ee-f6c3-4581-855d-beda5ac4f96e
+2021-11-08 13:21:36.855001+00:00,haunted Essex,FALLBACK,True,4757.794,1048.161,Can you say that again?,audio-files-staging/bdd790fa-8052-4f1f-86ae-7bc5dcb0d925
+2021-11-08 13:19:55.085341+00:00,hey Andy let's play chess,START_GAME,True,6353.043000000001,970.102,"Okay, would you like black or white?",audio-files-staging/aef4ff84-1155-4405-ab33-fcd5beff4a6d
+2021-11-08 13:23:18.795964+00:00,D4,MOVE_PIECE,False,1749.473,1013.49,"Sorry, I need a little bit more information about your move. Could you give me more details?",audio-files-staging/74532a42-649a-443a-88b8-a7cc5dab0f05
+2021-11-08 13:22:59.434090+00:00,yep right there on 56,FALLBACK,True,6554.121999999999,957.5840000000001,"Sorry, could you say that again?",audio-files-staging/5b2a997e-07e8-4100-a378-3857040b1330
+2021-11-08 13:22:07.275404+00:00,play make a move for me,BEST_MOVE,True,3710.647,1448.94,"Well, I'd reccomend moving your pawn from d7 to d5.",audio-files-staging/3e059660-03c4-4a5f-b460-514bcc3fc105
+2021-11-08 13:20:41.276769+00:00,butterfly,FALLBACK,True,6657.402,657.7460000000001,What was that?,audio-files-staging/a05293eb-8887-4069-b866-aa1079fb03b6
+2021-11-08 13:23:10.277708+00:00,Bondi 6,FALLBACK,True,3561.928,895.4029999999999,Can you say that again?,audio-files-staging/1fe67568-95f0-48b2-9ad0-bcd52682e311
+2021-11-08 13:22:26.689538+00:00,can I move a pawn B6,MOVE_PIECE,True,9107.695,1024.705,Let me move my pawn to d5,audio-files-staging/d82349be-53bd-4d45-89db-1f0e0451cf96
+2021-11-08 13:21:51.957865+00:00,on the B6,FALLBACK,True,3842.859,1049.309,I'm not sure I understood that.,audio-files-staging/ff971221-b053-4c3a-9d3a-8e23100a10ba
+2021-11-08 13:21:20.464757+00:00,Knight to C6,MOVE_PIECE,True,6140.983,851.4089999999999,Now I'll move my pawn to d4,audio-files-staging/ca99d244-1f11-4cbe-9301-ae10fc7d6524

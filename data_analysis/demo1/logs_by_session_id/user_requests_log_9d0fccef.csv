@@ -1,0 +1,21 @@
+timestamp,text,detected_fulfillment,fulfillment_success,recording_time_ms,time_to_response_ms,response_text,audio_name
+2021-11-10 13:26:23.011516+00:00,Queen to h8,MOVE_PIECE,False,10857.206,1010.5189999999999,"Actually, that move would be against the rules, so you can't do it.",audio-files-staging/fe239abd-e1b3-4ee2-bbcc-fc08f7544bdc
+2021-11-10 13:28:58.338570+00:00,Bishop to E7,MOVE_PIECE,True,5329.353,893.4449999999999,"For my turn, I'll move my bishop at f1 to d3",audio-files-staging/4ac75132-3928-4846-8de5-5e49d01a7778
+2021-11-10 13:30:35.917633+00:00,yeah Queens D4,MOVE_PIECE,True,8420.385,1058.346,Let me move my knight to d4,audio-files-staging/24b6f87a-d400-43ff-8294-1b84f4c9aae6
+2021-11-10 13:25:59.940946+00:00,Pawn to D5,MOVE_PIECE,True,4926.609,968.658,Now I'll move my pawn to c4,audio-files-staging/76876c3d-0712-4cf5-90cc-dfa9f2bd9e9d
+2021-11-10 13:27:22.813831+00:00,Pawn to D4,MOVE_PIECE,False,2819.192,731.583,"Oh, that's an illegal move. Could you give me a different one?",audio-files-staging/59064851-ca13-4621-8709-d9ace0e229e9
+2021-11-10 13:30:53.767217+00:00,I did a lot of hair testing myself ya-ya-ya please sorry,FALLBACK,True,5518.74,706.361,Can you say that again?,audio-files-staging/3c0e039e-127c-40dc-825e-05f62c061eef
+2021-11-10 13:28:13.133735+00:00,Pawn to C3,MOVE_PIECE,True,5673.706,1390.106,Now I'll move my knight to c3,audio-files-staging/0c3a5d97-9113-4abe-82e6-0a2ce0254f96
+2021-11-10 13:27:55.955728+00:00,Pawn to C4,MOVE_PIECE,True,2834.505,839.336,Let me move my pawn to e4,audio-files-staging/9a174ceb-2fab-4228-a94c-1155821c82fa
+2021-11-10 13:30:17.003818+00:00,Bishop to G4,MOVE_PIECE,False,6641.25,1280.275,"Actually, that move would be against the rules, so you can't do it.",audio-files-staging/406bdcbc-c1b7-46f0-a048-4b13995791d0
+2021-11-10 13:25:22.089398+00:00,play chess,START_GAME,True,3253.268,1102.426,"Okay, would you like black or white?",audio-files-staging/99c01134-7583-4644-9ffa-1243b8cd1079
+2021-11-10 13:25:32.699918+00:00,black,CHOOSE_SIDE,True,2384.712,1453.038,"By the way, I can make your move whenever you're ready, or I can tell you what else you can do. To move a piece, you can say 'pawn to C4', or, 'E7 to E5'. Now I'll move my pawn to d4",audio-files-staging/7f094aa2-7e48-4c1f-a4c8-df17c2bbca46
+2021-11-10 13:29:50.037767+00:00,help me make my next move,BEST_MOVE,True,3606.5710000000004,1664.248,"Well, I'd reccomend moving your bishop from f6 to e7.",audio-files-staging/4fc52afb-b9b6-4bbb-a79b-1d200cb13ed3
+2021-11-10 13:26:41.249450+00:00,Pawn to G3,MOVE_PIECE,False,9112.478,832.9159999999999,"Actually, that move would be against the rules, so you can't do it.",audio-files-staging/7dbab104-7444-4c54-ad19-b268bf7e966f
+2021-11-10 13:27:39.287296+00:00,Knight to G4,MOVE_PIECE,False,7234.07,6919.567,"Actually, that move would be against the rules, so you can't do it.",audio-files-staging/0f0ebd56-1442-4ac5-a512-3dba9ff4aad0
+2021-11-10 13:29:36.100545+00:00,art help me,POSSIBLE_ACTIONS,True,2669.09,1417.047,"I can move a piece for you, tell you how named pieces move, and help you make your next move.",audio-files-staging/3580b8a8-7519-4e15-87a8-304a86c11057
+2021-11-10 13:29:21.358461+00:00,Bishop to F6,MOVE_PIECE,True,3945.0769999999998,956.923,Now I'll move my pawn to e5,audio-files-staging/bfd5912f-5077-43e8-9b40-5dc8f87846d1
+2021-11-10 13:28:38.414050+00:00,Pawn to E6,MOVE_PIECE,True,5948.9400000000005,1416.872,"For my turn, I'll move my knight at g1 to f3",audio-files-staging/7bf64e2a-69a2-414b-af34-568828b66818
+2021-11-10 13:26:53.539266+00:00,b-52d for,FALLBACK,True,3801.9590000000003,814.941,What was that?,audio-files-staging/2028702e-06dd-457f-9aa9-a89074a1a718
+2021-11-10 13:27:02.557915+00:00,52 D4,HOW_PIECE_MOVES,True,2640.4809999999998,1652.469,"So that's a pawn. Pawns move vertically forward one square, or optionally, two squares if they haven't been moved yet. They can attack forward one square diagonally, but they are unable to move backwards.",audio-files-staging/1a33466c-f617-436d-ae63-7337a916b6c6
+2021-11-10 13:30:03.003112+00:00,why,FALLBACK,True,4568.226000000001,1073.695,I didn't get that. Can you say it again?,audio-files-staging/1e0d9169-2671-48a7-b347-02bdbf89fee3

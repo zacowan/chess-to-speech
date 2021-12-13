@@ -1,0 +1,15 @@
+timestamp,text,detected_fulfillment,fulfillment_success,recording_time_ms,time_to_response_ms,response_text,audio_name
+2021-12-06 13:17:15.161915+00:00,with the game,FALLBACK,False,2091.542,776.316,I missed what you said. What was that?,audio-files-staging/db2d83ec-ca87-434d-b102-7e4a8e2829f7
+2021-12-06 13:17:05.988911+00:00,put the game,FALLBACK,False,3731.7999999999997,1103.2640000000001,I missed what you said. What was that?,audio-files-staging/9a254e5c-f63d-40e5-9049-dda669449f25
+2021-12-06 13:16:48.156164+00:00,Queens D7,MOVE_PIECE,True,6761.897,1121.09,Now I'll move my bishop to d7,audio-files-staging/592ab010-fd43-4e42-bfaa-d47b492f2101
+2021-12-06 13:14:42.667652+00:00,I'd like a hard game,SELECT_DIFFICULTY,True,3821.0989999999997,1198.399,"Okay, then I'll go hard on you. Now, let's begin. Whenever you're ready, I can make a move for you. To move a piece, you can say something like 'pawn to E5', or, 'B3 to F3'. We'll play till one of us wins, or whenever you'd like to stop.",audio-files-staging/d2aaaede-879f-48dd-a9db-22fa94a3d240
+2021-12-06 13:15:05.395190+00:00,Pawn to C4,MOVE_PIECE,True,1917.529,1455.3600000000001,Now I'll move my pawn to e5,audio-files-staging/5bc47d4f-2a6d-403f-b304-3ae3b73f7f53
+2021-12-06 13:16:26.937253+00:00,Queen A4,MOVE_PIECE,True,10986.605000000001,1735.08,"For my turn, I'll move my knight at b8 to a6",audio-files-staging/26449412-545f-4f22-ae2b-3157f39208e8
+2021-12-06 13:15:55.072974+00:00,Knight to C3,MOVE_PIECE,True,2585.7169999999996,1291.666,"Now, let me move my knight to f6",audio-files-staging/effc2f37-82e8-4d79-8e0f-a59588878023
+2021-12-06 13:14:11.596094+00:00,I'd like a heart game,START_GAME,True,2707.125,942.673,"Alright, let's do this. Did you want black side or white side?",audio-files-staging/b8214395-14ce-492c-96a2-8f433fd47d05
+2021-12-06 13:13:40.087233+00:00,hey Andy let's play chess,START_GAME,True,3588.484,919.722,"Okay, would you like black or white side?",audio-files-staging/01684766-339f-4359-93d3-a5cbf8bec04f
+2021-12-06 13:13:58.738769+00:00,I'd like the White Side,CHOOSE_SIDE,True,11761.011999999999,1085.158,"Good choice, that means you'll go first. Now, would you like an easy game, or a hard game?",audio-files-staging/8f8aaa55-8d0e-4930-9d7a-c1822cda6866
+2021-12-06 13:15:38.426001+00:00,Knights E3,MOVE_PIECE,False,9431.443,1169.778,"Actually, that would be against the rules, so you can't do it.",audio-files-staging/d2333ac1-55ce-44e7-b393-dcf183d059b8
+2021-12-06 13:17:46.888341+00:00,end the game,QUIT_GAME,True,13780.272,5780.951,"I hear that you're all finished, is that right?",audio-files-staging/7fbd32dc-c1b6-4a56-9fb0-b1aa8d3f58b5
+2021-12-06 13:14:27.389656+00:00,I want the White Side,CHOOSE_SIDE,True,6391.845,1414.838,"Ok, then I'll take black. Now, would you like an easy game, or a hard game?",audio-files-staging/0856431c-f225-4dca-9e86-1af6eedbcbf8
+2021-12-06 13:18:00.667999+00:00,that's right,QUIT_GAME_YES,True,7488.709,991.1469999999999,"Alright, good game! I hope we can play again soon.",audio-files-staging/eadaaebb-ba0e-4bfc-8c8d-99342c4bf3e3

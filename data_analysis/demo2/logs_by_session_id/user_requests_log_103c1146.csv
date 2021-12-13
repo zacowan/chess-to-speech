@@ -1,0 +1,31 @@
+timestamp,text,detected_fulfillment,fulfillment_success,recording_time_ms,time_to_response_ms,response_text,audio_name
+2021-12-08 13:30:58.866142+00:00,maybe my last move,UNDO_MOVE,True,4120.5509999999995,1310.0839999999998,"Sure thing, moving the pieces back to where they were before.",audio-files-staging/25bac265-d9a7-401e-bf65-a225fad0baff
+2021-12-08 13:33:33.273220+00:00,1558,FALLBACK,False,6010.583,1018.362,Can you say that again?,audio-files-staging/9273cf63-8657-47ef-8878-ab9c04bc6cba
+2021-12-08 13:30:18.091251+00:00,Walmart 27,FALLBACK,False,2453.806,1207.749,I missed what you said. What was that?,audio-files-staging/21dad07c-44aa-43e8-bfc6-4b107e6c8251
+2021-12-08 13:31:30.109980+00:00,white bishop to C4,MOVE_PIECE,True,6142.741,964.991,Now I'll move my pawn to b5,audio-files-staging/70c1173e-3682-4816-b617-80fdab76bc36
+2021-12-08 13:27:50.578179+00:00,move Pawn to E4,MOVE_PIECE,True,3113.616,1164.565,Now I'll move my pawn to c5,audio-files-staging/a6fea93d-e817-494c-99d2-a9391bbc7fa4
+2021-12-08 13:31:57.587187+00:00,Bishop 45,FALLBACK,False,14979.523000000001,5830.622,I missed what you said. What was that?,audio-files-staging/9d101ff1-c27c-4c66-82ca-488895b96ac3
+2021-12-08 13:32:34.006671+00:00,you still in the game,FALLBACK,False,7655.677,950.1229999999999,Can you say that again?,audio-files-staging/b8d35e51-bed9-43b6-b28f-02a772acff0b
+2021-12-08 13:29:07.799298+00:00,1555,FALLBACK,False,6489.451,1057.222,"Sorry, could you say that again?",audio-files-staging/cf1d774b-adf6-4467-8d74-8a7bf818bd17
+2021-12-08 13:25:46.097689+00:00,hey Andy what's podcast,FALLBACK,False,3037.382,739.7950000000001,What was that?,audio-files-staging/456167f9-24c1-4ccd-97f0-54be8d0b4870
+2021-12-08 13:32:12.989670+00:00,Bishop to B5,MOVE_PIECE,True,2217.715,1236.763,Now I'll move my pawn to f5,audio-files-staging/3e9124f5-3025-4043-93c3-a5993c9e0929
+2021-12-08 13:30:35.019120+00:00,Luke 1:37,FALLBACK,False,8812.435000000001,353.512,,audio-files-staging/316dd9a3-a3c6-47af-ba9e-d8a9c1a3187e
+2021-12-08 13:29:26.233154+00:00,move the queen to E5,MOVE_PIECE,True,2876.9010000000003,825.183,Now I'll move my knight to c6,audio-files-staging/221f198d-fa87-4fbb-ba44-b55cc4c8ffa0
+2021-12-08 13:27:39.461329+00:00,how do you for,FALLBACK,False,8853.749,1442.48,I missed what you said. What was that?,audio-files-staging/a27a7c94-ef63-4be3-9fe1-1f3939ca2354
+2021-12-08 13:25:54.043941+00:00,hey Andy let's play chess,START_GAME,True,2552.816,799.823,"Okay, would you like black or white side?",audio-files-staging/2a1960cb-2ef9-4223-834b-43d915b17e2d
+2021-12-08 13:29:48.223306+00:00,ravn want you to Forfeit game for me,QUIT_GAME,True,8575.759,793.1980000000001,It sounds like you're all done - would you like to quit?,audio-files-staging/02fed4b0-3a22-4b2c-8278-d1facd614c89
+2021-12-08 13:34:38.851719+00:00,I want to quit the game,QUIT_GAME,True,3136.7400000000002,994.903,"I hear that you're all finished, is that right?",audio-files-staging/a16ec2be-f5ee-461e-8c67-8c39534000ef
+2021-12-08 13:32:43.434430+00:00,call Wesco do,FALLBACK,False,2172.6440000000002,1303.752,Can you say that again?,audio-files-staging/71d25ccc-3ec9-40cf-9477-bc6cb3145802
+2021-12-08 13:33:53.976016+00:00,alright I'm done,QUIT_GAME,True,4523.21,757.7860000000001,It sounds like you're all done - would you like to quit?,audio-files-staging/59b34bdb-4e92-42be-8463-ba83cfdfe586
+2021-12-08 13:26:31.496834+00:00,White,CHOOSE_SIDE,True,8148.070000000001,828.9559999999999,"Ok, then I'll take black. Next, would you like me to go easy, or hard on you?",audio-files-staging/b5d7001a-d20b-4e83-b808-aced17fc8425
+2021-12-08 13:29:16.359788+00:00,95,FALLBACK,False,1684.262,761.8299999999999,"Sorry, could you say that again?",audio-files-staging/c717bf71-3599-4a0e-9a1c-313be5ab0b47
+2021-12-08 13:34:49.276169+00:00,yes that is right,QUIT_GAME_YES,True,2350.285,1101.4989999999998,"Okay, thanks for playing with me!",audio-files-staging/56cfb0ec-471b-4ad3-abe2-dfcf7fb4e8b0
+2021-12-08 13:28:28.491804+00:00,new Queen to H5,MOVE_PIECE,True,7701.288,1100.372,"For my turn, I'll move my knight at g8 to f6",audio-files-staging/7f92dada-e3c7-4c8d-8b92-a160e6a0c7c3
+2021-12-08 13:30:06.905341+00:00,belkcredit,FALLBACK,False,9619.780999999999,920.8589999999999,I didn't get that. Can you say it again?,audio-files-staging/2809ac99-17d5-4892-a10b-4dda672cfee4
+2021-12-08 13:34:18.775423+00:00,please put the game,FALLBACK,False,11688.833,1228.862,What was that?,audio-files-staging/8aee9c8b-1c40-4f1f-8994-f56e0426e3aa
+2021-12-08 13:33:42.857748+00:00,1950s,FALLBACK,False,2239.367,1114.213,Can you say that again?,audio-files-staging/5ce74f2f-6ce9-4127-9391-57f74517b7b3
+2021-12-08 13:31:14.160330+00:00,can you undo that moved here,UNDO_MOVE,True,5331.731000000001,808.6030000000001,"Sure thing, moving the pieces back to where they were before.",audio-files-staging/5fb0e6d8-735a-4139-9b01-e7ec6f943c4e
+2021-12-08 13:26:17.368907+00:00,Call Wifey please Applewhite,FALLBACK,False,14394.106000000002,796.808,What was that?,audio-files-staging/d0b36adc-76bc-4e69-bc1c-2bb3b56f6a04
+2021-12-08 13:34:28.566944+00:00,the game,FALLBACK,False,3009.837,904.778,Can you say that again?,audio-files-staging/a0ea648c-6692-4d46-ada9-e9703d2bde02
+2021-12-08 13:32:58.552928+00:00,what else can I do,POSSIBLE_ACTIONS,True,8488.628999999999,1133.285,"I can perform a move for you, tell you how a named piece moves, give you advice on your best move, undo your last move, or restart the game. We can also stop playing whenever you're done.",audio-files-staging/b49809aa-cbc1-40aa-b115-00e27fce3c56
+2021-12-08 13:27:04.065993+00:00,easy,SELECT_DIFFICULTY,True,4437.089,6173.967,"Okay, then I'll go easy on you. Now, let's begin. Whenever you're ready, I can make a move for you. To move a piece, you can say something like 'pawn to E5', or, 'B3 to F3'. We'll play till one of us wins, or whenever you'd like to stop.",audio-files-staging/234d710d-bbc7-40e7-a7ac-bc2dd234494f
