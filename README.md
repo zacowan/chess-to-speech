@@ -1,2 +1,2 @@
 # Chess-to-Speech
-Project for Spoken Dialog Systems
+This was a project that allows users to play chess with a spoken dialogue system (named Andy). 
